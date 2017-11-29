@@ -1,6 +1,6 @@
-package com.example.mf.moviebox.activities.homescreen
+package com.example.mf.moviespace.activities.homescreen
 
-import com.example.mf.moviebox.base.BasePresenterImpl
+import com.example.mf.moviespace.base.BasePresenterImpl
 
 /**
  * Created by MF on 28-11-2017.

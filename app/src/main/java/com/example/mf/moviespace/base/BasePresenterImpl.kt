@@ -1,6 +1,4 @@
-package com.example.mf.moviebox.base
-
-import android.view.View
+package com.example.mf.moviespace.base
 
 /**
  * Created by MF on 28-11-2017.

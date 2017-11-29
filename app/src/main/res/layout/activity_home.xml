@@ -3,10 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.mf.moviebox.activities.homescreen.HomeActivity">
+    tools:context="com.example.mf.moviespace.activities.homescreen.HomeActivity">
 
     <include
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar"
+        android:id="@+id/toolbar"
+        />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

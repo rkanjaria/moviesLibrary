@@ -1,4 +1,4 @@
-package com.example.mf.moviebox;
+package com.example.mf.moviespace;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

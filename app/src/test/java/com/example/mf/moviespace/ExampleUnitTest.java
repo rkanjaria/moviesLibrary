@@ -1,4 +1,4 @@
-package com.example.mf.moviebox;
+package com.example.mf.moviespace;
 
 import org.junit.Test;
 

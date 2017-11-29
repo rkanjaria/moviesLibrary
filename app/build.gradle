@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.example.mf.moviebox"
+        applicationId "com.example.mf.moviespace"
         minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
