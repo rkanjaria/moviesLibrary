@@ -1,4 +1,4 @@
-package com.example.mf.moviespace.classes
+package com.example.mf.movielibrary.classes
 
 import android.app.Activity
 import android.content.Context

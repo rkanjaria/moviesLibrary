@@ -1,9 +1,10 @@
-package com.example.mf.moviespace.activities.homescreen
+package com.example.mf.movielibrary.activities.homescreen
 
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
-import com.example.mf.moviespace.R
-import com.example.mf.moviespace.base.BaseActivity
+import butterknife.BindView
+import com.example.mf.movielibrary.R
+import com.example.mf.movielibrary.base.BaseActivity
 
 /**
  * Created by MF on 28-11-2017.
@@ -11,11 +12,8 @@ import com.example.mf.moviespace.base.BaseActivity
 class HomeActivity : BaseActivity<HomeActivityContract.View, HomeActivityPresenter>(),
         HomeActivityContract.View{
 
+    @BindView(R.id.toolbar)
     lateinit var toolbar : Toolbar
-
-    override fun showRequestedMessage(str: String) {
-        showMessage(str)
-    }
 
     override var mPresenter: HomeActivityPresenter = HomeActivityPresenter()
 
@@ -24,9 +22,10 @@ class HomeActivity : BaseActivity<HomeActivityContract.View, HomeActivityPresent
         setContentView(R.layout.activity_home)
 
         toolbar = findViewById(R.id.toolbar)
-
-        mPresenter.showToast("Hello User")
         initToolbar(toolbar , true, "Movies")
+
+        mPresenter.callGetMoviesApi()
+
 
     }
 }

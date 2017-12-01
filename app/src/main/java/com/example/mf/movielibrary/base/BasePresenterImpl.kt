@@ -1,4 +1,4 @@
-package com.example.mf.moviespace.base
+package com.example.mf.movielibrary.base
 
 /**
  * Created by MF on 28-11-2017.

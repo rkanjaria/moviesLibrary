@@ -1,15 +1,12 @@
-package com.example.mf.moviespace.base
+package com.example.mf.movielibrary.base
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
-import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
-import android.widget.Switch
 import android.widget.Toast
-import com.example.mf.moviespace.classes.KeyboardUtils
+import com.example.mf.movielibrary.classes.KeyboardUtils
 
 /**
  * Created by MF on 28-11-2017.

@@ -1,4 +1,4 @@
-package com.example.mf.moviespace.base
+package com.example.mf.movielibrary.base
 
 import android.content.Context
 import android.support.annotation.StringRes
