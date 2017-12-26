@@ -13,7 +13,7 @@ object HomeActivityContract {
     }
 
     interface Presenter : BasePresenter<View>{
-        fun callGetMoviesApi()
+        fun callGetMoviesApi(movieOrSeries : String, requestType : String , page : Int)
 
     }
 

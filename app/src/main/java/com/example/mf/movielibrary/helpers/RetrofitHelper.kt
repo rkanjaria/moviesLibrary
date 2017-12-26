@@ -2,6 +2,8 @@ package com.example.mf.movielibrary.helpers
 
 import android.content.Context
 import com.example.mf.movielibrary.RetrofitApiService
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,10 +16,11 @@ class RetrofitHelper {
     companion object getRetroClient {
 
         fun create(): RetrofitApiService{
-
-            val BASE_URL = "https://api.themoviedb.org/3/";
+            val BASE_URL = "https://api.themoviedb.org/3/"
+            //5526b6795b244b3f164510b8955df249
 
             val retrofit = Retrofit.Builder()
+                    .client(getOkHttpClient())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .baseUrl(BASE_URL)
@@ -25,6 +28,16 @@ class RetrofitHelper {
 
             return retrofit.create(RetrofitApiService :: class.java)
         }
-    }
 
+        fun getHttpLoggingInterceptor() : HttpLoggingInterceptor {
+            val level = HttpLoggingInterceptor.Level.BODY
+            val httpLoggingInterceptor = HttpLoggingInterceptor()
+            httpLoggingInterceptor.level = level
+            return httpLoggingInterceptor
+        }
+
+        fun getOkHttpClient() : OkHttpClient = OkHttpClient.Builder()
+                .addInterceptor(getHttpLoggingInterceptor()
+                ).build()
+    }
 }

@@ -29,6 +29,7 @@
     <dimen name="size_64dp">64dp</dimen>
     <dimen name="size_70dp">70dp</dimen>
     <dimen name="size_80dp">80dp</dimen>
+    <dimen name="size_100dp">100dp</dimen>
 
     <!-- Text Size -->
     <dimen name="text_size_16">16sp</dimen>
