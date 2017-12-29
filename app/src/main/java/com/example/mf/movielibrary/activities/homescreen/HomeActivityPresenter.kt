@@ -19,6 +19,11 @@ class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.View>(), Ho
                 .subscribeOn(Schedulers.io())
                 .subscribe({ movieResult: MoviesResult? ->
                     mView?.showMessage(movieResult.toString())
+
+                    if(movieResult != null){
+                        mView?.setMovieRecyclerView(movieResult.moviesList)
+                    }
+
                 }, { error ->
                     error.printStackTrace()
                     mView?.showMessage(error.localizedMessage)

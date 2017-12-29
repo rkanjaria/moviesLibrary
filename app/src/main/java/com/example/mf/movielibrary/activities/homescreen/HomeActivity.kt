@@ -7,6 +7,7 @@ import butterknife.BindView
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
+import com.example.mf.movielibrary.models.Movie
 
 /**
  * Created by MF on 28-11-2017.
@@ -29,8 +30,10 @@ class HomeActivity : BaseActivity<HomeActivityContract.View, HomeActivityPresent
         toolbar = findViewById(R.id.toolbar)
         initToolbar(toolbar , true, "Movies")
         mPresenter.callGetMoviesApi("movie", "popular", 1)
+    }
 
-        movieRecyclerview.adapter = MovieRecyclerAdapter()
+    override fun setMovieRecyclerView(moviesList: List<Movie>) {
 
+        movieRecyclerview.adapter = MovieRecyclerAdapter(moviesList)
     }
 }
