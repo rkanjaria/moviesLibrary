@@ -11,8 +11,12 @@
         android:id="@+id/toolbar" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/movie_recyclerview"
+        android:id="@+id/movieRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/size_4dp"
+        android:paddingBottom="@dimen/size_4dp"
+        android:paddingLeft="@dimen/size_8dp"
+        android:clipToPadding="false" />
 
 </LinearLayout>

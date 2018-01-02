@@ -18,11 +18,7 @@ class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.View>(), Ho
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({ movieResult: MoviesResult? ->
-                    mView?.showMessage(movieResult.toString())
-
-                    if(movieResult != null){
-                        mView?.setMovieRecyclerView(movieResult.moviesList)
-                    }
+                    mView?.setMovieRecyclerView(movieResult?.moviesList)
 
                 }, { error ->
                     error.printStackTrace()

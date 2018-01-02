@@ -3,8 +3,8 @@ package com.example.mf.movielibrary.adapters
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import butterknife.ButterKnife
 import com.example.mf.movielibrary.R
+import files.photoUrl
 import com.example.mf.movielibrary.models.Movie
 import kotlinx.android.synthetic.main.movie_recycler_layout.view.*
 import files.inflate
@@ -33,7 +33,7 @@ class MovieRecyclerAdapter(val moviesList : List<Movie>) : RecyclerView.Adapter<
         private var movieModel : Movie? = null
 
         fun bindViews(movieModel : Movie){
-            view.movie_poster.loadImage(movieModel.posterPath)
+            view.moviePoster.loadImage(photoUrl + movieModel.posterPath)
         }
     }
 

@@ -11,7 +11,7 @@ import com.example.mf.movielibrary.models.Movie
 object HomeActivityContract {
 
     interface View : BaseView {
-        fun setMovieRecyclerView(moviesList: List<Movie>)
+        fun setMovieRecyclerView(moviesList: List<Movie> ?)
     }
 
     interface Presenter : BasePresenter<View>{

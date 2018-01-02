@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="@dimen/size_50dp"
-    android:layout_height="@dimen/size_100dp">
+    android:layout_width="110dp"
+    android:layout_height="150dp"
+    android:layout_marginTop="@dimen/size_4dp"
+    android:layout_marginRight="@dimen/size_8dp"
+    android:layout_marginBottom="@dimen/size_4dp">
 
-    <ImageView
-        android:id="@+id/movie_poster"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/moviePoster"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
