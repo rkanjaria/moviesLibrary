@@ -30,6 +30,9 @@
     <dimen name="size_70dp">70dp</dimen>
     <dimen name="size_80dp">80dp</dimen>
     <dimen name="size_100dp">100dp</dimen>
+    <dimen name="size_110dp">110dp</dimen>
+    <dimen name="size_150dp">150dp</dimen>
+    <dimen name="size_200dp">200dp</dimen>
 
     <!-- Text Size -->
     <dimen name="text_size_16">16sp</dimen>

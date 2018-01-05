@@ -9,15 +9,16 @@ import io.reactivex.schedulers.Schedulers
 /**
  * Created by MF on 28-11-2017.
  */
-class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.View>(), HomeActivityContract.Presenter {
+class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>(), HomeActivityContract.HomePresenter {
 
     override fun callGetMoviesApi(movieOrSeries : String, requestType : String, page : Int) {
 
-        val apiRepository = ApiRepositoryProvider.provideApiRepository()
-        apiRepository.getMoviesOrSeries(movieOrSeries, requestType, page)
+        mView?.showProgressBar()
+        ApiRepositoryProvider.provideApiRepository().getMoviesOrSeries(movieOrSeries, requestType, page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({ movieResult: MoviesResult? ->
+                    mView?.hideProgressBar()
                     mView?.setMovieRecyclerView(movieResult?.moviesList)
 
                 }, { error ->

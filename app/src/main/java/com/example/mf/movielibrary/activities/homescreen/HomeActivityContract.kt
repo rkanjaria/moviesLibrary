@@ -10,13 +10,14 @@ import com.example.mf.movielibrary.models.Movie
 
 object HomeActivityContract {
 
-    interface View : BaseView {
-        fun setMovieRecyclerView(moviesList: List<Movie> ?)
+    interface HomeView : BaseView {
+        fun setMovieRecyclerView(moviesList: List<Movie?> ?)
+        fun showProgressBar()
+        fun hideProgressBar()
     }
 
-    interface Presenter : BasePresenter<View>{
+    interface HomePresenter : BasePresenter<HomeView>{
         fun callGetMoviesApi(movieOrSeries : String, requestType : String , page : Int)
-
     }
 
 }

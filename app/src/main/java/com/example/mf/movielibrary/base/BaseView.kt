@@ -3,6 +3,7 @@ package com.example.mf.movielibrary.base
 import android.content.Context
 import android.support.annotation.StringRes
 import android.support.v7.widget.Toolbar
+import android.widget.ProgressBar
 
 
 /**

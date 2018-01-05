@@ -1,40 +1,92 @@
 package com.example.mf.movielibrary.adapters
 
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.example.mf.movielibrary.R
-import files.photoUrl
+import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
+import com.example.mf.movielibrary.classes.getYearFromDate
 import com.example.mf.movielibrary.models.Movie
-import kotlinx.android.synthetic.main.movie_recycler_layout.view.*
+import files.PARCELABLE_OBJECT
 import files.inflate
 import files.loadImage
+import files.photoUrl
+import kotlinx.android.synthetic.main.movie_recycler_layout.view.*
 
 /**
  * Created by MF on 23-12-2017.
  */
-class MovieRecyclerAdapter(val moviesList : List<Movie>) : RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHolder>() {
+class MovieRecyclerAdapter(val moviesList : List<Movie?>, onLoadMoreListener: OnLoadMoreListener) : RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val inflatedView = parent.inflate(R.layout.movie_recycler_layout, false)
-        return MovieViewHolder(inflatedView)
+    private val MOVIE_VIEW = 1
+    private val LOADER_VIEW = 2
+
+    private var isMoreDataAvailable = true
+    private var isLoading = false
+
+    private val loadMoreListener : OnLoadMoreListener  = onLoadMoreListener
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder? {
+
+        when (viewType){
+            MOVIE_VIEW -> return MovieViewHolder(parent.inflate(R.layout.movie_recycler_layout, false))
+            LOADER_VIEW -> return LoaderViewHolder(parent.inflate(R.layout.loader_recycler_layout, false))
+            else -> return null
+        }
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val movieModel = moviesList[position]
-        holder.bindViews(movieModel)
+
+        if(position >= itemCount -1 && !isLoading && isMoreDataAvailable){
+            isLoading = true
+            loadMoreListener.loadMore()
+        }
+
+        if(getItemViewType(position)  == MOVIE_VIEW){
+            holder.bindViews(moviesList[position])
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+
+        if(moviesList.get(position) == null){
+            return LOADER_VIEW
+        }else{
+            return MOVIE_VIEW
+        }
     }
 
     override fun getItemCount(): Int = moviesList.size
 
-    class MovieViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
+    class LoaderViewHolder (mLoaderView : View) : MovieViewHolder(mLoaderView)
+
+    open class MovieViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
         private var view : View = itemView
-        private var movieModel : Movie? = null
 
-        fun bindViews(movieModel : Movie){
-            view.moviePoster.loadImage(photoUrl + movieModel.posterPath)
+        fun bindViews(movieModel : Movie?){
+            view.moviePoster.loadImage(photoUrl + movieModel?.posterPath)
+            view.movieName.text = movieModel?.originalTitle
+
+            if(movieModel?.releaseDate != null && !movieModel.releaseDate.isBlank()){
+                view.movieYear.text = getYearFromDate(movieModel.releaseDate)
+            }
+
+            view.setOnClickListener({
+
+                val movieSeriesIntent = Intent(view.context, MovieSeriesActivity ::class.java)
+                movieSeriesIntent.putExtra(PARCELABLE_OBJECT, movieModel)
+                view.context.startActivity(movieSeriesIntent)
+            })
         }
     }
 
+    interface OnLoadMoreListener {
+        fun loadMore()
+    }
+
+    fun setIsMoreDataAvailable(isMoreDataAvailable: Boolean) {
+        this.isMoreDataAvailable = isMoreDataAvailable
+    }
 }

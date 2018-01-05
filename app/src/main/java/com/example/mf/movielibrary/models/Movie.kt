@@ -3,6 +3,9 @@ package com.example.mf.movielibrary.models
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import com.example.mf.movielibrary.models.Movie.CREATOR
+import com.google.gson.annotations.Expose
+
 
 /**
  * Created by MF on 21-12-2017.
@@ -28,7 +31,6 @@ data class Movie (
             arrayListOf<Int>().apply {
                 parcel.readList(this, Int::class.java.classLoader)
             },
-
             parcel.readString(),
             parcel.readString(),
             parcel.readString()) {
@@ -40,10 +42,10 @@ data class Movie (
         parcel.writeFloat(voteAverage)
         parcel.writeString(posterPath)
         parcel.writeString(originalTitle)
+        parcel.writeList(genreIds)
         parcel.writeString(backDroppath)
         parcel.writeString(overview)
         parcel.writeString(releaseDate)
-        parcel.writeList(genreIds)
     }
 
     override fun describeContents(): Int {
