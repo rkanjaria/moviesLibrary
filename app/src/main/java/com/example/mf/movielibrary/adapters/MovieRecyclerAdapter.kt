@@ -19,8 +19,8 @@ import kotlinx.android.synthetic.main.movie_recycler_layout.view.*
  */
 class MovieRecyclerAdapter(val moviesList : List<Movie?>, onLoadMoreListener: OnLoadMoreListener) : RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHolder>() {
 
-    private val MOVIE_VIEW = 1
-    private val LOADER_VIEW = 2
+    val MOVIE_VIEW = 1
+    val LOADER_VIEW = 2
 
     private var isMoreDataAvailable = true
     private var isLoading = false
@@ -43,7 +43,7 @@ class MovieRecyclerAdapter(val moviesList : List<Movie?>, onLoadMoreListener: On
             loadMoreListener.loadMore()
         }
 
-        if(getItemViewType(position)  == MOVIE_VIEW){
+        if(getItemViewType(position) == MOVIE_VIEW){
             holder.bindViews(moviesList[position])
         }
     }
@@ -59,7 +59,7 @@ class MovieRecyclerAdapter(val moviesList : List<Movie?>, onLoadMoreListener: On
 
     override fun getItemCount(): Int = moviesList.size
 
-    class LoaderViewHolder (mLoaderView : View) : MovieViewHolder(mLoaderView)
+    class LoaderViewHolder (loaderView : View) : MovieViewHolder(loaderView)
 
     open class MovieViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
@@ -88,5 +88,10 @@ class MovieRecyclerAdapter(val moviesList : List<Movie?>, onLoadMoreListener: On
 
     fun setIsMoreDataAvailable(isMoreDataAvailable: Boolean) {
         this.isMoreDataAvailable = isMoreDataAvailable
+    }
+
+    fun refreshAdapter(){
+        notifyItemRangeChanged(0, moviesList.size)
+        isLoading = false
     }
 }

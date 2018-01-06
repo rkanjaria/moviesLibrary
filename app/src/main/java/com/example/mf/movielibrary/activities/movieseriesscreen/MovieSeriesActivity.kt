@@ -18,13 +18,6 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         setContentView(R.layout.activity_movie_series)
 
         val movieModel = intent.getParcelableExtra<Movie>(PARCELABLE_OBJECT) as Movie
-
-        if(movieModel == null){
-            return
-        }
-
-
-        initToolbar(toolbar as Toolbar, true, movieModel.originalTitle)
-
+        initToolbar(toolbar as Toolbar, true, movieModel.originalTitle.toString())
     }
 }

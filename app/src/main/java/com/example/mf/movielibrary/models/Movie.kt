@@ -14,12 +14,12 @@ data class Movie (
         @SerializedName("id") val id : Int,
         @SerializedName("video") val video : Boolean,
         @SerializedName("vote_average") val voteAverage : Float,
-        @SerializedName("poster_path") val posterPath : String,
-        @SerializedName("original_title") val originalTitle : String,
-        @SerializedName("genre_ids") val genreIds : List<Int>,
-        @SerializedName("backdrop_path") val backDroppath : String,
-        @SerializedName("overview") val overview : String,
-        @SerializedName("release_date") val releaseDate : String
+        @SerializedName("poster_path") val posterPath : String ?,
+        @SerializedName("original_title") val originalTitle : String?,
+        @SerializedName("genre_ids") val genreIds : List<Int>?,
+        @SerializedName("backdrop_path") val backDroppath : String?,
+        @SerializedName("overview") val overview : String?,
+        @SerializedName("release_date") val releaseDate : String?
         ) : Parcelable {
 
     constructor(parcel: Parcel) : this(

@@ -11,7 +11,7 @@ import com.example.mf.movielibrary.models.Movie
 object HomeActivityContract {
 
     interface HomeView : BaseView {
-        fun setMovieRecyclerView(moviesList: List<Movie?> ?)
+        fun setMovieRecyclerView(moviesList: List<Movie?>?, totalPages: Int)
         fun showProgressBar()
         fun hideProgressBar()
     }

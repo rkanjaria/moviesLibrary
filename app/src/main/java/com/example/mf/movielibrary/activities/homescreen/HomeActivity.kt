@@ -15,11 +15,13 @@ import kotlinx.android.synthetic.main.activity_home.*
  * Created by MF on 28-11-2017.
  */
 class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPresenter>(),
-        HomeActivityContract.HomeView, MovieRecyclerAdapter.OnLoadMoreListener{
+        HomeActivityContract.HomeView, MovieRecyclerAdapter.OnLoadMoreListener {
 
-    private lateinit var mMoviesList : MutableList<Movie?>
-    private lateinit var movieAdapter : MovieRecyclerAdapter
+    private val mMoviesList = mutableListOf<Movie?>()
+    private lateinit var movieAdapter: MovieRecyclerAdapter
+    private lateinit var gridLayoutManager: GridLayoutManager
     private var page = 1
+    private var totalpages = - 1
 
     private var movieOrSeries = "movie"
     private var type = "popular"
@@ -30,45 +32,43 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         setContentView(R.layout.activity_home)
 
         initToolbar(toolbar as Toolbar, true, "Movies")
+
+        gridLayoutManager = GridLayoutManager(this, 3)
+        movieRecyclerView.layoutManager = gridLayoutManager
+        movieAdapter = MovieRecyclerAdapter(mMoviesList, this)
+        movieRecyclerView.adapter = movieAdapter
+
+
+        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup(){
+            override fun getSpanSize(position: Int): Int {
+                return if(movieAdapter.getItemViewType(position) == movieAdapter.LOADER_VIEW)
+                    gridLayoutManager.spanCount else 1
+            }
+        }
+
         mPresenter.callGetMoviesApi(movieOrSeries, type, page)
 
     }
 
-    override fun setMovieRecyclerView(moviesList: List<Movie?> ?) {
+    override fun setMovieRecyclerView(moviesList: List<Movie?>?, totalPages: Int) {
 
-        if(moviesList != null){
+        totalpages = totalPages
 
-            mMoviesList = moviesList.toMutableList()
+        if (moviesList != null) {
 
-            movieRecyclerView.layoutManager = GridLayoutManager(this, 3)
-            movieAdapter = MovieRecyclerAdapter(mMoviesList, this)
-            movieRecyclerView.adapter = movieAdapter
-        }
-
-
-
-        /*if(moviesList != null) {
-
-            if(mMoviesList.isEmpty()){
-
-                //when data loads for first time set recyclerview
+            if (mMoviesList.isEmpty()) {
+                // for first time when data loads, add items to list and refresh the recyclerview
                 mMoviesList.addAll(moviesList)
                 movieAdapter.notifyDataSetChanged()
-
-
-
-            }else {
-                // after data is loaded just add new list to list and refresh tha data
+            } else {
+                // for the second time remove the loader view and add the data and refresh the recyclerview
                 mMoviesList.removeAt(mMoviesList.size - 1)
-
                 if(moviesList.isNotEmpty()){
                     mMoviesList.addAll(moviesList)
-                }else{
-                    movieAdapter.setIsMoreDataAvailable(false)
                 }
-                movieAdapter.notifyDataSetChanged()
+                movieAdapter.refreshAdapter()
             }
-        }*/
+        }
     }
 
     override fun showProgressBar() {
@@ -80,14 +80,20 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
     }
 
     override fun loadMore() {
-        movieRecyclerView.post({loadMoreData()})
+        movieRecyclerView.post({ loadMoreData() })
     }
 
-    private fun loadMoreData(){
+    private fun loadMoreData() {
 
-        page ++
-        mMoviesList.add(null)
-        movieAdapter.notifyItemInserted(mMoviesList.size - 1)
-        mPresenter.callGetMoviesApi(movieOrSeries, type, page)
+        page++
+
+        if (page <= totalpages) {
+
+            mMoviesList.add(null)
+            movieAdapter.notifyItemInserted(mMoviesList.size - 1)
+            mPresenter.callGetMoviesApi(movieOrSeries, type, page)
+        }else{
+            movieAdapter.setIsMoreDataAvailable(false)
+        }
     }
 }
