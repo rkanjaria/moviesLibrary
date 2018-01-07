@@ -2,7 +2,7 @@
     <string name="app_name">Movie Library</string>
     
     <string-array name="toolbar_array">
-        <item>Movie</item>
+        <item>Movies</item>
         <item>Tv Shows</item>
     </string-array>
 </resources>
