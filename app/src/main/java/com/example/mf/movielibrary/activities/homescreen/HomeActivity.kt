@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.View
+import android.widget.ArrayAdapter
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.Movie
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.spinner_toolbar.*
 
 
 /**
@@ -31,7 +33,14 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        initToolbar(toolbar as Toolbar, true, "Movies")
+        setSupportActionBar(toolbar as Toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+
+        val spinnerAdapter : ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(this, R.array.toolbar_array,
+                android.R.layout.simple_spinner_dropdown_item)
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        toolbarSpinner?.adapter = spinnerAdapter
 
         gridLayoutManager = GridLayoutManager(this, 3)
         movieRecyclerView.layoutManager = gridLayoutManager
@@ -92,8 +101,16 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
             mMoviesList.add(null)
             movieAdapter.notifyItemInserted(mMoviesList.size - 1)
             mPresenter.callGetMoviesApi(movieOrSeries, type, page)
-        }else{
-            movieAdapter.setIsMoreDataAvailable(false)
         }
     }
+
+    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        val toolbarSpinner = MenuItemCompat.getActionProvider(menu?.findItem(R.id.movie)) as? AppCompatSpinner
+
+
+
+        return true
+    }*/
 }

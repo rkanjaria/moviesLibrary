@@ -7,7 +7,7 @@
     tools:context="com.example.mf.movielibrary.activities.homescreen.HomeActivity">
 
     <include
-        layout="@layout/toolbar"
+        layout="@layout/spinner_toolbar"
         android:id="@+id/toolbar" />
 
     <android.support.v7.widget.RecyclerView

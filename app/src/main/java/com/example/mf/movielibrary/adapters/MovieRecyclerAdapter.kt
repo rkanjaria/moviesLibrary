@@ -22,7 +22,7 @@ class MovieRecyclerAdapter(val moviesList : List<Movie?>, onLoadMoreListener: On
     val MOVIE_VIEW = 1
     val LOADER_VIEW = 2
 
-    private var isMoreDataAvailable = true
+    //private var isMoreDataAvailable = true
     private var isLoading = false
 
     private val loadMoreListener : OnLoadMoreListener  = onLoadMoreListener
@@ -38,7 +38,7 @@ class MovieRecyclerAdapter(val moviesList : List<Movie?>, onLoadMoreListener: On
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
 
-        if(position >= itemCount -1 && !isLoading && isMoreDataAvailable){
+        if(position >= itemCount -1 && !isLoading ){//&& isMoreDataAvailable){
             isLoading = true
             loadMoreListener.loadMore()
         }
@@ -86,9 +86,9 @@ class MovieRecyclerAdapter(val moviesList : List<Movie?>, onLoadMoreListener: On
         fun loadMore()
     }
 
-    fun setIsMoreDataAvailable(isMoreDataAvailable: Boolean) {
+    /*fun setIsMoreDataAvailable(isMoreDataAvailable: Boolean) {
         this.isMoreDataAvailable = isMoreDataAvailable
-    }
+    }*/
 
     fun refreshAdapter(){
         notifyItemRangeChanged(0, moviesList.size)

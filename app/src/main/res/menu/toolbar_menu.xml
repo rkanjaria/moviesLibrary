@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/movie"
+        android:title="Movie"
+        app:actionViewClass="android.support.v7.widget.AppCompatSpinner"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/tv"
+        android:title="Tv shows"
+        app:actionViewClass="android.support.v7.widget.AppCompatSpinner"
+        app:showAsAction="always" />
+</menu>
