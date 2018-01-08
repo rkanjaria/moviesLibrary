@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.Movie
+import files.MOVIE
+import files.TV_SHOWS
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.spinner_toolbar.*
 
@@ -17,18 +20,17 @@ import kotlinx.android.synthetic.main.spinner_toolbar.*
  * Created by MF on 28-11-2017.
  */
 class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPresenter>(),
-        HomeActivityContract.HomeView, MovieRecyclerAdapter.OnLoadMoreListener {
-
+        HomeActivityContract.HomeView, MovieRecyclerAdapter.OnLoadMoreListener, AdapterView.OnItemSelectedListener {
     private val mMoviesList = mutableListOf<Movie?>()
+
     private lateinit var movieAdapter: MovieRecyclerAdapter
     private lateinit var gridLayoutManager: GridLayoutManager
     private var page = 1
     private var totalpages = - 1
+    private var movieOrSeries = MOVIE
 
-    private var movieOrSeries = "movie"
     private var type = "popular"
     override var mPresenter: HomeActivityPresenter = HomeActivityPresenter()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -36,17 +38,16 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         setSupportActionBar(toolbar as Toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-
         val spinnerAdapter : ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(this, R.array.toolbar_array,
                 android.R.layout.simple_spinner_dropdown_item)
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        toolbarSpinner?.adapter = spinnerAdapter
+        toolbarSpinner.adapter = spinnerAdapter
+        toolbarSpinner.onItemSelectedListener = this
 
         gridLayoutManager = GridLayoutManager(this, 3)
         movieRecyclerView.layoutManager = gridLayoutManager
         movieAdapter = MovieRecyclerAdapter(mMoviesList, this)
         movieRecyclerView.adapter = movieAdapter
-
 
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup(){
             override fun getSpanSize(position: Int): Int {
@@ -54,9 +55,6 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
                     gridLayoutManager.spanCount else 1
             }
         }
-
-        mPresenter.callGetMoviesApi(movieOrSeries, type, page)
-
     }
 
     override fun setMovieRecyclerView(moviesList: List<Movie?>?, totalPages: Int) {
@@ -96,7 +94,7 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
 
         page++
 
-        if (page <= totalpages) {
+        if (page <= totalpages && page <=1000) {
 
             mMoviesList.add(null)
             movieAdapter.notifyItemInserted(mMoviesList.size - 1)
@@ -104,13 +102,16 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         }
     }
 
-    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onNothingSelected(parent: AdapterView<*>?){}
 
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
-        val toolbarSpinner = MenuItemCompat.getActionProvider(menu?.findItem(R.id.movie)) as? AppCompatSpinner
-
-
-
-        return true
-    }*/
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        when(position){
+            0 -> movieOrSeries = MOVIE
+            1 -> movieOrSeries = TV_SHOWS
+        }
+        mMoviesList.clear()
+        movieRecyclerView.removeAllViews()
+        page = 1
+        mPresenter.callGetMoviesApi(movieOrSeries, type, page)
+    }
 }
