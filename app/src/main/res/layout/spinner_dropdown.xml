@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/spinner_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxLines="1"
+    android:text="Tv shows"
+    android:textSize="@dimen/text_size_16"
+    style="@style/ToolbarTextStyle"
+    android:padding="@dimen/size_16dp" />

@@ -13,6 +13,7 @@ import com.example.mf.movielibrary.models.Movie
 import files.MOVIE
 import files.TV_SHOWS
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.spinner_dropdown.view.*
 import kotlinx.android.synthetic.main.spinner_toolbar.*
 
 
@@ -38,9 +39,8 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         setSupportActionBar(toolbar as Toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        val spinnerAdapter : ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(this, R.array.toolbar_array,
-                android.R.layout.simple_spinner_dropdown_item)
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.toolbar_array, R.layout.spinner_dropdown)
+        spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown)
         toolbarSpinner.adapter = spinnerAdapter
         toolbarSpinner.onItemSelectedListener = this
 

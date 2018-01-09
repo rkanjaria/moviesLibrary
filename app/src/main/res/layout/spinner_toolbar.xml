@@ -12,6 +12,8 @@
     <android.support.v7.widget.AppCompatSpinner
         android:id="@+id/toolbarSpinner"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:dropDownVerticalOffset="?attr/actionBarSize"
+        android:popupBackground="@color/darkGrey" />
 
 </android.support.v7.widget.Toolbar>
