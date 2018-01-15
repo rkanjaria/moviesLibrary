@@ -13,7 +13,6 @@ import com.example.mf.movielibrary.models.Movie
 import files.MOVIE
 import files.TV_SHOWS
 import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.spinner_dropdown.view.*
 import kotlinx.android.synthetic.main.spinner_toolbar.*
 
 
@@ -70,10 +69,11 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
             } else {
                 // for the second time remove the loader view and add the data and refresh the recyclerview
                 mMoviesList.removeAt(mMoviesList.size - 1)
+                val lastPosition = mMoviesList.size
                 if(moviesList.isNotEmpty()){
                     mMoviesList.addAll(moviesList)
                 }
-                movieAdapter.refreshAdapter()
+                movieAdapter.refreshAdapter(lastPosition)
             }
         }
     }

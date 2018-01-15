@@ -8,6 +8,7 @@ import android.graphics.Movie
 
 // urls
 val photoUrl = "https://image.tmdb.org/t/p/w500"
+val backdropUrl = "https://image.tmdb.org/t/p/w780"
 val baseUrl = "https://api.themoviedb.org/3/"
 
 //constants

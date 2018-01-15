@@ -86,8 +86,8 @@ class MovieRecyclerAdapter(val moviesList : List<Movie?>, onLoadMoreListener: On
         fun loadMore()
     }
 
-    fun refreshAdapter(){
-        notifyItemRangeChanged(0, moviesList.size)
+    fun refreshAdapter(lastPosition : Int){
+        notifyItemRangeChanged(lastPosition, moviesList.size)
         isLoading = false
     }
 }

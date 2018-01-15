@@ -6,7 +6,10 @@ import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.Movie
 import files.PARCELABLE_OBJECT
-import kotlinx.android.synthetic.main.activity_home.*
+import files.backdropUrl
+import files.loadImage
+import files.photoUrl
+import kotlinx.android.synthetic.main.activity_movie_series.*
 
 class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeriesView, MovieSeriesActivityPresenter>(),
         MovieSeriesActivityContract.MovieSeriesView {
@@ -19,5 +22,11 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
 
         val movieModel = intent.getParcelableExtra<Movie>(PARCELABLE_OBJECT) as Movie
         initToolbar(toolbar as Toolbar, true, movieModel.title.toString())
+
+        if (movieModel.backDroppath != null) {
+            backdropImage.loadImage(backdropUrl + movieModel.backDroppath, false)
+        }
+
+        synopsis.text = movieModel.overview
     }
 }
