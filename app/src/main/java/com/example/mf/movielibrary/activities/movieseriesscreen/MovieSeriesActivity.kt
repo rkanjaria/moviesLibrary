@@ -5,10 +5,7 @@ import android.support.v7.widget.Toolbar
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.Movie
-import files.PARCELABLE_OBJECT
-import files.backdropUrl
-import files.loadImage
-import files.photoUrl
+import files.*
 import kotlinx.android.synthetic.main.activity_movie_series.*
 
 class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeriesView, MovieSeriesActivityPresenter>(),
@@ -21,12 +18,16 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         setContentView(R.layout.activity_movie_series)
 
         val movieModel = intent.getParcelableExtra<Movie>(PARCELABLE_OBJECT) as Movie
-        initToolbar(toolbar as Toolbar, true, movieModel.title.toString())
+        //initToolbar(toolbar as Toolbar, true, movieModel.title.toString())
 
         if (movieModel.backDroppath != null) {
-            backdropImage.loadImage(backdropUrl + movieModel.backDroppath, false)
+            backdropImage.loadBlurImage(backdropUrl + movieModel.backDroppath, false)
         }
 
-        synopsis.text = movieModel.overview
+        if (movieModel.posterPath != null) {
+            posterImage.loadImage(photoUrl + movieModel.posterPath, false)
+        }
+
+        //synopsis.text = movieModel.overview
     }
 }
