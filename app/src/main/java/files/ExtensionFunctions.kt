@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.example.mf.movielibrary.R
-import com.example.mf.movielibrary.classes.BlurTransformation
+import com.example.mf.movielibrary.classes.BlurTransform
 
 /**
  * Created by MF on 23-12-2017.
@@ -31,7 +31,7 @@ fun ImageView.loadImage( url : String, attachToRoot : Boolean = false) {
 fun ImageView.loadBlurImage( url : String, attachToRoot : Boolean = false) {
     Glide.with(context)
             .load(url)
-            .apply(RequestOptions().transform(BlurTransformation(context)))
+            .apply(RequestOptions().transform(BlurTransform(context)))
             .apply(RequestOptions.placeholderOf(R.color.primary_dark_material_dark))
             .apply(RequestOptions.errorOf(R.color.primary_dark_material_dark))
             .transition(DrawableTransitionOptions.withCrossFade())

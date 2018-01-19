@@ -21,7 +21,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         //initToolbar(toolbar as Toolbar, true, movieModel.title.toString())
 
         if (movieModel.backDroppath != null) {
-            backdropImage.loadBlurImage(backdropUrl + movieModel.backDroppath, false)
+            backdropImage.loadImage(backdropUrl + movieModel.backDroppath, false)
         }
 
         if (movieModel.posterPath != null) {
