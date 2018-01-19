@@ -18,7 +18,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         setContentView(R.layout.activity_movie_series)
 
         val movieModel = intent.getParcelableExtra<Movie>(PARCELABLE_OBJECT) as Movie
-        //initToolbar(toolbar as Toolbar, true, movieModel.title.toString())
+        initToolbar(toolbar as Toolbar, true, "")
 
         if (movieModel.backDroppath != null) {
             backdropImage.loadImage(backdropUrl + movieModel.backDroppath, false)
@@ -27,7 +27,6 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         if (movieModel.posterPath != null) {
             posterImage.loadImage(photoUrl + movieModel.posterPath, false)
         }
-
-        //synopsis.text = movieModel.overview
+        movieTitle.text = movieModel.title
     }
 }
