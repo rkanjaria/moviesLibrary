@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.base.BaseActivity
+import com.example.mf.movielibrary.classes.getYearFromDate
 import com.example.mf.movielibrary.models.Movie
 import files.*
 import kotlinx.android.synthetic.main.activity_movie_series.*
@@ -21,12 +22,15 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         initToolbar(toolbar as Toolbar, true, "")
 
         if (movieModel.backDroppath != null) {
-            backdropImage.loadImage(backdropUrl + movieModel.backDroppath, false)
+            backdropImage.loadImage(backdropUrl + movieModel.backDroppath, placeholder = R.color.darkGrey)
         }
 
         if (movieModel.posterPath != null) {
-            posterImage.loadImage(photoUrl + movieModel.posterPath, false)
+            posterImage.loadImage(photoUrl + movieModel.posterPath, placeholder = R.color.darkGrey)
         }
         movieTitle.text = movieModel.title
+        movieYear.text = "Released in " + getYearFromDate(movieModel.releaseDate)
+        movieRating.text = movieModel.voteAverage.toString()
+        movieOverview.text = movieModel.overview
     }
 }

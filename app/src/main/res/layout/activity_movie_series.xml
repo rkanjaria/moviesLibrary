@@ -75,20 +75,46 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop" />
+
                 </android.support.v7.widget.CardView>
 
                 <TextView
                     android:id="@+id/movieTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/size_16dp"
+                    android:layout_marginStart="@dimen/size_32dp"
                     android:layout_toEndOf="@+id/posterCard"
                     android:fontFamily="@font/noto_sans_regular"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_16"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/movieRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/movieTitle"
+                    android:layout_alignStart="@+id/movieTitle"
+                    android:fontFamily="@font/noto_sans_regular"
+                    android:layout_marginTop="@dimen/size_8dp" />
+
+                <TextView
+                    android:id="@+id/movieYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/movieRating"
+                    android:layout_alignStart="@+id/movieTitle"
+                    android:fontFamily="@font/noto_sans_regular"
+                    android:layout_marginTop="@dimen/size_8dp" />
+
             </RelativeLayout>
+
+            <TextView
+                android:id="@+id/movieOverview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_regular"
+                android:layout_marginTop="@dimen/size_16dp" />
 
         </LinearLayout>
 

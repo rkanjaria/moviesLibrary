@@ -19,11 +19,11 @@ fun ViewGroup.inflate(@LayoutRes layoutRes : Int, attachToRoot : Boolean = false
     return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
 }
 
-fun ImageView.loadImage( url : String, attachToRoot : Boolean = false) {
+fun ImageView.loadImage( url : String, placeholder : Int = R.color.colorPrimaryDark, attachToRoot : Boolean = false) {
     Glide.with(context)
             .load(url)
-            .apply(RequestOptions.placeholderOf(R.color.primary_dark_material_dark))
-            .apply(RequestOptions.errorOf(R.color.primary_dark_material_dark))
+            .apply(RequestOptions.placeholderOf(placeholder))
+            .apply(RequestOptions.errorOf(placeholder))
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
 }
