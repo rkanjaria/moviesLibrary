@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
-import com.example.mf.movielibrary.classes.getYearFromDate
+import files.getYearFromDate
 import com.example.mf.movielibrary.models.Movie
 import files.PARCELABLE_OBJECT
 import files.inflate

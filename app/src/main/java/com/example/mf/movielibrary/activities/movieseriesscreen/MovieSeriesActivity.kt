@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.base.BaseActivity
-import com.example.mf.movielibrary.classes.getYearFromDate
+import files.getYearFromDate
 import com.example.mf.movielibrary.models.Movie
 import files.*
 import kotlinx.android.synthetic.main.activity_movie_series.*

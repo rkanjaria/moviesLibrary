@@ -5,16 +5,19 @@ import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.MoviesResult
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import org.reactivestreams.Subscriber
+import java.util.*
 
 /**
  * Created by MF on 28-11-2017.
  */
 class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>(), HomeActivityContract.HomePresenter {
 
-    override fun callGetMoviesApi(movieOrSeries : String, requestType : String, page : Int) {
+    override fun callGetMoviesApi(movieOrSeries: String, requestType: String, page: Int) {
 
-        if(page == 1){
+        if (page == 1) {
             mView?.showProgressBar()
         }
 
@@ -23,7 +26,7 @@ class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>()
                 .subscribeOn(Schedulers.io())
                 .subscribe({ movieResult: MoviesResult? ->
 
-                    if(page == 1){
+                    if (page == 1) {
                         mView?.hideProgressBar()
                     }
                     mView?.setMovieRecyclerView(movieResult?.moviesList, movieResult?.totalPages!!)
@@ -31,6 +34,8 @@ class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>()
 
                 }, { error ->
                     error.printStackTrace()
-                    mView?.showMessage(error.localizedMessage)})
+                    mView?.showMessage(error.localizedMessage)
+                })
     }
+
 }

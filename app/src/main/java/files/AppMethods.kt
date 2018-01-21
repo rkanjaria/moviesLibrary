@@ -1,4 +1,4 @@
-package com.example.mf.movielibrary.classes
+package files
 
 /**
  * Created by MF on 03-01-2018.
