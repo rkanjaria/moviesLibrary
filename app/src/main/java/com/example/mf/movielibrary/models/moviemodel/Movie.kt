@@ -1,10 +1,8 @@
-package com.example.mf.movielibrary.models
+package com.example.mf.movielibrary.models.moviemodel
 
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import com.example.mf.movielibrary.models.Movie.CREATOR
-import com.google.gson.annotations.Expose
 
 
 /**

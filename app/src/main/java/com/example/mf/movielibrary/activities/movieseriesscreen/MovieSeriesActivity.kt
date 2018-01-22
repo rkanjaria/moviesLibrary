@@ -4,8 +4,7 @@ import android.os.Bundle
 import android.support.v7.widget.Toolbar
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.base.BaseActivity
-import files.getYearFromDate
-import com.example.mf.movielibrary.models.Movie
+import com.example.mf.movielibrary.models.moviemodel.Movie
 import files.*
 import kotlinx.android.synthetic.main.activity_movie_series.*
 
@@ -29,7 +28,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
             posterImage.loadImage(photoUrl + movieModel.posterPath, placeholder = R.color.darkGrey)
         }
         movieTitle.text = movieModel.title
-        movieYear.text = "Released in " + getYearFromDate(movieModel.releaseDate)
+        movieYear.text = getDateWithCustomFormat(movieModel.releaseDate)
         movieRating.text = movieModel.voteAverage.toString()
         movieOverview.text = movieModel.overview
     }

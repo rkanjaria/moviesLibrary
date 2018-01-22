@@ -1,14 +1,10 @@
 package com.example.mf.movielibrary.activities.homescreen
 
-import android.util.Log
 import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.helpers.RetrofitHelper
-import com.example.mf.movielibrary.models.MoviesResult
+import com.example.mf.movielibrary.models.moviemodel.MoviesResult
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import org.reactivestreams.Subscriber
-import java.util.*
 
 /**
  * Created by MF on 28-11-2017.

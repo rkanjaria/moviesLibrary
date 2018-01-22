@@ -1,6 +1,6 @@
 package com.example.mf.movielibrary
 
-import com.example.mf.movielibrary.models.MoviesResult
+import com.example.mf.movielibrary.models.moviemodel.MoviesResult
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path

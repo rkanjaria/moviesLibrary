@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
-import com.example.mf.movielibrary.models.Movie
+import com.example.mf.movielibrary.models.moviemodel.Movie
 import files.MOVIE
 import files.TV_SHOWS
 import kotlinx.android.synthetic.main.activity_home.*

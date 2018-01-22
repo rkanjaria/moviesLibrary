@@ -16,3 +16,9 @@ val PARCELABLE_OBJECT = "parcelable_object"
 
 val MOVIE = "movie"
 val TV_SHOWS = "tv"
+
+val DATABASE_NAME = "movie.db"
+val MOVIE_TABLE = "movie_table"
+val ID = "_id"
+val GENRE_ID = "genre_id"
+val GENRE_NAME = "genre_name"
