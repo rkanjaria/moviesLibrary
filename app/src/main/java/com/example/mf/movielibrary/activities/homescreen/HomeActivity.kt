@@ -20,7 +20,8 @@ import kotlinx.android.synthetic.main.spinner_toolbar.*
  * Created by MF on 28-11-2017.
  */
 class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPresenter>(),
-        HomeActivityContract.HomeView, MovieRecyclerAdapter.OnLoadMoreListener, AdapterView.OnItemSelectedListener {
+        HomeActivityContract.HomeView, MovieRecyclerAdapter.OnMovieSeriesAdapterListener, AdapterView.OnItemSelectedListener {
+
     private val mMoviesList = mutableListOf<Movie?>()
 
     private lateinit var movieAdapter: MovieRecyclerAdapter
@@ -113,5 +114,9 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         movieRecyclerView.removeAllViews()
         page = 1
         mPresenter.callGetMoviesApi(movieOrSeries, type, page)
+    }
+
+    override fun onMovieOrSeriesClicked(movieModel: Movie?) {
+        mPresenter.launchMovieSeriesActivity(movieModel, movieOrSeries)
     }
 }

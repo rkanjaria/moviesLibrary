@@ -1,6 +1,8 @@
 package com.example.mf.movielibrary
 
+import com.example.mf.movielibrary.models.castmodel.CastResult
 import com.example.mf.movielibrary.models.moviemodel.MoviesResult
+import files.API_KEY
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -11,10 +13,16 @@ import retrofit2.http.Query
  */
 interface RetrofitApiService {
 
-    @GET("{movie_or_series}/{request_type}?api_key=5526b6795b244b3f164510b8955df249")
-    fun doGetMoviesOrSeriesApiCall(@Path("movie_or_series") movieOrSeries : String,
-                           @Path("request_type") requestType : String,
-                           @Query("page") page: Int) : Observable<MoviesResult>
+    @GET("{movie_or_series}/{request_type}")
+    fun doGetMoviesOrSeriesApiCall(@Path("movie_or_series") movieOrSeries: String,
+                                   @Path("request_type") requestType: String,
+                                   @Query("api_key") apiKey: String = API_KEY,
+                                   @Query("page") page: Int): Observable<MoviesResult>
+
+    @GET("{movie_or_series}/{movie_or_series_id}/credits")
+    fun doGetMovieOrSeriesCastApiCall(@Path("movie_or_series") movieOrSeries: String,
+                                      @Path("movie_or_series_id") movieOrSeriesId: Int,
+                                      @Query("api_key") apiKey: String = API_KEY): Observable<CastResult>
 
 
 }
