@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_width="@dimen/size_100dp"
-    android:layout_height="@dimen/size_200dp"
+    android:layout_width="@dimen/size_90dp"
+    android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/size_8dp">
 
     <android.support.v7.widget.CardView
-        android:layout_width="@dimen/size_100dp"
-        android:layout_height="@dimen/size_100dp">
+        android:layout_width="@dimen/size_90dp"
+        android:layout_height="@dimen/size_130dp">
 
         <LinearLayout
             android:orientation="vertical"
@@ -31,8 +31,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_regular"
-        android:layout_marginLeft="@dimen/size_8dp"
-        android:layout_marginRight="@dimen/size_8dp"
         android:layout_marginTop="@dimen/size_8dp"
         android:maxLines="2"
         android:ellipsize="end"
@@ -46,9 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_regular"
-        android:layout_marginLeft="@dimen/size_8dp"
-        android:layout_marginRight="@dimen/size_8dp"
-        android:layout_marginTop="@dimen/size_8dp"
+        android:layout_marginTop="@dimen/size_4dp"
         android:maxLines="1"
         android:ellipsize="end"
         android:gravity="center"

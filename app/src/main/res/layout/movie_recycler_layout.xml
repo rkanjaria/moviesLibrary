@@ -5,7 +5,7 @@
     android:layout_width="110dp"
     android:layout_height="210dp"
     android:layout_marginTop="@dimen/size_4dp"
-    android:layout_marginRight="@dimen/size_8dp"
+    android:layout_marginEnd="@dimen/size_8dp"
     android:layout_marginBottom="@dimen/size_4dp">
 
     <LinearLayout

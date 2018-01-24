@@ -20,7 +20,13 @@ class CastRecyclerAdapter(val castList : List<Cast>) : RecyclerView.Adapter<Cast
         return CastViewHolder(parent.inflate(R.layout.cast_recycler_layout, false))
     }
 
-    override fun getItemCount() = castList.size
+    override fun getItemCount() : Int {
+        if(castList.size < 6){
+            return castList.size
+        }else{
+            return 6
+        }
+    }
 
     inner class CastViewHolder(castView : View) : RecyclerView.ViewHolder(castView) {
 
