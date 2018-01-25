@@ -3,6 +3,9 @@ package com.example.mf.movielibrary.activities.homescreen
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -118,5 +121,19 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
 
     override fun onMovieOrSeriesClicked(movieModel: Movie?) {
         mPresenter.launchMovieSeriesActivity(movieModel, movieOrSeries)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater.inflate(R.menu.home_screen_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        when(item?.itemId){
+            R.id.action_sort -> showMessage("menu item clicked")
+        }
+        return true
     }
 }
