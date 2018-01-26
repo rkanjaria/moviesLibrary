@@ -15,6 +15,9 @@ import io.reactivex.schedulers.Schedulers
  * Created by MF on 28-11-2017.
  */
 class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>(), HomeActivityContract.HomePresenter {
+    override fun requestMovieOrSeriesTypeDialog() {
+        mView?.showMovieOrSeriesTypeDialog();
+    }
 
     override fun callGetMoviesApi(movieOrSeries: String, requestType: String, page: Int) {
 

@@ -5,4 +5,19 @@
         <item>Movies</item>
         <item>Tv Shows</item>
     </string-array>
+
+    <string-array name="movie_type_array">
+        <item>Popular</item>
+        <item>Top Rated</item>
+        <item>Upcoming</item>
+        <item>Now Playing</item>
+    </string-array>
+
+    <string-array name="tv_type_array">
+        <item>Popular</item>
+        <item>Top Rated</item>
+        <item>On Tv</item>
+        <item>Airing Today</item>
+    </string-array>
+
 </resources>

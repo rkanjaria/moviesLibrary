@@ -1,20 +1,18 @@
 package com.example.mf.movielibrary.activities.homescreen
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.Toolbar
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.MOVIE
-import files.TV_SHOWS
+import files.*
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.spinner_toolbar.*
 
@@ -23,7 +21,8 @@ import kotlinx.android.synthetic.main.spinner_toolbar.*
  * Created by MF on 28-11-2017.
  */
 class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPresenter>(),
-        HomeActivityContract.HomeView, MovieRecyclerAdapter.OnMovieSeriesAdapterListener, AdapterView.OnItemSelectedListener {
+        HomeActivityContract.HomeView, MovieRecyclerAdapter.OnMovieSeriesAdapterListener, AdapterView.OnItemSelectedListener,
+        DialogInterface.OnClickListener {
 
     private val mMoviesList = mutableListOf<Movie?>()
 
@@ -32,8 +31,9 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
     private var page = 1
     private var totalpages = - 1
     private var movieOrSeries = MOVIE
+    private var selectedTypePostion = 0;
 
-    private var type = "popular"
+    private var type = POPULAR
     override var mPresenter: HomeActivityPresenter = HomeActivityPresenter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -113,10 +113,9 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
             0 -> movieOrSeries = MOVIE
             1 -> movieOrSeries = TV_SHOWS
         }
-        mMoviesList.clear()
-        movieRecyclerView.removeAllViews()
-        page = 1
-        mPresenter.callGetMoviesApi(movieOrSeries, type, page)
+        type = POPULAR
+        selectedTypePostion = 0
+        clearListAndMakeApiCallAgain()
     }
 
     override fun onMovieOrSeriesClicked(movieModel: Movie?) {
@@ -132,8 +131,47 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         when(item?.itemId){
-            R.id.action_sort -> showMessage("menu item clicked")
+            R.id.action_sort -> mPresenter.requestMovieOrSeriesTypeDialog();
         }
         return true
+    }
+
+    override fun showMovieOrSeriesTypeDialog() {
+
+        val arrayType = if(movieOrSeries == MOVIE)  R.array.movie_type_array else R.array.tv_type_array
+        val dialogBuilder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.AlertDialogTheme))
+        dialogBuilder.setSingleChoiceItems(arrayType, selectedTypePostion,this)
+        dialogBuilder.create().show()
+    }
+
+    override fun onClick(dialogInterface: DialogInterface?, item: Int) {
+        if(movieOrSeries == MOVIE){
+
+            when(item){
+                0 -> type = POPULAR
+                1 -> type = TOP_RATED
+                2 -> type = UPCOMING
+                3 -> type = NOW_PLAYING
+            }
+        }else{
+            when(item){
+                0 -> type = POPULAR
+                1 -> type = TOP_RATED
+                2 -> type = ON_AIR
+                3 -> type = AIRING_TODAY
+            }
+        }
+
+        selectedTypePostion = item
+        dialogInterface?.dismiss()
+        clearListAndMakeApiCallAgain()
+    }
+
+
+    private fun clearListAndMakeApiCallAgain() {
+        mMoviesList.clear()
+        movieRecyclerView.removeAllViews()
+        page = 1
+        mPresenter.callGetMoviesApi(movieOrSeries, type, page)
     }
 }

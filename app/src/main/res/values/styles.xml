@@ -14,4 +14,8 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="AlertDialogTheme" parent="@android:style/Theme.Material.Dialog">
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+    </style>
+
 </resources>

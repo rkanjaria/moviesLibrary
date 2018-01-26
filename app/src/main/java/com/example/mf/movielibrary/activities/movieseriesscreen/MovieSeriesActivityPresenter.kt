@@ -21,7 +21,7 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
                     .subscribe ({
                         castResult: CastResult? ->
 
-                        if(castResult?.castList != null){
+                        if(castResult?.castList != null && castResult?.castList.isNotEmpty()){
                             mView?.setCastRecyclerview(castResult.castList)
                         }
                     },{

@@ -18,6 +18,15 @@ val MOVIE_OR_SERIES = "movie_or_series"
 val MOVIE = "movie"
 val TV_SHOWS = "tv"
 
+val LATEST = "latest"
+val NOW_PLAYING = "now_playing"
+val POPULAR = "popular"
+val TOP_RATED = "top_rated"
+val UPCOMING = "upcoming"
+val ON_AIR = "on_the_air"
+val AIRING_TODAY = "airing_today"
+
+
 val DATABASE_NAME = "movie.db"
 val MOVIE_TABLE = "movie_table"
 val ID = "_id"
