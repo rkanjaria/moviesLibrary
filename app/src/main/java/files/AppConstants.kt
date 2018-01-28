@@ -33,3 +33,6 @@ val GENRE_ID = "genre_id"
 val GENRE_NAME = "genre_name"
 
 val API_KEY = "5526b6795b244b3f164510b8955df249"
+
+val INT_ID = "cast_id"
+val NAME = "name"

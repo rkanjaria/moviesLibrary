@@ -13,9 +13,9 @@ import files.*
 import kotlinx.android.synthetic.main.activity_movie_series.*
 
 class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeriesView, MovieSeriesActivityPresenter>(),
-        MovieSeriesActivityContract.MovieSeriesView {
+        MovieSeriesActivityContract.MovieSeriesView, CastRecyclerAdapter.OnCastAdapterListener {
 
-    override var mPresenter: MovieSeriesActivityPresenter = MovieSeriesActivityPresenter()
+    override var mPresenter = MovieSeriesActivityPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,17 +38,20 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         movieGenre.text =  mPresenter.getMovieGenres(movieModel.genreIds)
 
         mPresenter.callgetMovieOrSeriesCastApi(intent.getStringExtra(MOVIE_OR_SERIES), movieModel.id)
-
     }
-
 
     override fun setCastRecyclerview(castList: List<Cast>) {
 
         castRecyclerview.setHasFixedSize(true)
         castRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        castRecyclerview.adapter = CastRecyclerAdapter(castList)
+        castRecyclerview.adapter = CastRecyclerAdapter(castList, this)
         castRecyclerview.visibility = View.VISIBLE
         castTitle.visibility = View.VISIBLE
     }
+
+    override fun onCastClicked(castModel : Cast) {
+        mPresenter.launchActorActivity(castModel)
+    }
+
 
 }

@@ -1,8 +1,13 @@
 package com.example.mf.movielibrary.activities.movieseriesscreen
 
+import android.content.Intent
+import com.example.mf.movielibrary.activities.actorsscreen.ActorsActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.helpers.RetrofitHelper
+import com.example.mf.movielibrary.models.castmodel.Cast
 import com.example.mf.movielibrary.models.castmodel.CastResult
+import files.INT_ID
+import files.NAME
 import files.database
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -13,12 +18,20 @@ import io.reactivex.schedulers.Schedulers
 class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContract.MovieSeriesView>(),
         MovieSeriesActivityContract.MovieSeriesPresenter {
 
+
+    override fun launchActorActivity(castModel: Cast) {
+        val actorIntent = Intent(mView?.getContext(), ActorsActivity::class.java)
+        actorIntent.putExtra(INT_ID, castModel.id)
+        actorIntent.putExtra(NAME, castModel.name)
+        mView?.lauchchActivity(actorIntent)
+    }
+
     override fun getMovieGenres(genreIds: List<Int>?): String {
         val genre = StringBuilder()
         genreIds?.forEach {
             genre.append(mView?.getContext()?.database?.getGenreBasedOnGenreId(it) + ", ")
         }
-        if(genre.isEmpty()) return "" else return genre.toString().substring(0, genre.length - 2)
+        if (genre.isEmpty()) return "" else return genre.toString().substring(0, genre.length - 2)
     }
 
     override fun callgetMovieOrSeriesCastApi(movieOrSeries: String?, movieId: Int) {

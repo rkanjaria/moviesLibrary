@@ -17,5 +17,6 @@ object MovieSeriesActivityContract {
     interface MovieSeriesPresenter : BasePresenter<MovieSeriesView>{
         fun callgetMovieOrSeriesCastApi(movieOrSeries: String?, movieId: Int)
         fun getMovieGenres(genreIds: List<Int>?) : String
+        fun launchActorActivity(castModel: Cast)
     }
 }

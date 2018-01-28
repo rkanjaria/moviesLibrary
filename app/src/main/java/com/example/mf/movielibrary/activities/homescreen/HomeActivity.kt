@@ -34,7 +34,7 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
     private var selectedTypePostion = 0;
 
     private var type = POPULAR
-    override var mPresenter: HomeActivityPresenter = HomeActivityPresenter()
+    override var mPresenter = HomeActivityPresenter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
