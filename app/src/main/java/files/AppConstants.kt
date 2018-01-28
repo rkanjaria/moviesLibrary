@@ -18,7 +18,6 @@ val MOVIE_OR_SERIES = "movie_or_series"
 val MOVIE = "movie"
 val TV_SHOWS = "tv"
 
-val LATEST = "latest"
 val NOW_PLAYING = "now_playing"
 val POPULAR = "popular"
 val TOP_RATED = "top_rated"

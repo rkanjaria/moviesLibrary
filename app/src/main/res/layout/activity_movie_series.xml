@@ -118,6 +118,17 @@
                     android:fontFamily="@font/noto_sans_regular"
                     android:layout_marginTop="@dimen/size_8dp" />
 
+                <TextView
+                    android:id="@+id/movieGenre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/movieYear"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:layout_alignStart="@+id/movieTitle"
+                    android:fontFamily="@font/noto_sans_regular"
+                    android:layout_marginTop="@dimen/size_8dp" />
+
             </RelativeLayout>
 
             <TextView

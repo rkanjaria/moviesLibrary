@@ -1,5 +1,6 @@
 package com.example.mf.movielibrary.activities.homescreen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
@@ -28,18 +29,17 @@ class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>()
         RetrofitHelper.create().doGetMoviesOrSeriesApiCall(movieOrSeries, requestType, page = page)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({ movieResult: MoviesResult? ->
+                .subscribe({ movieResult ->
 
                     if (page == 1) {
                         mView?.hideProgressBar()
                     }
                     mView?.setMovieRecyclerView(movieResult?.moviesList, movieResult?.totalPages!!)
-
-
                 }, { error ->
                     error.printStackTrace()
                     mView?.showMessage(error.localizedMessage)
                 })
+
     }
 
 

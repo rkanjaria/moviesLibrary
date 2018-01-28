@@ -35,8 +35,10 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         movieYear.text = getDateWithCustomFormat(movieModel.releaseDate)
         movieRating.text = movieModel.voteAverage.toString()
         movieOverview.text = movieModel.overview
+        movieGenre.text =  mPresenter.getMovieGenres(movieModel.genreIds)
 
         mPresenter.callgetMovieOrSeriesCastApi(intent.getStringExtra(MOVIE_OR_SERIES), movieModel.id)
+
     }
 
 
@@ -48,4 +50,5 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         castRecyclerview.visibility = View.VISIBLE
         castTitle.visibility = View.VISIBLE
     }
+
 }

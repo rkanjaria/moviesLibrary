@@ -1,6 +1,7 @@
 package com.example.mf.movielibrary.base
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -55,7 +56,7 @@ abstract class BaseActivity<in V : BaseView, T : BasePresenter<V>>
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
-        if(item?.itemId == android.R.id.home){
+        if (item?.itemId == android.R.id.home) {
             onBackPressed()
         }
         return true
@@ -64,5 +65,21 @@ abstract class BaseActivity<in V : BaseView, T : BasePresenter<V>>
     override fun onBackPressed() {
         super.onBackPressed()
         KeyboardUtils.hideSoftInputKeyboard(this)
+    }
+
+    override fun finishActivity() {
+        KeyboardUtils.hideSoftInputKeyboard(this)
+        finish()
+    }
+
+    override fun lauchchActivity(activityToBeLaunched: Intent) {
+        KeyboardUtils.hideSoftInputKeyboard(this)
+        startActivity(activityToBeLaunched)
+    }
+
+    override fun finishActivityAndStartAnotherActivity(activityToBeLaunched: Intent) {
+        KeyboardUtils.hideSoftInputKeyboard(this)
+        startActivity(activityToBeLaunched)
+        finish()
     }
 }

@@ -1,6 +1,7 @@
 package com.example.mf.movielibrary
 
 import com.example.mf.movielibrary.models.castmodel.CastResult
+import com.example.mf.movielibrary.models.genremodel.GenreResult
 import com.example.mf.movielibrary.models.moviemodel.MoviesResult
 import files.API_KEY
 import io.reactivex.Observable
@@ -24,5 +25,7 @@ interface RetrofitApiService {
                                       @Path("movie_or_series_id") movieOrSeriesId: Int,
                                       @Query("api_key") apiKey: String = API_KEY): Observable<CastResult>
 
-
+    @GET("genre/{movie_or_series}/list")
+    fun doGetGenreListApiCall(@Path("movie_or_series") movieOrSeries: String,
+                                      @Query("api_key") apiKey: String = API_KEY): Observable<GenreResult>
 }
