@@ -6,10 +6,7 @@ import android.view.View
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.actormodel.Actor
-import files.INT_ID
-import files.NAME
-import files.loadImage
-import files.photoUrl
+import files.*
 import kotlinx.android.synthetic.main.activity_actors.*
 
 class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsActivityPresenter>(),
@@ -30,6 +27,7 @@ class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsAct
         actorName.text = actor.actorName
         actorImage.loadImage(photoUrl + actor.profileImage, R.color.darkGrey)
         actorBiography.text = actor.biography
+        //actorBiography.setOnClickListener { actorBiography.expandOrCollapseTextView() }
     }
 
     override fun showProgressLoading() {
