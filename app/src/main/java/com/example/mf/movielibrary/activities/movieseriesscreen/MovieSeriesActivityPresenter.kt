@@ -6,10 +6,9 @@ import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.castmodel.Cast
 import com.example.mf.movielibrary.models.castmodel.CastResult
+import com.example.mf.movielibrary.models.moviemodel.Movie
 import com.example.mf.movielibrary.models.moviemodel.MoviesResult
-import files.INT_ID
-import files.NAME
-import files.database
+import files.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -19,7 +18,14 @@ import io.reactivex.schedulers.Schedulers
 class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContract.MovieSeriesView>(),
         MovieSeriesActivityContract.MovieSeriesPresenter {
 
-    override fun callgetSimilarMovieOrSeriesApi(moviesOrSeries: String?, movieOrSeriesId: Int) {
+    override fun launchMovieSeriesActivity(movieModel: Movie?, movieOrSeries: String?) {
+        val movieSeriesIntent = Intent(mView?.getContext(), MovieSeriesActivity::class.java)
+        movieSeriesIntent.putExtra(PARCELABLE_OBJECT, movieModel)
+        movieSeriesIntent.putExtra(MOVIE_OR_SERIES, movieOrSeries)
+        mView?.getContext()?.startActivity(movieSeriesIntent)
+    }
+
+    override fun callGetSimilarMovieOrSeriesApi(moviesOrSeries: String?, movieOrSeriesId: Int) {
         if (moviesOrSeries != null) {
             RetrofitHelper.create().doGetSimilarMoviesOrSeriesApiCall(moviesOrSeries, movieOrSeriesId)
                     .observeOn(AndroidSchedulers.mainThread())
@@ -27,7 +33,7 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
                     .subscribe({ movieResult: MoviesResult? ->
 
                         if (movieResult?.moviesList != null && movieResult.moviesList.isNotEmpty()) {
-                            mView?.setSimilarMoviesRecyclerview(movieResult.moviesList)
+                            mView?.setSimilarMoviesRecyclerview(movieResult.moviesList, movieResult.page)
                         }
                     }, { error ->
                         error.printStackTrace()

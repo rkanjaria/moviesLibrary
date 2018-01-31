@@ -31,7 +31,7 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
     private var page = 1
     private var totalpages = - 1
     private var movieOrSeries = MOVIE
-    private var selectedTypePostion = 0;
+    private var selectedTypePostion = 0
 
     private var type = POPULAR
     override var mPresenter = HomeActivityPresenter()

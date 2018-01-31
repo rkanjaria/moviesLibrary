@@ -34,8 +34,8 @@ interface RetrofitApiService {
     fun doGetActorApiCall(@Path("actor_id") actorId: Int,
                           @Query("api_key") apiKey: String = API_KEY): Observable<Actor>
 
-    @GET("{movie_or_series}/{movie_or_series_id}/similar")
+    @GET("{movie_or_series}/{movie_or_series_id}/recommendations")
     fun doGetSimilarMoviesOrSeriesApiCall(@Path("movie_or_series") movieOrSeries: String,
-                          @Path("movie_or_series_id") movieOrSeriesId: Int,
-                          @Query("api_key") apiKey: String = API_KEY): Observable<MoviesResult>
+                                          @Path("movie_or_series_id") movieOrSeriesId: Int,
+                                          @Query("api_key") apiKey: String = API_KEY): Observable<MoviesResult>
 }

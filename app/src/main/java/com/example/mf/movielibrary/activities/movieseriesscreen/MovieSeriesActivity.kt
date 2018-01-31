@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_movie_series.*
 class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeriesView, MovieSeriesActivityPresenter>(),
         MovieSeriesActivityContract.MovieSeriesView, CastRecyclerAdapter.OnCastAdapterListener, MovieRecyclerAdapter.OnMovieSeriesAdapterListener {
 
-
+    private var movieOrSeriesId = 0
 
     override var mPresenter = MovieSeriesActivityPresenter()
 
@@ -26,6 +26,8 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
 
         val movieModel = intent.getParcelableExtra(PARCELABLE_OBJECT) as Movie
         initToolbar(toolbar as Toolbar, true, "")
+
+        movieOrSeriesId = movieModel.id
 
         if (movieModel.backDroppath != null) {
             backdropImage.loadImage(backdropUrl + movieModel.backDroppath, placeholder = R.color.darkGrey)
@@ -38,10 +40,10 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         movieYear.text = getDateWithCustomFormat(movieModel.releaseDate)
         movieRating.text = movieModel.voteAverage.toString()
         movieOverview.text = movieModel.overview
-        movieGenre.text =  mPresenter.getMovieGenres(movieModel.genreIds)
+        movieGenre.text = mPresenter.getMovieGenres(movieModel.genreIds)
 
-        mPresenter.callgetMovieOrSeriesCastApi(intent.getStringExtra(MOVIE_OR_SERIES), movieModel.id)
-        mPresenter.callgetSimilarMovieOrSeriesApi(intent.getStringExtra(MOVIE_OR_SERIES), movieModel.id)
+        mPresenter.callgetMovieOrSeriesCastApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
+        mPresenter.callGetSimilarMovieOrSeriesApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
     }
 
     override fun setCastRecyclerview(castList: List<Cast>) {
@@ -53,35 +55,23 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         castTitle.visibility = View.VISIBLE
     }
 
-    override fun onCastClicked(castModel : Cast) {
+    override fun onCastClicked(castModel: Cast) {
         mPresenter.launchActorActivity(castModel)
     }
 
-    override fun setSimilarMoviesRecyclerview(moviesList: List<Movie?>) {
+    override fun setSimilarMoviesRecyclerview(moviesList: List<Movie?>, totalPages: Int) {
+
         similarMoviesRecyclerview.setHasFixedSize(true)
         similarMoviesRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        similarMoviesRecyclerview.adapter = MovieRecyclerAdapter(moviesList, this)
+        similarMoviesRecyclerview.adapter = MovieRecyclerAdapter(moviesList, this, true)
         similarMoviesRecyclerview.visibility = View.VISIBLE
-        similarMoviesTitle.visibility = View.VISIBLE
+        recommendationsTitle.visibility = View.VISIBLE
     }
 
-    override fun loadMore() {
-        similarMoviesTitle.post({ loadMoreData() })
-    }
-
-    private fun loadMoreData() {
-            /*page++
-
-            if (page <= totalpages && page <=1000) {
-
-                mMoviesList.add(null)
-                movieAdapter.notifyItemInserted(mMoviesList.size - 1)
-                mPresenter.callGetMoviesApi(movieOrSeries, type, page)
-            }*/
-    }
+    override fun loadMore() {}
 
     override fun onMovieOrSeriesClicked(movieModel: Movie?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mPresenter.launchMovieSeriesActivity(movieModel, intent.getStringExtra(MOVIE_OR_SERIES))
     }
 
 

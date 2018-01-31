@@ -12,7 +12,7 @@ object MovieSeriesActivityContract {
 
     interface MovieSeriesView : BaseView{
         fun setCastRecyclerview(castList: List<Cast>)
-        fun setSimilarMoviesRecyclerview(moviesList: List<Movie?>)
+        fun setSimilarMoviesRecyclerview(moviesList: List<Movie?>, totalPages: Int)
 
     }
 
@@ -20,6 +20,7 @@ object MovieSeriesActivityContract {
         fun callgetMovieOrSeriesCastApi(movieOrSeries: String?, movieId: Int)
         fun getMovieGenres(genreIds: List<Int>?) : String
         fun launchActorActivity(castModel: Cast)
-        fun callgetSimilarMovieOrSeriesApi(moviesOrSeries: String?, movieOrSeriesId: Int)
+        fun callGetSimilarMovieOrSeriesApi(moviesOrSeries: String?, movieOrSeriesId: Int)
+        fun launchMovieSeriesActivity(movieModel: Movie?, movieOrSeries: String?)
     }
 }
