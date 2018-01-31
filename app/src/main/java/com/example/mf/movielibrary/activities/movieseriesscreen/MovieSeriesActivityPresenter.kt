@@ -6,6 +6,7 @@ import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.castmodel.Cast
 import com.example.mf.movielibrary.models.castmodel.CastResult
+import com.example.mf.movielibrary.models.moviemodel.MoviesResult
 import files.INT_ID
 import files.NAME
 import files.database
@@ -17,6 +18,23 @@ import io.reactivex.schedulers.Schedulers
  */
 class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContract.MovieSeriesView>(),
         MovieSeriesActivityContract.MovieSeriesPresenter {
+
+    override fun callgetSimilarMovieOrSeriesApi(moviesOrSeries: String?, movieOrSeriesId: Int) {
+        if (moviesOrSeries != null) {
+            RetrofitHelper.create().doGetSimilarMoviesOrSeriesApiCall(moviesOrSeries, movieOrSeriesId)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({ movieResult: MoviesResult? ->
+
+                        if (movieResult?.moviesList != null && movieResult.moviesList.isNotEmpty()) {
+                            mView?.setSimilarMoviesRecyclerview(movieResult.moviesList)
+                        }
+                    }, { error ->
+                        error.printStackTrace()
+                        mView?.showMessage(error.localizedMessage)
+                    })
+        }
+    }
 
 
     override fun launchActorActivity(castModel: Cast) {
@@ -42,7 +60,7 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
                     .subscribeOn(Schedulers.io())
                     .subscribe({ castResult: CastResult? ->
 
-                        if (castResult?.castList != null && castResult?.castList.isNotEmpty()) {
+                        if (castResult?.castList != null && castResult.castList.isNotEmpty()) {
                             mView?.setCastRecyclerview(castResult.castList)
                         }
                     }, { error ->
