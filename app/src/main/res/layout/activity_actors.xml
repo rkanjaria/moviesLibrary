@@ -26,7 +26,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true">
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/posterCard"
@@ -52,34 +53,40 @@
                     android:textSize="@dimen/text_size_16"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/movieRating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/ratingIcon"
-                    android:layout_marginStart="@dimen/size_8dp"
-                    android:layout_toEndOf="@+id/ratingIcon"
-                    android:fontFamily="@font/noto_sans_regular" />
 
                 <TextView
-                    android:id="@+id/movieYear"
+                    android:id="@+id/actorGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignStart="@+id/movieTitle"
-                    android:layout_below="@+id/ratingIcon"
-                    android:layout_marginTop="@dimen/size_8dp"
-                    android:fontFamily="@font/noto_sans_regular" />
-
-                <TextView
-                    android:id="@+id/movieGenre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@+id/movieTitle"
-                    android:layout_below="@+id/movieYear"
+                    android:layout_alignStart="@+id/actorName"
+                    android:layout_below="@+id/actorName"
                     android:layout_marginTop="@dimen/size_8dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/noto_sans_regular"
                     android:maxLines="2" />
+
+                <TextView
+                    android:id="@+id/actorBirthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/actorName"
+                    android:layout_below="@+id/actorGender"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/noto_sans_regular"
+                    android:maxLines="2" />
+
+                <TextView
+                    android:id="@+id/actorBirthPlace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/actorName"
+                    android:layout_below="@+id/actorBirthday"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/noto_sans_regular"
+                    android:maxLines="2" />
+
 
             </RelativeLayout>
 
@@ -91,20 +98,20 @@
                 android:fontFamily="@font/noto_sans_regular" />
 
             <TextView
-                android:id="@+id/castTitle"
+                android:id="@+id/knowForTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/size_8dp"
-                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_32dp"
                 android:fontFamily="@font/noto_sans_regular"
-                android:text="Cast"
+                android:text="Known For"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_16"
                 android:textStyle="bold"
                 android:visibility="gone" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/castRecyclerview"
+                android:id="@+id/actorMovieRecyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_16dp"

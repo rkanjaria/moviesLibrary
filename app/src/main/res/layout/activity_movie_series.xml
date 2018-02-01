@@ -145,7 +145,7 @@
                 android:fontFamily="@font/noto_sans_regular"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_16"
-                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_32dp"
                 android:layout_marginStart="@dimen/size_8dp"
                 android:text="Cast"
                 android:visibility="gone"

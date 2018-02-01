@@ -16,7 +16,7 @@ import org.jetbrains.anko.displayMetrics
 /**
  * Created by MF on 23-12-2017.
  */
-class MovieRecyclerAdapter(val moviesList: List<Movie?>, onMovieSeriesAdapterListener: OnMovieSeriesAdapterListener, val isRecommendation: Boolean = false)
+class MovieRecyclerAdapter(val moviesList: List<Movie?>, onMovieSeriesAdapterListener: OnMovieSeriesAdapterListener?, val isRecommendation: Boolean = false)
     : RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHolder>() {
 
     val MOVIE_VIEW = 1
@@ -42,7 +42,7 @@ class MovieRecyclerAdapter(val moviesList: List<Movie?>, onMovieSeriesAdapterLis
 
         if (position >= itemCount - 1 && !isLoading && isMoreDataAvailable) {
             isLoading = true
-            movieSeriesAdapterListener.loadMore()
+            movieSeriesAdapterListener?.loadMore()
         }
 
         if (getItemViewType(position) == MOVIE_VIEW) {
@@ -84,14 +84,14 @@ class MovieRecyclerAdapter(val moviesList: List<Movie?>, onMovieSeriesAdapterLis
             }
 
             view.setOnClickListener({
-                movieSeriesAdapterListener.onMovieOrSeriesClicked(movieModel)
+                movieSeriesAdapterListener?.onMovieOrSeriesClicked(movieModel)
             })
         }
     }
 
     interface OnMovieSeriesAdapterListener {
-        fun loadMore()
-        fun onMovieOrSeriesClicked(movieModel: Movie?)
+        fun loadMore(){}
+        fun onMovieOrSeriesClicked(movieModel: Movie?){}
     }
 
     fun refreshAdapter(lastPosition: Int) {

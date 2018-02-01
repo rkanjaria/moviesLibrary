@@ -50,11 +50,11 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
     }
 
     fun getGenreBasedOnGenreId(genreId: Int): String {
-       val genre = dbInstance?.use {
+        val genre = dbInstance?.use {
             select(MOVIE_TABLE, GENRE_NAME)
                     .whereSimple(GENRE_ID + "= ?", genreId.toString())
                     .exec { parseList(StringParser) }
         }
-        return genre?.get(0)!!
+        if (genre!!.isNotEmpty()) return genre.get(0) else return ""
     }
 }

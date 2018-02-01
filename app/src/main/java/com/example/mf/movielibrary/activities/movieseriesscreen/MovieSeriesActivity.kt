@@ -56,7 +56,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
     }
 
     override fun onCastClicked(castModel: Cast) {
-        mPresenter.launchActorActivity(castModel)
+        mPresenter.launchActorActivity(castModel, intent.getStringExtra(MOVIE_OR_SERIES))
     }
 
     override fun setSimilarMoviesRecyclerview(moviesList: List<Movie?>, totalPages: Int) {
@@ -68,11 +68,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         recommendationsTitle.visibility = View.VISIBLE
     }
 
-    override fun loadMore() {}
-
     override fun onMovieOrSeriesClicked(movieModel: Movie?) {
         mPresenter.launchMovieSeriesActivity(movieModel, intent.getStringExtra(MOVIE_OR_SERIES))
     }
-
-
 }

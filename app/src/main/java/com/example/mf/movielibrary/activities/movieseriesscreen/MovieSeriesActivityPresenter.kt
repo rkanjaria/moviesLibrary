@@ -43,10 +43,11 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
     }
 
 
-    override fun launchActorActivity(castModel: Cast) {
+    override fun launchActorActivity(castModel: Cast, movieOrSeries: String?) {
         val actorIntent = Intent(mView?.getContext(), ActorsActivity::class.java)
         actorIntent.putExtra(INT_ID, castModel.id)
         actorIntent.putExtra(NAME, castModel.name)
+        actorIntent.putExtra(MOVIE_OR_SERIES, movieOrSeries)
         mView?.lauchchActivity(actorIntent)
     }
 

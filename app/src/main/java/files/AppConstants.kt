@@ -25,6 +25,9 @@ val UPCOMING = "upcoming"
 val ON_AIR = "on_the_air"
 val AIRING_TODAY = "airing_today"
 
+val MOVIE_CREDITS = "movie_credits"
+val TV_CREDITS = "tv_credits"
+
 
 val DATABASE_NAME = "movie.db"
 val MOVIE_TABLE = "movie_table"

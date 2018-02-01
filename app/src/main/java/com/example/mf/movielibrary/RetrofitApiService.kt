@@ -38,4 +38,15 @@ interface RetrofitApiService {
     fun doGetSimilarMoviesOrSeriesApiCall(@Path("movie_or_series") movieOrSeries: String,
                                           @Path("movie_or_series_id") movieOrSeriesId: Int,
                                           @Query("api_key") apiKey: String = API_KEY): Observable<MoviesResult>
+
+
+    @GET("person/{actor_id}/{movie_or_series}")
+    fun doGetActorsMoviesOrSeriesApiCall(@Path("actor_id") actorId: Int,
+                                         @Path("movie_or_series") movieOrSeries: String,
+                                         @Query("api_key") apiKey: String = API_KEY): Observable<MoviesResult>
+
+    @GET("person/{actor_id}/images")
+    fun doGetActorsImagesApiCall(@Path("actor_id") actorId: Int,
+                                 @Query("api_key") apiKey: String = API_KEY): Observable<MoviesResult>
+
 }

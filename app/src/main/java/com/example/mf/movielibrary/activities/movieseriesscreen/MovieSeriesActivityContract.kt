@@ -19,7 +19,7 @@ object MovieSeriesActivityContract {
     interface MovieSeriesPresenter : BasePresenter<MovieSeriesView>{
         fun callgetMovieOrSeriesCastApi(movieOrSeries: String?, movieId: Int)
         fun getMovieGenres(genreIds: List<Int>?) : String
-        fun launchActorActivity(castModel: Cast)
+        fun launchActorActivity(castModel: Cast, movieOrSeries: String?)
         fun callGetSimilarMovieOrSeriesApi(moviesOrSeries: String?, movieOrSeriesId: Int)
         fun launchMovieSeriesActivity(movieModel: Movie?, movieOrSeries: String?)
     }

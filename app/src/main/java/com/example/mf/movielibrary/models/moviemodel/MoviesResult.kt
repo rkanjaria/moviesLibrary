@@ -12,7 +12,7 @@ data class MoviesResult(
         @SerializedName("page") val page : Int,
         @SerializedName("total_results") val totalResults : Int,
         @SerializedName("total_pages") val totalPages : Int,
-        @SerializedName("results") val moviesList : List<Movie?>)
+        @SerializedName(value = "results", alternate = ["cast"]) val moviesList : List<Movie?>)
 
 
 data class Movie (

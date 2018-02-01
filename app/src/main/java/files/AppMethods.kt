@@ -43,3 +43,11 @@ fun getDateWithCustomFormat(date: String?): String {
         return ""
     }
 }
+
+fun getGender(genderId : Int) : String {
+    when (genderId) {
+        1 -> return "Female"
+        2 -> return "Male"
+    }
+    return ""
+}
