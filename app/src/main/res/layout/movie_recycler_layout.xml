@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<com.example.mf.movielibrary.widgets.MoviesCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="110dp"
-    android:layout_height="210dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_marginTop="@dimen/size_4dp"
     android:layout_marginEnd="@dimen/size_8dp"
     android:layout_marginBottom="@dimen/size_4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="100">
 
         <ImageView
             android:id="@+id/moviePoster"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="0dp"
+            android:layout_weight="70"
             android:scaleType="centerCrop" />
 
         <RelativeLayout
             android:id="@+id/movieBottomLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:background="@color/colorPrimary"
+            android:layout_weight="30"
             android:padding="@dimen/size_6dp">
 
             <TextView
@@ -49,4 +52,4 @@
 
     </LinearLayout>
 
-</android.support.v7.widget.CardView>
+</com.example.mf.movielibrary.widgets.MoviesCardView>

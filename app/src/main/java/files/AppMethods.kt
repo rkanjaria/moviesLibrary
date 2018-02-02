@@ -1,5 +1,8 @@
 package files
 
+import android.content.Context
+import org.jetbrains.anko.displayMetrics
+
 /**
  * Created by MF on 03-01-2018.
  */
@@ -50,4 +53,10 @@ fun getGender(genderId : Int) : String {
         2 -> return "Male"
     }
     return ""
+}
+
+fun calculateNoOfColumns(context: Context, width : Int): Int{
+    val displayMetrices = context.displayMetrics
+    val dpWidth = displayMetrices.widthPixels / displayMetrices.density
+    return (dpWidth / width).toInt()
 }

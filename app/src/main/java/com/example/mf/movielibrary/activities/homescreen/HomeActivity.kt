@@ -5,7 +5,10 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.Toolbar
-import android.view.*
+import android.view.ContextThemeWrapper
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.mf.movielibrary.R
@@ -47,7 +50,7 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         toolbarSpinner.adapter = spinnerAdapter
         toolbarSpinner.onItemSelectedListener = this
 
-        gridLayoutManager = GridLayoutManager(this, 3)
+        gridLayoutManager = GridLayoutManager(this, calculateNoOfColumns(this, 110))
         movieRecyclerView.layoutManager = gridLayoutManager
         movieAdapter = MovieRecyclerAdapter(mMoviesList, this)
         movieRecyclerView.adapter = movieAdapter
