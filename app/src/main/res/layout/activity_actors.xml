@@ -104,7 +104,7 @@
                 android:layout_marginStart="@dimen/size_8dp"
                 android:layout_marginTop="@dimen/size_32dp"
                 android:fontFamily="@font/noto_sans_regular"
-                android:text="Known For"
+                android:text="Also known for"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_16"
                 android:textStyle="bold"

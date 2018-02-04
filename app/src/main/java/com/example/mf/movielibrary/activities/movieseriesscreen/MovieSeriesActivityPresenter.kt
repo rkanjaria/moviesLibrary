@@ -68,7 +68,7 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
                     .subscribe({ castResult: CastResult? ->
 
                         if (castResult?.castList != null && castResult.castList.isNotEmpty()) {
-                            mView?.setCastRecyclerview(castResult.castList)
+                            mView?.setCastRecyclerview(castResult.castList.sortedBy { it.order })
                         }
                     }, { error ->
                         error.printStackTrace()

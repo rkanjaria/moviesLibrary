@@ -1,6 +1,7 @@
 package com.example.mf.movielibrary
 
 import com.example.mf.movielibrary.models.actormodel.Actor
+import com.example.mf.movielibrary.models.actormodel.ActorImagesResult
 import com.example.mf.movielibrary.models.castmodel.CastResult
 import com.example.mf.movielibrary.models.genremodel.GenreResult
 import com.example.mf.movielibrary.models.moviemodel.MoviesResult
@@ -47,6 +48,6 @@ interface RetrofitApiService {
 
     @GET("person/{actor_id}/images")
     fun doGetActorsImagesApiCall(@Path("actor_id") actorId: Int,
-                                 @Query("api_key") apiKey: String = API_KEY): Observable<MoviesResult>
+                                 @Query("api_key") apiKey: String = API_KEY): Observable<ActorImagesResult>
 
 }

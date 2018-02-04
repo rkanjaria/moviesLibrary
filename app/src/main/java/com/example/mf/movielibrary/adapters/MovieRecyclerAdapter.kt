@@ -16,7 +16,7 @@ import org.jetbrains.anko.displayMetrics
 /**
  * Created by MF on 23-12-2017.
  */
-class MovieRecyclerAdapter(val moviesList: List<Movie?>, onMovieSeriesAdapterListener: OnMovieSeriesAdapterListener?, val isRecommendation: Boolean = false)
+class MovieRecyclerAdapter(val moviesList: List<Movie?>, onMovieSeriesAdapterListener: OnMovieSeriesAdapterListener?, val isHorizontal: Boolean = false)
     : RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHolder>() {
 
     val MOVIE_VIEW = 1
@@ -69,12 +69,12 @@ class MovieRecyclerAdapter(val moviesList: List<Movie?>, onMovieSeriesAdapterLis
 
         fun bindViews(movieModel: Movie?) {
 
-            if(isRecommendation) {
+            if(isHorizontal) {
                 val widthInDp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100f, view.context.displayMetrics)
                 view.layoutParams.width = widthInDp.toInt()
             }
 
-            val placeholder = if(isRecommendation) R.color.darkGrey else R.color.colorPrimary
+            val placeholder = if(isHorizontal) R.color.darkGrey else R.color.colorPrimary
             view.moviePoster.loadImage(photoUrl + movieModel?.posterPath, placeholder)
             view.movieName.text = movieModel?.title
             view.movieBottomLayout.setBackgroundColor(ContextCompat.getColor(view.context, placeholder))

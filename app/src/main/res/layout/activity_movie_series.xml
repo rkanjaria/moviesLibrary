@@ -171,7 +171,7 @@
                 android:textSize="@dimen/text_size_16"
                 android:layout_marginTop="@dimen/size_32dp"
                 android:layout_marginStart="@dimen/size_8dp"
-                android:text="Recommendations"
+                android:text="You may also like"
                 android:visibility="gone"
                 android:textStyle="bold" />
 

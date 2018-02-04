@@ -36,6 +36,7 @@ class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsAct
         //actorBiography.setOnClickListener { actorBiography.expandOrCollapseTextView() }
 
         mPresenter.callGetActorsMoviesOrSeriesApi(actor.actorId, intent.getStringExtra(MOVIE_OR_SERIES))
+        posterCard.setOnClickListener { mPresenter.launchImagesActivity(actor.actorId) }
     }
 
     override fun showProgressLoading() {
@@ -57,4 +58,5 @@ class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsAct
     override fun onMovieOrSeriesClicked(movieModel: Movie?) {
         mPresenter.launchMovieSeriesActivity(movieModel, intent.getStringExtra(MOVIE_OR_SERIES))
     }
+
 }

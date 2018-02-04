@@ -1,6 +1,7 @@
 package com.example.mf.movielibrary.activities.actorsscreen
 
 import android.content.Intent
+import com.example.mf.movielibrary.activities.imgescreen.ImageActivity
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.helpers.RetrofitHelper
@@ -55,5 +56,11 @@ class ActorsActivityPresenter : BasePresenterImpl<ActorsActivityContract.ActorsV
         movieSeriesIntent.putExtra(PARCELABLE_OBJECT, movieModel)
         movieSeriesIntent.putExtra(MOVIE_OR_SERIES, moviesOrSeries)
         mView?.getContext()?.startActivity(movieSeriesIntent)
+    }
+
+    override fun launchImagesActivity(actorId: Int) {
+        val imagesIntent = Intent(mView?.getContext(), ImageActivity::class.java)
+        imagesIntent.putExtra(ID, actorId)
+        mView?.getContext()?.startActivity(imagesIntent)
     }
 }

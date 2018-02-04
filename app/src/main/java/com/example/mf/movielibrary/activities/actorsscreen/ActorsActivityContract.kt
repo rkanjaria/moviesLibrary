@@ -18,5 +18,6 @@ class ActorsActivityContract {
         fun callGetActorApi(actorId: Int)
         fun callGetActorsMoviesOrSeriesApi(actorId: Int, moviesOrSeries: String?)
         fun launchMovieSeriesActivity(movieModel: Movie?, moviesOrSeries: String?)
+        fun launchImagesActivity(actorId: Int)
     }
 }

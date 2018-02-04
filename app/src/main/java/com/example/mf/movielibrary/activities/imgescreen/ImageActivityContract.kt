@@ -7,8 +7,15 @@ import com.example.mf.movielibrary.base.BaseView
 /**
  * Created by MF on 01-02-2018.
  */
-class ImageActivityContract{
+class ImageActivityContract {
 
-    interface ImageBaseView : BaseView {}
-    interface ImagePresenter : BasePresenter<ImageBaseView> {}
+    interface ImageBaseView : BaseView {
+        fun setImageViewPager(imageList: List<String?>)
+        fun showProgressLoading()
+        fun hideProgressLoading()
+    }
+
+    interface ImagePresenter : BasePresenter<ImageBaseView> {
+        fun callActorsImageApi(actorId: Int)
+    }
 }
