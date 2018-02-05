@@ -27,13 +27,15 @@ class SeasonRecyclerAdapter(val seasonList: List<Season>) : RecyclerView.Adapter
         holder?.bindViews(seasonList.get(position))
     }
 
+
+
     override fun getItemCount(): Int {
         return seasonList.size
     }
 
     inner class SeasonViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val view = itemView
-        fun bindViews(seasonModel: Season) {
+        fun bindViews(seasonModel : Season){
 
             val widthInDp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100f, view.context.displayMetrics)
             view.layoutParams.width = widthInDp.toInt()
