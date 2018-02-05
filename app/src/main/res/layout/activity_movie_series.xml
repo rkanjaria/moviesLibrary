@@ -139,6 +139,29 @@
                 android:layout_marginTop="@dimen/size_16dp" />
 
             <TextView
+                android:id="@+id/seasonsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_regular"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16"
+                android:layout_marginTop="@dimen/size_32dp"
+                android:layout_marginStart="@dimen/size_8dp"
+                android:text="Seasons"
+                android:visibility="gone"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/seasonsRecyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:paddingStart="@dimen/size_8dp"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false" />
+
+            <TextView
                 android:id="@+id/castTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -160,7 +183,6 @@
                 android:layout_marginTop="@dimen/size_16dp"
                 android:clipToPadding="false"
                 android:nestedScrollingEnabled="false" />
-
 
             <TextView
                 android:id="@+id/recommendationsTitle"

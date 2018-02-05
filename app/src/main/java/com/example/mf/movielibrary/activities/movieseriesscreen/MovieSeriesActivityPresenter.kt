@@ -8,6 +8,7 @@ import com.example.mf.movielibrary.models.castmodel.Cast
 import com.example.mf.movielibrary.models.castmodel.CastResult
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import com.example.mf.movielibrary.models.moviemodel.MoviesResult
+import com.example.mf.movielibrary.models.movieseriesdetailsmodel.MovieSeriesDetailsResult
 import files.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -76,5 +77,23 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
                     })
         }
 
+    }
+
+    override fun callGetTvDetailsApi(movieOrSeriesId: Int) {
+        RetrofitHelper.create().doGetTvSeasonsApiCall(movieOrSeriesId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ movieSeriesDetailsResult ->
+
+                    if (movieSeriesDetailsResult.seasonsList != null && movieSeriesDetailsResult.seasonsList.isNotEmpty()) {
+                        mView?.setSeasonRecyclerview(movieSeriesDetailsResult.seasonsList
+                                .filter {
+                                    it.airDate != null && it.episodeCount != 0 && it.posterPath != null && it.seasonNumber != 0
+                                }.sortedBy { it.seasonNumber })
+                    }
+                }, { error ->
+                    error.printStackTrace()
+                    mView?.showMessage(error.localizedMessage)
+                })
     }
 }

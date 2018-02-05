@@ -5,6 +5,7 @@ import com.example.mf.movielibrary.models.actormodel.ActorImagesResult
 import com.example.mf.movielibrary.models.castmodel.CastResult
 import com.example.mf.movielibrary.models.genremodel.GenreResult
 import com.example.mf.movielibrary.models.moviemodel.MoviesResult
+import com.example.mf.movielibrary.models.movieseriesdetailsmodel.MovieSeriesDetailsResult
 import files.API_KEY
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -49,5 +50,9 @@ interface RetrofitApiService {
     @GET("person/{actor_id}/images")
     fun doGetActorsImagesApiCall(@Path("actor_id") actorId: Int,
                                  @Query("api_key") apiKey: String = API_KEY): Observable<ActorImagesResult>
+
+    @GET("tv/{tv_id}")
+    fun doGetTvSeasonsApiCall(@Path("tv_id") tvId: Int,
+                              @Query("api_key") apiKey: String = API_KEY): Observable<MovieSeriesDetailsResult>
 
 }
