@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/size_120dp"
+    android:layout_height="@dimen/size_100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="@dimen/size_8dp"
     android:layout_marginLeft="@dimen/size_8dp"
@@ -12,28 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.CardView
-            android:id="@+id/posterCard"
+        <ImageView
+            android:id="@+id/episodePosterImage"
             android:layout_width="@dimen/size_150dp"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/episodePosterImage"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
-
-        </android.support.v7.widget.CardView>
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/episodeTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/size_32dp"
-            android:layout_toEndOf="@+id/posterCard"
+            android:layout_marginStart="@dimen/size_16dp"
+            android:layout_toEndOf="@+id/episodePosterImage"
             android:fontFamily="@font/noto_sans_regular"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_16"
             android:layout_marginTop="@dimen/size_16dp"
             android:textStyle="bold" />
 
@@ -54,6 +46,7 @@
             android:layout_toEndOf="@+id/ratingIcon"
             android:layout_alignTop="@+id/ratingIcon"
             android:fontFamily="@font/noto_sans_regular"
+            android:textSize="@dimen/text_size_12"
             android:layout_marginStart="@dimen/size_8dp" />
 
         <TextView
@@ -63,6 +56,7 @@
             android:layout_below="@+id/ratingIcon"
             android:layout_alignStart="@+id/episodeTitle"
             android:fontFamily="@font/noto_sans_regular"
+            android:textSize="@dimen/text_size_12"
             android:layout_marginTop="@dimen/size_8dp" />
 
     </RelativeLayout>

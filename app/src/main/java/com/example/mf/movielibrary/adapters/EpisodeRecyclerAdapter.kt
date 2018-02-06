@@ -6,10 +6,7 @@ import android.view.ViewGroup
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
 import com.example.mf.movielibrary.models.seasonmodels.Episode
-import files.getYearFromDate
-import files.inflate
-import files.loadImage
-import files.photoUrl
+import files.*
 import kotlinx.android.synthetic.main.episode_recyler_layout.view.*
 
 /**
@@ -34,7 +31,7 @@ class EpisodeRecyclerAdapter(val episodeList: List<Episode>) : RecyclerView.Adap
             view.episodePosterImage.loadImage(photoUrl + episodeModel.stillPath)
             view.episodeTitle.text = episodeModel.episodeName
             view.episodeRating.text = episodeModel.voteAverage.toString()
-            view.episodeDate.text = getYearFromDate(episodeModel.episodeAirDate)
+            view.episodeDate.text = getDateWithCustomFormat(episodeModel.episodeAirDate)
         }
     }
 }
