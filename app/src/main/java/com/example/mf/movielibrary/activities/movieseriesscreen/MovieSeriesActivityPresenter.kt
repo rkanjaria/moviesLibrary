@@ -2,6 +2,7 @@ package com.example.mf.movielibrary.activities.movieseriesscreen
 
 import android.content.Intent
 import com.example.mf.movielibrary.activities.actorsscreen.ActorsActivity
+import com.example.mf.movielibrary.activities.seasonscreen.SeasonActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.castmodel.Cast
@@ -9,6 +10,7 @@ import com.example.mf.movielibrary.models.castmodel.CastResult
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import com.example.mf.movielibrary.models.moviemodel.MoviesResult
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.MovieSeriesDetailsResult
+import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
 import files.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -18,6 +20,13 @@ import io.reactivex.schedulers.Schedulers
  */
 class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContract.MovieSeriesView>(),
         MovieSeriesActivityContract.MovieSeriesPresenter {
+
+    override fun launchSeasonActivity(season: Season, movieOrSeriesId: Int) {
+        val seasonIntent = Intent(mView?.getContext(), SeasonActivity::class.java)
+        seasonIntent.putExtra(PARCELABLE_OBJECT, season)
+        seasonIntent.putExtra(INT_ID, movieOrSeriesId)
+        mView?.getContext()?.startActivity(seasonIntent)
+    }
 
     override fun launchMovieSeriesActivity(movieModel: Movie?, movieOrSeries: String?) {
         val movieSeriesIntent = Intent(mView?.getContext(), MovieSeriesActivity::class.java)

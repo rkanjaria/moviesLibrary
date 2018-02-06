@@ -23,7 +23,7 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
     return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
 }
 
-fun ImageView.loadImage(url: String, placeholder: Int = R.color.colorPrimaryDark, attachToRoot: Boolean = false) {
+fun ImageView.loadImage(url: String, placeholder: Int = R.color.darkGrey, attachToRoot: Boolean = false) {
     Glide.with(context)
             .load(url)
             .apply(RequestOptions.placeholderOf(placeholder))

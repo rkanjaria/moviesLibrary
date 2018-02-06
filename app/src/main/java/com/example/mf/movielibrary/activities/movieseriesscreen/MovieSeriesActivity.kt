@@ -16,7 +16,8 @@ import files.*
 import kotlinx.android.synthetic.main.activity_movie_series.*
 
 class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeriesView, MovieSeriesActivityPresenter>(),
-        MovieSeriesActivityContract.MovieSeriesView, CastRecyclerAdapter.OnCastAdapterListener, MovieRecyclerAdapter.OnMovieSeriesAdapterListener {
+        MovieSeriesActivityContract.MovieSeriesView, CastRecyclerAdapter.OnCastAdapterListener,
+        MovieRecyclerAdapter.OnMovieSeriesAdapterListener, SeasonRecyclerAdapter.SeasonAdapterListener {
 
     private var movieOrSeriesId = 0
 
@@ -81,8 +82,13 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
     override fun setSeasonRecyclerview(seasonsList: List<Season>) {
         seasonsRecyclerview.setHasFixedSize(true)
         seasonsRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        seasonsRecyclerview.adapter = SeasonRecyclerAdapter(seasonsList)
+        seasonsRecyclerview.adapter = SeasonRecyclerAdapter(seasonsList, this)
         seasonsRecyclerview.visibility = View.VISIBLE
         seasonsTitle.visibility = View.VISIBLE
     }
+
+    override fun onSeasonClicked(season: Season) {
+        mPresenter.launchSeasonActivity(season, movieOrSeriesId)
+    }
+
 }

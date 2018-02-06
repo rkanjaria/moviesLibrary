@@ -74,10 +74,8 @@ class MovieRecyclerAdapter(val moviesList: List<Movie?>, onMovieSeriesAdapterLis
                 view.layoutParams.width = widthInDp.toInt()
             }
 
-            val placeholder = if(isHorizontal) R.color.darkGrey else R.color.colorPrimary
-            view.moviePoster.loadImage(photoUrl + movieModel?.posterPath, placeholder)
+            view.moviePoster.loadImage(photoUrl + movieModel?.posterPath)
             view.movieName.text = movieModel?.title
-            view.movieBottomLayout.setBackgroundColor(ContextCompat.getColor(view.context, placeholder))
 
             if (movieModel?.releaseDate != null && !movieModel.releaseDate.isBlank()) {
                 view.movieYear.text = getYearFromDate(movieModel.releaseDate)

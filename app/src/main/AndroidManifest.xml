@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.actorsscreen.ActorsActivity" />
-        <activity android:name=".activities.imgescreen.ImageActivity"/>
+        <activity android:name=".activities.imgescreen.ImageActivity" />
+        <activity android:name=".activities.seasonscreen.SeasonActivity"></activity>
     </application>
 
 </manifest>

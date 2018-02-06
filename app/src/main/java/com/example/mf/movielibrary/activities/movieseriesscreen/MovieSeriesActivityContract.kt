@@ -25,5 +25,6 @@ object MovieSeriesActivityContract {
         fun callGetSimilarMovieOrSeriesApi(moviesOrSeries: String?, movieOrSeriesId: Int)
         fun launchMovieSeriesActivity(movieModel: Movie?, movieOrSeries: String?)
         fun callGetTvDetailsApi(movieOrSeriesId: Int)
+        fun launchSeasonActivity(season: Season, movieOrSeriesId: Int)
     }
 }
