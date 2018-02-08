@@ -29,7 +29,7 @@ class ImageAdapter(context: Context, val imageList: List<String?>) : PagerAdapte
 
     override fun instantiateItem(container: ViewGroup?, position: Int): Any {
         val itemView = layoutInfalter.inflate(R.layout.image_layout, container, false)
-        itemView.mainImage.loadImage(photoUrl + imageList.get(position))
+        itemView.mainImage.loadImage(photoUrl + imageList.get(position), R.color.colorPrimaryDark)
         container?.addView(itemView)
         return itemView
     }

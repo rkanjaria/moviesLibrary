@@ -134,7 +134,8 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         when(item?.itemId){
-            R.id.action_sort -> mPresenter.requestMovieOrSeriesTypeDialog();
+            R.id.action_sort -> mPresenter.requestMovieOrSeriesTypeDialog()
+            R.id.action_search -> mPresenter.requestSearchActivity()
         }
         return true
     }

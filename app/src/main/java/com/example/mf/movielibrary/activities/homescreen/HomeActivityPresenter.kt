@@ -3,6 +3,7 @@ package com.example.mf.movielibrary.activities.homescreen
 import android.annotation.SuppressLint
 import android.content.Intent
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
+import com.example.mf.movielibrary.activities.searchscreen.SearchActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.moviemodel.Movie
@@ -16,6 +17,7 @@ import io.reactivex.schedulers.Schedulers
  * Created by MF on 28-11-2017.
  */
 class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>(), HomeActivityContract.HomePresenter {
+
     override fun requestMovieOrSeriesTypeDialog() {
         mView?.showMovieOrSeriesTypeDialog();
     }
@@ -49,5 +51,9 @@ class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>()
         movieSeriesIntent.putExtra(PARCELABLE_OBJECT, movieModel)
         movieSeriesIntent.putExtra(MOVIE_OR_SERIES, movieOrSeries)
         mView?.getContext()?.startActivity(movieSeriesIntent)
+    }
+
+    override fun requestSearchActivity() {
+        mView?.getContext()?.startActivity(Intent(mView?.getContext(), SearchActivity::class.java))
     }
 }

@@ -21,6 +21,7 @@ object HomeActivityContract {
         fun callGetMoviesApi(movieOrSeries : String, requestType : String , page : Int)
         fun launchMovieSeriesActivity(movieModel: Movie?, movieOrSeries: String)
         fun requestMovieOrSeriesTypeDialog()
+        fun requestSearchActivity()
     }
 
 }

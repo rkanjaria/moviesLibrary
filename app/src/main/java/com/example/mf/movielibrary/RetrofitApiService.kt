@@ -61,4 +61,9 @@ interface RetrofitApiService {
                                    @Path("season_number") seasonNumber: Int,
                                    @Query("api_key") apiKey: String = API_KEY): Observable<SeasonResult>
 
+    @GET("search/{movie_or_series}")
+    fun doSearchMovieOrSeriesApiCall(@Path("movie_or_series") movieOrSeries: String,
+                                     @Query("api_key") apiKey: String = API_KEY,
+                                     @Query("query") searchQuery: String,
+                                     @Query("page") page: Int): Observable<MoviesResult>
 }

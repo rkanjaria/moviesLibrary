@@ -17,5 +17,11 @@
     <style name="AlertDialogTheme" parent="@android:style/Theme.Material.Dialog">
         <item name="android:fontFamily">@font/noto_sans_regular</item>
     </style>
+    
+    <style name="movieSearViewStyle" parent="Widget.AppCompat.Light.SearchView">
+        <item name="submitBackground">@color/darkGrey</item>
+        <item name="queryBackground">@color/darkGrey</item>
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+    </style>
 
 </resources>
