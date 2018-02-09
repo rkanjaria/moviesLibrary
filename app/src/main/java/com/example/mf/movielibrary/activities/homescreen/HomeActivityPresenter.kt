@@ -36,7 +36,7 @@ class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>()
                     if (page == 1) {
                         mView?.hideProgressBar()
                     }
-                    mView?.setMovieRecyclerView(movieResult?.moviesList, movieResult?.totalPages!!)
+                    mView?.setMovieRecyclerView(movieResult?.moviesList, movieResult?.totalResults!!)
                 }, { error ->
                     error.printStackTrace()
                     mView?.showMessage(error.localizedMessage)

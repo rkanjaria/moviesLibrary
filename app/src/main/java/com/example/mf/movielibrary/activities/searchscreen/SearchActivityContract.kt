@@ -10,7 +10,7 @@ import com.example.mf.movielibrary.models.moviemodel.Movie
 class SearchActivityContract {
 
     interface SearchBaseView : BaseView {
-        fun setSearchRecyclerView(moviesList: List<Movie?>?, totalPages: Int)
+        fun setSearchRecyclerView(moviesList: List<Movie?>?, totalResult: Int)
         fun showProgressBar()
         fun hideProgressBar()
     }

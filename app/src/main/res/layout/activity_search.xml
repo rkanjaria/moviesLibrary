@@ -16,7 +16,6 @@
         android:layout_marginTop="@dimen/size_16dp"
         android:layout_marginLeft="@dimen/size_8dp"
         android:layout_marginRight="@dimen/size_8dp"
-        android:layout_marginBottom="@dimen/size_16dp"
         app:cardCornerRadius="@dimen/size_4dp">
 
         <android.support.v7.widget.SearchView
@@ -28,15 +27,22 @@
 
     </android.support.v7.widget.CardView>
 
+    <LinearLayout
+        android:id="@+id/tagsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchCardView"
+        android:orientation="vertical" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/searchRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="@dimen/size_4dp"
         android:paddingBottom="@dimen/size_4dp"
-        android:paddingLeft="@dimen/size_8dp"
+        android:paddingStart="@dimen/size_8dp"
         android:clipToPadding="false"
-        android:layout_below="@+id/searchCardView" />
+        android:layout_below="@+id/tagsLayout" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -44,5 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone" />
+
+
 
 </RelativeLayout>

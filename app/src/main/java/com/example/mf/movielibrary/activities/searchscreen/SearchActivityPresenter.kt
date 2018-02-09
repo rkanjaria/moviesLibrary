@@ -38,7 +38,7 @@ class SearchActivityPresenter : BasePresenterImpl<SearchActivityContract.SearchB
                         if (queryPage == 1) {
                             mView?.hideProgressBar()
                         }
-                        mView?.setSearchRecyclerView(movieResult?.moviesList, movieResult?.totalPages!!)
+                        mView?.setSearchRecyclerView(movieResult?.moviesList, movieResult?.totalResults!!)
                     }, { error ->
                         error.printStackTrace()
                         mView?.showMessage(error.localizedMessage)

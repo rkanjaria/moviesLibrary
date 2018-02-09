@@ -41,7 +41,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         }
         movieTitle.text = movieModel.title
         movieYear.text = getDateWithCustomFormat(movieModel.releaseDate)
-        movieRating.text = movieModel.voteAverage.toString()
+        movieRating.text = if (movieModel.voteAverage != 0f) movieModel.voteAverage.toString() else "No rating"
         movieOverview.text = movieModel.overview
         movieGenre.text = mPresenter.getMovieGenres(movieModel.genreIds)
 
