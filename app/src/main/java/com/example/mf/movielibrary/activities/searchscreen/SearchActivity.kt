@@ -42,6 +42,13 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+
+        if(intent.getStringExtra(MOVIE_OR_SERIES) == MOVIE){
+            movieOrSeries = MOVIE
+        }else{
+            movieOrSeries = TV_SHOWS
+        }
+
         gridLayoutManager = GridLayoutManager(this, calculateNoOfColumns(this, 110))
         searchRecyclerView.layoutManager = gridLayoutManager
 
@@ -53,12 +60,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         }
 
 
-        val list = mutableListOf<String>()
-        list.add("Movies")
-        list.add("Tv Shows")
-        list.add("Genres")
-        list.add("By Actors")
-
+        val list = resources.getStringArray(R.array.search_tags).toList()
         tagsLayout.asTagsLayout(list)
         movieSeriesSearchView.setOnQueryTextListener(this)
     }

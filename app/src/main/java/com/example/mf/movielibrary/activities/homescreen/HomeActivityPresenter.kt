@@ -53,7 +53,9 @@ class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>()
         mView?.getContext()?.startActivity(movieSeriesIntent)
     }
 
-    override fun requestSearchActivity() {
-        mView?.getContext()?.startActivity(Intent(mView?.getContext(), SearchActivity::class.java))
+    override fun requestSearchActivity(movieOrSeries: String) {
+        val searchIntent = Intent(mView?.getContext(), SearchActivity::class.java)
+        searchIntent.putExtra(MOVIE_OR_SERIES, movieOrSeries)
+        mView?.getContext()?.startActivity(searchIntent)
     }
 }
