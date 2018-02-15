@@ -108,8 +108,6 @@ fun LinearLayout.asTagsLayout(tagsList: List<String>) {
 
         previousTagWidth = tagView.measureTextViewWidth() + px
         previousTagHeight = tagView.measureTextViewHeight() + px
-
-        tagView.setOnClickListener(){}
     }
 
     this.addView(tagLayout)
@@ -124,3 +122,36 @@ fun TextView.measureTextViewHeight(): Int {
     this.measure(0, 0)
     return this.measuredHeight
 }
+
+/*
+fun View.findSelectedTag(context: Context) : String {
+
+    var selectedText = ""
+
+    try {
+        if (this is ViewGroup) {
+            val viewGroup = this
+            for (i in 0 until viewGroup.childCount) {
+                val child = viewGroup.getChildAt(i)
+                child.findSelectedTag(context)
+            }
+        }else if(this is TextView){
+
+            this.setOnClickListener {
+
+                if(this.text.equals()){
+                    this.background = ContextCompat.getDrawable(context, R.drawable.tag_background_colored_drawable)
+                    this.setTextColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
+                    selectedText = this.text.toString()
+                }else{
+                    this.background = ContextCompat.getDrawable(context, R.drawable.tag_background_drawable)
+                    this.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
+                }
+            }
+        }
+
+    } catch (e: Throwable) {
+        e.printStackTrace()
+    }
+    return selectedText
+}*/

@@ -45,8 +45,10 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
         if(intent.getStringExtra(MOVIE_OR_SERIES) == MOVIE){
             movieOrSeries = MOVIE
+            movieSeriesSearchView.queryHint = "Search movies"
         }else{
             movieOrSeries = TV_SHOWS
+            movieSeriesSearchView.queryHint = "Search Tv shows"
         }
 
         gridLayoutManager = GridLayoutManager(this, calculateNoOfColumns(this, 110))
@@ -59,10 +61,10 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
             }
         }
 
-
         val list = resources.getStringArray(R.array.search_tags).toList()
         tagsLayout.asTagsLayout(list)
         movieSeriesSearchView.setOnQueryTextListener(this)
+
     }
 
     override fun setSearchRecyclerView(moviesList: List<Movie?>?, totalResult: Int) {

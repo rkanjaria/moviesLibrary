@@ -7,14 +7,14 @@ import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.EpisodeRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
+import com.example.mf.movielibrary.models.seasonmodels.Episode
 import com.example.mf.movielibrary.models.seasonmodels.SeasonResult
 import files.INT_ID
 import files.PARCELABLE_OBJECT
 import kotlinx.android.synthetic.main.activity_season.*
 
 class SeasonActivity : BaseActivity<SeasonActivityContract.SeasonView, SeasonActivityPresenter>(),
-        SeasonActivityContract.SeasonView{
-
+        SeasonActivityContract.SeasonView, EpisodeRecyclerAdapter.EpisodeAdapterListener{
 
     override var mPresenter = SeasonActivityPresenter()
 
@@ -32,7 +32,7 @@ class SeasonActivity : BaseActivity<SeasonActivityContract.SeasonView, SeasonAct
         if (seasonResult?.episodeList != null && seasonResult.episodeList.isNotEmpty()) {
             episodesRecyclerview.setHasFixedSize(true)
             episodesRecyclerview.layoutManager = LinearLayoutManager(this)
-            episodesRecyclerview.adapter = EpisodeRecyclerAdapter(seasonResult.episodeList)
+            episodesRecyclerview.adapter = EpisodeRecyclerAdapter(seasonResult.episodeList, this)
             episodesRecyclerview.visibility = View.VISIBLE
         }
     }
@@ -44,4 +44,9 @@ class SeasonActivity : BaseActivity<SeasonActivityContract.SeasonView, SeasonAct
     override fun hideProgressLoading() {
         progressBar.visibility = View.GONE
     }
+
+    override fun onEpisodeClicked(episode: Episode) {
+        mPresenter.lanchEpisodeActivity(episode)
+    }
+
 }

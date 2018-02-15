@@ -1,6 +1,11 @@
 package files
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import com.example.mf.movielibrary.R
 import org.jetbrains.anko.displayMetrics
 
 /**
@@ -47,7 +52,7 @@ fun getDateWithCustomFormat(date: String?): String {
     }
 }
 
-fun getGender(genderId : Int) : String {
+fun getGender(genderId: Int): String {
     when (genderId) {
         1 -> return "Female"
         2 -> return "Male"
@@ -55,8 +60,10 @@ fun getGender(genderId : Int) : String {
     return ""
 }
 
-fun calculateNoOfColumns(context: Context, width : Int): Int{
+fun calculateNoOfColumns(context: Context, width: Int): Int {
     val displayMetrices = context.displayMetrics
     val dpWidth = displayMetrices.widthPixels / displayMetrices.density
     return (dpWidth / width).toInt()
 }
+
+

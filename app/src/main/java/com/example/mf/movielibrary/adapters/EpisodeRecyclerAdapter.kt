@@ -12,7 +12,9 @@ import kotlinx.android.synthetic.main.episode_recyler_layout.view.*
 /**
  * Created by MF on 06-02-2018.
  */
-class EpisodeRecyclerAdapter(val episodeList: List<Episode>) : RecyclerView.Adapter<EpisodeRecyclerAdapter.EpisodeViewHolder>() {
+class EpisodeRecyclerAdapter(val episodeList: List<Episode>, episodeAdapterListener: EpisodeAdapterListener?) : RecyclerView.Adapter<EpisodeRecyclerAdapter.EpisodeViewHolder>() {
+
+    val episodeListener = episodeAdapterListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeViewHolder {
         return EpisodeViewHolder(parent.inflate(R.layout.episode_recyler_layout, false))
@@ -23,7 +25,7 @@ class EpisodeRecyclerAdapter(val episodeList: List<Episode>) : RecyclerView.Adap
 
     override fun getItemCount() = episodeList.size
 
-    class EpisodeViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView){
+    inner class EpisodeViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView){
         var view = itemView
 
         fun bindViews(episodeModel: Episode){
@@ -32,6 +34,12 @@ class EpisodeRecyclerAdapter(val episodeList: List<Episode>) : RecyclerView.Adap
             view.episodeTitle.text = episodeModel.episodeName
             view.episodeRating.text = episodeModel.voteAverage.toString()
             view.episodeDate.text = getDateWithCustomFormat(episodeModel.episodeAirDate)
+
+            view.setOnClickListener{episodeListener?.onEpisodeClicked(episodeModel)}
         }
+    }
+
+    interface EpisodeAdapterListener{
+        fun onEpisodeClicked(episode: Episode)
     }
 }
