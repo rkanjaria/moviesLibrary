@@ -5,6 +5,8 @@ import com.example.mf.movielibrary.activities.episodescreen.EpisodeActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.seasonmodels.Episode
+import files.ID
+import files.INT_ID
 import files.PARCELABLE_OBJECT
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -14,9 +16,11 @@ import io.reactivex.schedulers.Schedulers
  */
 class SeasonActivityPresenter : BasePresenterImpl<SeasonActivityContract.SeasonView>(), SeasonActivityContract.SeasonPresenter {
 
-    override fun lanchEpisodeActivity(episode: Episode) {
+    override fun lanchEpisodeActivity(episode: Episode, seriesId: Int, seasonNumber: Int) {
         val episodeIntent = Intent(mView?.getContext(), EpisodeActivity::class.java)
         episodeIntent.putExtra(PARCELABLE_OBJECT, episode)
+        episodeIntent.putExtra(ID, seriesId)
+        episodeIntent.putExtra(INT_ID, seasonNumber)
         mView?.getContext()?.startActivity(episodeIntent)
     }
 

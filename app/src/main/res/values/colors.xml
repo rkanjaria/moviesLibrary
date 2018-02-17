@@ -6,4 +6,16 @@
     <color name="colorAccent">#01D277</color>
     <color name="white">#ffffff</color>
     <color name="darkGrey">#212121</color>
+    <color name="lightGrey">#e0e0e0</color>
+
+    <!-- circle indicator view -->
+    <bool name="default_circle_indicator_snap">false</bool>
+    <color name="default_circle_indicator_stroke_color">@android:color/transparent</color>
+    <dimen name="default_circle_indicator_stroke_width">@dimen/size_1dp</dimen>
+    <dimen name="default_circle_indicator_radius">@dimen/size_4dp</dimen>
+    <bool name="default_circle_indicator_centered">true</bool>
+    <color name="default_circle_indicator_fill_color">@color/colorAccent</color>
+    <color name="default_circle_indicator_page_color">@color/lightGrey</color>
+    <integer name="default_circle_indicator_orientation">0</integer>
+
 </resources>

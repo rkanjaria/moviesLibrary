@@ -17,6 +17,6 @@ class SeasonActivityContract {
     }
     interface SeasonPresenter : BasePresenter<SeasonView> {
         fun callGetSesonDetailsApi(seriesId: Int, seasonNumber: Int)
-        fun lanchEpisodeActivity(episode: Episode)
+        fun lanchEpisodeActivity(episode: Episode, seriesId: Int, seasonNumber: Int)
     }
 }

@@ -19,6 +19,7 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.example.mf.movielibrary.R
@@ -35,13 +36,24 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
     return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
 }
 
-fun ImageView.loadImage(url: String, placeholder: Int = R.color.darkGrey, attachToRoot: Boolean = false) {
-    Glide.with(context)
-            .load(url)
-            .apply(RequestOptions.placeholderOf(placeholder))
-            .apply(RequestOptions.errorOf(placeholder))
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(this)
+fun ImageView.loadImage(url: String, placeholder: Int = R.color.darkGrey, attachToRoot: Boolean = false, centerCrop: Boolean = false) {
+
+    if(centerCrop){
+        Glide.with(context)
+                .load(url)
+                .apply(RequestOptions().centerCrop())
+                .apply(RequestOptions.placeholderOf(placeholder))
+                .apply(RequestOptions.errorOf(placeholder))
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(this)
+    }else {
+        Glide.with(context)
+                .load(url)
+                .apply(RequestOptions.placeholderOf(placeholder))
+                .apply(RequestOptions.errorOf(placeholder))
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(this)
+    }
 }
 
 fun ImageView.loadBlurImage(url: String, attachToRoot: Boolean = false) {

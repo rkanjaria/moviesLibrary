@@ -17,13 +17,16 @@ class SeasonActivity : BaseActivity<SeasonActivityContract.SeasonView, SeasonAct
         SeasonActivityContract.SeasonView, EpisodeRecyclerAdapter.EpisodeAdapterListener{
 
     override var mPresenter = SeasonActivityPresenter()
+    private var seriesId = -1
+    private var seasonNumber = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_season)
 
         val seasonModel = intent.getParcelableExtra(PARCELABLE_OBJECT) as Season
-        val seriesId = intent.getIntExtra(INT_ID, -1)
+        seriesId = intent.getIntExtra(INT_ID, -1)
+        seasonNumber = seasonModel.seasonNumber
         mPresenter.callGetSesonDetailsApi(seriesId, seasonModel.seasonNumber)
     }
 
@@ -46,7 +49,7 @@ class SeasonActivity : BaseActivity<SeasonActivityContract.SeasonView, SeasonAct
     }
 
     override fun onEpisodeClicked(episode: Episode) {
-        mPresenter.lanchEpisodeActivity(episode)
+        mPresenter.lanchEpisodeActivity(episode, seriesId, seasonNumber)
     }
 
 }

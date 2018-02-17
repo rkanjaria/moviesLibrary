@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.mf.movielibrary.R
+import files.backdropUrl
 import files.loadImage
-import files.photoUrl
 import kotlinx.android.synthetic.main.image_layout.view.*
 
 
-class ImageAdapter(context: Context, val imageList: List<String?>) : PagerAdapter() {
+class ImageAdapter(context: Context, val imageList: List<String?>, val centerCrop: Boolean = false) : PagerAdapter() {
     var layoutInfalter: LayoutInflater
 
     init {
@@ -29,7 +29,7 @@ class ImageAdapter(context: Context, val imageList: List<String?>) : PagerAdapte
 
     override fun instantiateItem(container: ViewGroup?, position: Int): Any {
         val itemView = layoutInfalter.inflate(R.layout.image_layout, container, false)
-        itemView.mainImage.loadImage(photoUrl + imageList.get(position), R.color.colorPrimaryDark)
+        itemView.mainImage.loadImage(backdropUrl + imageList.get(position), R.color.colorPrimaryDark, centerCrop = centerCrop)
         container?.addView(itemView)
         return itemView
     }

@@ -3,6 +3,7 @@ package com.example.mf.movielibrary
 import com.example.mf.movielibrary.models.actormodel.Actor
 import com.example.mf.movielibrary.models.actormodel.ActorImagesResult
 import com.example.mf.movielibrary.models.castmodel.CastResult
+import com.example.mf.movielibrary.models.episodemodels.EpisodeImageResult
 import com.example.mf.movielibrary.models.genremodel.GenreResult
 import com.example.mf.movielibrary.models.moviemodel.MoviesResult
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.MovieSeriesDetailsResult
@@ -66,4 +67,11 @@ interface RetrofitApiService {
                                      @Query("api_key") apiKey: String = API_KEY,
                                      @Query("query") searchQuery: String,
                                      @Query("page") page: Int): Observable<MoviesResult>
+
+    @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}/images")
+    fun doGetEpisodeImagesApiCall(@Path("tv_id") tvId: Int,
+                                  @Path("season_number") seasonNumber: Int,
+                                  @Path("episode_number") episodeNumber: Int,
+                                  @Query("api_key") apiKey: String = API_KEY): Observable<EpisodeImageResult>
+
 }
