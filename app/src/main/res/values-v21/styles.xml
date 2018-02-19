@@ -4,5 +4,6 @@
     <style name="AlertDialogTheme" parent="@android:style/Theme.Material.Dialog">
         <item name="android:fontFamily">@font/noto_sans_regular</item>
         <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/text_size_16</item>
     </style>
 </resources>
