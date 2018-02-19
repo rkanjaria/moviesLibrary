@@ -8,41 +8,51 @@
     android:orientation="vertical"
     tools:context="com.example.mf.movielibrary.activities.searchscreen.SearchActivity">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/searchCardView"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/darkGrey"
+        android:background="@color/colorPrimary"
+        app:titleTextAppearance="@style/ToolbarTextStyle"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:elevation="@dimen/size_4dp"
         android:layout_marginTop="@dimen/size_16dp"
-        android:layout_marginLeft="@dimen/size_8dp"
-        android:layout_marginRight="@dimen/size_8dp"
-        app:cardCornerRadius="@dimen/size_4dp">
+        android:layout_marginBottom="@dimen/size_8dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetEnd="0dp">
 
-        <android.support.v7.widget.SearchView
-            android:id="@+id/movieSeriesSearchView"
+        <android.support.v7.widget.CardView
+            android:id="@+id/searchCardView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:iconifiedByDefault="false"
-            style="@style/movieSearViewStyle" />
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_8dp"
+            android:layout_marginRight="@dimen/size_8dp"
+            app:cardBackgroundColor="@color/darkGrey"
+            app:cardCornerRadius="@dimen/size_4dp">
 
-    </android.support.v7.widget.CardView>
+            <android.support.v7.widget.SearchView
+                android:id="@+id/movieSeriesSearchView"
+                style="@style/movieSearViewStyle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:iconifiedByDefault="false" />
 
-    <LinearLayout
-        android:id="@+id/tagsLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/searchCardView"
-        android:orientation="vertical" />
+        </android.support.v7.widget.CardView>
+
+    </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/searchRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="@dimen/size_4dp"
+        android:layout_below="@+id/toolbar"
+        android:clipToPadding="false"
         android:paddingBottom="@dimen/size_4dp"
         android:paddingStart="@dimen/size_8dp"
-        android:clipToPadding="false"
-        android:layout_below="@+id/tagsLayout" />
+        android:paddingTop="@dimen/size_4dp" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -50,7 +60,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone" />
-
 
 
 </RelativeLayout>

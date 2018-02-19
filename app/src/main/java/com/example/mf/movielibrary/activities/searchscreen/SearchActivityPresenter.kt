@@ -45,4 +45,8 @@ class SearchActivityPresenter : BasePresenterImpl<SearchActivityContract.SearchB
                     })
         }
     }
+
+    override fun requestSearchTypeDialog() {
+        mView?.showSearchTypeDialog()
+    }
 }

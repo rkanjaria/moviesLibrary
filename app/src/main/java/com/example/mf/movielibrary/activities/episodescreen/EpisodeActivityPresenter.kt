@@ -18,8 +18,7 @@ class EpisodeActivityPresenter : BasePresenterImpl<EpisodeActivityContract.Episo
                 .subscribe({ episodeImageResult ->
 
                     if (episodeImageResult.imageList != null && episodeImageResult.imageList.isNotEmpty()) {
-
-                        mView?.addImagesToList(episodeImageResult.imageList.subList(0, 1).map { it.filePath!! })
+                        mView?.addImagesToList(episodeImageResult.imageList.subList(1, episodeImageResult.imageList.size).map { it.filePath!! })
                     }
 
                 }, { error ->

@@ -40,8 +40,11 @@ class EpisodeActivity : BaseActivity<EpisodeActivityContract.EpisodeView, Episod
 
     override fun addImagesToList(imageList: List<String>) {
 
-        this.imageList.addAll(if (imageList.size < 4) imageList else imageList.subList(0, 3))
-        imageAdapter.notifyDataSetChanged()
-        pageIndicator.visibility = View.VISIBLE
+        if (imageList.size > 1) {
+
+            this.imageList.addAll(if (imageList.size < 4) imageList else imageList.subList(0, 3))
+            imageAdapter.notifyDataSetChanged()
+            pageIndicator.visibility = View.VISIBLE
+        }
     }
 }

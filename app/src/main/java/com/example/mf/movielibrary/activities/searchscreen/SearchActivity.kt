@@ -1,20 +1,13 @@
 package com.example.mf.movielibrary.activities.searchscreen
 
-import android.app.Activity
+import android.app.AlertDialog
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.SearchView
-import android.text.TextUtils
-import android.util.DisplayMetrics
-import android.util.TypedValue
-import android.view.Gravity
+import android.view.ContextThemeWrapper
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
@@ -22,7 +15,6 @@ import com.example.mf.movielibrary.classes.KeyboardUtils
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import files.*
 import kotlinx.android.synthetic.main.activity_search.*
-import org.jetbrains.anko.displayMetrics
 
 
 class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, SearchActivityPresenter>(),
@@ -42,13 +34,14 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
+        initToolbar(toolbar, false, "")
 
-        if(intent.getStringExtra(MOVIE_OR_SERIES) == MOVIE){
+        if (intent.getStringExtra(MOVIE_OR_SERIES) == MOVIE) {
             movieOrSeries = MOVIE
             movieSeriesSearchView.queryHint = "Search movies"
-        }else{
+        } else {
             movieOrSeries = TV_SHOWS
-            movieSeriesSearchView.queryHint = "Search Tv shows"
+            movieSeriesSearchView.queryHint = "Search tv shows"
         }
 
         gridLayoutManager = GridLayoutManager(this, calculateNoOfColumns(this, 110))
@@ -61,8 +54,8 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
             }
         }
 
-        val list = resources.getStringArray(R.array.search_tags).toList()
-        tagsLayout.asTagsLayout(list)
+        //val list = resources.getStringArray(R.array.search_tags).toList()
+        //tagsLayout.asTagsLayout(list)
         movieSeriesSearchView.setOnQueryTextListener(this)
 
     }
@@ -135,51 +128,22 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         mPresenter.launchMovieSeriesActivity(movieModel, movieOrSeries)
     }
 
-    /*fun asTagsLayout(tagsList: List<String>) {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.sort_menu, menu)
+        return true
+    }
 
-        val px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8f, displayMetrics).toInt()
-        var previousTagWidth = 0
-        var previousTagHeight = 0
-        var left = 0
-        var top = 0
-
-        val displayMetrices = DisplayMetrics()
-        windowManager.defaultDisplay.getMetrics(displayMetrices)
-        val screenWidth = displayMetrices.widthPixels
-
-        val params = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-        val tagLayout = RelativeLayout(this)
-        tagLayout.setPadding(0, px * 2, 0, 0)
-        tagLayout.layoutParams = params
-
-        tagsList.forEach {
-            val tagView = TextView(this)
-            tagView.setPadding(px, px, px, px)
-            tagView.text = tagsList.get(tagsList.indexOf(it))
-            tagView.background = ContextCompat.getDrawable(this, R.drawable.tag_background_drawable)
-            tagView.typeface = ResourcesCompat.getFont(this, R.font.noto_sans_regular)
-            tagView.maxLines = 1
-            tagView.gravity = Gravity.CENTER
-            tagView.ellipsize = TextUtils.TruncateAt.END
-
-            val tagViewParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            left = left + previousTagWidth
-
-            if ((screenWidth - px - left) < tagView.measureTextViewWidth()) {
-                top = top + previousTagHeight
-                left = 0
-            }
-
-            tagViewParams.setMargins(left, top, 0, 0)
-            tagView.layoutParams = tagViewParams
-            tagLayout.addView(tagView)
-
-            previousTagWidth = tagView.measureTextViewWidth() + px
-            previousTagHeight = tagView.measureTextViewHeight() + px
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.action_sort -> mPresenter.requestSearchTypeDialog()
         }
+        return true
+    }
 
-        (tagsLayout as LinearLayout).addView(tagLayout)
-
-    }*/
-
+    override fun showSearchTypeDialog() {
+        val arrayType = if(movieOrSeries == MOVIE)  R.array.movie_type_array else R.array.tv_type_array
+        val dialogBuilder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.AlertDialogTheme))
+        dialogBuilder.setSingleChoiceItems(arrayType, 0, null)
+        dialogBuilder.create().show()
+    }
 }

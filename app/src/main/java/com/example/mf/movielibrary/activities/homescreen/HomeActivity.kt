@@ -126,7 +126,6 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-
         menuInflater.inflate(R.menu.home_screen_menu, menu)
         return true
     }
