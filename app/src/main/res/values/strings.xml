@@ -23,8 +23,6 @@
     <string-array name="search_tags">
         <item>Movies</item>
         <item>Tv Shows</item>
-        <item>Genres</item>
-        <item>By Actors</item>
     </string-array>
 
 </resources>

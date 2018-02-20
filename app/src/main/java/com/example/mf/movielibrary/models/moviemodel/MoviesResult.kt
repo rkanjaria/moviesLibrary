@@ -20,6 +20,7 @@ data class Movie (
         @SerializedName("video") val video : Boolean,
         @SerializedName("vote_average") val voteAverage : Float,
         @SerializedName("poster_path") val posterPath : String ?,
+        @SerializedName("media_type") val mediaType : String ?,
         @SerializedName(value = "original_title", alternate = ["original_name"]) val originalTitle : String?,
         @SerializedName(value = "title", alternate = ["name"]) val title : String?,
         @SerializedName("genre_ids") val genreIds : List<Int>?,
@@ -39,6 +40,7 @@ data class Movie (
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
+            parcel.readString(),
             arrayListOf<Int>().apply {
                 parcel.readList(this, Int::class.java.classLoader)
             },
@@ -52,6 +54,7 @@ data class Movie (
         parcel.writeByte(if (video) 1 else 0)
         parcel.writeFloat(voteAverage)
         parcel.writeString(posterPath)
+        parcel.writeString(mediaType)
         parcel.writeString(originalTitle)
         parcel.writeString(title)
         parcel.writeList(genreIds)

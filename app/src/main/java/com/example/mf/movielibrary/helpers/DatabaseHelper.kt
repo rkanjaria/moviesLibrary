@@ -1,6 +1,7 @@
 package com.example.mf.movielibrary.helpers
 
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import com.example.mf.movielibrary.models.genremodel.Genre
@@ -56,5 +57,14 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
                     .exec { parseList(StringParser) }
         }
         if (genre!!.isNotEmpty()) return genre.get(0) else return ""
+    }
+
+    fun isMovieTableEmpty(): Boolean {
+        val result = dbInstance?.use {
+            select(MOVIE_TABLE, GENRE_NAME)
+                    .exec {parseList(StringParser)}
+        }
+
+        return (result == null || result.isEmpty())
     }
 }

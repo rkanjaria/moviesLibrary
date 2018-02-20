@@ -16,26 +16,33 @@ class SplashActivityPresenter : BasePresenterImpl<SplashActivityContract.SplashV
     }
 
     override fun callGetGenreListApi(movieOrSeries: String, flag: Int) {
+        val isTableEmpty = mView?.getContext()?.database?.isMovieTableEmpty()
 
-        RetrofitHelper.create().doGetGenreListApiCall(movieOrSeries)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({ genreResult ->
-                    if (genreResult != null && genreResult.genresList.isNotEmpty()) {
-                        genreResult.genresList.forEach {
-                            mView?.getContext()?.database?.insertGenre(it.genreId.toString(), it.genreName!!)
-                        }
+        if (isTableEmpty != null && isTableEmpty) {
 
-                        if(flag == 1){ // api call for tv is completed finish the activity
-                            mView?.finishActivityAndStartAnotherActivity(
-                                    Intent(mView?.getContext(), HomeActivity::class.java))
-                        }else{
-                            mView?.callGetTvGenreListApi()
+            RetrofitHelper.create().doGetGenreListApiCall(movieOrSeries)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({ genreResult ->
+                        if (genreResult != null && genreResult.genresList.isNotEmpty()) {
+                            genreResult.genresList.forEach {
+                                mView?.getContext()?.database?.insertGenre(it.genreId.toString(), it.genreName!!)
+                            }
+
+                            if (flag == 1) { // api call for tv is completed finish the activity
+                                mView?.finishActivityAndStartAnotherActivity(
+                                        Intent(mView?.getContext(), HomeActivity::class.java))
+                            } else {
+                                mView?.callGetTvGenreListApi()
+                            }
                         }
-                    }
-                }, { error ->
-                    error.printStackTrace()
-                    mView?.showMessage(error.localizedMessage)
-                })
+                    }, { error ->
+                        error.printStackTrace()
+                        mView?.showMessage(error.localizedMessage)
+                    })
+        }else{
+            mView?.finishActivityAndStartAnotherActivity(
+                    Intent(mView?.getContext(), HomeActivity::class.java))
+        }
     }
 }

@@ -21,7 +21,6 @@ class SplashActivity : BaseActivity<SplashActivityContract.SplashView, SplashAct
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        mPresenter.clearTable(MOVIE_TABLE)
         mPresenter.callGetGenreListApi(MOVIE, flag)
     }
 

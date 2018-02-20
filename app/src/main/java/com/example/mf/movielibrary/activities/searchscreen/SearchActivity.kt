@@ -1,6 +1,7 @@
 package com.example.mf.movielibrary.activities.searchscreen
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.SearchView
@@ -18,7 +19,8 @@ import kotlinx.android.synthetic.main.activity_search.*
 
 
 class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, SearchActivityPresenter>(),
-        SearchActivityContract.SearchBaseView, MovieRecyclerAdapter.OnMovieSeriesAdapterListener, SearchView.OnQueryTextListener {
+        SearchActivityContract.SearchBaseView, MovieRecyclerAdapter.OnMovieSeriesAdapterListener,
+        SearchView.OnQueryTextListener, DialogInterface.OnClickListener {
 
     private val mSearchList = mutableListOf<Movie?>()
     private lateinit var gridLayoutManager: GridLayoutManager
@@ -53,9 +55,6 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
                     gridLayoutManager.spanCount else 1
             }
         }
-
-        //val list = resources.getStringArray(R.array.search_tags).toList()
-        //tagsLayout.asTagsLayout(list)
         movieSeriesSearchView.setOnQueryTextListener(this)
 
     }
@@ -141,9 +140,15 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     }
 
     override fun showSearchTypeDialog() {
-        val arrayType = if(movieOrSeries == MOVIE)  R.array.movie_type_array else R.array.tv_type_array
         val dialogBuilder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.AlertDialogTheme))
-        dialogBuilder.setSingleChoiceItems(arrayType, 0, null)
+        dialogBuilder.setSingleChoiceItems(R.array.search_tags, 0, this)
         dialogBuilder.create().show()
+    }
+
+    override fun onClick(dialogInterface: DialogInterface?, item: Int) {
+        when(item){
+            0 -> movieOrSeries = MOVIE
+            1 -> movieOrSeries = TV_SHOWS
+        }
     }
 }
