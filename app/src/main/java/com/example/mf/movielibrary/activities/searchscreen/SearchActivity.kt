@@ -40,10 +40,10 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
         if (intent.getStringExtra(MOVIE_OR_SERIES) == MOVIE) {
             movieOrSeries = MOVIE
-            movieSeriesSearchView.queryHint = "Search movies"
+            movieSeriesSearchView.queryHint = getString(R.string.search_movies)
         } else {
             movieOrSeries = TV_SHOWS
-            movieSeriesSearchView.queryHint = "Search tv shows"
+            movieSeriesSearchView.queryHint = getString(R.string.search_tv_shows)
         }
 
         gridLayoutManager = GridLayoutManager(this, calculateNoOfColumns(this, 110))
@@ -133,7 +133,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId){
+        when (item?.itemId) {
             R.id.action_sort -> mPresenter.requestSearchTypeDialog()
         }
         return true
@@ -146,9 +146,24 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     }
 
     override fun onClick(dialogInterface: DialogInterface?, item: Int) {
-        when(item){
-            0 -> movieOrSeries = MOVIE
-            1 -> movieOrSeries = TV_SHOWS
+        when (item) {
+            0 -> changeSearchPreference(MOVIE)
+            1 -> changeSearchPreference(TV_SHOWS)
+        }
+        dialogInterface?.dismiss()
+    }
+
+    private fun changeSearchPreference(searchPreference: String) {
+
+        when (searchPreference) {
+            MOVIE -> {
+                movieSeriesSearchView.queryHint = getString(R.string.search_movies)
+                movieOrSeries = MOVIE
+            }
+            TV_SHOWS -> {
+                movieSeriesSearchView.queryHint = getString(R.string.search_tv_shows)
+                movieOrSeries = TV_SHOWS
+            }
         }
     }
 }

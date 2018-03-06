@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Movie Library</string>
+    <string name="search_movies">Search movies</string>
+    <string name="search_tv_shows">Search tv shows</string>
 
     <string-array name="toolbar_array">
         <item>Movies</item>
