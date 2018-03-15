@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.View
+import android.widget.Toast
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.activities.videoplayerscreen.VideoPlayerActivity
 import com.example.mf.movielibrary.adapters.CastRecyclerAdapter
@@ -14,6 +15,7 @@ import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.castmodel.Cast
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
+import com.example.mf.movielibrary.models.videomodels.VideoTrailers
 import files.*
 import kotlinx.android.synthetic.main.activity_movie_series.*
 
@@ -22,6 +24,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         MovieRecyclerAdapter.OnMovieSeriesAdapterListener, SeasonRecyclerAdapter.SeasonAdapterListener {
 
     private var movieOrSeriesId = 0
+    //private var VideoTrailers;
 
     override var mPresenter = MovieSeriesActivityPresenter()
 
@@ -49,14 +52,11 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
 
         mPresenter.callgetMovieOrSeriesCastApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
         mPresenter.callGetSimilarMovieOrSeriesApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
+        mPresenter.callGetMoviesOrSeriesTrailersApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
 
         if(intent.getStringExtra(MOVIE_OR_SERIES) == TV_SHOWS){
             mPresenter.callGetTvDetailsApi(movieOrSeriesId)
         }
-
-        backdropImage.setOnClickListener({
-            lauchchActivity(Intent(this, VideoPlayerActivity::class.java))
-        })
     }
 
     override fun setCastRecyclerview(castList: List<Cast>) {
@@ -97,4 +97,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         mPresenter.launchSeasonActivity(season, movieOrSeriesId)
     }
 
+    override fun showPlayTrailerLayout(videoTrailersList: List<VideoTrailers>) {
+        Toast.makeText(this, "api call done", Toast.LENGTH_SHORT).show()
+    }
 }

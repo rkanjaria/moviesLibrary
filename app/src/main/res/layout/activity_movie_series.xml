@@ -87,6 +87,8 @@
                     android:layout_toEndOf="@+id/posterCard"
                     android:fontFamily="@font/noto_sans_regular"
                     android:textColor="@color/white"
+                    android:maxLines="3"
+                    android:ellipsize="end"
                     android:textSize="@dimen/text_size_16"
                     android:textStyle="bold" />
 

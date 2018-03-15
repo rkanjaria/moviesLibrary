@@ -8,6 +8,7 @@ import com.example.mf.movielibrary.models.genremodel.GenreResult
 import com.example.mf.movielibrary.models.moviemodel.MoviesResult
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.MovieSeriesDetailsResult
 import com.example.mf.movielibrary.models.seasonmodels.SeasonResult
+import com.example.mf.movielibrary.models.videomodels.VideoResult
 import files.API_KEY
 import io.reactivex.Observable
 import retrofit2.http.GET
@@ -73,5 +74,11 @@ interface RetrofitApiService {
                                   @Path("season_number") seasonNumber: Int,
                                   @Path("episode_number") episodeNumber: Int,
                                   @Query("api_key") apiKey: String = API_KEY): Observable<EpisodeImageResult>
+
+
+    @GET("{movie_or_series}/{movie_or_tv_id}/videos")
+    fun doGetMovieOrSeriesTrailers(@Path("movie_or_series") movieOrSeries: String,
+                                   @Path("movie_or_tv_id") movieOrSeriesId: Int,
+                                   @Query("api_key") apiKey: String = API_KEY): Observable<VideoResult>
 
 }

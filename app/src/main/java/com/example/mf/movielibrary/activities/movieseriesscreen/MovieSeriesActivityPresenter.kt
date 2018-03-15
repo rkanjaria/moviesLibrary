@@ -105,4 +105,23 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
                     mView?.showMessage(error.localizedMessage)
                 })
     }
+
+    override fun callGetMoviesOrSeriesTrailersApi(moviesOrSeries: String, movieOrSeriesId: Int) {
+        RetrofitHelper.create().doGetMovieOrSeriesTrailers(moviesOrSeries, movieOrSeriesId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ videoResults ->
+
+                    if (videoResults.results != null && videoResults.results.isNotEmpty()) {
+
+                        mView?.showPlayTrailerLayout(videoResults.results.filter {
+                            it.site.equals("YouTube") && it.type.equals("Trailer")
+                        })
+                    }
+
+                }, { error ->
+                    error.printStackTrace()
+                    mView?.showMessage(error.localizedMessage)
+                })
+    }
 }

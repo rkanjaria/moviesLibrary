@@ -29,10 +29,6 @@ data class Movie (
         @SerializedName(value = "release_date", alternate = ["first_air_date"]) val releaseDate : String?
 ) : Parcelable {
 
-
-    /*arrayListOf<Int>().apply {
-        parcel.readList(this, Int::class.java.classLoader)
-    },*/
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readByte() != 0.toByte(),
