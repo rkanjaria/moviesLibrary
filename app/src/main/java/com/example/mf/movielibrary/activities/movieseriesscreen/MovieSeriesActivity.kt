@@ -1,10 +1,12 @@
 package com.example.mf.movielibrary.activities.movieseriesscreen
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.View
 import com.example.mf.movielibrary.R
+import com.example.mf.movielibrary.activities.videoplayerscreen.VideoPlayerActivity
 import com.example.mf.movielibrary.adapters.CastRecyclerAdapter
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.adapters.SeasonRecyclerAdapter
@@ -51,6 +53,10 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         if(intent.getStringExtra(MOVIE_OR_SERIES) == TV_SHOWS){
             mPresenter.callGetTvDetailsApi(movieOrSeriesId)
         }
+
+        backdropImage.setOnClickListener({
+            lauchchActivity(Intent(this, VideoPlayerActivity::class.java))
+        })
     }
 
     override fun setCastRecyclerview(castList: List<Cast>) {

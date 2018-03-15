@@ -39,3 +39,5 @@ val API_KEY = "5526b6795b244b3f164510b8955df249"
 
 val INT_ID = "cast_id"
 val NAME = "name"
+
+val YOUTUBE_API_KEY = "AIzaSyC5BpEwIkGZDf_9F7X3FEMGS2TEYeA6HzQ"
