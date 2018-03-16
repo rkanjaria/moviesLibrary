@@ -1,13 +1,11 @@
 package com.example.mf.movielibrary.activities.movieseriesscreen
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.Toast
 import com.example.mf.movielibrary.R
-import com.example.mf.movielibrary.activities.videoplayerscreen.VideoPlayerActivity
 import com.example.mf.movielibrary.adapters.CastRecyclerAdapter
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.adapters.SeasonRecyclerAdapter
@@ -24,7 +22,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         MovieRecyclerAdapter.OnMovieSeriesAdapterListener, SeasonRecyclerAdapter.SeasonAdapterListener {
 
     private var movieOrSeriesId = 0
-    //private var VideoTrailers;
+    private lateinit var trailersList: List<VideoTrailers>
 
     override var mPresenter = MovieSeriesActivityPresenter()
 
@@ -54,9 +52,14 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         mPresenter.callGetSimilarMovieOrSeriesApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
         mPresenter.callGetMoviesOrSeriesTrailersApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
 
-        if(intent.getStringExtra(MOVIE_OR_SERIES) == TV_SHOWS){
+        if (intent.getStringExtra(MOVIE_OR_SERIES) == TV_SHOWS) {
             mPresenter.callGetTvDetailsApi(movieOrSeriesId)
         }
+
+
+        backdropImage.setOnClickListener({
+                mPresenter.launchTrailerActivity(trailersList[0])
+        })
     }
 
     override fun setCastRecyclerview(castList: List<Cast>) {
@@ -98,6 +101,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
     }
 
     override fun showPlayTrailerLayout(videoTrailersList: List<VideoTrailers>) {
+        trailersList = videoTrailersList
         Toast.makeText(this, "api call done", Toast.LENGTH_SHORT).show()
     }
 }
