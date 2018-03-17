@@ -39,6 +39,8 @@
                 android:layout_gravity="bottom"
                 android:background="@drawable/scrim_bottom" />
 
+            <include layout="@layout/play_trailer_layout" />
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"

@@ -25,7 +25,10 @@
         <activity android:name=".activities.seasonscreen.SeasonActivity" />
         <activity android:name=".activities.searchscreen.SearchActivity" />
         <activity android:name=".activities.episodescreen.EpisodeActivity" />
-        <activity android:name=".activities.trailerscreen.TrailerActivity"></activity>
+        <activity
+            android:name=".activities.trailerscreen.TrailerActivity"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
     </application>
 
 </manifest>

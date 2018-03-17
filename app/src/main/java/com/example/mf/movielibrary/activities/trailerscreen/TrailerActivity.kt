@@ -19,14 +19,19 @@ class TrailerActivity : YouTubeBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_player)
 
-        this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         val trailer = intent.getParcelableExtra(PARCELABLE_OBJECT) as VideoTrailers
 
         videoPlayer.initialize(YOUTUBE_API_KEY, object : YouTubePlayer.OnInitializedListener {
             override fun onInitializationSuccess(provider: YouTubePlayer.Provider?, youtubePlayer: YouTubePlayer?, wasRestored: Boolean) {
-                youtubePlayer?.loadVideo(trailer.key)
+
+                youtubePlayer?.setFullscreen(true)
+                youtubePlayer?.setShowFullscreenButton(false)
+
+                if (!wasRestored) {
+                    youtubePlayer?.loadVideo(trailer.key)
+                }
             }
+
             override fun onInitializationFailure(provider: YouTubePlayer.Provider?, p1: YouTubeInitializationResult?) {
 
             }

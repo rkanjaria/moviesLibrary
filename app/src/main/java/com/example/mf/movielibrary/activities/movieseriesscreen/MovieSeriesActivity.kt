@@ -3,6 +3,8 @@ package com.example.mf.movielibrary.activities.movieseriesscreen
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.example.mf.movielibrary.R
@@ -16,6 +18,7 @@ import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
 import com.example.mf.movielibrary.models.videomodels.VideoTrailers
 import files.*
 import kotlinx.android.synthetic.main.activity_movie_series.*
+import kotlinx.android.synthetic.main.play_trailer_layout.*
 
 class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeriesView, MovieSeriesActivityPresenter>(),
         MovieSeriesActivityContract.MovieSeriesView, CastRecyclerAdapter.OnCastAdapterListener,
@@ -56,9 +59,8 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
             mPresenter.callGetTvDetailsApi(movieOrSeriesId)
         }
 
-
-        backdropImage.setOnClickListener({
-                mPresenter.launchTrailerActivity(trailersList[0])
+        playTrailer.setOnClickListener({
+            mPresenter.launchTrailerActivity(trailersList[0])
         })
     }
 
@@ -102,6 +104,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
 
     override fun showPlayTrailerLayout(videoTrailersList: List<VideoTrailers>) {
         trailersList = videoTrailersList
-        Toast.makeText(this, "api call done", Toast.LENGTH_SHORT).show()
+        playTrailer.visibility = View.VISIBLE
+        //Toast.makeText(this, "api call done", Toast.LENGTH_SHORT).show()
     }
 }

@@ -32,7 +32,7 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
     private lateinit var movieAdapter: MovieRecyclerAdapter
     private lateinit var gridLayoutManager: GridLayoutManager
     private var page = 1
-    private var totalResults = - 1
+    private var totalResultsCount = - 1
     private var movieOrSeries = MOVIE
     private var selectedTypePostion = 0
 
@@ -63,9 +63,9 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         }
     }
 
-    override fun setMovieRecyclerView(moviesList: List<Movie?>?, totalResult: Int) {
+    override fun setMovieRecyclerView(moviesList: List<Movie?>?, totalResults: Int) {
 
-        totalResults = totalResult
+        totalResultsCount = totalResults
 
         if (moviesList != null) {
 
@@ -101,7 +101,7 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
 
         page++
 
-        if (mMoviesList.size < totalResults) {
+        if (mMoviesList.size < totalResultsCount) {
 
             mMoviesList.add(null)
             movieAdapter.notifyItemInserted(mMoviesList.size - 1)
