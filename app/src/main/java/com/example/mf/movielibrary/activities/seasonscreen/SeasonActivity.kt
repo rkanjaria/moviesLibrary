@@ -2,6 +2,7 @@ package com.example.mf.movielibrary.activities.seasonscreen
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.Toolbar
 import android.view.View
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.EpisodeRecyclerAdapter
@@ -14,7 +15,7 @@ import files.PARCELABLE_OBJECT
 import kotlinx.android.synthetic.main.activity_season.*
 
 class SeasonActivity : BaseActivity<SeasonActivityContract.SeasonView, SeasonActivityPresenter>(),
-        SeasonActivityContract.SeasonView, EpisodeRecyclerAdapter.EpisodeAdapterListener{
+        SeasonActivityContract.SeasonView, EpisodeRecyclerAdapter.EpisodeAdapterListener {
 
     override var mPresenter = SeasonActivityPresenter()
     private var seriesId = -1
@@ -27,6 +28,8 @@ class SeasonActivity : BaseActivity<SeasonActivityContract.SeasonView, SeasonAct
         val seasonModel = intent.getParcelableExtra(PARCELABLE_OBJECT) as Season
         seriesId = intent.getIntExtra(INT_ID, -1)
         seasonNumber = seasonModel.seasonNumber
+
+        initToolbar(toolbar as Toolbar, true, "Season ${seasonNumber}")
         mPresenter.callGetSesonDetailsApi(seriesId, seasonModel.seasonNumber)
     }
 

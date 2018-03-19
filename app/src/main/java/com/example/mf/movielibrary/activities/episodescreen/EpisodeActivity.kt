@@ -1,6 +1,7 @@
 package com.example.mf.movielibrary.activities.episodescreen
 
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.v7.widget.Toolbar
 import android.view.View
 import com.example.mf.movielibrary.R
@@ -10,7 +11,8 @@ import com.example.mf.movielibrary.models.seasonmodels.Episode
 import files.*
 import kotlinx.android.synthetic.main.activity_episode.*
 
-class EpisodeActivity : BaseActivity<EpisodeActivityContract.EpisodeView, EpisodeActivityPresenter>(), EpisodeActivityContract.EpisodeView {
+class EpisodeActivity : BaseActivity<EpisodeActivityContract.EpisodeView, EpisodeActivityPresenter>(),
+        EpisodeActivityContract.EpisodeView {
 
     override var mPresenter = EpisodeActivityPresenter()
     private val imageList = mutableListOf<String>()
@@ -36,6 +38,28 @@ class EpisodeActivity : BaseActivity<EpisodeActivityContract.EpisodeView, Episod
         episodeOverview.text = episodeModel.episodeOverview
         episodeAirDate.text = getDateWithCustomFormat(episodeModel.episodeAirDate)
         episodeVoteAverage.text = episodeModel.voteAverage.toString()
+
+
+        appBarLayout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
+            var isShow = true
+            var scrollRange = -1
+
+            override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout.totalScrollRange
+                }
+
+                if (scrollRange + verticalOffset == 0) {
+                    collapsingToolbar.title = "Episode " + String.format("%02d", episodeModel.episodeNumber)
+                    isShow = true
+                } else if (isShow) {
+                    collapsingToolbar.title = " "
+                    isShow = false
+                }
+            }
+        })
+
+
     }
 
     override fun addImagesToList(imageList: List<String>) {

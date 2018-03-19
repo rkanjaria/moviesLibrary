@@ -19,27 +19,28 @@ class EpisodeRecyclerAdapter(val episodeList: List<Episode>, episodeAdapterListe
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeViewHolder {
         return EpisodeViewHolder(parent.inflate(R.layout.episode_recyler_layout, false))
     }
+
     override fun onBindViewHolder(holder: EpisodeViewHolder?, position: Int) {
         holder?.bindViews(episodeList.get(position))
     }
 
     override fun getItemCount() = episodeList.size
 
-    inner class EpisodeViewHolder(itemView : View) :RecyclerView.ViewHolder(itemView){
+    inner class EpisodeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var view = itemView
 
-        fun bindViews(episodeModel: Episode){
+        fun bindViews(episodeModel: Episode) {
 
             view.episodePosterImage.loadImage(photoUrl + episodeModel.stillPath)
-            view.episodeTitle.text = episodeModel.episodeName
+            view.episodeTitle.text = String.format("%02d", episodeModel.episodeNumber) + ". " + episodeModel.episodeName
             view.episodeRating.text = episodeModel.voteAverage.toString()
             view.episodeDate.text = getDateWithCustomFormat(episodeModel.episodeAirDate)
 
-            view.setOnClickListener{episodeListener?.onEpisodeClicked(episodeModel)}
+            view.setOnClickListener { episodeListener?.onEpisodeClicked(episodeModel) }
         }
     }
 
-    interface EpisodeAdapterListener{
+    interface EpisodeAdapterListener {
         fun onEpisodeClicked(episode: Episode)
     }
 }

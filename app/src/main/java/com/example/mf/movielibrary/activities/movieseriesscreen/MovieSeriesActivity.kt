@@ -1,12 +1,10 @@
 package com.example.mf.movielibrary.activities.movieseriesscreen
 
 import android.os.Bundle
+import android.support.design.widget.AppBarLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.CastRecyclerAdapter
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
@@ -61,6 +59,25 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
 
         playTrailer.setOnClickListener({
             mPresenter.launchTrailerActivity(trailersList[0])
+        })
+
+        appBarLayout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
+            var isShow = true
+            var scrollRange = -1
+
+            override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
+                if(scrollRange == -1){
+                    scrollRange = appBarLayout.totalScrollRange
+                }
+
+                if(scrollRange + verticalOffset == 0){
+                    collapsingToolbar.title = movieModel.title
+                    isShow = true
+                }else if(isShow){
+                    collapsingToolbar.title = " "
+                    isShow = false
+                }
+            }
         })
     }
 
