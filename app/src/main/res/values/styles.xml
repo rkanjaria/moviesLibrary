@@ -8,10 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="ToolbarTextStyle" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+    <style name="ToolbarTextStyle" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">@dimen/text_size_16</item>
         <item name="android:fontFamily">@font/noto_sans_regular</item>
-        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="AlertDialogTheme" parent="@android:style/Theme.Material.Dialog">

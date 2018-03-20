@@ -6,5 +6,8 @@
     android:maxLines="1"
     android:text="Tv shows"
     android:textSize="@dimen/text_size_16"
-    style="@style/ToolbarTextStyle"
-    android:padding="@dimen/size_16dp" />
+    android:textAppearance="@style/ToolbarTextStyle"
+    android:paddingLeft="@dimen/size_16dp"
+    android:paddingRight="@dimen/size_16dp"
+    android:paddingTop="@dimen/size_12dp"
+    android:paddingBottom="@dimen/size_12dp" />

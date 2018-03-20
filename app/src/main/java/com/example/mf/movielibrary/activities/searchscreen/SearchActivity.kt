@@ -29,6 +29,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     private var totalResults = -1
     private var movieOrSeries = MOVIE
     private var searchQuery: String? = null
+    private var selectedItemPosition = 0
 
     override var mPresenter = SearchActivityPresenter()
 
@@ -41,9 +42,11 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         if (intent.getStringExtra(MOVIE_OR_SERIES) == MOVIE) {
             movieOrSeries = MOVIE
             movieSeriesSearchView.queryHint = getString(R.string.search_movies)
+            selectedItemPosition = 0
         } else {
             movieOrSeries = TV_SHOWS
             movieSeriesSearchView.queryHint = getString(R.string.search_tv_shows)
+            selectedItemPosition = 1
         }
 
         gridLayoutManager = GridLayoutManager(this, calculateNoOfColumns(this, 110))
@@ -141,7 +144,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
     override fun showSearchTypeDialog() {
         val dialogBuilder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.AlertDialogTheme))
-        dialogBuilder.setSingleChoiceItems(R.array.search_tags, 0, this)
+        dialogBuilder.setSingleChoiceItems(R.array.search_tags, selectedItemPosition, this)
         dialogBuilder.create().show()
     }
 
@@ -159,10 +162,12 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
             MOVIE -> {
                 movieSeriesSearchView.queryHint = getString(R.string.search_movies)
                 movieOrSeries = MOVIE
+                selectedItemPosition = 0
             }
             TV_SHOWS -> {
                 movieSeriesSearchView.queryHint = getString(R.string.search_tv_shows)
                 movieOrSeries = TV_SHOWS
+                selectedItemPosition = 1
             }
         }
     }

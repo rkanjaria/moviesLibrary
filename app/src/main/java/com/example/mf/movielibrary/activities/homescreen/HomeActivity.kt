@@ -32,7 +32,7 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
     private lateinit var movieAdapter: MovieRecyclerAdapter
     private lateinit var gridLayoutManager: GridLayoutManager
     private var page = 1
-    private var totalResultsCount = - 1
+    private var totalResultsCount = -1
     private var movieOrSeries = MOVIE
     private var selectedTypePostion = 0
 
@@ -52,12 +52,10 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
 
         gridLayoutManager = GridLayoutManager(this, calculateNoOfColumns(this, 110))
         movieRecyclerView.layoutManager = gridLayoutManager
-        movieAdapter = MovieRecyclerAdapter(mMoviesList, this)
-        movieRecyclerView.adapter = movieAdapter
 
-        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup(){
+        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
-                return if(movieAdapter.getItemViewType(position) == movieAdapter.LOADER_VIEW)
+                return if (movieAdapter.getItemViewType(position) == movieAdapter.LOADER_VIEW)
                     gridLayoutManager.spanCount else 1
             }
         }
@@ -72,12 +70,13 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
             if (mMoviesList.isEmpty()) {
                 // for first time when data loads, add items to list and refresh the recyclerview
                 mMoviesList.addAll(moviesList)
-                movieAdapter.notifyDataSetChanged()
+                movieAdapter = MovieRecyclerAdapter(mMoviesList, this)
+                movieRecyclerView.adapter = movieAdapter
             } else {
                 // for the second time remove the loader view and add the data and refresh the recyclerview
                 mMoviesList.removeAt(mMoviesList.size - 1)
                 val lastPosition = mMoviesList.size
-                if(moviesList.isNotEmpty()){
+                if (moviesList.isNotEmpty()) {
                     mMoviesList.addAll(moviesList)
                 }
                 movieAdapter.refreshAdapter(lastPosition)
@@ -109,10 +108,10 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         }
     }
 
-    override fun onNothingSelected(parent: AdapterView<*>?){}
+    override fun onNothingSelected(parent: AdapterView<*>?) {}
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        when(position){
+        when (position) {
             0 -> movieOrSeries = MOVIE
             1 -> movieOrSeries = TV_SHOWS
         }
@@ -132,7 +131,7 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
-        when(item?.itemId){
+        when (item?.itemId) {
             R.id.action_sort -> mPresenter.requestMovieOrSeriesTypeDialog()
             R.id.action_search -> mPresenter.requestSearchActivity(movieOrSeries)
         }
@@ -141,23 +140,23 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
 
     override fun showMovieOrSeriesTypeDialog() {
 
-        val arrayType = if(movieOrSeries == MOVIE)  R.array.movie_type_array else R.array.tv_type_array
+        val arrayType = if (movieOrSeries == MOVIE) R.array.movie_type_array else R.array.tv_type_array
         val dialogBuilder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.AlertDialogTheme))
-        dialogBuilder.setSingleChoiceItems(arrayType, selectedTypePostion,this)
+        dialogBuilder.setSingleChoiceItems(arrayType, selectedTypePostion, this)
         dialogBuilder.create().show()
     }
 
     override fun onClick(dialogInterface: DialogInterface?, item: Int) {
-        if(movieOrSeries == MOVIE){
+        if (movieOrSeries == MOVIE) {
 
-            when(item){
+            when (item) {
                 0 -> type = POPULAR
                 1 -> type = TOP_RATED
                 2 -> type = UPCOMING
                 3 -> type = NOW_PLAYING
             }
-        }else{
-            when(item){
+        } else {
+            when (item) {
                 0 -> type = POPULAR
                 1 -> type = TOP_RATED
                 2 -> type = ON_AIR

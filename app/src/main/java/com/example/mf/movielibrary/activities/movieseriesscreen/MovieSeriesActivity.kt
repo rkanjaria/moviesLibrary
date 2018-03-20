@@ -2,6 +2,8 @@ package com.example.mf.movielibrary.activities.movieseriesscreen
 
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
+import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.View
@@ -66,14 +68,14 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
             var scrollRange = -1
 
             override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
-                if(scrollRange == -1){
+                if (scrollRange == -1) {
                     scrollRange = appBarLayout.totalScrollRange
                 }
 
-                if(scrollRange + verticalOffset == 0){
+                if (scrollRange + verticalOffset == 0) {
                     collapsingToolbar.title = movieModel.title
                     isShow = true
-                }else if(isShow){
+                } else if (isShow) {
                     collapsingToolbar.title = " "
                     isShow = false
                 }
