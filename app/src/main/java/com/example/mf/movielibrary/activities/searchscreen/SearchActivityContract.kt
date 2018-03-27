@@ -1,5 +1,6 @@
 package com.example.mf.movielibrary.activities.searchscreen
 
+import android.widget.LinearLayout
 import com.example.mf.movielibrary.base.BasePresenter
 import com.example.mf.movielibrary.base.BaseView
 import com.example.mf.movielibrary.models.moviemodel.Movie
@@ -19,5 +20,6 @@ class SearchActivityContract {
         fun callSearchMovieOrSeriesByName(movieOrSeries: String, query: String?, queryPage: Int)
         fun launchMovieSeriesActivity(movieModel: Movie?, movieOrSeries: String)
         fun requestSearchTypeDialog()
+        fun getGenreFromDbAndCreateBottomSheet(movieOrSeries: String, genreBottomSheet : LinearLayout)
     }
 }

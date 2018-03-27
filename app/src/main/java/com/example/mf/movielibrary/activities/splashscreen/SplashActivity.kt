@@ -9,10 +9,6 @@ import files.TV_SHOWS
 
 class SplashActivity : BaseActivity<SplashActivityContract.SplashView, SplashActivityPresenter>(),
         SplashActivityContract.SplashView {
-    override fun callGetTvGenreListApi() {
-        flag = 1
-        mPresenter.callGetGenreListApi(TV_SHOWS, flag)
-    }
 
     override var mPresenter: SplashActivityPresenter = SplashActivityPresenter()
     var flag = 0
@@ -23,5 +19,11 @@ class SplashActivity : BaseActivity<SplashActivityContract.SplashView, SplashAct
 
         mPresenter.callGetGenreListApi(MOVIE, flag)
     }
+
+    override fun callGetTvGenreListApi() {
+        flag = 1
+        mPresenter.callGetGenreListApi(TV_SHOWS, flag)
+    }
+
 
 }

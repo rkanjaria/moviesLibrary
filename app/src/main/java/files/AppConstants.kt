@@ -34,6 +34,7 @@ val MOVIE_TABLE = "movie_table"
 val ID = "_id"
 val GENRE_ID = "genre_id"
 val GENRE_NAME = "genre_name"
+val SHOW_TYPE = "show_type"
 
 val API_KEY = "5526b6795b244b3f164510b8955df249"
 

@@ -77,7 +77,7 @@ fun TextView.expandOrCollapseTextView() {
             .start()
 }
 
-fun LinearLayout.asTagsLayout(tagsList: List<String>) {
+/*fun LinearLayout.asTagsLayout(tagsList: List<String>) {
 
     val px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8f, context.displayMetrics).toInt()
     var previousTagWidth = 0
@@ -133,7 +133,7 @@ fun TextView.measureTextViewWidth(): Int {
 fun TextView.measureTextViewHeight(): Int {
     this.measure(0, 0)
     return this.measuredHeight
-}
+}*/
 
 /*
 fun View.findSelectedTag(context: Context) : String {

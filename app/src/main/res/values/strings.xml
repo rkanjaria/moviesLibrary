@@ -25,6 +25,7 @@
     <string-array name="search_tags">
         <item>Movies</item>
         <item>Tv Shows</item>
+        <item>Genre</item>
     </string-array>
 
 </resources>

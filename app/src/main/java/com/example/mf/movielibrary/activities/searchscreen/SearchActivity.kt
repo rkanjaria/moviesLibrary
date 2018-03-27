@@ -1,14 +1,21 @@
 package com.example.mf.movielibrary.activities.searchscreen
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.support.design.widget.BottomSheetBehavior
+import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.SearchView
-import android.view.ContextThemeWrapper
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.text.TextUtils
+import android.util.DisplayMetrics
+import android.util.TypedValue
+import android.view.*
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
@@ -16,6 +23,7 @@ import com.example.mf.movielibrary.classes.KeyboardUtils
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import files.*
 import kotlinx.android.synthetic.main.activity_search.*
+import org.jetbrains.anko.displayMetrics
 
 
 class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, SearchActivityPresenter>(),
@@ -30,6 +38,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     private var movieOrSeries = MOVIE
     private var searchQuery: String? = null
     private var selectedItemPosition = 0
+    private var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>? = null
 
     override var mPresenter = SearchActivityPresenter()
 
@@ -49,6 +58,9 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
             selectedItemPosition = 1
         }
 
+        bottomSheetBehavior = BottomSheetBehavior.from(genreBottomSheet)
+        bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
+
         gridLayoutManager = GridLayoutManager(this, calculateNoOfColumns(this, 110))
         searchRecyclerView.layoutManager = gridLayoutManager
 
@@ -58,8 +70,9 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
                     gridLayoutManager.spanCount else 1
             }
         }
-        movieSeriesSearchView.setOnQueryTextListener(this)
 
+        mPresenter.getGenreFromDbAndCreateBottomSheet(movieOrSeries, genreBottomSheet)
+        movieSeriesSearchView.setOnQueryTextListener(this)
     }
 
     override fun setSearchRecyclerView(moviesList: List<Movie?>?, totalResult: Int) {
@@ -152,6 +165,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         when (item) {
             0 -> changeSearchPreference(MOVIE)
             1 -> changeSearchPreference(TV_SHOWS)
+            2 -> bottomSheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
         }
         dialogInterface?.dismiss()
     }

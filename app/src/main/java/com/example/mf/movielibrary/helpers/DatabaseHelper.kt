@@ -29,7 +29,7 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
         db.createTable(MOVIE_TABLE, true,
                 ID to INTEGER + PRIMARY_KEY,
                 GENRE_ID to TEXT,
-                GENRE_NAME to TEXT)
+                GENRE_NAME to TEXT, SHOW_TYPE to TEXT)
         Log.d("TABLE_CREATED", "TABLE CREATED ${MOVIE_TABLE}")
     }
 
@@ -37,12 +37,12 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
         db.dropTable(MOVIE_TABLE, true)
     }
 
-    fun insertGenre(genreId: String, genreName: String) {
+    fun insertGenre(genreId: String, genreName: String, movieOrSeries: String) {
         dbInstance?.use {
             insert(MOVIE_TABLE, GENRE_ID to genreId,
-                    GENRE_NAME to genreName)
+                    GENRE_NAME to genreName, SHOW_TYPE to movieOrSeries)
         }
-        Log.d("GENRE_INSERTED", "id ${genreId}, name ${genreName}")
+        Log.d("GENRE_INSERTED", "id ${genreId}, name ${genreName}, type ${movieOrSeries}")
     }
 
     fun clearTable(tableName: String) {
@@ -59,10 +59,30 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
         if (genre!!.isNotEmpty()) return genre.get(0) else return ""
     }
 
+    fun getAllGenres(movieOrSeries: String): List<Genre> {
+
+        val genreList = ArrayList<Genre>()
+
+        dbInstance?.use {
+            select(MOVIE_TABLE).parseList(
+                    object : MapRowParser<List<Genre>> {
+                        override fun parseRow(columns: Map<String, Any?>): ArrayList<Genre> {
+                            val id = columns.get(GENRE_ID)
+                            val name = columns.get(GENRE_NAME)
+                            val genre = Genre(genreId = id as Int, genreName = name.toString())
+                            genreList.add(genre)
+                            return genreList
+                        }
+                    })
+        }
+
+        return genreList
+    }
+
     fun isMovieTableEmpty(): Boolean {
         val result = dbInstance?.use {
             select(MOVIE_TABLE, GENRE_NAME)
-                    .exec {parseList(StringParser)}
+                    .exec { parseList(StringParser) }
         }
 
         return (result == null || result.isEmpty())
