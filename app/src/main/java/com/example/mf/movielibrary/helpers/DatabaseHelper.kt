@@ -1,7 +1,6 @@
 package com.example.mf.movielibrary.helpers
 
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import com.example.mf.movielibrary.models.genremodel.Genre
@@ -56,27 +55,28 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
                     .whereSimple(GENRE_ID + "= ?", genreId.toString())
                     .exec { parseList(StringParser) }
         }
+
         if (genre!!.isNotEmpty()) return genre.get(0) else return ""
     }
 
+
     fun getAllGenres(movieOrSeries: String): List<Genre> {
-
         val genreList = ArrayList<Genre>()
-
         dbInstance?.use {
-            select(MOVIE_TABLE).parseList(
-                    object : MapRowParser<List<Genre>> {
-                        override fun parseRow(columns: Map<String, Any?>): ArrayList<Genre> {
-                            val id = columns.get(GENRE_ID)
-                            val name = columns.get(GENRE_NAME)
-                            val genre = Genre(genreId = id as Int, genreName = name.toString())
-                            genreList.add(genre)
-                            return genreList
-                        }
-                    })
-        }
+            select(MOVIE_TABLE, GENRE_ID, GENRE_NAME)
+                    .whereSimple(SHOW_TYPE + "= ?", movieOrSeries).exec {
+                parseList(object : MapRowParser<List<Genre>> {
+                    override fun parseRow(columns: Map<String, Any?>): List<Genre> {
 
-        return genreList
+                        val genre = Genre(columns.getValue(GENRE_ID).toString().toInt(), columns.getValue(GENRE_NAME).toString())
+                        genreList.add(genre)
+                        Log.e("Your result", columns.toString())
+                        return genreList
+                    }
+                })
+            }
+        }
+        return genreList!!
     }
 
     fun isMovieTableEmpty(): Boolean {

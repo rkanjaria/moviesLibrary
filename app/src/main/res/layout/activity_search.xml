@@ -71,7 +71,7 @@
     <LinearLayout
         android:id="@+id/genreBottomSheet"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_100dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/darkGrey"
         app:behavior_hideable="true"
