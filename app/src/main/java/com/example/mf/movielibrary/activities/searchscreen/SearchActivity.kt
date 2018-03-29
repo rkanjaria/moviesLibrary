@@ -26,6 +26,7 @@ import com.example.mf.movielibrary.models.moviemodel.Movie
 import files.*
 import kotlinx.android.synthetic.main.activity_search.*
 import org.jetbrains.anko.displayMetrics
+import org.w3c.dom.Text
 
 
 class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, SearchActivityPresenter>(),
@@ -49,8 +50,8 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         setContentView(R.layout.activity_search)
 
         initToolbar(toolbar, false, "")
-
-        if (intent.getStringExtra(MOVIE_OR_SERIES) == MOVIE) {
+        movieOrSeries = intent.getStringExtra(MOVIE_OR_SERIES)
+        /*if (intent.getStringExtra(MOVIE_OR_SERIES) == MOVIE) {
             movieOrSeries = MOVIE
             movieSeriesSearchView.queryHint = getString(R.string.search_movies)
             selectedItemPosition = 0
@@ -58,7 +59,9 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
             movieOrSeries = TV_SHOWS
             movieSeriesSearchView.queryHint = getString(R.string.search_tv_shows)
             selectedItemPosition = 1
-        }
+        }*/
+
+        changeSearchPreference(movieOrSeries)
 
         bottomSheetBehavior = BottomSheetBehavior.from(genreBottomSheet)
         bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
@@ -74,7 +77,16 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         }
 
         movieSeriesSearchView.setOnQueryTextListener(this)
+
+        moviesTag.setOnClickListener {
+            changeSearchPreference(MOVIE)
+        }
+
+        tvShowsTag.setOnClickListener {
+            changeSearchPreference(TV_SHOWS)
+        }
     }
+
 
     override fun setSearchRecyclerView(moviesList: List<Movie?>?, totalResult: Int) {
 
@@ -151,7 +163,10 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.action_sort -> mPresenter.requestSearchTypeDialog()
+            R.id.action_sort -> {
+                //mPresenter.getGenreFromDbAndCreateBottomSheet(movieOrSeries)
+                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
+            }//mPresenter.requestSearchTypeDialog()
         }
         return true
     }
@@ -164,7 +179,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
     override fun onClick(dialogInterface: DialogInterface?, item: Int) {
         when (item) {
-            0 -> changeSearchPreference(MOVIE)
+            0 -> changeSearchPreference(TV_SHOWS)
             1 -> changeSearchPreference(TV_SHOWS)
             2 -> {
                 mPresenter.getGenreFromDbAndCreateBottomSheet(movieOrSeries)
@@ -178,22 +193,34 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
         when (searchPreference) {
             MOVIE -> {
+                selectTag(moviesTag, tvShowsTag)
                 movieSeriesSearchView.queryHint = getString(R.string.search_movies)
                 movieOrSeries = MOVIE
                 selectedItemPosition = 0
             }
             TV_SHOWS -> {
+                selectTag(tvShowsTag, moviesTag)
                 movieSeriesSearchView.queryHint = getString(R.string.search_tv_shows)
                 movieOrSeries = TV_SHOWS
                 selectedItemPosition = 1
             }
         }
+
+        mPresenter.getGenreFromDbAndCreateBottomSheet(movieOrSeries)
+    }
+
+    fun selectTag(tagToBeSelected: TextView, tagToBeDeselected: TextView) {
+        tagToBeSelected.background = ContextCompat.getDrawable(this, R.drawable.tag_background_colored_drawable)
+        tagToBeSelected.setTextColor(ContextCompat.getColor(this, R.color.darkGrey))
+        tagToBeDeselected.background = ContextCompat.getDrawable(this, R.drawable.tag_background_drawable)
+        tagToBeDeselected.setTextColor(ContextCompat.getColor(this, R.color.mediumGrey))
     }
 
 
     override fun createTagsLayout(tagsList: List<Genre>) {
 
         val px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8f, displayMetrics).toInt()
+        val px6dp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6f, displayMetrics).toInt()
         var previousTagWidth = 0
         var previousTagHeight = 0
         var left = 0
@@ -211,11 +238,11 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
         tagsList.forEach {
             val tagView = TextView(this)
-            tagView.setPadding(px * 2, px, px * 2, px)
+            tagView.setPadding(px * 2, px6dp, px * 2, px6dp)
             tagView.text = tagsList.get(tagsList.indexOf(it)).genreName
             tagView.tag = tagsList.get(tagsList.indexOf(it)).genreId
             tagView.background = ContextCompat.getDrawable(this, R.drawable.tag_background_drawable)
-            tagView.setTextColor(ContextCompat.getColor(this, R.color.colorAccent))
+            tagView.setTextColor(ContextCompat.getColor(this, R.color.mediumGrey))
             tagView.typeface = ResourcesCompat.getFont(this, R.font.noto_sans_regular)
             tagView.textSize = 12f
             tagView.maxLines = 1
@@ -238,10 +265,10 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
             previousTagHeight = tagView.measureTextViewHeight() + px
         }
 
-        if (genreBottomSheet.childCount > 0) {
-            genreBottomSheet.removeAllViews()
+        if (genreTagsLayout.childCount > 0) {
+            genreTagsLayout.removeAllViews()
         }
-        genreBottomSheet.addView(tagLayout)
+        genreTagsLayout.addView(tagLayout)
     }
 
     fun TextView.measureTextViewWidth(): Int {
@@ -262,7 +289,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
                 val outRect = Rect()
                 genreBottomSheet.getGlobalVisibleRect(outRect)
 
-                if(!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())){
+                if (!outRect.contains(ev.rawX.toInt(), ev.rawY.toInt())) {
                     bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
                 }
             }

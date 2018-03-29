@@ -7,6 +7,7 @@
     <color name="white">#ffffff</color>
     <color name="darkGrey">#212121</color>
     <color name="lightGrey">#e0e0e0</color>
+    <color name="mediumGrey">#8c8c8c</color>
 
     <!-- circle indicator view -->
     <bool name="default_circle_indicator_snap">false</bool>

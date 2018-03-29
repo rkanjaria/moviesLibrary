@@ -4,6 +4,6 @@
     android:thickness="1dp">
 
     <solid
-        android:color="@color/colorAccent" />
+        android:color="@color/mediumGrey" />
     <corners android:radius="@dimen/size_200dp" />
 </shape>
