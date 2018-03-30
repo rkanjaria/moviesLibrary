@@ -6,15 +6,15 @@
     android:animateLayoutChanges="true"
     android:gravity="center">
 
-    <TextView
+    <View
         android:id="@+id/playTrailer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/size_40dp"
+        android:layout_height="@dimen/size_40dp"
         android:background="@drawable/play_trailer_drawable"
-        android:fontFamily="@font/noto_sans_bold"
+        android:fontFamily="@font/noto_sans_regular"
         android:textColor="@color/white"
         android:gravity="center"
         android:visibility="gone"
-        android:text="Play Trailer" />
+        android:textStyle="bold" />
 
 </RelativeLayout>

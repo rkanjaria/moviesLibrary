@@ -1,37 +1,35 @@
 package com.example.mf.movielibrary.activities.searchscreen
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.graphics.Rect
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.SearchView
-import android.text.TextUtils
-import android.util.DisplayMetrics
-import android.util.TypedValue
-import android.view.*
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
+import android.view.ContextThemeWrapper
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.classes.KeyboardUtils
+import com.example.mf.movielibrary.fragments.GenreBottomSheetFragment
 import com.example.mf.movielibrary.models.genremodel.Genre
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.*
+import files.MOVIE
+import files.MOVIE_OR_SERIES
+import files.TV_SHOWS
+import files.calculateNoOfColumns
 import kotlinx.android.synthetic.main.activity_search.*
-import org.jetbrains.anko.displayMetrics
-import org.w3c.dom.Text
 
 
 class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, SearchActivityPresenter>(),
         SearchActivityContract.SearchBaseView, MovieRecyclerAdapter.OnMovieSeriesAdapterListener,
-        SearchView.OnQueryTextListener, DialogInterface.OnClickListener {
+        SearchView.OnQueryTextListener, DialogInterface.OnClickListener, GenreBottomSheetFragment.GenreBottomSheetListener {
+
+    override fun createTagsLayout(tagsList: List<Genre>) {
+
+    }
 
     private val mSearchList = mutableListOf<Movie?>()
     private lateinit var gridLayoutManager: GridLayoutManager
@@ -41,7 +39,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     private var movieOrSeries = MOVIE
     private var searchQuery: String? = null
     private var selectedItemPosition = 0
-    private var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>? = null
+    private val genreBottomSheet = GenreBottomSheetFragment()
 
     override var mPresenter = SearchActivityPresenter()
 
@@ -51,20 +49,6 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
         initToolbar(toolbar, false, "")
         movieOrSeries = intent.getStringExtra(MOVIE_OR_SERIES)
-        /*if (intent.getStringExtra(MOVIE_OR_SERIES) == MOVIE) {
-            movieOrSeries = MOVIE
-            movieSeriesSearchView.queryHint = getString(R.string.search_movies)
-            selectedItemPosition = 0
-        } else {
-            movieOrSeries = TV_SHOWS
-            movieSeriesSearchView.queryHint = getString(R.string.search_tv_shows)
-            selectedItemPosition = 1
-        }*/
-
-        changeSearchPreference(movieOrSeries)
-
-        bottomSheetBehavior = BottomSheetBehavior.from(genreBottomSheet)
-        bottomSheetBehavior?.state = BottomSheetBehavior.STATE_HIDDEN
 
         gridLayoutManager = GridLayoutManager(this, calculateNoOfColumns(this, 110))
         searchRecyclerView.layoutManager = gridLayoutManager
@@ -75,16 +59,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
                     gridLayoutManager.spanCount else 1
             }
         }
-
         movieSeriesSearchView.setOnQueryTextListener(this)
-
-        moviesTag.setOnClickListener {
-            changeSearchPreference(MOVIE)
-        }
-
-        tvShowsTag.setOnClickListener {
-            changeSearchPreference(TV_SHOWS)
-        }
     }
 
 
@@ -164,9 +139,8 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.action_sort -> {
-                //mPresenter.getGenreFromDbAndCreateBottomSheet(movieOrSeries)
-                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
-            }//mPresenter.requestSearchTypeDialog()
+                genreBottomSheet.show(supportFragmentManager, "GenreBottomSheet")
+            }
         }
         return true
     }
@@ -178,48 +152,24 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     }
 
     override fun onClick(dialogInterface: DialogInterface?, item: Int) {
-        when (item) {
+        /*when (item) {
             0 -> changeSearchPreference(TV_SHOWS)
             1 -> changeSearchPreference(TV_SHOWS)
             2 -> {
                 mPresenter.getGenreFromDbAndCreateBottomSheet(movieOrSeries)
-                bottomSheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
+                //bottomSheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
             }
         }
-        dialogInterface?.dismiss()
+        dialogInterface?.dismiss()*/
     }
 
     private fun changeSearchPreference(searchPreference: String) {
 
-        when (searchPreference) {
-            MOVIE -> {
-                selectTag(moviesTag, tvShowsTag)
-                movieSeriesSearchView.queryHint = getString(R.string.search_movies)
-                movieOrSeries = MOVIE
-                selectedItemPosition = 0
-            }
-            TV_SHOWS -> {
-                selectTag(tvShowsTag, moviesTag)
-                movieSeriesSearchView.queryHint = getString(R.string.search_tv_shows)
-                movieOrSeries = TV_SHOWS
-                selectedItemPosition = 1
-            }
-        }
-
-        mPresenter.getGenreFromDbAndCreateBottomSheet(movieOrSeries)
     }
 
-    fun selectTag(tagToBeSelected: TextView, tagToBeDeselected: TextView) {
-        tagToBeSelected.background = ContextCompat.getDrawable(this, R.drawable.tag_background_colored_drawable)
-        tagToBeSelected.setTextColor(ContextCompat.getColor(this, R.color.darkGrey))
-        tagToBeDeselected.background = ContextCompat.getDrawable(this, R.drawable.tag_background_drawable)
-        tagToBeDeselected.setTextColor(ContextCompat.getColor(this, R.color.mediumGrey))
-    }
+    /*override fun createTagsLayout(tagsList: List<Genre>) {
 
-
-    override fun createTagsLayout(tagsList: List<Genre>) {
-
-        val px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8f, displayMetrics).toInt()
+        *//*val px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 8f, displayMetrics).toInt()
         val px6dp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 6f, displayMetrics).toInt()
         var previousTagWidth = 0
         var previousTagHeight = 0
@@ -265,13 +215,13 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
             previousTagHeight = tagView.measureTextViewHeight() + px
         }
 
-        if (genreTagsLayout.childCount > 0) {
-            genreTagsLayout.removeAllViews()
+        if (view.genreTagsLayout.childCount > 0) {
+            view.genreTagsLayout.removeAllViews()
         }
-        genreTagsLayout.addView(tagLayout)
-    }
+        view.genreTagsLayout.addView(tagLayout)*//*
+    }*/
 
-    fun TextView.measureTextViewWidth(): Int {
+    /*fun TextView.measureTextViewWidth(): Int {
         this.measure(0, 0)
         return this.measuredWidth
     }
@@ -280,8 +230,8 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         this.measure(0, 0)
         return this.measuredHeight
     }
-
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+*/
+    /*override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
 
         if (ev?.action == MotionEvent.ACTION_DOWN) {
             if (bottomSheetBehavior?.state == BottomSheetBehavior.STATE_EXPANDED) {
@@ -295,5 +245,25 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
             }
         }
         return super.dispatchTouchEvent(ev)
+    }*/
+
+    override fun onMovieOrSeriesClicked(moviesOrSeries: String) {
+        when (moviesOrSeries) {
+            MOVIE -> {
+                movieSeriesSearchView.queryHint = getString(R.string.search_movies)
+                movieOrSeries = MOVIE
+                selectedItemPosition = 0
+            }
+            TV_SHOWS -> {
+                movieSeriesSearchView.queryHint = getString(R.string.search_tv_shows)
+                movieOrSeries = TV_SHOWS
+                selectedItemPosition = 1
+            }
+        }
+        genreBottomSheet.createTagsLayout(moviesOrSeries)
+    }
+
+    override fun onGenreTagsClicked(tag : String) {
+
     }
 }
