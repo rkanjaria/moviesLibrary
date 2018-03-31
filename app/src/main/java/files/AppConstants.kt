@@ -30,11 +30,23 @@ val TV_CREDITS = "tv_credits"
 
 
 val DATABASE_NAME = "movie.db"
-val MOVIE_TABLE = "movie_table"
+val GENRE_TABLE = "genre_table"
 val ID = "_id"
 val GENRE_ID = "genre_id"
 val GENRE_NAME = "genre_name"
 val SHOW_TYPE = "show_type"
+
+val FAVOURITE_TABLE = "favourite_table"
+val MOVIE_ID = "movie_id"
+val VOTE_AVERAGE = "vote_average"
+val POSTER_PATH = "poster_path"
+val MEDIA_TYPE = "media_type"
+val ORIGINAL_TITLE = "original_title"
+val TITLE = "title"
+val BACKDROP_PATH = "backdrop_path"
+val OVERVIEW = "overview"
+val RELEASE_DATE = "release_Date"
+
 
 val API_KEY = "5526b6795b244b3f164510b8955df249"
 

@@ -17,6 +17,7 @@ object MovieSeriesActivityContract {
         fun setSimilarMoviesRecyclerview(moviesList: List<Movie?>, totalPages: Int)
         fun setSeasonRecyclerview(seasonsList: List<Season>)
         fun showPlayTrailerLayout(videoTrailersList: List<VideoTrailers>)
+        fun highlightFavoriteIcon()
 
     }
 
@@ -30,5 +31,6 @@ object MovieSeriesActivityContract {
         fun launchSeasonActivity(season: Season, movieOrSeriesId: Int)
         fun callGetMoviesOrSeriesTrailersApi(moviesOrSeries: String, movieOrSeriesId: Int)
         fun launchTrailerActivity(videoTrailer: VideoTrailers?)
+        fun addToFavourites(movieModel: Movie)
     }
 }

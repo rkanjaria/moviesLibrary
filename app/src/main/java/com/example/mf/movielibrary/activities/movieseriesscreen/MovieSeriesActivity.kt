@@ -81,6 +81,10 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
                 }
             }
         })
+
+        favouriteIcon.setOnClickListener{
+            mPresenter.addToFavourites(movieModel)
+        }
     }
 
     override fun setCastRecyclerview(castList: List<Cast>) {
@@ -125,5 +129,10 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         trailersList = videoTrailersList
         playTrailer.visibility = View.VISIBLE
         //Toast.makeText(this, "api call done", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun highlightFavoriteIcon() {
+        favouriteIcon.background = ContextCompat.getDrawable(this, R.drawable.ic_favorite)
+        showMessage("Added to favourites")
     }
 }

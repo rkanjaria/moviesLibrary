@@ -6,7 +6,6 @@ import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.activities.homescreen.HomeActivity
 import com.example.mf.movielibrary.base.BaseActivity
 import files.MOVIE
-import files.MOVIE_TABLE
 import files.TV_SHOWS
 import files.database
 

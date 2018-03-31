@@ -23,6 +23,14 @@ import io.reactivex.schedulers.Schedulers
 class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContract.MovieSeriesView>(),
         MovieSeriesActivityContract.MovieSeriesPresenter {
 
+    override fun addToFavourites(movieModel: Movie) {
+        if (mView?.getContext()?.database?.insertFavourites(movieModel) != -1L) {
+            mView?.highlightFavoriteIcon()
+        }else{
+            mView?.showMessage("Favourite can't be added");
+        }
+    }
+
     override fun launchTrailerActivity(videoTrailer: VideoTrailers?) {
         val trailerIntent = Intent(mView?.getContext(), TrailerActivity::class.java)
         trailerIntent.putExtra(PARCELABLE_OBJECT, videoTrailer)
