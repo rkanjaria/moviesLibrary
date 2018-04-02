@@ -1,12 +1,20 @@
 package com.example.mf.movielibrary.activities.movieseriesscreen
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
+import android.view.PointerIcon
 import android.view.View
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.AnimationSet
+import android.view.animation.ScaleAnimation
+import android.widget.ImageView
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.CastRecyclerAdapter
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
@@ -82,7 +90,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
             }
         })
 
-        favouriteIcon.setOnClickListener{
+        favouriteIcon.setOnClickListener {
             mPresenter.addToFavourites(movieModel)
         }
     }
@@ -132,7 +140,19 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
     }
 
     override fun highlightFavoriteIcon() {
-        favouriteIcon.background = ContextCompat.getDrawable(this, R.drawable.ic_favorite)
-        showMessage("Added to favourites")
+        favouriteIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite))
+        animateHeart(favouriteIcon)
+    }
+
+
+    fun animateHeart(image: ImageView) {
+        val objectAnimator = ObjectAnimator.ofPropertyValuesHolder(image,
+                PropertyValuesHolder.ofFloat(View.SCALE_X, 1.3f),
+                PropertyValuesHolder.ofFloat(View.SCALE_Y, 1.3f))
+
+        objectAnimator.repeatCount = 1
+        objectAnimator.repeatMode = ObjectAnimator.REVERSE
+        objectAnimator.setDuration(200)
+        objectAnimator.start()
     }
 }
