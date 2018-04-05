@@ -8,7 +8,7 @@ import com.example.mf.movielibrary.models.moviemodel.Movie
  * Created by MF on 28-11-2017.
  */
 
-object HomeActivityContract {
+class HomeActivityContract {
 
     interface HomeView : BaseView {
         fun setMovieRecyclerView(moviesList: List<Movie?>?, totalResults: Int)
@@ -22,6 +22,7 @@ object HomeActivityContract {
         fun launchMovieSeriesActivity(movieModel: Movie?, movieOrSeries: String)
         fun requestMovieOrSeriesTypeDialog()
         fun requestSearchActivity(movieOrSeries: String)
+        fun requestFavouritesActivity()
     }
 
 }

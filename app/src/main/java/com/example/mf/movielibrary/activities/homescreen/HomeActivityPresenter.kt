@@ -2,6 +2,7 @@ package com.example.mf.movielibrary.activities.homescreen
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import com.example.mf.movielibrary.activities.favouritescreen.FavoritesActivity
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
 import com.example.mf.movielibrary.activities.searchscreen.SearchActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
@@ -17,6 +18,10 @@ import io.reactivex.schedulers.Schedulers
  * Created by MF on 28-11-2017.
  */
 class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>(), HomeActivityContract.HomePresenter {
+
+    override fun requestFavouritesActivity() {
+        mView?.lauchchActivity(Intent(mView?.getContext(), FavoritesActivity::class.java))
+    }
 
     override fun requestMovieOrSeriesTypeDialog() {
         mView?.showMovieOrSeriesTypeDialog();

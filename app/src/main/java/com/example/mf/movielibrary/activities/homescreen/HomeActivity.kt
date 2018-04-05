@@ -134,6 +134,7 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         when (item?.itemId) {
             R.id.action_sort -> mPresenter.requestMovieOrSeriesTypeDialog()
             R.id.action_search -> mPresenter.requestSearchActivity(movieOrSeries)
+            R.id.action_favourites -> mPresenter.requestFavouritesActivity()
         }
         return true
     }

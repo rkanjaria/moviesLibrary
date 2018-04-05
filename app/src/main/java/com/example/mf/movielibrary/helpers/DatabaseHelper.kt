@@ -43,7 +43,8 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
                 GENRE_ID to TEXT,
                 BACKDROP_PATH to TEXT,
                 OVERVIEW to TEXT,
-                RELEASE_DATE to TEXT)
+                RELEASE_DATE to TEXT,
+                SHOW_TYPE to TEXT)
 
         Log.d("TABLE_CREATED", "TABLE CREATED ${FAVOURITE_TABLE}")
 
@@ -104,7 +105,7 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
         return (result == null || result.isEmpty())
     }
 
-    fun insertFavourites(movieModel: Movie): Long {
+    fun insertMovie(movieModel: Movie, movieOrSeries: String): Long {
 
         val isInserted = dbInstance?.use {
             insert(FAVOURITE_TABLE, MOVIE_ID to movieModel.id,
@@ -115,8 +116,60 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
                     TITLE to movieModel.title,
                     BACKDROP_PATH to movieModel.backDroppath,
                     OVERVIEW to movieModel.overview,
-                    RELEASE_DATE to movieModel.releaseDate)
+                    RELEASE_DATE to movieModel.releaseDate,
+                    SHOW_TYPE to movieOrSeries)
         }
         return isInserted!!
+    }
+
+    fun removeMovie(movieId: Int): Boolean {
+        var isDeleted = false
+        dbInstance?.use {
+            val result = delete(FAVOURITE_TABLE, "${MOVIE_ID} = {m_id}", "m_id" to movieId) > 0
+            if (result) isDeleted = true else isDeleted = false
+        }
+        return isDeleted
+    }
+
+
+    fun doesAlreadyExists(movieId: Int): Boolean {
+        val movies = dbInstance?.use {
+            select(FAVOURITE_TABLE, ORIGINAL_TITLE)
+                    .whereSimple(MOVIE_ID + "= ?", movieId.toString())
+                    .exec { parseList(StringParser) }
+        }
+
+        return (movies != null && movies.size > 0)
+    }
+
+    fun getAllMoviesOrTvShows(movieOrSeries: String): List<Movie>{
+
+        val moviesOrShowsList = ArrayList<Movie>()
+        dbInstance?.use {
+            select(FAVOURITE_TABLE, MOVIE_ID, VOTE_AVERAGE, POSTER_PATH, MEDIA_TYPE,
+                    ORIGINAL_TITLE, TITLE, BACKDROP_PATH, OVERVIEW, RELEASE_DATE)
+                    .whereSimple(SHOW_TYPE + "= ?", movieOrSeries).exec {
+                parseList(object : MapRowParser<List<Movie>> {
+                    override fun parseRow(columns: Map<String, Any?>): List<Movie> {
+
+                        val movie = Movie(
+                                id = columns.getValue(MOVIE_ID).toString().toInt(),
+                                voteAverage = columns.getValue(VOTE_AVERAGE).toString().toFloat(),
+                                posterPath = columns.getValue(POSTER_PATH).toString(),
+                                mediaType = columns.getValue(MEDIA_TYPE).toString(),
+                                originalTitle = columns.getValue(ORIGINAL_TITLE).toString(),
+                                title = columns.getValue(TITLE).toString(),
+                                genreIds = null,
+                                backDroppath = columns.getValue(BACKDROP_PATH).toString(),
+                                overview = columns.getValue(OVERVIEW).toString(),
+                                releaseDate = columns.getValue(RELEASE_DATE).toString())
+                        moviesOrShowsList.add(movie)
+                        Log.e("Your result", columns.toString())
+                        return moviesOrShowsList
+                    }
+                })
+            }
+        }
+        return moviesOrShowsList!!
     }
 }

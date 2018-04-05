@@ -17,7 +17,7 @@ data class MoviesResult(
 
 data class Movie (
         @SerializedName("id") val id : Int,
-        @SerializedName("video") val video : Boolean,
+        @SerializedName("video") val video : Boolean = false,
         @SerializedName("vote_average") val voteAverage : Float,
         @SerializedName("poster_path") val posterPath : String ?,
         @SerializedName("media_type") val mediaType : String ?,

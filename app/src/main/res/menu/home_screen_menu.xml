@@ -12,4 +12,9 @@
         android:icon="@drawable/ic_sort"
         app:showAsAction="always" />
 
+    <item android:id="@+id/action_favourites"
+        android:title="Favourites"
+        android:icon="@drawable/ic_favorite_border_whit"
+        app:showAsAction="ifRoom" />
+
 </menu>

@@ -29,6 +29,7 @@
             android:name=".activities.trailerscreen.TrailerActivity"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
+        <activity android:name=".activities.favouritescreen.FavoritesActivity"></activity>
     </application>
 
 </manifest>

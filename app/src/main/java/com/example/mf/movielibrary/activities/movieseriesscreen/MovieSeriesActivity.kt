@@ -32,6 +32,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         MovieSeriesActivityContract.MovieSeriesView, CastRecyclerAdapter.OnCastAdapterListener,
         MovieRecyclerAdapter.OnMovieSeriesAdapterListener, SeasonRecyclerAdapter.SeasonAdapterListener {
 
+
     private var movieOrSeriesId = 0
     private lateinit var trailersList: List<VideoTrailers>
 
@@ -90,8 +91,12 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
             }
         })
 
+        if (database.doesAlreadyExists(movieOrSeriesId)) {
+            favouriteIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite))
+        }
+
         favouriteIcon.setOnClickListener {
-            mPresenter.addToFavourites(movieModel)
+            mPresenter.addOrRemoveFavourites(movieModel, intent.getStringExtra(MOVIE_OR_SERIES))
         }
     }
 
@@ -144,6 +149,10 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         animateHeart(favouriteIcon)
     }
 
+    override fun unhighlightFavoriteIcon() {
+        animateHeart(favouriteIcon)
+        favouriteIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border))
+    }
 
     fun animateHeart(image: ImageView) {
         val objectAnimator = ObjectAnimator.ofPropertyValuesHolder(image,
