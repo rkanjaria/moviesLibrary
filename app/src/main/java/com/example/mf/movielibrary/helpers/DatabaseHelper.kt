@@ -5,8 +5,17 @@ import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import com.example.mf.movielibrary.models.genremodel.Genre
 import com.example.mf.movielibrary.models.moviemodel.Movie
+import com.google.gson.Gson
+import com.google.gson.JsonElement
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
+import com.google.gson.reflect.TypeToken
+import com.google.gson.stream.JsonReader
 import files.*
 import org.jetbrains.anko.db.*
+import org.json.JSONArray
+import org.json.JSONObject
+import org.json.JSONStringer
 
 /**
  * Created by MF on 22-01-2018.
@@ -40,7 +49,7 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
                 MEDIA_TYPE to TEXT,
                 ORIGINAL_TITLE to TEXT,
                 TITLE to TEXT,
-                GENRE_ID to TEXT,
+                GENRES to TEXT,
                 BACKDROP_PATH to TEXT,
                 OVERVIEW to TEXT,
                 RELEASE_DATE to TEXT,
@@ -107,6 +116,7 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
 
     fun insertMovie(movieModel: Movie, movieOrSeries: String): Long {
 
+        val genresString = Gson().toJson(movieModel.genreIds)
         val isInserted = dbInstance?.use {
             insert(FAVOURITE_TABLE, MOVIE_ID to movieModel.id,
                     VOTE_AVERAGE to movieModel.voteAverage.toString(),
@@ -114,6 +124,7 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
                     MEDIA_TYPE to movieModel.mediaType,
                     ORIGINAL_TITLE to movieModel.originalTitle,
                     TITLE to movieModel.title,
+                    GENRES to genresString,
                     BACKDROP_PATH to movieModel.backDroppath,
                     OVERVIEW to movieModel.overview,
                     RELEASE_DATE to movieModel.releaseDate,
@@ -142,16 +153,18 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
         return (movies != null && movies.size > 0)
     }
 
-    fun getAllMoviesOrTvShows(movieOrSeries: String): List<Movie>{
+    fun getAllMoviesOrTvShows(movieOrSeries: String): List<Movie> {
 
         val moviesOrShowsList = ArrayList<Movie>()
         dbInstance?.use {
             select(FAVOURITE_TABLE, MOVIE_ID, VOTE_AVERAGE, POSTER_PATH, MEDIA_TYPE,
-                    ORIGINAL_TITLE, TITLE, BACKDROP_PATH, OVERVIEW, RELEASE_DATE)
+                    ORIGINAL_TITLE, TITLE, GENRES, BACKDROP_PATH, OVERVIEW, RELEASE_DATE)
                     .whereSimple(SHOW_TYPE + "= ?", movieOrSeries).exec {
                 parseList(object : MapRowParser<List<Movie>> {
                     override fun parseRow(columns: Map<String, Any?>): List<Movie> {
 
+                        val type = object : TypeToken<List<Int>>() {}.type
+                        val genreIds = Gson().fromJson<List<Int>>(columns.getValue(GENRES).toString(), type)
                         val movie = Movie(
                                 id = columns.getValue(MOVIE_ID).toString().toInt(),
                                 voteAverage = columns.getValue(VOTE_AVERAGE).toString().toFloat(),
@@ -159,12 +172,11 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
                                 mediaType = columns.getValue(MEDIA_TYPE).toString(),
                                 originalTitle = columns.getValue(ORIGINAL_TITLE).toString(),
                                 title = columns.getValue(TITLE).toString(),
-                                genreIds = null,
+                                genreIds = genreIds,
                                 backDroppath = columns.getValue(BACKDROP_PATH).toString(),
                                 overview = columns.getValue(OVERVIEW).toString(),
                                 releaseDate = columns.getValue(RELEASE_DATE).toString())
                         moviesOrShowsList.add(movie)
-                        Log.e("Your result", columns.toString())
                         return moviesOrShowsList
                     }
                 })

@@ -7,9 +7,13 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.mf.movielibrary.classes.KeyboardUtils
+import android.widget.TextView
+
+
 
 /**
  * Created by MF on 28-11-2017.
@@ -27,19 +31,19 @@ abstract class BaseActivity<in V : BaseView, T : BasePresenter<V>>
     override fun getContext(): Context = this
 
     override fun showError(error: String?) {
-        Toast.makeText(this, error, Toast.LENGTH_LONG).show()
+        toast(error)
     }
 
     override fun showError(stringResId: Int) {
-        Toast.makeText(this, stringResId, Toast.LENGTH_LONG).show()
+        toast(stringResId)
     }
 
     override fun showMessage(stringResId: Int) {
-        Toast.makeText(this, stringResId, Toast.LENGTH_LONG).show()
+        toast(stringResId)
     }
 
     override fun showMessage(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        toast(message)
     }
 
     override fun onDestroy() {
@@ -81,5 +85,14 @@ abstract class BaseActivity<in V : BaseView, T : BasePresenter<V>>
         KeyboardUtils.hideSoftInputKeyboard(this)
         startActivity(activityToBeLaunched)
         finish()
+    }
+
+    fun toast(message: String?) {
+        val toast = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        //val toastLayout = toast.getView() as LinearLayout
+    }
+
+    fun toast(stringResId: Int) {
+        Toast.makeText(this, stringResId, Toast.LENGTH_LONG).show()
     }
 }

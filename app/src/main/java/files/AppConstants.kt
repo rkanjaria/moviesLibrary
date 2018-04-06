@@ -15,6 +15,8 @@ val baseUrl = "https://api.themoviedb.org/3/"
 val PARCELABLE_OBJECT = "parcelable_object"
 val MOVIE_OR_SERIES = "movie_or_series"
 
+val RESULT_CODE = 100
+
 val MOVIE = "movie"
 val TV_SHOWS = "tv"
 
@@ -43,6 +45,7 @@ val POSTER_PATH = "poster_path"
 val MEDIA_TYPE = "media_type"
 val ORIGINAL_TITLE = "original_title"
 val TITLE = "title"
+val GENRES = "genres"
 val BACKDROP_PATH = "backdrop_path"
 val OVERVIEW = "overview"
 val RELEASE_DATE = "release_Date"

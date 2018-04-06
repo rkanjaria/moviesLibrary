@@ -2,9 +2,11 @@ package com.example.mf.movielibrary.activities.movieseriesscreen
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.IntentCompat
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
@@ -93,10 +95,12 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
 
         if (database.doesAlreadyExists(movieOrSeriesId)) {
             favouriteIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite))
+            setResult(RESULT_CODE)
         }
 
         favouriteIcon.setOnClickListener {
             mPresenter.addOrRemoveFavourites(movieModel, intent.getStringExtra(MOVIE_OR_SERIES))
+            setResult(RESULT_CODE)
         }
     }
 
@@ -141,7 +145,6 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
     override fun showPlayTrailerLayout(videoTrailersList: List<VideoTrailers>) {
         trailersList = videoTrailersList
         playTrailer.visibility = View.VISIBLE
-        //Toast.makeText(this, "api call done", Toast.LENGTH_SHORT).show()
     }
 
     override fun highlightFavoriteIcon() {
