@@ -3,6 +3,7 @@ package com.example.mf.movielibrary.base
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
@@ -12,7 +13,8 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.mf.movielibrary.classes.KeyboardUtils
 import android.widget.TextView
-
+import android.widget.RelativeLayout
+import com.example.mf.movielibrary.R
 
 
 /**
@@ -88,11 +90,20 @@ abstract class BaseActivity<in V : BaseView, T : BasePresenter<V>>
     }
 
     fun toast(message: String?) {
-        val toast = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-        //val toastLayout = toast.getView() as LinearLayout
+        val toast = Toast.makeText(this, message, Toast.LENGTH_SHORT)
+        val toastLayout = toast.getView() as LinearLayout
+        val toastTV = toastLayout.getChildAt(0) as TextView
+        toastTV.typeface = ResourcesCompat.getFont(this, R.font.noto_sans_regular)
+        toastTV.textSize = 14f
+        toast.show()
     }
 
     fun toast(stringResId: Int) {
-        Toast.makeText(this, stringResId, Toast.LENGTH_LONG).show()
+        val toast = Toast.makeText(this, stringResId, Toast.LENGTH_SHORT)
+        val toastLayout = toast.getView() as LinearLayout
+        val toastTV = toastLayout.getChildAt(0) as TextView
+        toastTV.typeface = ResourcesCompat.getFont(this, R.font.noto_sans_regular)
+        toastTV.textSize = 14f
+        toast.show()
     }
 }
