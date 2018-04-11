@@ -30,5 +30,6 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_favourites_text">Hey there! You have no favourites added. Please add something</string>
 
 </resources>

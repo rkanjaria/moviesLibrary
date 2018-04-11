@@ -15,4 +15,32 @@
         android:paddingLeft="@dimen/size_8dp"
         android:paddingTop="@dimen/size_4dp" />
 
+
+    <LinearLayout
+        android:id="@+id/noFavouritesLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="">
+
+        <ImageView
+            android:layout_width="@dimen/size_200dp"
+            android:layout_height="@dimen/size_200dp"
+            android:src="@drawable/minion"
+            android:padding="@dimen/size_16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans_regular"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16"
+            android:gravity="center"
+            android:layout_margin="@dimen/size_16dp"
+            android:text="@string/no_favourites_text"/>
+
+    </LinearLayout>
+
 </RelativeLayout>
