@@ -50,6 +50,10 @@ interface RetrofitApiService {
                                          @Path("movie_or_series") movieOrSeries: String,
                                          @Query("api_key") apiKey: String = API_KEY): Observable<MoviesResult>
 
+    @GET("person/{actor_id}/combined_credits")
+    fun doGetActorsMoviesAndSeriesApiCall(@Path("actor_id") actorId: Int,
+                                          @Query("api_key") apiKey: String = API_KEY): Observable<MoviesResult>
+
     @GET("person/{actor_id}/images")
     fun doGetActorsImagesApiCall(@Path("actor_id") actorId: Int,
                                  @Query("api_key") apiKey: String = API_KEY): Observable<ActorImagesResult>

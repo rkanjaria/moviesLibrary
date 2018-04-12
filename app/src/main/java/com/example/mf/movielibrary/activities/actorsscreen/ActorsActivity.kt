@@ -56,7 +56,7 @@ class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsAct
     }
 
     override fun onMovieOrSeriesClicked(movieModel: Movie?) {
-        mPresenter.launchMovieSeriesActivity(movieModel, intent.getStringExtra(MOVIE_OR_SERIES))
+        mPresenter.launchMovieSeriesActivity(movieModel)
     }
 
 }

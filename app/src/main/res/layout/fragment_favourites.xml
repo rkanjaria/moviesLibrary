@@ -22,13 +22,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:visibility="">
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="@dimen/size_200dp"
             android:layout_height="@dimen/size_200dp"
-            android:src="@drawable/minion"
-            android:padding="@dimen/size_16dp"/>
+            android:src="@drawable/search" />
 
         <TextView
             android:layout_width="match_parent"

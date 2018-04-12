@@ -36,8 +36,8 @@ class ActorsActivityPresenter : BasePresenterImpl<ActorsActivityContract.ActorsV
 
         if (moviesOrSeries != null) {
 
-            val movieOrSeriesQueryParam = if (moviesOrSeries.equals(MOVIE)) MOVIE_CREDITS else TV_CREDITS
-            RetrofitHelper.create().doGetActorsMoviesOrSeriesApiCall(actorId, movieOrSeriesQueryParam)
+            //val movieOrSeriesQueryParam = if (moviesOrSeries.equals(MOVIE)) MOVIE_CREDITS else TV_CREDITS
+            RetrofitHelper.create().doGetActorsMoviesAndSeriesApiCall(actorId)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe({ movieResult ->
@@ -51,10 +51,10 @@ class ActorsActivityPresenter : BasePresenterImpl<ActorsActivityContract.ActorsV
         }
     }
 
-    override fun launchMovieSeriesActivity(movieModel: Movie?, moviesOrSeries: String?) {
+    override fun launchMovieSeriesActivity(movieModel: Movie?) {
         val movieSeriesIntent = Intent(mView?.getContext(), MovieSeriesActivity::class.java)
         movieSeriesIntent.putExtra(PARCELABLE_OBJECT, movieModel)
-        movieSeriesIntent.putExtra(MOVIE_OR_SERIES, moviesOrSeries)
+        movieSeriesIntent.putExtra(MOVIE_OR_SERIES, movieModel?.mediaType)
         mView?.getContext()?.startActivity(movieSeriesIntent)
     }
 
