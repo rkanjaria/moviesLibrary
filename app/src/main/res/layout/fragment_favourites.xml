@@ -26,8 +26,8 @@
 
         <ImageView
             android:layout_width="@dimen/size_200dp"
-            android:layout_height="@dimen/size_200dp"
-            android:src="@drawable/search" />
+            android:layout_height="@dimen/size_300dp"
+            android:src="@drawable/robo_search" />
 
         <TextView
             android:layout_width="match_parent"
@@ -37,7 +37,8 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_16"
             android:gravity="center"
-            android:layout_margin="@dimen/size_16dp"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
             android:text="@string/no_favourites_text"/>
 
     </LinearLayout>
