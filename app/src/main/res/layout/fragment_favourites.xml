@@ -25,9 +25,9 @@
         android:visibility="gone">
 
         <ImageView
-            android:layout_width="@dimen/size_200dp"
-            android:layout_height="@dimen/size_300dp"
-            android:src="@drawable/robo_search" />
+            android:layout_width="@dimen/size_100dp"
+            android:layout_height="@dimen/size_100dp"
+            android:src="@drawable/lover_grey" />
 
         <TextView
             android:layout_width="match_parent"
@@ -37,6 +37,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_16"
             android:gravity="center"
+            android:layout_marginTop="@dimen/size_24dp"
             android:layout_marginLeft="@dimen/size_16dp"
             android:layout_marginRight="@dimen/size_16dp"
             android:text="@string/no_favourites_text"/>
