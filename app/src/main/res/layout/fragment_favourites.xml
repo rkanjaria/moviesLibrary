@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:visibility="gone">
+        android:visibility="">
 
         <ImageView
             android:layout_width="@dimen/size_100dp"
@@ -35,9 +35,21 @@
             android:ellipsize="end"
             android:fontFamily="@font/noto_sans_regular"
             android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/size_16dp"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:text="Whoops !"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans_regular"
             android:textSize="@dimen/text_size_16"
             android:gravity="center"
-            android:layout_marginTop="@dimen/size_24dp"
+            android:layout_marginTop="@dimen/size_8dp"
             android:layout_marginLeft="@dimen/size_16dp"
             android:layout_marginRight="@dimen/size_16dp"
             android:text="@string/no_favourites_text"/>
