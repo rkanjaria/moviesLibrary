@@ -64,6 +64,46 @@
             android:layout_centerInParent="true"
             android:visibility="gone" />
 
+        <LinearLayout
+            android:id="@+id/noSearchLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/size_100dp"
+                android:layout_height="@dimen/size_100dp"
+                android:src="@drawable/search" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/noto_sans_regular"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_20"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:text="Aww Snap !"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/noto_sans_regular"
+                android:textSize="@dimen/text_size_16"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/size_8dp"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:layout_marginRight="@dimen/size_16dp"
+                android:text="@string/no_search_text"/>
+
+        </LinearLayout>
+
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

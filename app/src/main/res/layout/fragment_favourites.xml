@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:visibility="">
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="@dimen/size_100dp"

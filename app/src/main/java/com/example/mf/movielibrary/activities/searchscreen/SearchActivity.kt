@@ -67,7 +67,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
         totalResults = totalResult
 
-        if (moviesList != null) {
+        if (moviesList != null && moviesList.isNotEmpty()) {
 
             if (mSearchList.isEmpty()) {
                 // for first time when data loads, set the adapter of recyclerview this helps in solving pagination issue since new adapter is set no refreshed
@@ -84,6 +84,11 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
                 }
                 movieAdapter.refreshAdapter(lastPosition)
             }
+            searchRecyclerView.visibility = View.VISIBLE
+            noSearchLayout.visibility = View.GONE
+        } else {
+            searchRecyclerView.visibility = View.GONE
+            noSearchLayout.visibility = View.VISIBLE
         }
     }
 
@@ -263,7 +268,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         genreBottomSheet.createTagsLayout(moviesOrSeries)
     }
 
-    override fun onGenreTagsClicked(tag : String) {
+    override fun onGenreTagsClicked(tag: String) {
 
     }
 }
