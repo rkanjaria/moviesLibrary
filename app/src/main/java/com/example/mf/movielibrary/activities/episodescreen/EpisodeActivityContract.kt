@@ -5,7 +5,7 @@ import com.example.mf.movielibrary.base.BaseView
 import com.example.mf.movielibrary.models.imagemodels.ImageModel
 
 /**
- * Created by MF on 15-02-2018.
+ * Created by RK on 15-02-2018.
  */
 class EpisodeActivityContract {
 

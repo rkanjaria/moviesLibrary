@@ -3,7 +3,7 @@ package com.example.mf.movielibrary.models.imagemodels
 import com.google.gson.annotations.SerializedName
 
 /**
- * Created by MF on 17-02-2018.
+ * Created by RK on 17-02-2018.
  */
 data class ImageModel(
         @SerializedName("width") val width: Int,

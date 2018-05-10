@@ -18,7 +18,7 @@ import org.json.JSONObject
 import org.json.JSONStringer
 
 /**
- * Created by MF on 22-01-2018.
+ * Created by RK on 22-01-2018.
  */
 class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABASE_NAME) {
 

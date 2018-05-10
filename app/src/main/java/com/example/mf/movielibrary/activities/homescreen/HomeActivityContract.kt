@@ -5,7 +5,7 @@ import com.example.mf.movielibrary.base.BaseView
 import com.example.mf.movielibrary.models.moviemodel.Movie
 
 /**
- * Created by MF on 28-11-2017.
+ * Created by RK on 28-11-2017.
  */
 
 class HomeActivityContract {
@@ -23,6 +23,7 @@ class HomeActivityContract {
         fun requestMovieOrSeriesTypeDialog()
         fun requestSearchActivity(movieOrSeries: String)
         fun requestFavouritesActivity()
+        fun requestCollectionsActivity()
     }
 
 }

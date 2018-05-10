@@ -8,7 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
- * Created by MF on 01-02-2018.
+ * Created by RK on 01-02-2018.
  */
 class ImageActivityPresenter : BasePresenterImpl<ImageActivityContract.ImageBaseView>(), ImageActivityContract.ImagePresenter {
 

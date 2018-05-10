@@ -5,7 +5,7 @@ import com.example.mf.movielibrary.base.BasePresenter
 import com.example.mf.movielibrary.base.BaseView
 
 /**
- * Created by MF on 01-02-2018.
+ * Created by RK on 01-02-2018.
  */
 class ImageActivityContract {
 

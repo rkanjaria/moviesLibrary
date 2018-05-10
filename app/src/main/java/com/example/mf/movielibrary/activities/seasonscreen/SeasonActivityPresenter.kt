@@ -12,7 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
- * Created by MF on 06-02-2018.
+ * Created by RK on 06-02-2018.
  */
 class SeasonActivityPresenter : BasePresenterImpl<SeasonActivityContract.SeasonView>(), SeasonActivityContract.SeasonPresenter {
 

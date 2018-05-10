@@ -58,8 +58,6 @@ class EpisodeActivity : BaseActivity<EpisodeActivityContract.EpisodeView, Episod
                 }
             }
         })
-
-
     }
 
     override fun addImagesToList(imageList: List<String>) {

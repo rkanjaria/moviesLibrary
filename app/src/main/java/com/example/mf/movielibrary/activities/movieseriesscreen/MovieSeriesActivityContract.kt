@@ -8,7 +8,7 @@ import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
 import com.example.mf.movielibrary.models.videomodels.VideoTrailers
 
 /**
- * Created by MF on 04-01-2018.
+ * Created by RK on 04-01-2018.
  */
 object MovieSeriesActivityContract {
 

@@ -5,7 +5,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 /**
- * Created by MF on 22-01-2018.
+ * Created by RK on 22-01-2018.
  */
 data class CastResult(
         @SerializedName("id") val id: Int,

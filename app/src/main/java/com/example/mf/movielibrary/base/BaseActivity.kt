@@ -18,7 +18,7 @@ import com.example.mf.movielibrary.R
 
 
 /**
- * Created by MF on 28-11-2017.
+ * Created by RK on 28-11-2017.
  */
 abstract class BaseActivity<in V : BaseView, T : BasePresenter<V>>
     : AppCompatActivity(), BaseView {

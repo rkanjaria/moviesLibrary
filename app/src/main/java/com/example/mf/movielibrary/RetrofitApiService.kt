@@ -3,6 +3,7 @@ package com.example.mf.movielibrary
 import com.example.mf.movielibrary.models.actormodel.Actor
 import com.example.mf.movielibrary.models.actormodel.ActorImagesResult
 import com.example.mf.movielibrary.models.castmodel.CastResult
+import com.example.mf.movielibrary.models.collectionmodels.CollectionsResult
 import com.example.mf.movielibrary.models.episodemodels.EpisodeImageResult
 import com.example.mf.movielibrary.models.genremodel.GenreResult
 import com.example.mf.movielibrary.models.moviemodel.MoviesResult
@@ -16,7 +17,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 /**
- * Created by MF on 01-12-2017.
+ * Created by RK on 01-12-2017.
  */
 interface RetrofitApiService {
 
@@ -84,5 +85,9 @@ interface RetrofitApiService {
     fun doGetMovieOrSeriesTrailers(@Path("movie_or_series") movieOrSeries: String,
                                    @Path("movie_or_tv_id") movieOrSeriesId: Int,
                                    @Query("api_key") apiKey: String = API_KEY): Observable<VideoResult>
+
+    @GET("list/{list_id}")
+    fun doGetMovieOrSeriesTrailers(@Path("list_id") listId: Int,
+                                   @Query("api_key") apiKey: String = API_KEY): Observable<CollectionsResult>
 
 }

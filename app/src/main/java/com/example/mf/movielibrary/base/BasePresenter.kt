@@ -1,7 +1,7 @@
 package com.example.mf.movielibrary.base
 
 /**
- * Created by MF on 28-11-2017.
+ * Created by RK on 28-11-2017.
  */
 interface BasePresenter<in V : BaseView> {
 

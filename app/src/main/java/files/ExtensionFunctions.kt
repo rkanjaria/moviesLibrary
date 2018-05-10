@@ -29,7 +29,7 @@ import org.jetbrains.anko.collections.forEachByIndex
 import org.jetbrains.anko.displayMetrics
 
 /**
- * Created by MF on 23-12-2017.
+ * Created by RK on 23-12-2017.
  */
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {

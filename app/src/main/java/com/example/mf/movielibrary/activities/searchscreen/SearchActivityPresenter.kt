@@ -12,7 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
- * Created by MF on 08-02-2018.
+ * Created by RK on 08-02-2018.
  */
 class SearchActivityPresenter : BasePresenterImpl<SearchActivityContract.SearchBaseView>(),
         SearchActivityContract.SearchPresenter {

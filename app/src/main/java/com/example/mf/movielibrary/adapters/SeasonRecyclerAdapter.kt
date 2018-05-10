@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.movie_recycler_layout.view.*
 import org.jetbrains.anko.displayMetrics
 
 /**
- * Created by MF on 05-02-2018.
+ * Created by RK on 05-02-2018.
  */
 class SeasonRecyclerAdapter(val seasonList: List<Season>, seasonAdapterListener: SeasonAdapterListener?) : RecyclerView.Adapter<SeasonRecyclerAdapter.SeasonViewHolder>() {
 

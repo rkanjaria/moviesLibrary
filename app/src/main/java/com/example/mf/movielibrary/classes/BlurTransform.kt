@@ -8,7 +8,7 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation
 import java.security.MessageDigest
 
 /**
- * Created by MF on 19-01-2018.
+ * Created by RK on 19-01-2018.
  */
 class BlurTransform(context: Context) : BitmapTransformation() {
 

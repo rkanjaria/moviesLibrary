@@ -10,7 +10,7 @@ import files.*
 import kotlinx.android.synthetic.main.episode_recyler_layout.view.*
 
 /**
- * Created by MF on 06-02-2018.
+ * Created by RK on 06-02-2018.
  */
 class EpisodeRecyclerAdapter(val episodeList: List<Episode>, episodeAdapterListener: EpisodeAdapterListener?) : RecyclerView.Adapter<EpisodeRecyclerAdapter.EpisodeViewHolder>() {
 

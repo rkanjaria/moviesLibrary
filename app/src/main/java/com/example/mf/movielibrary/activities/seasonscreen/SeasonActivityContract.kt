@@ -6,7 +6,7 @@ import com.example.mf.movielibrary.models.seasonmodels.Episode
 import com.example.mf.movielibrary.models.seasonmodels.SeasonResult
 
 /**
- * Created by MF on 06-02-2018.
+ * Created by RK on 06-02-2018.
  */
 class SeasonActivityContract {
 

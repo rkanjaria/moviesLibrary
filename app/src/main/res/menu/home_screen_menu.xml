@@ -17,4 +17,9 @@
         android:icon="@drawable/ic_sort"
         app:showAsAction="always" />
 
+    <item android:id="@+id/action_collections"
+        android:title="Collections"
+        android:icon="@drawable/ic_sort"
+        app:showAsAction="always" />
+
 </menu>

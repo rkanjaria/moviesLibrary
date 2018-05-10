@@ -7,7 +7,7 @@ import com.example.mf.movielibrary.models.genremodel.Genre
 import com.example.mf.movielibrary.models.moviemodel.Movie
 
 /**
- * Created by MF on 08-02-2018.
+ * Created by RK on 08-02-2018.
  */
 class SearchActivityContract {
 

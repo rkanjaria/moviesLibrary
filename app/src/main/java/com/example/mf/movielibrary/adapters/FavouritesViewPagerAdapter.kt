@@ -10,7 +10,7 @@ import files.MOVIE_OR_SERIES
 import files.TV_SHOWS
 
 /**
- * Created by MF on 05-04-2018.
+ * Created by RK on 05-04-2018.
  */
 class FavouritesViewPagerAdapter(fragmentManager: FragmentManager, val fragmentTitleList: Array<String>) :
         FragmentStatePagerAdapter(fragmentManager) {

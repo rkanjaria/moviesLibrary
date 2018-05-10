@@ -10,7 +10,7 @@ import com.example.mf.movielibrary.R
 
 
 /**
- * Created by MF on 02-02-2018.
+ * Created by RK on 02-02-2018.
  */
 class MoviesCardView : CardView {
 

@@ -9,7 +9,7 @@ import com.example.mf.movielibrary.R
 import org.jetbrains.anko.displayMetrics
 
 /**
- * Created by MF on 03-01-2018.
+ * Created by RK on 03-01-2018.
  */
 
 fun getYearFromDate(date: String?): String {

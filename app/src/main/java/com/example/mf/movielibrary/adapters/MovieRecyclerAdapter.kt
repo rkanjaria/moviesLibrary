@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.movie_recycler_layout.view.*
 import org.jetbrains.anko.displayMetrics
 
 /**
- * Created by MF on 23-12-2017.
+ * Created by RK on 23-12-2017.
  */
 class MovieRecyclerAdapter(val moviesList: List<Movie?>, onMovieSeriesAdapterListener: OnMovieSeriesAdapterListener?, val isHorizontal: Boolean = false)
     : RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHolder>() {

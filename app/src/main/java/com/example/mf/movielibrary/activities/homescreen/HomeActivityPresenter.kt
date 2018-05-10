@@ -1,23 +1,25 @@
 package com.example.mf.movielibrary.activities.homescreen
 
-import android.annotation.SuppressLint
 import android.content.Intent
+import com.example.mf.movielibrary.activities.collectionlistscreen.CollectionsListActivity
 import com.example.mf.movielibrary.activities.favouritescreen.FavoritesActivity
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
 import com.example.mf.movielibrary.activities.searchscreen.SearchActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import com.example.mf.movielibrary.models.moviemodel.MoviesResult
 import files.MOVIE_OR_SERIES
 import files.PARCELABLE_OBJECT
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
- * Created by MF on 28-11-2017.
+ * Created by RK on 28-11-2017.
  */
 class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>(), HomeActivityContract.HomePresenter {
+    override fun requestCollectionsActivity() {
+        mView?.lauchchActivity(Intent(mView?.getContext(), CollectionsListActivity::class.java))
+    }
 
     override fun requestFavouritesActivity() {
         mView?.lauchchActivity(Intent(mView?.getContext(), FavoritesActivity::class.java))

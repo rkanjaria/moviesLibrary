@@ -5,7 +5,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 /**
- * Created by MF on 05-02-2018.
+ * Created by RK on 05-02-2018.
  */
 data class MovieSeriesDetailsResult(
         @SerializedName("seasons") val seasonsList: List<Season>?

@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.spinner_toolbar.*
 
 
 /**
- * Created by MF on 28-11-2017.
+ * Created by RK on 28-11-2017.
  */
 class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPresenter>(),
         HomeActivityContract.HomeView, MovieRecyclerAdapter.OnMovieSeriesAdapterListener, AdapterView.OnItemSelectedListener,
@@ -135,6 +135,7 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
             R.id.action_sort -> mPresenter.requestMovieOrSeriesTypeDialog()
             R.id.action_search -> mPresenter.requestSearchActivity(movieOrSeries)
             R.id.action_favourites -> mPresenter.requestFavouritesActivity()
+            R.id.action_collections -> mPresenter.requestCollectionsActivity()
         }
         return true
     }

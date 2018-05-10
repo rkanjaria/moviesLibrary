@@ -6,7 +6,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
- * Created by MF on 15-02-2018.
+ * Created by RK on 15-02-2018.
  */
 class EpisodeActivityPresenter : BasePresenterImpl<EpisodeActivityContract.EpisodeView>(), EpisodeActivityContract.EpisodePresenter {
 

@@ -5,7 +5,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 /**
- * Created by MF on 15-03-2018.
+ * Created by RK on 15-03-2018.
  */
 
 data class VideoResult(
