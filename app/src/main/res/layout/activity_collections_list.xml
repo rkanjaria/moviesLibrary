@@ -13,6 +13,10 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/collectionsListRecylerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/size_8dp"
+        android:paddingRight="@dimen/size_8dp"
+        android:paddingTop="@dimen/size_8dp"
+        android:clipToPadding="false" />
 
 </LinearLayout>

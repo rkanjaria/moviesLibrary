@@ -87,7 +87,7 @@ interface RetrofitApiService {
                                    @Query("api_key") apiKey: String = API_KEY): Observable<VideoResult>
 
     @GET("list/{list_id}")
-    fun doGetMovieOrSeriesTrailers(@Path("list_id") listId: Int,
+    fun doGetListApiCall(@Path("list_id") listId: Int,
                                    @Query("api_key") apiKey: String = API_KEY): Observable<CollectionsResult>
 
 }
