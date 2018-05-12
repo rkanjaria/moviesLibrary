@@ -9,10 +9,7 @@ import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.collectionmodels.CollectionsResult
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.INT_ID
-import files.NAME
-import files.calculateNoOfColumns
-import files.loadImage
+import files.*
 import kotlinx.android.synthetic.main.activity_collections.*
 
 class CollectionsActivity : BaseActivity<CollectionsActivityContract.CollectionsView, CollectionsActivityPresenter>(),
@@ -31,7 +28,7 @@ class CollectionsActivity : BaseActivity<CollectionsActivityContract.Collections
     override fun setCollectionsRecyclerview(collectionsResult: CollectionsResult) {
 
         val imagePath = if (collectionsResult.posterPath != null) collectionsResult.posterPath else ""
-        collectionPosterImage.loadImage(imagePath, R.color.darkGrey)
+        collectionPosterImage.loadImage(photoUrl + imagePath, R.color.darkGrey)
 
         if (collectionsResult.moviesList != null && collectionsResult.moviesList.isNotEmpty()) {
             collectionsRecylerview.layoutManager = GridLayoutManager(this, calculateNoOfColumns(this, 110))
