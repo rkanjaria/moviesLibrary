@@ -3,6 +3,7 @@ package files
 import android.animation.ObjectAnimator
 import android.app.Activity
 import android.content.Context
+import android.support.annotation.DrawableRes
 import android.support.annotation.LayoutRes
 import android.support.annotation.Px
 import android.support.v4.content.ContextCompat
@@ -36,7 +37,7 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
     return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
 }
 
-fun ImageView.loadImage(url: String, placeholder: Int = R.color.darkGrey, attachToRoot: Boolean = false, centerCrop: Boolean = false) {
+fun ImageView.loadImage(url: String, placeholder: Int = R.color.darkGrey, centerCrop: Boolean = false) {
 
     if(centerCrop){
         Glide.with(context)
@@ -56,12 +57,22 @@ fun ImageView.loadImage(url: String, placeholder: Int = R.color.darkGrey, attach
     }
 }
 
-fun ImageView.loadBlurImage(url: String, attachToRoot: Boolean = false) {
+fun ImageView.loadBlurImage(url: String) {
     Glide.with(context)
             .load(url)
             .apply(RequestOptions().transform(BlurTransform(context)))
             .apply(RequestOptions.placeholderOf(R.color.primary_dark_material_dark))
             .apply(RequestOptions.errorOf(R.color.primary_dark_material_dark))
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(this)
+}
+
+fun ImageView.loadDrawableImage(@DrawableRes url: Int, placeholder: Int = R.color.darkGrey) {
+    Glide.with(context)
+            .load(url)
+            .apply(RequestOptions().transform(BlurTransform(context)))
+            .apply(RequestOptions.placeholderOf(placeholder))
+            .apply(RequestOptions.errorOf(placeholder))
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
 }

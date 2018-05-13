@@ -17,6 +17,11 @@ class CollectionsListActivity : BaseActivity<CollectionsListActivityContract.Col
             "Disney Classic Collection",
             "Anime Movies")
 
+    val collectionsImages = listOf(R.drawable.marvel,
+            R.drawable.dc,
+            R.drawable.disney,
+            R.drawable.anime)
+
     override var mPresenter = CollectionsListActivityPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +35,6 @@ class CollectionsListActivity : BaseActivity<CollectionsListActivityContract.Col
     override fun setCollectionsRecyclerview() {
         collectionsListRecylerview.layoutManager = LinearLayoutManager(this)
         collectionsListRecylerview.setHasFixedSize(true)
-        collectionsListRecylerview.adapter = CollectionsListAdapter(collectionsIds, collectionsName)
+        collectionsListRecylerview.adapter = CollectionsListAdapter(collectionsIds, collectionsName, collectionsImages)
     }
 }
