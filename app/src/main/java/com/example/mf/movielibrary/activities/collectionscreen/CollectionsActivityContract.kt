@@ -18,5 +18,6 @@ class CollectionsActivityContract {
 
     interface CollectionsPresenter : BasePresenter<CollectionsView> {
         fun callGetListApi(intExtra: Int)
+        fun launchMoviesOrSeriesActivity(movieModel: Movie?)
     }
 }

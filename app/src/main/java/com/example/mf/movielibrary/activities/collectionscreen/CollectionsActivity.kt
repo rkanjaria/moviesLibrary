@@ -22,13 +22,11 @@ class CollectionsActivity : BaseActivity<CollectionsActivityContract.Collections
         setContentView(R.layout.activity_collections)
 
         initToolbar(toolbar as Toolbar, true, intent.getStringExtra(NAME))
+        collectionPosterImage.loadDrawableImage(intent.getIntExtra(BACKDROP_PATH, 0), R.color.darkGrey)
         mPresenter.callGetListApi(intent.getIntExtra(INT_ID, 0))
     }
 
     override fun setCollectionsRecyclerview(collectionsResult: CollectionsResult) {
-
-        val imagePath = if (collectionsResult.posterPath != null) collectionsResult.posterPath else ""
-        collectionPosterImage.loadImage(photoUrl + imagePath, R.color.darkGrey)
 
         if (collectionsResult.moviesList != null && collectionsResult.moviesList.isNotEmpty()) {
             collectionsRecylerview.layoutManager = GridLayoutManager(this, calculateNoOfColumns(this, 110))
@@ -42,6 +40,10 @@ class CollectionsActivity : BaseActivity<CollectionsActivityContract.Collections
 
     override fun hideProgressBar() {
         progressBar.visibility = View.GONE
+    }
+
+    override fun onMovieOrSeriesClicked(movieModel: Movie?) {
+        mPresenter.launchMoviesOrSeriesActivity(movieModel)
     }
 
 }

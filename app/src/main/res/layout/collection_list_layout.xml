@@ -17,7 +17,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_70dp"
+            android:layout_height="@dimen/size_50dp"
             android:background="@drawable/scrim_bottom_light"
             android:layout_alignParentBottom="true"/>
 
@@ -29,7 +29,7 @@
             android:textColor="@color/white"
             android:text="sljfsdfjw"
             android:layout_alignParentBottom="true"
-            android:layout_margin="@dimen/size_16dp"
+            android:layout_margin="@dimen/size_12dp"
             android:textSize="@dimen/text_size_16"
             android:textStyle="bold" />
 

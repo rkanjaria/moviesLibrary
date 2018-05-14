@@ -71,6 +71,7 @@ fun ImageView.loadDrawableImage(@DrawableRes url: Int, placeholder: Int = R.colo
     Glide.with(context)
             .load(url)
             .apply(RequestOptions().transform(BlurTransform(context)))
+            .apply(RequestOptions().centerCrop())
             .apply(RequestOptions.placeholderOf(placeholder))
             .apply(RequestOptions.errorOf(placeholder))
             .transition(DrawableTransitionOptions.withCrossFade())
