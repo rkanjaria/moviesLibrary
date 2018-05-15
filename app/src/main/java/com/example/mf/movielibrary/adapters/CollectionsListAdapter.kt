@@ -1,12 +1,9 @@
 package com.example.mf.movielibrary.adapters
 
 import android.content.Intent
-import android.support.annotation.DrawableRes
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestManager
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.activities.collectionscreen.CollectionsActivity
 import files.*

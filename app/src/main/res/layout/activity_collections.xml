@@ -11,7 +11,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_230dp"
+        android:layout_height="@dimen/size_250dp"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -23,6 +23,8 @@
             app:collapsedTitleTextAppearance="@style/ToolbarTextStyle"
             app:expandedTitleTextAppearance="@style/ToolbarTextStyle"
             app:contentScrim="@color/colorPrimary"
+            app:expandedTitleMarginStart="@dimen/size_26dp"
+            app:expandedTitleMarginBottom="@dimen/size_26dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
@@ -38,8 +40,6 @@
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="bottom"
                 android:background="@drawable/scrim_bottom" />
-
-            <include layout="@layout/play_trailer_layout" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
