@@ -88,6 +88,11 @@ interface RetrofitApiService {
 
     @GET("list/{list_id}")
     fun doGetListApiCall(@Path("list_id") listId: Int,
-                                   @Query("api_key") apiKey: String = API_KEY): Observable<CollectionsResult>
+                         @Query("api_key") apiKey: String = API_KEY): Observable<CollectionsResult>
+
+    @GET("{movie_or_series}/{movie_or_tv_id}/reviews")
+    fun doGetMovieOrSeriesReviews(@Path("movie_or_series") movieOrSeries: String,
+                                  @Path("movie_or_tv_id") movieOrSeriesId: Int,
+                                  @Query("api_key") apiKey: String = API_KEY): Observable<VideoResult>
 
 }

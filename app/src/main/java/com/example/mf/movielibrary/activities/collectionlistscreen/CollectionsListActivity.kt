@@ -11,18 +11,22 @@ import kotlinx.android.synthetic.main.activity_collections_list.*
 class CollectionsListActivity : BaseActivity<CollectionsListActivityContract.CollectionsListView, CollectionsListActivityPresenter>(),
         CollectionsListActivityContract.CollectionsListView {
 
-    val collectionsIds = listOf(1, 3, 338, 3321, 69937)
+    val collectionsIds = listOf(1, 3, 338, 3321, 69937, 15273, 272)
     val collectionsName = listOf("The Marvel Universe",
             "The DC Comics Universe",
             "Disney Classic Collection",
             "Anime Movies",
-            "Batman Animated Movies")
+            "Batman Animated Movies",
+            "James Bond Collection",
+            "Harry Potter Movies")
 
     val collectionsImages = listOf(R.drawable.marvel,
             R.drawable.dc,
-            R.drawable.disney,
-            R.drawable.anime_one,
-            R.drawable.batman)
+            R.drawable.disney_one,
+            R.drawable.anime,
+            R.drawable.batman,
+            R.drawable.bond,
+            R.drawable.harry_potter)
 
     override var mPresenter = CollectionsListActivityPresenter()
 

@@ -50,7 +50,7 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         toolbarSpinner.adapter = spinnerAdapter
         toolbarSpinner.onItemSelectedListener = this
 
-        gridLayoutManager = GridLayoutManager(this, calculateNoOfColumns(this, 110))
+        gridLayoutManager = GridLayoutManager(this, 3)
         movieRecyclerView.layoutManager = gridLayoutManager
 
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {

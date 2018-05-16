@@ -19,7 +19,6 @@ object MovieSeriesActivityContract {
         fun showPlayTrailerLayout(videoTrailersList: List<VideoTrailers>)
         fun highlightFavoriteIcon()
         fun unhighlightFavoriteIcon()
-
     }
 
     interface MovieSeriesPresenter : BasePresenter<MovieSeriesView>{
@@ -33,5 +32,6 @@ object MovieSeriesActivityContract {
         fun callGetMoviesOrSeriesTrailersApi(moviesOrSeries: String, movieOrSeriesId: Int)
         fun launchTrailerActivity(videoTrailer: VideoTrailers?)
         fun addOrRemoveFavourites(movieModel: Movie, movieOrSeries: String)
+        fun callGetMoviesOrSeriesReviewsApi(moviesOrSeries: String, movieOrSeriesId: Int)
     }
 }

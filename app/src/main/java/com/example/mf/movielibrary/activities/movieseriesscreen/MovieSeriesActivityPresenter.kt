@@ -23,6 +23,7 @@ import io.reactivex.schedulers.Schedulers
 class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContract.MovieSeriesView>(),
         MovieSeriesActivityContract.MovieSeriesPresenter {
 
+
     override fun addOrRemoveFavourites(movieModel: Movie, movieOrSeries: String) {
 
         if (mView?.getContext()?.database?.doesAlreadyExists(movieModel.id)!!) {
@@ -38,113 +39,132 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
         }
     }
 
-        override fun launchTrailerActivity(videoTrailer: VideoTrailers?) {
-            val trailerIntent = Intent(mView?.getContext(), TrailerActivity::class.java)
-            trailerIntent.putExtra(PARCELABLE_OBJECT, videoTrailer)
-            mView?.getContext()?.startActivity(trailerIntent)
-        }
+    override fun launchTrailerActivity(videoTrailer: VideoTrailers?) {
+        val trailerIntent = Intent(mView?.getContext(), TrailerActivity::class.java)
+        trailerIntent.putExtra(PARCELABLE_OBJECT, videoTrailer)
+        mView?.getContext()?.startActivity(trailerIntent)
+    }
 
-        override fun launchSeasonActivity(season: Season, movieOrSeriesId: Int) {
-            val seasonIntent = Intent(mView?.getContext(), SeasonActivity::class.java)
-            seasonIntent.putExtra(PARCELABLE_OBJECT, season)
-            seasonIntent.putExtra(INT_ID, movieOrSeriesId)
-            mView?.getContext()?.startActivity(seasonIntent)
-        }
+    override fun launchSeasonActivity(season: Season, movieOrSeriesId: Int) {
+        val seasonIntent = Intent(mView?.getContext(), SeasonActivity::class.java)
+        seasonIntent.putExtra(PARCELABLE_OBJECT, season)
+        seasonIntent.putExtra(INT_ID, movieOrSeriesId)
+        mView?.getContext()?.startActivity(seasonIntent)
+    }
 
-        override fun launchMovieSeriesActivity(movieModel: Movie?, movieOrSeries: String?) {
-            val movieSeriesIntent = Intent(mView?.getContext(), MovieSeriesActivity::class.java)
-            movieSeriesIntent.putExtra(PARCELABLE_OBJECT, movieModel)
-            movieSeriesIntent.putExtra(MOVIE_OR_SERIES, movieOrSeries)
-            mView?.getContext()?.startActivity(movieSeriesIntent)
-        }
+    override fun launchMovieSeriesActivity(movieModel: Movie?, movieOrSeries: String?) {
+        val movieSeriesIntent = Intent(mView?.getContext(), MovieSeriesActivity::class.java)
+        movieSeriesIntent.putExtra(PARCELABLE_OBJECT, movieModel)
+        movieSeriesIntent.putExtra(MOVIE_OR_SERIES, movieOrSeries)
+        mView?.getContext()?.startActivity(movieSeriesIntent)
+    }
 
-        override fun callGetSimilarMovieOrSeriesApi(moviesOrSeries: String?, movieOrSeriesId: Int) {
-            if (moviesOrSeries != null) {
-                RetrofitHelper.create().doGetSimilarMoviesOrSeriesApiCall(moviesOrSeries, movieOrSeriesId)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe({ movieResult: MoviesResult? ->
-
-                            if (movieResult?.moviesList != null && movieResult.moviesList.isNotEmpty()) {
-                                mView?.setSimilarMoviesRecyclerview(movieResult.moviesList, movieResult.page)
-                            }
-                        }, { error ->
-                            error.printStackTrace()
-                            mView?.showMessage(error.localizedMessage)
-                        })
-            }
-        }
-
-
-        override fun launchActorActivity(castModel: Cast, movieOrSeries: String?) {
-            val actorIntent = Intent(mView?.getContext(), ActorsActivity::class.java)
-            actorIntent.putExtra(INT_ID, castModel.id)
-            actorIntent.putExtra(NAME, castModel.name)
-            actorIntent.putExtra(MOVIE_OR_SERIES, movieOrSeries)
-            mView?.lauchchActivity(actorIntent)
-        }
-
-        override fun getMovieGenres(genreIds: List<Int>?): String {
-            val genre = StringBuilder()
-            genreIds?.forEach {
-                genre.append(mView?.getContext()?.database?.getGenreBasedOnGenreId(it) + ", ")
-            }
-            if (genre.isEmpty()) return "" else return genre.toString().substring(0, genre.length - 2)
-        }
-
-        override fun callgetMovieOrSeriesCastApi(movieOrSeries: String?, movieId: Int) {
-
-            if (movieOrSeries != null) {
-                RetrofitHelper.create().doGetMovieOrSeriesCastApiCall(movieOrSeries, movieId)
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe({ castResult: CastResult? ->
-
-                            if (castResult?.castList != null && castResult.castList.isNotEmpty()) {
-                                mView?.setCastRecyclerview(castResult.castList.sortedBy { it.order })
-                            }
-                        }, { error ->
-                            error.printStackTrace()
-                            mView?.showMessage(error.localizedMessage)
-                        })
-            }
-
-        }
-
-        override fun callGetTvDetailsApi(movieOrSeriesId: Int) {
-            RetrofitHelper.create().doGetTvSeasonsApiCall(movieOrSeriesId)
+    override fun callGetSimilarMovieOrSeriesApi(moviesOrSeries: String?, movieOrSeriesId: Int) {
+        if (moviesOrSeries != null) {
+            RetrofitHelper.create().doGetSimilarMoviesOrSeriesApiCall(moviesOrSeries, movieOrSeriesId)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    .subscribe({ movieSeriesDetailsResult ->
+                    .subscribe({ movieResult: MoviesResult? ->
 
-                        if (movieSeriesDetailsResult.seasonsList != null && movieSeriesDetailsResult.seasonsList.isNotEmpty()) {
-                            mView?.setSeasonRecyclerview(movieSeriesDetailsResult.seasonsList
-                                    .filter {
-                                        it.airDate != null && it.episodeCount != 0 && it.posterPath != null && it.seasonNumber != 0
-                                    }.sortedBy { it.seasonNumber })
+                        if (movieResult?.moviesList != null && movieResult.moviesList.isNotEmpty()) {
+                            mView?.setSimilarMoviesRecyclerview(movieResult.moviesList, movieResult.page)
                         }
-                    }, { error ->
-                        error.printStackTrace()
-                        mView?.showMessage(error.localizedMessage)
-                    })
-        }
-
-        override fun callGetMoviesOrSeriesTrailersApi(moviesOrSeries: String, movieOrSeriesId: Int) {
-            RetrofitHelper.create().doGetMovieOrSeriesTrailers(moviesOrSeries, movieOrSeriesId)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe({ videoResults ->
-
-                        if (videoResults.results != null && videoResults.results.isNotEmpty()) {
-
-                            mView?.showPlayTrailerLayout(videoResults.results.filter {
-                                it.site.equals("YouTube") && it.type.equals("Trailer")
-                            })
-                        }
-
                     }, { error ->
                         error.printStackTrace()
                         mView?.showMessage(error.localizedMessage)
                     })
         }
     }
+
+
+    override fun launchActorActivity(castModel: Cast, movieOrSeries: String?) {
+        val actorIntent = Intent(mView?.getContext(), ActorsActivity::class.java)
+        actorIntent.putExtra(INT_ID, castModel.id)
+        actorIntent.putExtra(NAME, castModel.name)
+        actorIntent.putExtra(MOVIE_OR_SERIES, movieOrSeries)
+        mView?.lauchchActivity(actorIntent)
+    }
+
+    override fun getMovieGenres(genreIds: List<Int>?): String {
+        val genre = StringBuilder()
+        genreIds?.forEach {
+            genre.append(mView?.getContext()?.database?.getGenreBasedOnGenreId(it) + ", ")
+        }
+        if (genre.isEmpty()) return "" else return genre.toString().substring(0, genre.length - 2)
+    }
+
+    override fun callgetMovieOrSeriesCastApi(movieOrSeries: String?, movieId: Int) {
+
+        if (movieOrSeries != null) {
+            RetrofitHelper.create().doGetMovieOrSeriesCastApiCall(movieOrSeries, movieId)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({ castResult: CastResult? ->
+
+                        if (castResult?.castList != null && castResult.castList.isNotEmpty()) {
+                            mView?.setCastRecyclerview(castResult.castList.sortedBy { it.order })
+                        }
+                    }, { error ->
+                        error.printStackTrace()
+                        mView?.showMessage(error.localizedMessage)
+                    })
+        }
+
+    }
+
+    override fun callGetTvDetailsApi(movieOrSeriesId: Int) {
+        RetrofitHelper.create().doGetTvSeasonsApiCall(movieOrSeriesId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ movieSeriesDetailsResult ->
+
+                    if (movieSeriesDetailsResult.seasonsList != null && movieSeriesDetailsResult.seasonsList.isNotEmpty()) {
+                        mView?.setSeasonRecyclerview(movieSeriesDetailsResult.seasonsList
+                                .filter {
+                                    it.airDate != null && it.episodeCount != 0 && it.posterPath != null && it.seasonNumber != 0
+                                }.sortedBy { it.seasonNumber })
+                    }
+                }, { error ->
+                    error.printStackTrace()
+                    mView?.showMessage(error.localizedMessage)
+                })
+    }
+
+    override fun callGetMoviesOrSeriesTrailersApi(moviesOrSeries: String, movieOrSeriesId: Int) {
+        RetrofitHelper.create().doGetMovieOrSeriesTrailers(moviesOrSeries, movieOrSeriesId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ videoResults ->
+
+                    if (videoResults.results != null && videoResults.results.isNotEmpty()) {
+
+                        mView?.showPlayTrailerLayout(videoResults.results.filter {
+                            it.site.equals("YouTube") && it.type.equals("Trailer")
+                        })
+                    }
+
+                }, { error ->
+                    error.printStackTrace()
+                    mView?.showMessage(error.localizedMessage)
+                })
+    }
+
+    override fun callGetMoviesOrSeriesReviewsApi(moviesOrSeries: String, movieOrSeriesId: Int) {
+        RetrofitHelper.create().doGetMovieOrSeriesReviews(moviesOrSeries, movieOrSeriesId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ videoResults ->
+
+                    if (videoResults.results != null && videoResults.results.isNotEmpty()) {
+
+                        mView?.showPlayTrailerLayout(videoResults.results.filter {
+                            it.site.equals("YouTube") && it.type.equals("Trailer")
+                        })
+                    }
+
+                }, { error ->
+                    error.printStackTrace()
+                    mView?.showMessage(error.localizedMessage)
+                })
+    }
+}

@@ -65,6 +65,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         mPresenter.callgetMovieOrSeriesCastApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
         mPresenter.callGetSimilarMovieOrSeriesApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
         mPresenter.callGetMoviesOrSeriesTrailersApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
+        mPresenter.callGetMoviesOrSeriesReviewsApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
 
         if (intent.getStringExtra(MOVIE_OR_SERIES) == TV_SHOWS) {
             mPresenter.callGetTvDetailsApi(movieOrSeriesId)
