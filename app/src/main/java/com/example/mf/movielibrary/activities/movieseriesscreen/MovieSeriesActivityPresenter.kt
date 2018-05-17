@@ -153,13 +153,11 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
         RetrofitHelper.create().doGetMovieOrSeriesReviews(moviesOrSeries, movieOrSeriesId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({ videoResults ->
+                .subscribe({ reviewResults ->
 
-                    if (videoResults.results != null && videoResults.results.isNotEmpty()) {
+                    if (reviewResults.reviewList != null && reviewResults.reviewList.isNotEmpty()) {
 
-                        mView?.showPlayTrailerLayout(videoResults.results.filter {
-                            it.site.equals("YouTube") && it.type.equals("Trailer")
-                        })
+                        mView?.setReviewRecyclerview(reviewResults.reviewList)
                     }
 
                 }, { error ->

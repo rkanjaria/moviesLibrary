@@ -20,11 +20,13 @@ import android.widget.ImageView
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.CastRecyclerAdapter
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
+import com.example.mf.movielibrary.adapters.ReviewAdapter
 import com.example.mf.movielibrary.adapters.SeasonRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.castmodel.Cast
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
+import com.example.mf.movielibrary.models.reviewmodels.UserReview
 import com.example.mf.movielibrary.models.videomodels.VideoTrailers
 import files.*
 import kotlinx.android.synthetic.main.activity_movie_series.*
@@ -137,6 +139,14 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         seasonsRecyclerview.adapter = SeasonRecyclerAdapter(seasonsList, this)
         seasonsRecyclerview.visibility = View.VISIBLE
         seasonsTitle.visibility = View.VISIBLE
+    }
+
+    override fun setReviewRecyclerview(reviewList: List<UserReview>) {
+        reviewsRecyclerview.setHasFixedSize(true)
+        reviewsRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        reviewsRecyclerview.adapter = ReviewAdapter(reviewList, null)
+        reviewsRecyclerview.visibility = View.VISIBLE
+        reviewsTitle.visibility = View.VISIBLE
     }
 
     override fun onSeasonClicked(season: Season) {

@@ -5,6 +5,7 @@ import com.example.mf.movielibrary.base.BaseView
 import com.example.mf.movielibrary.models.castmodel.Cast
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
+import com.example.mf.movielibrary.models.reviewmodels.UserReview
 import com.example.mf.movielibrary.models.videomodels.VideoTrailers
 
 /**
@@ -12,18 +13,19 @@ import com.example.mf.movielibrary.models.videomodels.VideoTrailers
  */
 object MovieSeriesActivityContract {
 
-    interface MovieSeriesView : BaseView{
+    interface MovieSeriesView : BaseView {
         fun setCastRecyclerview(castList: List<Cast>)
         fun setSimilarMoviesRecyclerview(moviesList: List<Movie?>, totalPages: Int)
         fun setSeasonRecyclerview(seasonsList: List<Season>)
         fun showPlayTrailerLayout(videoTrailersList: List<VideoTrailers>)
         fun highlightFavoriteIcon()
         fun unhighlightFavoriteIcon()
+        fun setReviewRecyclerview(reviewList: List<UserReview>)
     }
 
-    interface MovieSeriesPresenter : BasePresenter<MovieSeriesView>{
+    interface MovieSeriesPresenter : BasePresenter<MovieSeriesView> {
         fun callgetMovieOrSeriesCastApi(movieOrSeries: String?, movieId: Int)
-        fun getMovieGenres(genreIds: List<Int>?) : String
+        fun getMovieGenres(genreIds: List<Int>?): String
         fun launchActorActivity(castModel: Cast, movieOrSeries: String?)
         fun callGetSimilarMovieOrSeriesApi(moviesOrSeries: String?, movieOrSeriesId: Int)
         fun launchMovieSeriesActivity(movieModel: Movie?, movieOrSeries: String?)

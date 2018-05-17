@@ -8,6 +8,7 @@ import com.example.mf.movielibrary.models.episodemodels.EpisodeImageResult
 import com.example.mf.movielibrary.models.genremodel.GenreResult
 import com.example.mf.movielibrary.models.moviemodel.MoviesResult
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.MovieSeriesDetailsResult
+import com.example.mf.movielibrary.models.reviewmodels.ReviewResult
 import com.example.mf.movielibrary.models.seasonmodels.SeasonResult
 import com.example.mf.movielibrary.models.videomodels.VideoResult
 import files.API_KEY
@@ -93,6 +94,6 @@ interface RetrofitApiService {
     @GET("{movie_or_series}/{movie_or_tv_id}/reviews")
     fun doGetMovieOrSeriesReviews(@Path("movie_or_series") movieOrSeries: String,
                                   @Path("movie_or_tv_id") movieOrSeriesId: Int,
-                                  @Query("api_key") apiKey: String = API_KEY): Observable<VideoResult>
+                                  @Query("api_key") apiKey: String = API_KEY): Observable<ReviewResult>
 
 }
