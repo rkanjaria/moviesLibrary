@@ -39,7 +39,7 @@ class SeasonRecyclerAdapter(val seasonList: List<Season>, seasonAdapterListener:
             val widthInDp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100f, view.context.displayMetrics)
             view.layoutParams.width = widthInDp.toInt()
             view.moviePoster.loadImage(photoUrl + seasonModel.posterPath, R.color.darkGrey)
-            view.movieBottomLayout.setBackgroundColor(ContextCompat.getColor(view.context, R.color.darkGrey))
+            //view.movieBottomLayout.setBackgroundColor(ContextCompat.getColor(view.context, R.color.darkGrey))
 
             view.movieName.text = "Season ${seasonModel.seasonNumber}"
             view.movieYear.text = getYearFromDate(seasonModel.airDate)
