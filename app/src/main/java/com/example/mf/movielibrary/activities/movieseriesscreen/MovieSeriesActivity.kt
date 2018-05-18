@@ -143,7 +143,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
 
     override fun setReviewRecyclerview(reviewList: List<UserReview>) {
         reviewsRecyclerview.setHasFixedSize(true)
-        reviewsRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        reviewsRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         reviewsRecyclerview.adapter = ReviewAdapter(reviewList, null)
         reviewsRecyclerview.visibility = View.VISIBLE
         reviewsTitle.visibility = View.VISIBLE
