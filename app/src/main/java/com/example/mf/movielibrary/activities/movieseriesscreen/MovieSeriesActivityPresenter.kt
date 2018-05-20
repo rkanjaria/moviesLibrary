@@ -2,6 +2,7 @@ package com.example.mf.movielibrary.activities.movieseriesscreen
 
 import android.content.Intent
 import com.example.mf.movielibrary.activities.actorsscreen.ActorsActivity
+import com.example.mf.movielibrary.activities.reviewscreen.ReviewActivity
 import com.example.mf.movielibrary.activities.seasonscreen.SeasonActivity
 import com.example.mf.movielibrary.activities.trailerscreen.TrailerActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
@@ -12,16 +13,24 @@ import com.example.mf.movielibrary.models.moviemodel.Movie
 import com.example.mf.movielibrary.models.moviemodel.MoviesResult
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.MovieSeriesDetailsResult
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
+import com.example.mf.movielibrary.models.reviewmodels.UserReview
 import com.example.mf.movielibrary.models.videomodels.VideoTrailers
 import files.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.ArrayList
 
 /**
  * Created by RK on 04-01-2018.
  */
 class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContract.MovieSeriesView>(),
         MovieSeriesActivityContract.MovieSeriesPresenter {
+
+    override fun launchReviewActivity(reviewList: List<UserReview>) {
+        val reviewIntent = Intent(mView?.getContext(), ReviewActivity::class.java)
+        reviewIntent.putParcelableArrayListExtra(PARCELABLE_OBJECT, ArrayList(reviewList))
+        mView?.getContext()?.startActivity(reviewIntent)
+    }
 
 
     override fun addOrRemoveFavourites(movieModel: Movie, movieOrSeries: String) {
@@ -156,7 +165,6 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
                 .subscribe({ reviewResults ->
 
                     if (reviewResults.reviewList != null && reviewResults.reviewList.isNotEmpty()) {
-
                         mView?.setReviewRecyclerview(reviewResults.reviewList)
                     }
 

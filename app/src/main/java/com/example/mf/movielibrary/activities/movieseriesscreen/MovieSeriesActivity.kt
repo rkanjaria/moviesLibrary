@@ -2,20 +2,12 @@ package com.example.mf.movielibrary.activities.movieseriesscreen
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.content.ContextCompat
-import android.support.v4.content.IntentCompat
-import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
-import android.view.PointerIcon
 import android.view.View
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
-import android.view.animation.ScaleAnimation
 import android.widget.ImageView
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.CastRecyclerAdapter
@@ -62,6 +54,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         movieYear.text = getDateWithCustomFormat(movieModel.releaseDate)
         movieRating.text = if (movieModel.voteAverage != 0f) movieModel.voteAverage.toString() else "No rating"
         movieOverview.text = movieModel.overview
+        //movieOverview.setOnClickListener({movieOverview.toggle()})
         movieGenre.text = mPresenter.getMovieGenres(movieModel.genreIds)
 
         mPresenter.callgetMovieOrSeriesCastApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
@@ -108,7 +101,6 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
     }
 
     override fun setCastRecyclerview(castList: List<Cast>) {
-
         castRecyclerview.setHasFixedSize(true)
         castRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         castRecyclerview.adapter = CastRecyclerAdapter(castList, this)
@@ -121,7 +113,6 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
     }
 
     override fun setSimilarMoviesRecyclerview(moviesList: List<Movie?>, totalPages: Int) {
-
         similarMoviesRecyclerview.setHasFixedSize(true)
         similarMoviesRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         similarMoviesRecyclerview.adapter = MovieRecyclerAdapter(moviesList, this, true)
@@ -144,9 +135,11 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
     override fun setReviewRecyclerview(reviewList: List<UserReview>) {
         reviewsRecyclerview.setHasFixedSize(true)
         reviewsRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        reviewsRecyclerview.adapter = ReviewAdapter(reviewList, null)
+        reviewsRecyclerview.adapter = ReviewAdapter(reviewList, true)
         reviewsRecyclerview.visibility = View.VISIBLE
         reviewsTitle.visibility = View.VISIBLE
+        readAllReviews.visibility = View.VISIBLE
+        readAllReviews.setOnClickListener { mPresenter.launchReviewActivity(reviewList) }
     }
 
     override fun onSeasonClicked(season: Season) {

@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/reviewerImage"
-        android:layout_width="54dp"
-        android:layout_height="55dp"
+        android:layout_width="@dimen/size_50dp"
+        android:layout_height="@dimen/size_50dp"
         android:layout_marginStart="@dimen/size_16dp"
         android:layout_marginTop="@dimen/size_16dp"
         app:layout_constraintStart_toStartOf="parent"

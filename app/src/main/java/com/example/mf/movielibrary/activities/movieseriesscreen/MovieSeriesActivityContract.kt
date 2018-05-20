@@ -35,5 +35,6 @@ object MovieSeriesActivityContract {
         fun launchTrailerActivity(videoTrailer: VideoTrailers?)
         fun addOrRemoveFavourites(movieModel: Movie, movieOrSeries: String)
         fun callGetMoviesOrSeriesReviewsApi(moviesOrSeries: String, movieOrSeriesId: Int)
+        fun launchReviewActivity(reviewList: List<UserReview>)
     }
 }

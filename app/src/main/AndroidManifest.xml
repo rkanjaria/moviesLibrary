@@ -31,7 +31,8 @@
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
         <activity android:name=".activities.favouritescreen.FavoritesActivity" />
         <activity android:name=".activities.collectionlistscreen.CollectionsListActivity" />
-        <activity android:name=".activities.collectionscreen.CollectionsActivity"></activity>
+        <activity android:name=".activities.collectionscreen.CollectionsActivity" />
+        <activity android:name=".activities.reviewscreen.ReviewActivity"></activity>
     </application>
 
 </manifest>
