@@ -62,7 +62,6 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         movieSeriesSearchView.setOnQueryTextListener(this)
     }
 
-
     override fun setSearchRecyclerView(moviesList: List<Movie?>?, totalResult: Int) {
 
         totalResults = totalResult

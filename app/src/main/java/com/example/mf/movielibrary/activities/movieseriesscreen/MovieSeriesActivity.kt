@@ -138,8 +138,11 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         reviewsRecyclerview.adapter = ReviewAdapter(reviewList, true)
         reviewsRecyclerview.visibility = View.VISIBLE
         reviewsTitle.visibility = View.VISIBLE
-        readAllReviews.visibility = View.VISIBLE
-        readAllReviews.setOnClickListener { mPresenter.launchReviewActivity(reviewList) }
+
+        if (reviewList.size > 1) {
+            readAllReviews.visibility = View.VISIBLE
+            readAllReviews.setOnClickListener { mPresenter.launchReviewActivity(reviewList) }
+        }
     }
 
     override fun onSeasonClicked(season: Season) {

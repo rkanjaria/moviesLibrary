@@ -160,6 +160,7 @@
                 app:etv_collapsedLines="3"
                 app:etv_animationDuration="200" />-->
 
+
             <TextView
                 android:id="@+id/movieOverview"
                 android:layout_width="wrap_content"
