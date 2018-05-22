@@ -20,7 +20,7 @@ class SearchActivityPresenter : BasePresenterImpl<SearchActivityContract.SearchB
     override fun getGenreFromDbAndCreateBottomSheet(movieOrSeries: String) {
         val genreList = mView?.getContext()?.database?.getAllGenres(movieOrSeries)
         if (genreList != null && genreList.isNotEmpty()) {
-            mView?.createTagsLayout(genreList)
+            mView?.setGenreRecylerview(genreList)
         }
     }
 

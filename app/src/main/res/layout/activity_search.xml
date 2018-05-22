@@ -48,10 +48,16 @@
         </android.support.v7.widget.Toolbar>
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/genreRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/toolbar" />
+
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/searchRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/toolbar"
+            android:layout_below="@+id/genreRecyclerView"
             android:clipToPadding="false"
             android:paddingBottom="@dimen/size_4dp"
             android:paddingStart="@dimen/size_8dp"

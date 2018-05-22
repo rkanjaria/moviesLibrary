@@ -16,7 +16,7 @@ class SearchActivityContract {
         fun showProgressBar()
         fun hideProgressBar()
         fun showSearchTypeDialog()
-        fun createTagsLayout(tagsList: List<Genre>)
+        fun setGenreRecylerview(genreList: List<Genre>)
     }
 
     interface SearchPresenter : BasePresenter<SearchBaseView> {
