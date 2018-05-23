@@ -15,19 +15,17 @@ import com.example.mf.movielibrary.adapters.GenreAdapter
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.classes.KeyboardUtils
-import com.example.mf.movielibrary.fragments.GenreBottomSheetFragment
 import com.example.mf.movielibrary.models.genremodel.Genre
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import files.MOVIE
 import files.MOVIE_OR_SERIES
 import files.TV_SHOWS
-import files.calculateNoOfColumns
 import kotlinx.android.synthetic.main.activity_search.*
 
 
 class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, SearchActivityPresenter>(),
         SearchActivityContract.SearchBaseView, MovieRecyclerAdapter.OnMovieSeriesAdapterListener,
-        SearchView.OnQueryTextListener, DialogInterface.OnClickListener, GenreBottomSheetFragment.GenreBottomSheetListener {
+        SearchView.OnQueryTextListener, DialogInterface.OnClickListener, GenreAdapter.GenreAdapterListener {
 
     private val mSearchList = mutableListOf<Movie?>()
     private lateinit var gridLayoutManager: GridLayoutManager
@@ -37,7 +35,8 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     private var movieOrSeries = MOVIE
     private var searchQuery: String? = null
     private var selectedItemPosition = 0
-    private val genreBottomSheet = GenreBottomSheetFragment()
+    private var isGenre = false
+    private var currentGenreId = -1
 
     override var mPresenter = SearchActivityPresenter()
 
@@ -47,8 +46,9 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
         initToolbar(toolbar, false, "")
         movieOrSeries = intent.getStringExtra(MOVIE_OR_SERIES)
+        changeSearchPreference(movieOrSeries)
 
-        gridLayoutManager = GridLayoutManager(this, calculateNoOfColumns(this, 110))
+        gridLayoutManager = GridLayoutManager(this, 3)
         searchRecyclerView.layoutManager = gridLayoutManager
 
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -92,7 +92,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     override fun setGenreRecylerview(genreList: List<Genre>) {
         genreRecyclerView.setHasFixedSize(true)
         genreRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        genreRecyclerView.adapter = GenreAdapter(genreList)
+        genreRecyclerView.adapter = GenreAdapter(genreList, this)
     }
 
     override fun showProgressBar() {
@@ -115,11 +115,17 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
             mSearchList.add(null)
             movieAdapter.notifyItemInserted(mSearchList.size - 1)
-            mPresenter.callSearchMovieOrSeriesByName(movieOrSeries, searchQuery, queryPage)
+
+            if (isGenre) {
+                mPresenter.callSearchByGenreApi(movieOrSeries, queryPage, currentGenreId)
+            } else {
+                mPresenter.callSearchMovieOrSeriesByName(movieOrSeries, searchQuery, queryPage)
+            }
         }
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
+        movieSeriesSearchView.clearFocus()
         searchQuery = query
         clearListAndMakeApiCallAgain()
         return true
@@ -128,7 +134,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     override fun onQueryTextChange(newText: String?) = false
 
     private fun clearListAndMakeApiCallAgain() {
-        KeyboardUtils.hideSoftInputKeyboard(this)
+        isGenre = false
         mSearchList.clear()
         searchRecyclerView.removeAllViews()
         queryPage = 1
@@ -140,15 +146,14 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.sort_menu, menu)
+        menuInflater.inflate(R.menu.search_menu, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
         when (item?.itemId) {
-            R.id.action_sort -> {
-                genreBottomSheet.show(supportFragmentManager, "GenreBottomSheet")
-            }
+            R.id.action_sort -> mPresenter.requestSearchTypeDialog()
         }
         return true
     }
@@ -160,19 +165,18 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     }
 
     override fun onClick(dialogInterface: DialogInterface?, item: Int) {
-       /* when (item) {
-            0 -> changeSearchPreference(TV_SHOWS)
+        when (item) {
+            0 -> changeSearchPreference(MOVIE)
             1 -> changeSearchPreference(TV_SHOWS)
             2 -> {
-                mPresenter.getGenreFromDbAndCreateBottomSheet(movieOrSeries)
-                //bottomSheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
+                mPresenter.getGenreFromDb(movieOrSeries)
             }
         }
-        dialogInterface?.dismiss()*/
+        dialogInterface?.dismiss()
     }
 
-    override fun onMovieOrSeriesClicked(moviesOrSeries: String) {
-        when (moviesOrSeries) {
+    private fun changeSearchPreference(preferenceString: String) {
+        when (preferenceString) {
             MOVIE -> {
                 movieSeriesSearchView.queryHint = getString(R.string.search_movies)
                 movieOrSeries = MOVIE
@@ -184,10 +188,15 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
                 selectedItemPosition = 1
             }
         }
-        genreBottomSheet.createTagsLayout(moviesOrSeries)
+        mPresenter.getGenreFromDb(preferenceString)
     }
 
-    override fun onGenreTagsClicked(tag: String) {
-
+    override fun onGenreSelected(genreId: Int) {
+        currentGenreId = genreId
+        isGenre = true
+        mSearchList.clear()
+        searchRecyclerView.removeAllViews()
+        queryPage = 1
+        mPresenter.callSearchByGenreApi(movieOrSeries, queryPage, currentGenreId)
     }
 }

@@ -29,7 +29,7 @@ class CollectionsActivity : BaseActivity<CollectionsActivityContract.Collections
     override fun setCollectionsRecyclerview(collectionsResult: CollectionsResult) {
 
         if (collectionsResult.moviesList != null && collectionsResult.moviesList.isNotEmpty()) {
-            collectionsRecylerview.layoutManager = GridLayoutManager(this, calculateNoOfColumns(this, 110))
+            collectionsRecylerview.layoutManager = GridLayoutManager(this, 3)
             collectionsRecylerview.adapter = MovieRecyclerAdapter(collectionsResult.moviesList, this)
         }
     }

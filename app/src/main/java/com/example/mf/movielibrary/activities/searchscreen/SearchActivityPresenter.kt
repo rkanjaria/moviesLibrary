@@ -17,13 +17,33 @@ import io.reactivex.schedulers.Schedulers
 class SearchActivityPresenter : BasePresenterImpl<SearchActivityContract.SearchBaseView>(),
         SearchActivityContract.SearchPresenter {
 
-    override fun getGenreFromDbAndCreateBottomSheet(movieOrSeries: String) {
+    override fun callSearchByGenreApi(movieOrSeries: String, page: Int, genreId: Int) {
+
+        if (page == 1) {
+            mView?.showProgressBar()
+        }
+
+        RetrofitHelper.create().doSearchMovieOrSeriesByGenreApiCall(movieOrSeries, page = page, genres = genreId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ movieResult ->
+
+                    if (page == 1) {
+                        mView?.hideProgressBar()
+                    }
+                    mView?.setSearchRecyclerView(movieResult?.moviesList, movieResult?.totalResults!!)
+                }, { error ->
+                    error.printStackTrace()
+                    mView?.showMessage(error.localizedMessage)
+                })
+    }
+
+    override fun getGenreFromDb(movieOrSeries: String) {
         val genreList = mView?.getContext()?.database?.getAllGenres(movieOrSeries)
         if (genreList != null && genreList.isNotEmpty()) {
             mView?.setGenreRecylerview(genreList)
         }
     }
-
 
     override fun launchMovieSeriesActivity(movieModel: Movie?, movieOrSeries: String) {
         val movieSeriesIntent = Intent(mView?.getContext(), MovieSeriesActivity::class.java)

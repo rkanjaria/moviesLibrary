@@ -96,4 +96,13 @@ interface RetrofitApiService {
                                   @Path("movie_or_tv_id") movieOrSeriesId: Int,
                                   @Query("api_key") apiKey: String = API_KEY): Observable<ReviewResult>
 
+
+
+    @GET("discover/{movie_or_series}")
+    fun doSearchMovieOrSeriesByGenreApiCall(@Path("movie_or_series") movieOrSeries: String,
+                                            @Query("sort_by") popularity : String = "popularity.desc",
+                                            @Query("page") page: Int,
+                                            @Query("with_genres") genres: Int,
+                                            @Query("api_key") apiKey: String = API_KEY): Observable<MoviesResult>
+
 }

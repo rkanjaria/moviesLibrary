@@ -23,6 +23,7 @@ class SearchActivityContract {
         fun callSearchMovieOrSeriesByName(movieOrSeries: String, query: String?, queryPage: Int)
         fun launchMovieSeriesActivity(movieModel: Movie?, movieOrSeries: String)
         fun requestSearchTypeDialog()
-        fun getGenreFromDbAndCreateBottomSheet(movieOrSeries: String)
+        fun getGenreFromDb(movieOrSeries: String)
+        fun callSearchByGenreApi(movieOrSeries: String, page: Int, genreId: Int)
     }
 }

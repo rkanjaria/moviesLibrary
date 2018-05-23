@@ -51,7 +51,10 @@
             android:id="@+id/genreRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar" />
+            android:layout_below="@+id/toolbar"
+            android:paddingStart="@dimen/size_8dp"
+            android:paddingBottom="@dimen/size_12dp"
+            android:clipToPadding="false"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/searchRecyclerView"
@@ -60,8 +63,7 @@
             android:layout_below="@+id/genreRecyclerView"
             android:clipToPadding="false"
             android:paddingBottom="@dimen/size_4dp"
-            android:paddingStart="@dimen/size_8dp"
-            android:paddingTop="@dimen/size_4dp" />
+            android:paddingStart="@dimen/size_8dp" />
 
         <ProgressBar
             android:id="@+id/progressBar"

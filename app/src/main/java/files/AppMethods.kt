@@ -60,10 +60,10 @@ fun getGender(genderId: Int): String {
     return ""
 }
 
-fun calculateNoOfColumns(context: Context, width: Int): Int {
+/*fun calculateNoOfColumns(context: Context, width: Int): Int {
     val displayMetrices = context.displayMetrics
     val dpWidth = displayMetrices.widthPixels / displayMetrices.density
     return (dpWidth / width).toInt()
-}
+}*/
 
 
