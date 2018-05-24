@@ -192,6 +192,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     }
 
     override fun onGenreSelected(genreId: Int) {
+        movieSeriesSearchView.clearFocus()
         currentGenreId = genreId
         isGenre = true
         mSearchList.clear()

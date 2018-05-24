@@ -23,10 +23,10 @@ class CastRecyclerAdapter(val castList : List<Cast>, onCastAdapterListener: OnCa
     }
 
     override fun getItemCount() : Int {
-        if(castList.size < 6){
+        if(castList.size < 8){
             return castList.size
         }else{
-            return 6
+            return 8
         }
     }
 

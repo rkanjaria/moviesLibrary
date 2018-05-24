@@ -157,13 +157,11 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
     override fun highlightFavoriteIcon() {
         favouriteIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite))
         animateHeart(favouriteIcon)
-        showMessage("Added to favourites")
     }
 
     override fun unhighlightFavoriteIcon() {
         animateHeart(favouriteIcon)
         favouriteIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite_border))
-        showMessage("Removed from favourites")
     }
 
     fun animateHeart(image: ImageView) {
