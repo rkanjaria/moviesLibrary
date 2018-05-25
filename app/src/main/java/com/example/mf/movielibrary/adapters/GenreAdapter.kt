@@ -23,20 +23,25 @@ class GenreAdapter(val genreList: List<Genre>, val genreListener: GenreAdapterLi
         holder?.bindViews(genreList[position], position)
     }
 
-    inner class GenreViewHolder(genreView : View) : RecyclerView.ViewHolder(genreView){
+    fun removeSeletedGenre() {
+        selectedPosition = -1
+        notifyDataSetChanged()
+    }
+
+    inner class GenreViewHolder(genreView: View) : RecyclerView.ViewHolder(genreView) {
         val view = genreView
-        fun bindViews(genre : Genre, position: Int ){
+        fun bindViews(genre: Genre, position: Int) {
             view.genreName.text = genre.genreName
 
-            if(position == selectedPosition){
+            if (position == selectedPosition) {
                 view.genreName.background = ContextCompat.getDrawable(view.context, R.drawable.tag_background_colored_drawable)
                 view.genreName.setTextColor(ContextCompat.getColor(view.context, R.color.colorPrimary))
-            }else{
+            } else {
                 view.genreName.background = ContextCompat.getDrawable(view.context, R.drawable.tag_background_drawable)
                 view.genreName.setTextColor(ContextCompat.getColor(view.context, android.R.color.secondary_text_dark))
             }
 
-            view.setOnClickListener{
+            view.setOnClickListener {
                 genreListener?.onGenreSelected(genre.genreId)
                 selectedPosition = adapterPosition
                 notifyDataSetChanged()
@@ -44,7 +49,7 @@ class GenreAdapter(val genreList: List<Genre>, val genreListener: GenreAdapterLi
         }
     }
 
-    interface GenreAdapterListener{
-        fun onGenreSelected(genreId : Int){}
+    interface GenreAdapterListener {
+        fun onGenreSelected(genreId: Int) {}
     }
 }

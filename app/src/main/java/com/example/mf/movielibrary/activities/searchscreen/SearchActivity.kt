@@ -135,9 +135,10 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
     private fun clearListAndMakeApiCallAgain() {
         isGenre = false
+        (genreRecyclerView.adapter as GenreAdapter).removeSeletedGenre()
+        queryPage = 1
         mSearchList.clear()
         searchRecyclerView.removeAllViews()
-        queryPage = 1
         mPresenter.callSearchMovieOrSeriesByName(movieOrSeries, searchQuery, queryPage)
     }
 
@@ -168,9 +169,6 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         when (item) {
             0 -> changeSearchPreference(MOVIE)
             1 -> changeSearchPreference(TV_SHOWS)
-            2 -> {
-                mPresenter.getGenreFromDb(movieOrSeries)
-            }
         }
         dialogInterface?.dismiss()
     }

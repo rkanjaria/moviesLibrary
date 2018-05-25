@@ -17,7 +17,7 @@ import io.reactivex.schedulers.Schedulers
  * Created by RK on 28-11-2017.
  */
 class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>(), HomeActivityContract.HomePresenter {
-    override fun requestCollectionsActivity() {
+    /*override fun requestCollectionsActivity() {
         mView?.lauchchActivity(Intent(mView?.getContext(), CollectionsListActivity::class.java))
     }
 
@@ -64,5 +64,5 @@ class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>()
         val searchIntent = Intent(mView?.getContext(), SearchActivity::class.java)
         searchIntent.putExtra(MOVIE_OR_SERIES, movieOrSeries)
         mView?.getContext()?.startActivity(searchIntent)
-    }
+    }*/
 }

@@ -11,19 +11,19 @@ import com.example.mf.movielibrary.models.moviemodel.Movie
 class HomeActivityContract {
 
     interface HomeView : BaseView {
-        fun setMovieRecyclerView(moviesList: List<Movie?>?, totalResults: Int)
+        /*fun setMovieRecyclerView(moviesList: List<Movie?>?, totalResults: Int)
         fun showProgressBar()
         fun hideProgressBar()
-        fun showMovieOrSeriesTypeDialog()
+        fun showMovieOrSeriesTypeDialog()*/
     }
 
     interface HomePresenter : BasePresenter<HomeView>{
-        fun callGetMoviesApi(movieOrSeries : String, requestType : String , page : Int)
+        /*fun callGetMoviesApi(movieOrSeries : String, requestType : String , page : Int)
         fun launchMovieSeriesActivity(movieModel: Movie?, movieOrSeries: String)
         fun requestMovieOrSeriesTypeDialog()
         fun requestSearchActivity(movieOrSeries: String)
         fun requestFavouritesActivity()
-        fun requestCollectionsActivity()
+        fun requestCollectionsActivity()*/
     }
 
 }
