@@ -30,4 +30,9 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
+    <style name="navigationViewStyle" parent="@android:style/TextAppearance.Medium">
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+    </style>
+
 </resources>
