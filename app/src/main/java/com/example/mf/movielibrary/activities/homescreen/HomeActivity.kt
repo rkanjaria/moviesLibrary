@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_home.*
  * Created by RK on 28-11-2017.
  */
 class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPresenter>(),
-        HomeActivityContract.HomeView, DialogInterface.OnClickListener, HomeFragment.HomeFragmentListener {
+        HomeActivityContract.HomeView, HomeFragment.HomeFragmentListener {
 
 
     private val homeFragment = HomeFragment()
@@ -45,33 +45,32 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, homeFragment).commit()
 
+        navigationView.setCheckedItem(R.id.action_movies)
         navigationView.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_movies -> {
                     item.setChecked(true)
+                    homeFragment.callMoviesOrSeriesApi(MOVIE)
                     drawerLayout.closeDrawers()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.action_tv_shows -> {
                     item.setChecked(true)
-                    showMessage(item.title.toString())
+                    homeFragment.callMoviesOrSeriesApi(TV_SHOWS)
                     drawerLayout.closeDrawers()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.action_favourites -> {
-                    item.setChecked(true)
                     drawerLayout.closeDrawers()
                     mPresenter.requestFavouritesActivity()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.action_collections -> {
-                    item.setChecked(true)
                     drawerLayout.closeDrawers()
                     mPresenter.requestCollectionsActivity()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.action_people -> {
-                    item.setChecked(true)
                     showMessage(item.title.toString())
                     drawerLayout.closeDrawers()
                     return@OnNavigationItemSelectedListener true
@@ -82,10 +81,7 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
     }
 
     override fun showMovieOrSeriesTypeDialog() {
-        /*val arrayType = if (movieOrSeries == MOVIE) R.array.movie_type_array else R.array.tv_type_array
-        val dialogBuilder = AlertDialog.Builder(ContextThemeWrapper(this, R.style.AlertDialogTheme))
-        dialogBuilder.setSingleChoiceItems(arrayType, selectedTypePostion, this)
-        dialogBuilder.create().show()*/
+        homeFragment.showMovieOrSeriesTypeDialog()
     }
 
     override fun onMovieOrSeriesClicked(movieModel: Movie?, movieOrSeries: String) {
@@ -107,29 +103,6 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         return true
     }
 
-    override fun onClick(dialogInterface: DialogInterface?, item: Int) {
-        /*if (movieOrSeries == MOVIE) {
-
-            when (item) {
-                0 -> type = POPULAR
-                1 -> type = TOP_RATED
-                2 -> type = UPCOMING
-                3 -> type = NOW_PLAYING
-            }
-        } else {
-            when (item) {
-                0 -> type = POPULAR
-                1 -> type = TOP_RATED
-                2 -> type = ON_AIR
-                3 -> type = AIRING_TODAY
-            }
-        }
-
-        selectedTypePostion = item
-        dialogInterface?.dismiss()
-        //clearListAndMakeApiCallAgain()*/
-    }
-
     override fun setMovieRecyclerView(moviesList: List<Movie?>?, totalResults: Int) {
         homeFragment.setRecyclerView(moviesList, totalResults)
     }
@@ -142,35 +115,3 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         homeFragment.hideProgressBar()
     }
 }
-
-/*override fun loadMore() {
-movieRecyclerView.post({ loadMoreData() })
-}
-
-private fun loadMoreData() {
-
-page++
-
-if (mMoviesList.size < totalResultsCount) {
-
-    mMoviesList.add(null)
-    movieAdapter.notifyItemInserted(mMoviesList.size - 1)
-    mPresenter.callGetMoviesApi(movieOrSeries, type, page)
-}
-}
-
-override fun onNothingSelected(parent: AdapterView<*>?) {}
-
-override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-when (position) {
-    0 -> movieOrSeries = MOVIE
-    1 -> movieOrSeries = TV_SHOWS
-}
-type = POPULAR
-selectedTypePostion = 0
-clearListAndMakeApiCallAgain()
-}
-
-override fun onMovieOrSeriesClicked(movieModel: Movie?) {
-
-}}*/

@@ -1,26 +1,27 @@
 package com.example.mf.movielibrary.fragments
 
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.MOVIE
-import files.POPULAR
+import files.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
  * A simple [Fragment] subclass.
  *
  */
-class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListener {
+class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListener, DialogInterface.OnClickListener {
 
     private var mListener: HomeFragmentListener? = null
     private val mMoviesList = mutableListOf<Movie?>()
@@ -95,7 +96,7 @@ class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListen
         mListener?.onMovieOrSeriesClicked(movieModel, movieOrSeries)
     }
 
-    private fun clearListAndMakeApiCallAgain() {
+    private fun clearListAndMakeApiCallAgain(movieOrSeries: String) {
         mMoviesList.clear()
         movieRecyclerView.removeAllViews()
         page = 1
@@ -113,6 +114,43 @@ class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListen
             movieAdapter.notifyItemInserted(mMoviesList.size - 1)
             mListener?.callGetMoviesApi(movieOrSeries, type, page)
         }
+    }
+
+    fun showMovieOrSeriesTypeDialog() {
+        val arrayType = if (movieOrSeries == MOVIE) R.array.movie_type_array else R.array.tv_type_array
+        val dialogBuilder = AlertDialog.Builder(ContextThemeWrapper(context, R.style.AlertDialogTheme))
+        dialogBuilder.setSingleChoiceItems(arrayType, selectedTypePostion, this)
+        dialogBuilder.create().show()
+    }
+
+    override fun onClick(dialogInterface: DialogInterface?, item: Int) {
+        if (movieOrSeries == MOVIE) {
+
+            when (item) {
+                0 -> type = POPULAR
+                1 -> type = TOP_RATED
+                2 -> type = UPCOMING
+                3 -> type = NOW_PLAYING
+            }
+        } else {
+            when (item) {
+                0 -> type = POPULAR
+                1 -> type = TOP_RATED
+                2 -> type = ON_AIR
+                3 -> type = AIRING_TODAY
+            }
+        }
+
+        selectedTypePostion = item
+        dialogInterface?.dismiss()
+        clearListAndMakeApiCallAgain(movieOrSeries)
+    }
+
+    fun callMoviesOrSeriesApi(movieOrSeries: String) {
+        this.movieOrSeries = movieOrSeries
+        type = POPULAR
+        selectedTypePostion = 0
+        clearListAndMakeApiCallAgain(movieOrSeries)
     }
 
     interface HomeFragmentListener {

@@ -13,6 +13,8 @@
             android:icon="@drawable/ic_tv_black"
             android:title="Tv Shows"/>
 
+    </group>
+
         <item
             android:id="@+id/action_favourites"
             android:icon="@drawable/ic_favorite_black"
@@ -28,6 +30,6 @@
             android:icon="@drawable/ic_face_black"
             android:title="Actors"/>
 
-    </group>
+
 
 </menu>

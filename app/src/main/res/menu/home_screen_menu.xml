@@ -11,5 +11,4 @@
         android:title="Sort"
         android:icon="@drawable/ic_sort"
         app:showAsAction="always" />
-
 </menu>
