@@ -153,9 +153,14 @@ class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListen
         clearListAndMakeApiCallAgain(movieOrSeries)
     }
 
+    fun onClickSearch() {
+        mListener?.onClickSearchActivity(movieOrSeries)
+    }
+
     interface HomeFragmentListener {
         fun callGetMoviesApi(movieOrSeries: String, type: String, page: Int)
         fun onMovieOrSeriesClicked(movieModel: Movie?, movieOrSeries: String)
+        fun onClickSearchActivity(movieOrSeries: String)
     }
 
 }

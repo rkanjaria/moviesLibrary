@@ -13,17 +13,6 @@
         <item name="android:fontFamily">@font/noto_sans_regular</item>
     </style>
 
-    <style name="AlertDialogTheme" parent="@android:style/Theme.Material.Dialog">
-        <item name="android:fontFamily">@font/noto_sans_regular</item>
-        <item name="android:textSize">@dimen/text_size_16</item>
-    </style>
-    
-    <style name="movieSearViewStyle" parent="Widget.AppCompat.Light.SearchView">
-        <item name="submitBackground">@color/darkGrey</item>
-        <item name="queryBackground">@color/darkGrey</item>
-        <item name="android:fontFamily">@font/noto_sans_regular</item>
-    </style>
-
     <style name="movieTabStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="android:fontFamily">@font/noto_sans_regular</item>
         <item name="android:textSize">@dimen/text_size_14</item>
@@ -33,6 +22,7 @@
     <style name="navigationViewStyle" parent="@android:style/TextAppearance.Medium">
         <item name="android:fontFamily">@font/noto_sans_regular</item>
         <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

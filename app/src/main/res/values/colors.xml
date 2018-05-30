@@ -9,6 +9,7 @@
     <color name="lightGrey">#e0e0e0</color>
     <color name="mediumGrey">#8c8c8c</color>
     <color name="transperentMediumGrey">#75000000</color>
+    <color name="navigationGrey">#3D3D3D</color>
 
     <!-- circle indicator view -->
     <bool name="default_circle_indicator_snap">false</bool>

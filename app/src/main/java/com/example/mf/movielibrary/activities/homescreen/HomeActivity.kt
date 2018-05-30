@@ -26,7 +26,6 @@ import kotlinx.android.synthetic.main.activity_home.*
 class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPresenter>(),
         HomeActivityContract.HomeView, HomeFragment.HomeFragmentListener {
 
-
     private val homeFragment = HomeFragment()
 
     override fun callGetMoviesApi(movieOrSeries: String, type: String, page: Int) {
@@ -45,19 +44,27 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, homeFragment).commit()
 
+        supportActionBar?.title = "Movies"
         navigationView.setCheckedItem(R.id.action_movies)
         navigationView.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_movies -> {
                     item.setChecked(true)
-                    homeFragment.callMoviesOrSeriesApi(MOVIE)
                     drawerLayout.closeDrawers()
+                    supportActionBar?.title = "Movies"
+                    homeFragment.callMoviesOrSeriesApi(MOVIE)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.action_tv_shows -> {
                     item.setChecked(true)
-                    homeFragment.callMoviesOrSeriesApi(TV_SHOWS)
                     drawerLayout.closeDrawers()
+                    supportActionBar?.title = "Tv Shows"
+                    homeFragment.callMoviesOrSeriesApi(TV_SHOWS)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.action_search -> {
+                    drawerLayout.closeDrawers()
+                    homeFragment.onClickSearch()
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.action_favourites -> {
@@ -71,7 +78,7 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.action_people -> {
-                    showMessage(item.title.toString())
+
                     drawerLayout.closeDrawers()
                     return@OnNavigationItemSelectedListener true
                 }
@@ -98,13 +105,17 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         when (item?.itemId) {
             android.R.id.home -> drawerLayout.openDrawer(GravityCompat.START)
             R.id.action_sort -> mPresenter.requestMovieOrSeriesTypeDialog()
-            R.id.action_search -> mPresenter.requestSearchActivity("")
+            R.id.action_search -> homeFragment.onClickSearch()
         }
         return true
     }
 
     override fun setMovieRecyclerView(moviesList: List<Movie?>?, totalResults: Int) {
         homeFragment.setRecyclerView(moviesList, totalResults)
+    }
+
+    override fun onClickSearchActivity(movieOrSeries: String) {
+        mPresenter.requestSearchActivity(movieOrSeries)
     }
 
     override fun showProgressBar() {

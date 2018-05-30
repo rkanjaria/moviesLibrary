@@ -21,6 +21,11 @@ import files.MOVIE
 import files.MOVIE_OR_SERIES
 import files.TV_SHOWS
 import kotlinx.android.synthetic.main.activity_search.*
+import android.graphics.Typeface
+import android.support.v4.content.res.ResourcesCompat
+import android.widget.TextView
+
+
 
 
 class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, SearchActivityPresenter>(),
@@ -57,6 +62,9 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
                     gridLayoutManager.spanCount else 1
             }
         }
+        val searchText = movieSeriesSearchView.findViewById(android.support.v7.appcompat.R.id.search_src_text) as TextView
+        searchText.typeface = ResourcesCompat.getFont(this, R.font.noto_sans_regular)
+        searchText.textSize = 16f
         movieSeriesSearchView.setOnQueryTextListener(this)
     }
 

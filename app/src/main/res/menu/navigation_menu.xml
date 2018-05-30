@@ -6,30 +6,34 @@
         <item
             android:id="@+id/action_movies"
             android:icon="@drawable/ic_movie_black"
-            android:title="Movies"/>
+            android:title="Movies" />
 
         <item
             android:id="@+id/action_tv_shows"
             android:icon="@drawable/ic_tv_black"
-            android:title="Tv Shows"/>
+            android:title="Tv Shows" />
 
     </group>
 
-        <item
-            android:id="@+id/action_favourites"
-            android:icon="@drawable/ic_favorite_black"
-            android:title="Favourites"/>
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_black"
+        android:title="Search" />
 
-        <item
-            android:id="@+id/action_collections"
-            android:icon="@drawable/ic_view_stream_black"
-            android:title="Collections"/>
+    <item
+        android:id="@+id/action_favourites"
+        android:icon="@drawable/ic_favorite_black"
+        android:title="Favourites" />
 
-        <item
-            android:id="@+id/action_people"
-            android:icon="@drawable/ic_face_black"
-            android:title="Actors"/>
+    <item
+        android:id="@+id/action_collections"
+        android:icon="@drawable/ic_view_module_black"
+        android:title="Collections" />
 
+    <item
+        android:id="@+id/action_people"
+        android:icon="@drawable/ic_face_black"
+        android:title="Actors" />
 
 
 </menu>

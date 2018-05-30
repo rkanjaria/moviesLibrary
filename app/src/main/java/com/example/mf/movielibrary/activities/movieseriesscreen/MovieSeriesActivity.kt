@@ -54,7 +54,6 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         movieYear.text = getDateWithCustomFormat(movieModel.releaseDate)
         movieRating.text = if (movieModel.voteAverage != 0f) movieModel.voteAverage.toString() else "No rating"
         movieOverview.text = movieModel.overview
-        //movieOverview.setOnClickListener({movieOverview.toggle()})
         movieGenre.text = mPresenter.getMovieGenres(movieModel.genreIds)
 
         mPresenter.callgetMovieOrSeriesCastApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
