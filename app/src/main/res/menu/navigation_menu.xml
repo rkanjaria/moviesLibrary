@@ -27,7 +27,7 @@
 
     <item
         android:id="@+id/action_collections"
-        android:icon="@drawable/ic_view_module_black"
+        android:icon="@drawable/ic_view_stream_black"
         android:title="Collections" />
 
     <item

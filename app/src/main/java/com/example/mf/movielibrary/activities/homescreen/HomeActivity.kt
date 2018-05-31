@@ -78,8 +78,8 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.action_people -> {
-
                     drawerLayout.closeDrawers()
+                    mPresenter.requestActorsActivity()
                     return@OnNavigationItemSelectedListener true
                 }
             }

@@ -24,6 +24,7 @@ class HomeActivityContract {
         fun requestSearchActivity(movieOrSeries: String)
         fun requestFavouritesActivity()
         fun requestCollectionsActivity()
+        fun requestActorsActivity()
     }
 
 }
