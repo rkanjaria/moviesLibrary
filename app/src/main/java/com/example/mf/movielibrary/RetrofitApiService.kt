@@ -2,6 +2,7 @@ package com.example.mf.movielibrary
 
 import com.example.mf.movielibrary.models.actormodel.Actor
 import com.example.mf.movielibrary.models.actormodel.ActorImagesResult
+import com.example.mf.movielibrary.models.actormodel.ActorsResult
 import com.example.mf.movielibrary.models.castmodel.CastResult
 import com.example.mf.movielibrary.models.collectionmodels.CollectionsResult
 import com.example.mf.movielibrary.models.episodemodels.EpisodeImageResult
@@ -97,12 +98,16 @@ interface RetrofitApiService {
                                   @Query("api_key") apiKey: String = API_KEY): Observable<ReviewResult>
 
 
-
     @GET("discover/{movie_or_series}")
     fun doSearchMovieOrSeriesByGenreApiCall(@Path("movie_or_series") movieOrSeries: String,
-                                            @Query("sort_by") popularity : String = "popularity.desc",
+                                            @Query("sort_by") popularity: String = "popularity.desc",
                                             @Query("page") page: Int,
                                             @Query("with_genres") genres: Int,
                                             @Query("api_key") apiKey: String = API_KEY): Observable<MoviesResult>
+
+    @GET("person/popular")
+    fun doGetPopularPeopleApiCall(
+            @Query("page") page: Int,
+            @Query("api_key") apiKey: String = API_KEY): Observable<ActorsResult>
 
 }

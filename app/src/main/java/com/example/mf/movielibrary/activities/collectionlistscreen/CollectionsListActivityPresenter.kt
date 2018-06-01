@@ -1,5 +1,7 @@
 package com.example.mf.movielibrary.activities.collectionlistscreen
 
+import android.content.Intent
+import com.example.mf.movielibrary.activities.collectionscreen.CollectionsActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
 
 /**
@@ -7,6 +9,7 @@ import com.example.mf.movielibrary.base.BasePresenterImpl
  */
 class CollectionsListActivityPresenter : BasePresenterImpl<CollectionsListActivityContract.CollectionsListView>(),
         CollectionsListActivityContract.CollectionsListPresenter {
+
     override fun requestCollectionsRecyclerview() {
         mView?.setCollectionsRecyclerview()
     }

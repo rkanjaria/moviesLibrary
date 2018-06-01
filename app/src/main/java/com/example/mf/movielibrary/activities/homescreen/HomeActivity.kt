@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.FragmentTransaction
 import android.content.DialogInterface
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.widget.GridLayoutManager
@@ -27,6 +28,7 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
         HomeActivityContract.HomeView, HomeFragment.HomeFragmentListener {
 
     private val homeFragment = HomeFragment()
+    private val delay = 250L
 
     override fun callGetMoviesApi(movieOrSeries: String, type: String, page: Int) {
         mPresenter.callGetMoviesApi(movieOrSeries, type, page)
@@ -64,22 +66,22 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
                 }
                 R.id.action_search -> {
                     drawerLayout.closeDrawers()
-                    homeFragment.onClickSearch()
+                    Handler().postDelayed({ homeFragment.onClickSearch() }, delay)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.action_favourites -> {
                     drawerLayout.closeDrawers()
-                    mPresenter.requestFavouritesActivity()
+                    Handler().postDelayed({ mPresenter.requestFavouritesActivity() }, delay)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.action_collections -> {
                     drawerLayout.closeDrawers()
-                    mPresenter.requestCollectionsActivity()
+                    Handler().postDelayed({ mPresenter.requestCollectionsActivity() }, delay)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.action_people -> {
                     drawerLayout.closeDrawers()
-                    mPresenter.requestActorsActivity()
+                    Handler().postDelayed({ mPresenter.requestActorsActivity() }, delay)
                     return@OnNavigationItemSelectedListener true
                 }
             }

@@ -16,7 +16,7 @@ class ActorsActivityContract {
 
     interface ActorsPresenter : BasePresenter<ActorsView> {
         fun callGetActorApi(actorId: Int)
-        fun callGetActorsMoviesOrSeriesApi(actorId: Int, moviesOrSeries: String?)
+        fun callGetActorsMoviesOrSeriesApi(actorId: Int)
         fun launchMovieSeriesActivity(movieModel: Movie?)
         fun launchImagesActivity(actorId: Int)
     }

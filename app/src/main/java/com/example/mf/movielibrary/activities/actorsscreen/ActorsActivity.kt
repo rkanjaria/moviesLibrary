@@ -35,7 +35,7 @@ class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsAct
         actorBiography.text = actor.biography
         //actorBiography.setOnClickListener { actorBiography.expandOrCollapseTextView() }
 
-        mPresenter.callGetActorsMoviesOrSeriesApi(actor.actorId, intent.getStringExtra(MOVIE_OR_SERIES))
+        mPresenter.callGetActorsMoviesOrSeriesApi(actor.actorId)
         posterCard.setOnClickListener { mPresenter.launchImagesActivity(actor.actorId) }
     }
 
@@ -53,6 +53,7 @@ class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsAct
         actorMovieRecyclerview.adapter = MovieRecyclerAdapter(moviesList, this, true)
         actorMovieRecyclerview.visibility = View.VISIBLE
         knowForTitle.visibility = View.VISIBLE
+        viewMore.visibility = View.VISIBLE
     }
 
     override fun onMovieOrSeriesClicked(movieModel: Movie?) {

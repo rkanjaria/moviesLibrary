@@ -1,10 +1,15 @@
 package com.example.mf.movielibrary.adapters
 
+import android.app.Activity
 import android.content.Intent
+import android.support.v4.app.ActivityCompat
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.example.mf.movielibrary.R
+import com.example.mf.movielibrary.R.id.imageView
 import com.example.mf.movielibrary.activities.collectionscreen.CollectionsActivity
 import files.*
 import kotlinx.android.synthetic.main.collection_list_layout.view.*
@@ -26,11 +31,11 @@ class CollectionsListAdapter(val collectionIdList: List<Int>, val collectionName
         holder?.bindItems(collectionIdList[position], collectionNames[position], collectionImages[position])
     }
 
-    class CollectionsListViewHolder(collectionView: View) : RecyclerView.ViewHolder(collectionView) {
+    inner open class CollectionsListViewHolder(collectionView: View) : RecyclerView.ViewHolder(collectionView) {
 
         val view = collectionView
 
-        fun bindItems(collectionId: Int, collectionName: String, collectionImage : Int) {
+        fun bindItems(collectionId: Int, collectionName: String, collectionImage: Int) {
             view.collectionName.text = collectionName
             view.collectionImage.loadDrawableImage(collectionImage, R.color.darkGrey)
 
@@ -40,6 +45,10 @@ class CollectionsListAdapter(val collectionIdList: List<Int>, val collectionName
                 collectionsListIntent.putExtra(NAME, collectionName)
                 collectionsListIntent.putExtra(BACKDROP_PATH, collectionImage)
                 view.context.startActivity(collectionsListIntent)
+
+                /*val options = ActivityOptionsCompat.makeSceneTransitionAnimation(it.context as Activity, view.collectionImage,
+                        ViewCompat.getTransitionName(view.collectionImage))
+                view.context.startActivity(collectionsListIntent, options.toBundle())*/
             })
         }
     }

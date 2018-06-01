@@ -32,23 +32,20 @@ class ActorsActivityPresenter : BasePresenterImpl<ActorsActivityContract.ActorsV
                 })
     }
 
-    override fun callGetActorsMoviesOrSeriesApi(actorId: Int, moviesOrSeries: String?) {
+    override fun callGetActorsMoviesOrSeriesApi(actorId: Int) {
 
-        if (moviesOrSeries != null) {
-
-            //val movieOrSeriesQueryParam = if (moviesOrSeries.equals(MOVIE)) MOVIE_CREDITS else TV_CREDITS
-            RetrofitHelper.create().doGetActorsMoviesAndSeriesApiCall(actorId)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe({ movieResult ->
-                        if (movieResult != null) {
-                            mView?.setActorMoviesRecyclerview(movieResult.moviesList)
-                        }
-                    }, { error ->
-                        error.printStackTrace()
-                        mView?.showMessage(error.localizedMessage)
-                    })
-        }
+        //val movieOrSeriesQueryParam = if (moviesOrSeries.equals(MOVIE)) MOVIE_CREDITS else TV_CREDITS
+        RetrofitHelper.create().doGetActorsMoviesAndSeriesApiCall(actorId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ movieResult ->
+                    if (movieResult != null) {
+                        mView?.setActorMoviesRecyclerview(movieResult.moviesList)
+                    }
+                }, { error ->
+                    error.printStackTrace()
+                    mView?.showMessage(error.localizedMessage)
+                })
     }
 
     override fun launchMovieSeriesActivity(movieModel: Movie?) {
