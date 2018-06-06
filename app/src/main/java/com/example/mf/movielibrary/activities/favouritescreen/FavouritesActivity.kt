@@ -7,10 +7,10 @@ import com.example.mf.movielibrary.adapters.FavouritesViewPagerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_favorites.*
 
-class FavoritesActivity : BaseActivity<FavoritesActivityContract.FavoritesView, FavoritesActivityPresenter>(),
-        FavoritesActivityContract.FavoritesView {
+class FavouritesActivity : BaseActivity<FavouritesActivityContract.FavoritesView, FavouritesActivityPresenter>(),
+        FavouritesActivityContract.FavoritesView {
 
-    override var mPresenter = FavoritesActivityPresenter()
+    override var mPresenter = FavouritesActivityPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -19,6 +19,8 @@ val RESULT_CODE = 100
 
 val MOVIE = "movie"
 val TV_SHOWS = "tv"
+val MOVIE_CREDITS = "movie_credits"
+val TV_CREDITS = "tv_credits"
 
 val NOW_PLAYING = "now_playing"
 val POPULAR = "popular"
@@ -27,8 +29,7 @@ val UPCOMING = "upcoming"
 val ON_AIR = "on_the_air"
 val AIRING_TODAY = "airing_today"
 
-val MOVIE_CREDITS = "movie_credits"
-val TV_CREDITS = "tv_credits"
+
 
 
 val DATABASE_NAME = "movie.db"

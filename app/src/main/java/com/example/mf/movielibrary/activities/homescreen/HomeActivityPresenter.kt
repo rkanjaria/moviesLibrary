@@ -3,7 +3,7 @@ package com.example.mf.movielibrary.activities.homescreen
 import android.content.Intent
 import com.example.mf.movielibrary.activities.actorslistscreen.ActorsListActivity
 import com.example.mf.movielibrary.activities.collectionlistscreen.CollectionsListActivity
-import com.example.mf.movielibrary.activities.favouritescreen.FavoritesActivity
+import com.example.mf.movielibrary.activities.favouritescreen.FavouritesActivity
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
 import com.example.mf.movielibrary.activities.searchscreen.SearchActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
@@ -29,7 +29,7 @@ class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>()
     }
 
     override fun requestFavouritesActivity() {
-        mView?.lauchchActivity(Intent(mView?.getContext(), FavoritesActivity::class.java))
+        mView?.lauchchActivity(Intent(mView?.getContext(), FavouritesActivity::class.java))
     }
 
     override fun requestMovieOrSeriesTypeDialog() {

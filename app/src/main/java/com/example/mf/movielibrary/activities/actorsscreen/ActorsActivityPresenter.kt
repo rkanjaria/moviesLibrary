@@ -1,10 +1,12 @@
 package com.example.mf.movielibrary.activities.actorsscreen
 
 import android.content.Intent
+import com.example.mf.movielibrary.activities.actorsmovieseriesscreen.ActorsMoviesSeriesActivity
 import com.example.mf.movielibrary.activities.imgescreen.ImageActivity
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.helpers.RetrofitHelper
+import com.example.mf.movielibrary.models.actormodel.Actor
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import files.*
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -12,6 +14,14 @@ import io.reactivex.schedulers.Schedulers
 
 class ActorsActivityPresenter : BasePresenterImpl<ActorsActivityContract.ActorsView>(),
         ActorsActivityContract.ActorsPresenter {
+
+    override fun launchActorsMoviesSeriesActivity(actorModel: Actor) {
+        val actorMovieSeriesIntent = Intent(mView?.getContext(), ActorsMoviesSeriesActivity::class.java)
+        actorMovieSeriesIntent.putExtra(INT_ID, actorModel.actorId)
+        actorMovieSeriesIntent.putExtra(NAME, actorModel.actorName)
+        actorMovieSeriesIntent.putExtra(BACKDROP_PATH, actorModel.profileImage)
+        mView?.getContext()?.startActivity(actorMovieSeriesIntent)
+    }
 
     override fun callGetActorApi(actorId: Int) {
         mView?.showProgressLoading()

@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_actors.*
 class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsActivityPresenter>(),
         ActorsActivityContract.ActorsView , MovieRecyclerAdapter.OnMovieSeriesAdapterListener{
 
+    private lateinit var actorModel : Actor
     override var mPresenter = ActorsActivityPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +27,7 @@ class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsAct
     }
 
     override fun setActorsData(actor: Actor) {
+        actorModel = actor
         mainLayout.visibility = View.VISIBLE
         actorName.text = actor.actorName
         actorGender.text = getGender(actor.gender)
@@ -54,6 +56,7 @@ class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsAct
         actorMovieRecyclerview.visibility = View.VISIBLE
         knowForTitle.visibility = View.VISIBLE
         viewMore.visibility = View.VISIBLE
+        viewMore.setOnClickListener{mPresenter.launchActorsMoviesSeriesActivity(actorModel)}
     }
 
     override fun onMovieOrSeriesClicked(movieModel: Movie?) {

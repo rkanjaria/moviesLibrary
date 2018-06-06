@@ -6,7 +6,7 @@ import com.example.mf.movielibrary.base.BaseView
 /**
  * Created by RK on 05-04-2018.
  */
-class FavoritesActivityContract {
+class FavouritesActivityContract {
 
     interface FavoritesView : BaseView {
         fun setupViewPager()
