@@ -52,6 +52,7 @@ class ActorsMoviesSeriesActivity : BaseActivity<ActorsMoviesSeriesActivityContra
         })
     }
 
+
     override fun setViewPager() {
         movieSeriesViewpager.adapter = ActorsMoviesSeriesAdapter(supportFragmentManager,
                 resources.getStringArray(R.array.toolbar_array))
@@ -63,10 +64,10 @@ class ActorsMoviesSeriesActivity : BaseActivity<ActorsMoviesSeriesActivityContra
     }
 
     override fun hideProgressBar() {
-        ActorsMovieSeriesFragment().hideProgressBar()
+        //ActorsMovieSeriesFragment().hideProgressBar()
     }
 
     override fun showProgressBar() {
-        ActorsMovieSeriesFragment().showProgressBar()
+        //ActorsMovieSeriesFragment().showProgressBar()
     }
 }

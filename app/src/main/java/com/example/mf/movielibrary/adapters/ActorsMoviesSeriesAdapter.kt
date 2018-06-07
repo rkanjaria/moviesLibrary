@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.example.mf.movielibrary.fragments.ActorsMovieSeriesFragment
-import com.example.mf.movielibrary.fragments.FavouritesFragment
 import files.MOVIE
 import files.MOVIE_OR_SERIES
 import files.TV_SHOWS

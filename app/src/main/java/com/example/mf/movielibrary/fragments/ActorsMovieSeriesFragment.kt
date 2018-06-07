@@ -5,15 +5,16 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import files.*
 import kotlinx.android.synthetic.main.fragment_actors_movie_series.*
+import kotlinx.android.synthetic.main.fragment_actors_movie_series.view.*
 
 class ActorsMovieSeriesFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListener {
 
@@ -25,24 +26,30 @@ class ActorsMovieSeriesFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeries
     private lateinit var gridLayoutManager: GridLayoutManager
     private var totalResultsCount = -1
     private var actorId = -1
+    private var movieSeriesRecyclerView: RecyclerView? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
         movieOrSeries = arguments.getString(MOVIE_OR_SERIES)
-        return inflater.inflate(R.layout.fragment_actors_movie_series, container, false)
+        val rootView = inflater?.inflate(R.layout.fragment_actors_movie_series, container, false)
+        movieSeriesRecyclerView = rootView?.findViewById(R.id.movieSeriesRecyclerView) as RecyclerView
+        return rootView
     }
 
+
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         actorId = activity.intent.getIntExtra(INT_ID, -1)
+
         when (movieOrSeries) {
             MOVIE -> mListener?.onCallActorsCreditsApi(actorId, MOVIE_CREDITS, page)
             TV_SHOWS -> mListener?.onCallActorsCreditsApi(actorId, TV_CREDITS, page)
         }
 
         gridLayoutManager = GridLayoutManager(context, 3)
-        movieRecyclerView.layoutManager = gridLayoutManager
+        movieSeriesRecyclerView?.layoutManager = gridLayoutManager
 
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
@@ -78,7 +85,7 @@ class ActorsMovieSeriesFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeries
                 // for first time when data loads, add items to list and refresh the recyclerview
                 mMoviesList.addAll(moviesList)
                 movieAdapter = MovieRecyclerAdapter(mMoviesList, this)
-                movieRecyclerView.adapter = movieAdapter
+                movieSeriesRecyclerView?.adapter = movieAdapter
             } else {
                 // for the second time remove the loader view and add the data and refresh the recyclerview
                 mMoviesList.removeAt(mMoviesList.size - 1)
@@ -92,7 +99,7 @@ class ActorsMovieSeriesFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeries
     }
 
     override fun loadMore() {
-        movieRecyclerView.post{loadMoreData()}
+        movieSeriesRecyclerView?.post { loadMoreData() }
     }
 
     private fun loadMoreData() {

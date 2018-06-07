@@ -3,17 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/colorPrimary"
+    tools:context="com.example.mf.movielibrary.fragments.ActorsMovieSeriesFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/movieRecyclerView"
+        android:id="@+id/movieSeriesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="@dimen/size_4dp"
         android:paddingBottom="@dimen/size_4dp"
         android:paddingLeft="@dimen/size_8dp"
-        android:clipToPadding="false"
-        android:layout_below="@+id/toolbar" />
+        android:clipToPadding="false" />
 
     <ProgressBar
         android:id="@+id/progressBar"
