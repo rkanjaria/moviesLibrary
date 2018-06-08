@@ -26,15 +26,12 @@ class ActorsMovieSeriesFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeries
     private lateinit var gridLayoutManager: GridLayoutManager
     private var totalResultsCount = -1
     private var actorId = -1
-    private var movieSeriesRecyclerView: RecyclerView? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
         movieOrSeries = arguments.getString(MOVIE_OR_SERIES)
-        val rootView = inflater?.inflate(R.layout.fragment_actors_movie_series, container, false)
-        movieSeriesRecyclerView = rootView?.findViewById(R.id.movieSeriesRecyclerView) as RecyclerView
-        return rootView
+        return inflater?.inflate(R.layout.fragment_actors_movie_series, container, false)
     }
 
 

@@ -60,14 +60,19 @@ class ActorsMoviesSeriesActivity : BaseActivity<ActorsMoviesSeriesActivityContra
     }
 
     override fun setMovieOrSeriesRecyclerView(moviesList: List<Movie?>?, totalResults: Int) {
-        ActorsMovieSeriesFragment().setMovieOrSeriesRecyclerView(moviesList, totalResults)
+        getCurrentFragment().setMovieOrSeriesRecyclerView(moviesList, totalResults)
     }
 
     override fun hideProgressBar() {
-        //ActorsMovieSeriesFragment().hideProgressBar()
+        getCurrentFragment().hideProgressBar()
     }
 
     override fun showProgressBar() {
-        //ActorsMovieSeriesFragment().showProgressBar()
+        getCurrentFragment().showProgressBar()
+    }
+
+    fun getCurrentFragment(): ActorsMovieSeriesFragment {
+        return movieSeriesViewpager.adapter.instantiateItem(movieSeriesViewpager,
+                movieSeriesViewpager.currentItem) as ActorsMovieSeriesFragment
     }
 }
