@@ -8,13 +8,13 @@ class ActorsMoviesSeriesActivityContract {
 
     interface ActorsMoviesSeriesView : BaseView {
         fun setViewPager()
-        fun setMovieOrSeriesRecyclerView(moviesList: List<Movie?>?, totalResults: Int)
-        fun hideProgressBar()
-        fun showProgressBar()
+        fun setMovieOrSeriesRecyclerView(moviesList: List<Movie?>?, totalResults: Int, moviesOrSeriesCredits: String)
+        fun hideProgressBar(moviesOrSeriesCredits: String)
+        fun showProgressBar(moviesOrSeriesCredits: String)
     }
 
     interface ActorsMoviesSeriesPresenter : BasePresenter<ActorsMoviesSeriesView> {
         fun requestViewPager()
-        fun callActorsCreditsApi(actorId: Int, moviesOrSeriesCredits: String, page: Int)
+        fun callActorsCreditsApi(actorId: Int, moviesOrSeriesCredits: String)
     }
 }

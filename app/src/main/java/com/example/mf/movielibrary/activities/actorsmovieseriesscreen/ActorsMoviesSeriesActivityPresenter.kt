@@ -2,26 +2,23 @@ package com.example.mf.movielibrary.activities.actorsmovieseriesscreen
 
 import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.helpers.RetrofitHelper
+import files.MOVIE_CREDITS
+import files.MOVIE_OR_SERIES
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class ActorsMoviesSeriesActivityPresenter : BasePresenterImpl<ActorsMoviesSeriesActivityContract.ActorsMoviesSeriesView>(),
         ActorsMoviesSeriesActivityContract.ActorsMoviesSeriesPresenter {
 
-    override fun callActorsCreditsApi(actorId: Int, moviesOrSeriesCredits: String, page: Int) {
-        if (page == 1) {
-            mView?.showProgressBar()
-        }
+    override fun callActorsCreditsApi(actorId: Int, moviesOrSeriesCredits: String) {
 
-        RetrofitHelper.create().doGetActorsCreditsApiCall(actorId, moviesOrSeriesCredits, page = page)
+        mView?.showProgressBar(moviesOrSeriesCredits)
+        RetrofitHelper.create().doGetActorsCreditsApiCall(actorId, moviesOrSeriesCredits)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({ movieResult ->
-
-                    if (page == 1) {
-                        mView?.hideProgressBar()
-                    }
-                    mView?.setMovieOrSeriesRecyclerView(movieResult?.moviesList, movieResult?.totalResults!!)
+                    mView?.hideProgressBar(moviesOrSeriesCredits)
+                    mView?.setMovieOrSeriesRecyclerView(movieResult?.moviesList, movieResult?.totalResults!!, moviesOrSeriesCredits)
                 }, { error ->
                     error.printStackTrace()
                     mView?.showMessage(error.localizedMessage)

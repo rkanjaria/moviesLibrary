@@ -1,32 +1,24 @@
 package com.example.mf.movielibrary.adapters
 
-import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.example.mf.movielibrary.fragments.ActorsMovieSeriesFragment
-import files.MOVIE
-import files.MOVIE_OR_SERIES
-import files.TV_SHOWS
 
-class ActorsMoviesSeriesAdapter(fragmentManager: FragmentManager, val fragmentTitleList: Array<String>) :
-        FragmentStatePagerAdapter(fragmentManager) {
+class ActorsMoviesSeriesAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
+
+    private val fragments = mutableListOf<Fragment>()
+    private val titles = mutableListOf<String>()
 
     override fun getItem(position: Int): Fragment {
-
-        val bundle = Bundle()
-
-        when (position) {
-            0 -> bundle.putString(MOVIE_OR_SERIES, MOVIE)
-            1 -> bundle.putString(MOVIE_OR_SERIES, TV_SHOWS)
-        }
-
-        val actorsMoviesSeriesFragment = ActorsMovieSeriesFragment()
-        actorsMoviesSeriesFragment.arguments = bundle
-        return actorsMoviesSeriesFragment
+        return fragments[position]
     }
 
-    override fun getCount() = fragmentTitleList.size
+    fun addFragment(fragment: Fragment, title: String){
+        fragments.add(fragment)
+        titles.add(title)
+    }
 
-    override fun getPageTitle(position: Int) = fragmentTitleList[position]
+    override fun getCount() = fragments.size
+
+    override fun getPageTitle(position: Int) = titles[position]
 }
