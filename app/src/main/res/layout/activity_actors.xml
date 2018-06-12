@@ -126,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:fontFamily="@font/noto_sans_regular"
-                android:text="View more"
+                android:text="See all"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/text_size_16"
                 android:layout_marginTop="@dimen/size_16dp"
@@ -135,8 +135,6 @@
                 android:visibility="gone" />
 
         </LinearLayout>
-
-
 
     </ScrollView>
 

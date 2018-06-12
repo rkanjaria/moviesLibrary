@@ -60,17 +60,25 @@ fun ImageView.loadImage(url: String, placeholder: Int = R.color.darkGrey, center
 fun ImageView.loadBlurImage(url: String) {
     Glide.with(context)
             .load(url)
-            .apply(RequestOptions().transform(BlurTransform(context)))
+            .apply(RequestOptions().transform(BlurTransform(context, 20f)))
             .apply(RequestOptions.placeholderOf(R.color.primary_dark_material_dark))
             .apply(RequestOptions.errorOf(R.color.primary_dark_material_dark))
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
 }
 
+fun ImageView.loadCircularImage(url: String) {
+    Glide.with(context)
+            .load(url)
+            .apply(RequestOptions.circleCropTransform())
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(this)
+}
+
+
 fun ImageView.loadDrawableImage(@DrawableRes url: Int, placeholder: Int = R.color.darkGrey) {
     Glide.with(context)
             .load(url)
-            .apply(RequestOptions().transform(BlurTransform(context)))
             .apply(RequestOptions().centerCrop())
             .apply(RequestOptions.placeholderOf(placeholder))
             .apply(RequestOptions.errorOf(placeholder))

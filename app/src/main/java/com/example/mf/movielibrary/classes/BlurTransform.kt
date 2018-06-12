@@ -10,7 +10,7 @@ import java.security.MessageDigest
 /**
  * Created by RK on 19-01-2018.
  */
-class BlurTransform(context: Context) : BitmapTransformation() {
+class BlurTransform(context: Context, val blurRadius: Float) : BitmapTransformation() {
 
     val renderScript = RenderScript.create(context)
 
@@ -26,7 +26,7 @@ class BlurTransform(context: Context) : BitmapTransformation() {
 
         val scriptIntrinsicBlur = ScriptIntrinsicBlur.create(renderScript, Element.U8_4(renderScript))
         scriptIntrinsicBlur.setInput(input)
-        scriptIntrinsicBlur.setRadius(10f)
+        scriptIntrinsicBlur.setRadius(blurRadius)
         scriptIntrinsicBlur.forEach(output)
         output.copyTo(bluredBitmap)
 

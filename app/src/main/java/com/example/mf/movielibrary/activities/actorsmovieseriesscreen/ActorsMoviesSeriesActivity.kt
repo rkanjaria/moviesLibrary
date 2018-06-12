@@ -27,28 +27,10 @@ class ActorsMoviesSeriesActivity : BaseActivity<ActorsMoviesSeriesActivityContra
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actors_movies_series)
 
-        initToolbar(toolbar as Toolbar, true, "")
-        actorsImage.loadImage(photoUrl + intent.getStringExtra(BACKDROP_PATH), R.color.darkGrey)
+        initToolbar(toolbar as Toolbar, true, intent.getStringExtra(NAME))
+        /*actorsBackdropImage.loadBlurImage(photoUrl + intent.getStringExtra(BACKDROP_PATH))
+        actorsImage.loadCircularImage(photoUrl + intent.getStringExtra(BACKDROP_PATH))*/
         mPresenter.requestViewPager()
-
-        appBarLayout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
-            var isShow = true
-            var scrollRange = -1
-
-            override fun onOffsetChanged(appBarLayout: AppBarLayout, verticalOffset: Int) {
-                if (scrollRange == -1) {
-                    scrollRange = appBarLayout.totalScrollRange
-                }
-
-                if (scrollRange + verticalOffset == 0) {
-                    collapsingToolbar.title = intent.getStringExtra(NAME)
-                    isShow = true
-                } else if (isShow) {
-                    collapsingToolbar.title = " "
-                    isShow = false
-                }
-            }
-        })
     }
 
     override fun setViewPager() {
