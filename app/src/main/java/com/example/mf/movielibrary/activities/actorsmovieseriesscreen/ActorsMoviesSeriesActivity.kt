@@ -26,10 +26,7 @@ class ActorsMoviesSeriesActivity : BaseActivity<ActorsMoviesSeriesActivityContra
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actors_movies_series)
-
         initToolbar(toolbar as Toolbar, true, intent.getStringExtra(NAME))
-        /*actorsBackdropImage.loadBlurImage(photoUrl + intent.getStringExtra(BACKDROP_PATH))
-        actorsImage.loadCircularImage(photoUrl + intent.getStringExtra(BACKDROP_PATH))*/
         mPresenter.requestViewPager()
     }
 

@@ -87,6 +87,16 @@
                     android:fontFamily="@font/noto_sans_regular"
                     android:maxLines="2" />
 
+                <Button
+                    android:id="@+id/FollowInstagram"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/actorBirthPlace"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="@dimen/size_8dp"
+                    android:fontFamily="@font/noto_sans_regular"
+                    android:text="Follow on Instagram" />
+
 
             </RelativeLayout>
 
