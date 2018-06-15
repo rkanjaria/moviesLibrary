@@ -60,6 +60,7 @@ class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsAct
 
     override fun setInstgramButton(instagramId: String) {
         instaIcon.visibility = View.VISIBLE
+        twitterIcon.visibility = View.VISIBLE
         instaIcon.setOnClickListener{mPresenter.openInstagramIntent(instagramId)}
     }
 

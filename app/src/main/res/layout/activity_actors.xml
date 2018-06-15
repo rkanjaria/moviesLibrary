@@ -79,6 +79,7 @@
                     android:id="@+id/instaIcon"
                     android:layout_width="@dimen/size_30dp"
                     android:layout_height="@dimen/size_30dp"
+                    android:layout_marginTop="@dimen/size_8dp"
                     android:padding="@dimen/size_4dp"
                     android:visibility="gone"
                     android:layout_alignStart="@+id/actorName"
