@@ -12,6 +12,7 @@ class ActorsActivityContract {
         fun showProgressLoading()
         fun hideProgressLoading()
         fun setActorMoviesRecyclerview(moviesList: List<Movie?>)
+        fun setInstgramButton(instagramId: String)
     }
 
     interface ActorsPresenter : BasePresenter<ActorsView> {
@@ -20,5 +21,7 @@ class ActorsActivityContract {
         fun launchMovieSeriesActivity(movieModel: Movie?)
         fun launchImagesActivity(actorId: Int)
         fun launchActorsMoviesSeriesActivity(actorModel: Actor)
+        fun callGetActorIds(actorId: Int)
+        fun openInstagramIntent(instagramId: String)
     }
 }

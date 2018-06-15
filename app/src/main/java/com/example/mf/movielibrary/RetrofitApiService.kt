@@ -1,6 +1,7 @@
 package com.example.mf.movielibrary
 
 import com.example.mf.movielibrary.models.actormodel.Actor
+import com.example.mf.movielibrary.models.actormodel.ActorIdResult
 import com.example.mf.movielibrary.models.actormodel.ActorImagesResult
 import com.example.mf.movielibrary.models.actormodel.ActorsResult
 import com.example.mf.movielibrary.models.castmodel.CastResult
@@ -50,8 +51,8 @@ interface RetrofitApiService {
 
     @GET("person/{actor_id}/{movie_or_series}")
     fun doGetActorsCreditsApiCall(@Path("actor_id") actorId: Int,
-                                         @Path("movie_or_series") movieOrSeries: String,
-                                         @Query("api_key") apiKey: String = API_KEY): Observable<MoviesResult>
+                                  @Path("movie_or_series") movieOrSeries: String,
+                                  @Query("api_key") apiKey: String = API_KEY): Observable<MoviesResult>
 
     @GET("person/{actor_id}/combined_credits")
     fun doGetActorsMoviesAndSeriesApiCall(@Path("actor_id") actorId: Int,
@@ -109,5 +110,9 @@ interface RetrofitApiService {
     fun doGetPopularPeopleApiCall(
             @Query("page") page: Int,
             @Query("api_key") apiKey: String = API_KEY): Observable<ActorsResult>
+
+    @GET("person/{actor_id}/external_ids\n")
+    fun doGetActorsIdsApiCall(@Path("actor_id") actorId: Int,
+                              @Query("api_key") apiKey: String = API_KEY): Observable<ActorIdResult>
 
 }

@@ -24,18 +24,17 @@ class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsAct
 
         initToolbar(toolbar as Toolbar, true, intent.getStringExtra(NAME))
         mPresenter.callGetActorApi(intent.getIntExtra(INT_ID, -1))
+        mPresenter.callGetActorIds(intent.getIntExtra(INT_ID, -1))
     }
 
     override fun setActorsData(actor: Actor) {
         actorModel = actor
         mainLayout.visibility = View.VISIBLE
         actorName.text = actor.actorName
-        actorGender.text = getGender(actor.gender)
         actorBirthday.text = getDateWithCustomFormat(actor.birthday)
         actorBirthPlace.text = actor.placeOfBirth
         actorImage.loadImage(photoUrl + actor.profileImage, R.color.darkGrey)
         actorBiography.text = actor.biography
-        //actorBiography.setOnClickListener { actorBiography.expandOrCollapseTextView() }
 
         mPresenter.callGetActorsMoviesOrSeriesApi(actor.actorId)
         posterCard.setOnClickListener { mPresenter.launchImagesActivity(actor.actorId) }
@@ -57,6 +56,11 @@ class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsAct
         knowForTitle.visibility = View.VISIBLE
         viewMore.visibility = View.VISIBLE
         viewMore.setOnClickListener{mPresenter.launchActorsMoviesSeriesActivity(actorModel)}
+    }
+
+    override fun setInstgramButton(instagramId: String) {
+        instaIcon.visibility = View.VISIBLE
+        instaIcon.setOnClickListener{mPresenter.openInstagramIntent(instagramId)}
     }
 
     override fun onMovieOrSeriesClicked(movieModel: Movie?) {

@@ -1,6 +1,7 @@
 package com.example.mf.movielibrary.activities.actorsscreen
 
 import android.content.Intent
+import android.net.Uri
 import com.example.mf.movielibrary.activities.actorsmovieseriesscreen.ActorsMoviesSeriesActivity
 import com.example.mf.movielibrary.activities.imgescreen.ImageActivity
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
@@ -23,6 +24,20 @@ class ActorsActivityPresenter : BasePresenterImpl<ActorsActivityContract.ActorsV
         mView?.getContext()?.startActivity(actorMovieSeriesIntent)
     }
 
+    override fun callGetActorIds(actorId: Int) {
+        RetrofitHelper.create().doGetActorsIdsApiCall(actorId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe({ actorIdResult ->
+                    if (actorIdResult.instagramId != null) {
+                        mView?.setInstgramButton(actorIdResult.instagramId)
+                    }
+                }, { error ->
+                    error.printStackTrace()
+                    mView?.showMessage(error.localizedMessage)
+                })
+    }
+
     override fun callGetActorApi(actorId: Int) {
         mView?.showProgressLoading()
         RetrofitHelper.create().doGetActorApiCall(actorId)
@@ -43,8 +58,6 @@ class ActorsActivityPresenter : BasePresenterImpl<ActorsActivityContract.ActorsV
     }
 
     override fun callGetActorsMoviesOrSeriesApi(actorId: Int) {
-
-        //val movieOrSeriesQueryParam = if (moviesOrSeries.equals(MOVIE)) MOVIE_CREDITS else TV_CREDITS
         RetrofitHelper.create().doGetActorsMoviesAndSeriesApiCall(actorId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -69,5 +82,17 @@ class ActorsActivityPresenter : BasePresenterImpl<ActorsActivityContract.ActorsV
         val imagesIntent = Intent(mView?.getContext(), ImageActivity::class.java)
         imagesIntent.putExtra(ID, actorId)
         mView?.getContext()?.startActivity(imagesIntent)
+    }
+
+    override fun openInstagramIntent(instagramId: String) {
+        val instaIntent = Intent(Intent.ACTION_VIEW)
+        val instagramUrl = "http://instagram.com/_u/" + instagramId
+        try {
+            if (mView?.getContext()?.packageManager?.getPackageInfo("com.instagram.android", 0) != null)
+                instaIntent.`package` = "com.instagram.android"
+        } catch (e: Exception) {
+        }
+        instaIntent.data = Uri.parse(instagramUrl)
+        mView?.getContext()?.startActivity(instaIntent)
     }
 }
