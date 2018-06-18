@@ -16,6 +16,7 @@ import io.reactivex.schedulers.Schedulers
 class ActorsActivityPresenter : BasePresenterImpl<ActorsActivityContract.ActorsView>(),
         ActorsActivityContract.ActorsPresenter {
 
+
     override fun launchActorsMoviesSeriesActivity(actorModel: Actor) {
         val actorMovieSeriesIntent = Intent(mView?.getContext(), ActorsMoviesSeriesActivity::class.java)
         actorMovieSeriesIntent.putExtra(INT_ID, actorModel.actorId)
@@ -29,9 +30,8 @@ class ActorsActivityPresenter : BasePresenterImpl<ActorsActivityContract.ActorsV
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({ actorIdResult ->
-                    if (actorIdResult.instagramId != null) {
-                        mView?.setInstgramButton(actorIdResult.instagramId)
-                    }
+                    mView?.setSocialMediaIcons(actorIdResult)
+
                 }, { error ->
                     error.printStackTrace()
                     mView?.showMessage(error.localizedMessage)
@@ -94,5 +94,19 @@ class ActorsActivityPresenter : BasePresenterImpl<ActorsActivityContract.ActorsV
         }
         instaIntent.data = Uri.parse(instagramUrl)
         mView?.getContext()?.startActivity(instaIntent)
+    }
+
+    override fun openTwitterIntent(twitterId: String) {
+        val twitterIntent = Intent(Intent.ACTION_VIEW)
+        try {
+            if (mView?.getContext()?.packageManager?.getPackageInfo("com.twitter.android", 0) != null) {
+                twitterIntent.`package` = "com.twitter.android"
+                twitterIntent.data = Uri.parse("twitter://user?user_id=" + twitterId)
+            }
+        } catch (e: Exception) {
+        }
+        twitterIntent.data = Uri.parse("https://twitter.com/" + twitterId)
+        mView?.getContext()?.startActivity(twitterIntent)
+
     }
 }

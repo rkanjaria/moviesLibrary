@@ -75,28 +75,32 @@
                     android:fontFamily="@font/noto_sans_regular"
                     android:maxLines="2" />
 
-                <ImageView
-                    android:id="@+id/instaIcon"
-                    android:layout_width="@dimen/size_30dp"
-                    android:layout_height="@dimen/size_30dp"
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_marginTop="@dimen/size_8dp"
-                    android:padding="@dimen/size_4dp"
-                    android:visibility="gone"
                     android:layout_alignStart="@+id/actorName"
-                    android:layout_below="@+id/actorBirthPlace"
-                    android:src="@drawable/instagram" />
+                    android:layout_below="@+id/actorBirthPlace">
 
-                <ImageView
-                    android:id="@+id/twitterIcon"
-                    android:layout_width="@dimen/size_30dp"
-                    android:layout_height="@dimen/size_30dp"
-                    android:layout_alignTop="@id/instaIcon"
-                    android:layout_toEndOf="@+id/instaIcon"
-                    android:layout_below="@+id/actorBirthPlace"
-                    android:padding="@dimen/size_4dp"
-                    android:visibility="gone"
-                    android:layout_marginStart="@dimen/size_16dp"
-                    android:src="@drawable/twitter" />
+                    <ImageView
+                        android:id="@+id/instaIcon"
+                        android:layout_width="@dimen/size_30dp"
+                        android:layout_height="@dimen/size_30dp"
+                        android:padding="@dimen/size_4dp"
+                        android:visibility="gone"
+                        android:layout_marginEnd="@dimen/size_16dp"
+                        android:src="@drawable/instagram" />
+
+                    <ImageView
+                        android:id="@+id/twitterIcon"
+                        android:layout_width="@dimen/size_30dp"
+                        android:layout_height="@dimen/size_30dp"
+                        android:padding="@dimen/size_4dp"
+                        android:visibility="gone"
+                        android:src="@drawable/twitter" />
+
+                </LinearLayout>
 
             </RelativeLayout>
 

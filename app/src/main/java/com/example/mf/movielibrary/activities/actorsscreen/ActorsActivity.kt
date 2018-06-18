@@ -8,14 +8,15 @@ import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.actormodel.Actor
+import com.example.mf.movielibrary.models.actormodel.ActorIdResult
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import files.*
 import kotlinx.android.synthetic.main.activity_actors.*
 
 class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsActivityPresenter>(),
-        ActorsActivityContract.ActorsView , MovieRecyclerAdapter.OnMovieSeriesAdapterListener{
+        ActorsActivityContract.ActorsView, MovieRecyclerAdapter.OnMovieSeriesAdapterListener {
 
-    private lateinit var actorModel : Actor
+    private lateinit var actorModel: Actor
     override var mPresenter = ActorsActivityPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,13 +56,20 @@ class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsAct
         actorMovieRecyclerview.visibility = View.VISIBLE
         knowForTitle.visibility = View.VISIBLE
         viewMore.visibility = View.VISIBLE
-        viewMore.setOnClickListener{mPresenter.launchActorsMoviesSeriesActivity(actorModel)}
+        viewMore.setOnClickListener { mPresenter.launchActorsMoviesSeriesActivity(actorModel) }
     }
 
-    override fun setInstgramButton(instagramId: String) {
-        instaIcon.visibility = View.VISIBLE
-        twitterIcon.visibility = View.VISIBLE
-        instaIcon.setOnClickListener{mPresenter.openInstagramIntent(instagramId)}
+    override fun setSocialMediaIcons(actorIdResult: ActorIdResult?) {
+
+        if (actorIdResult?.instagramId != null && actorIdResult.instagramId.isNotEmpty()) {
+            instaIcon.visibility = View.VISIBLE
+            instaIcon.setOnClickListener { mPresenter.openInstagramIntent(actorIdResult.instagramId) }
+        }
+
+        if(actorIdResult?.twitterId != null && actorIdResult.twitterId.isNotEmpty()){
+            twitterIcon.visibility = View.VISIBLE
+            twitterIcon.setOnClickListener { mPresenter.openTwitterIntent(actorIdResult.twitterId) }
+        }
     }
 
     override fun onMovieOrSeriesClicked(movieModel: Movie?) {
