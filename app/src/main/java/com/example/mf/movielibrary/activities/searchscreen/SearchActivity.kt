@@ -25,9 +25,6 @@ import android.graphics.Typeface
 import android.support.v4.content.res.ResourcesCompat
 import android.widget.TextView
 
-
-
-
 class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, SearchActivityPresenter>(),
         SearchActivityContract.SearchBaseView, MovieRecyclerAdapter.OnMovieSeriesAdapterListener,
         SearchView.OnQueryTextListener, DialogInterface.OnClickListener, GenreAdapter.GenreAdapterListener {

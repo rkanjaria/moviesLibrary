@@ -8,6 +8,7 @@ import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActiv
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.MovieSeriesDetailsResult
 import com.example.mf.movielibrary.models.reviewmodels.UserReview
 import files.inflate
+import files.loadCircularImage
 import kotlinx.android.synthetic.main.review_recyler_layout.view.*
 
 class ReviewAdapter(val reviewList: List<UserReview>, val isFromMovieSeriesActivity: Boolean) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
@@ -32,6 +33,8 @@ class ReviewAdapter(val reviewList: List<UserReview>, val isFromMovieSeriesActiv
         val view = reviewItem
 
         fun bindViews(reviewModel: UserReview) {
+            view.reviewerImage.loadCircularImage(R.drawable.green_background)
+            view.reviewerFirstLetter.text = reviewModel.author?.get(0).toString().toUpperCase()
             view.reviewerName.text = reviewModel.author
             view.review.text = reviewModel.content
         }

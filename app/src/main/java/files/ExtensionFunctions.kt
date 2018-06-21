@@ -67,7 +67,7 @@ fun ImageView.loadBlurImage(url: String) {
             .into(this)
 }
 
-fun ImageView.loadCircularImage(url: String) {
+fun ImageView.loadCircularImage(url: Any) {
     Glide.with(context)
             .load(url)
             .apply(RequestOptions.circleCropTransform())

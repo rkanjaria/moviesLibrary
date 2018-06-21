@@ -7,13 +7,27 @@
 
     <ImageView
         android:id="@+id/reviewerImage"
-        android:layout_width="@dimen/size_50dp"
-        android:layout_height="@dimen/size_50dp"
+        android:layout_width="@dimen/size_40dp"
+        android:layout_height="@dimen/size_40dp"
         android:layout_marginStart="@dimen/size_16dp"
         android:layout_marginTop="@dimen/size_16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:src="@color/colorAccent"/>
+
+    <TextView
+        android:id="@+id/reviewerFirstLetter"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fontFamily="@font/noto_sans_regular"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_18"
+        android:textColor="@color/darkGrey"
+        app:layout_constraintStart_toStartOf="@+id/reviewerImage"
+        app:layout_constraintEnd_toEndOf="@+id/reviewerImage"
+        app:layout_constraintTop_toTopOf="@+id/reviewerImage"
+        app:layout_constraintBottom_toBottomOf="@+id/reviewerImage" />
 
     <TextView
         android:id="@+id/reviewerName"
@@ -24,17 +38,8 @@
         android:textStyle="bold"
         android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/reviewerImage"
-        app:layout_constraintTop_toTopOf="@+id/reviewerImage" />
-
-    <TextView
-        android:id="@+id/reviewDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_4dp"
-        android:fontFamily="@font/noto_sans_regular"
-        android:textSize="@dimen/text_size_12"
-        app:layout_constraintStart_toStartOf="@+id/reviewerName"
-        app:layout_constraintTop_toBottomOf="@+id/reviewerName" />
+        app:layout_constraintTop_toTopOf="@+id/reviewerImage"
+        app:layout_constraintBottom_toBottomOf="@+id/reviewerImage" />
 
     <TextView
         android:id="@+id/review"
