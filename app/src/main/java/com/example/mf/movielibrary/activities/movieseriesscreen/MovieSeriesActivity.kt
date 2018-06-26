@@ -149,8 +149,11 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
     }
 
     override fun showPlayTrailerLayout(videoTrailersList: List<VideoTrailers>) {
-        trailersList = videoTrailersList
-        playTrailer.visibility = View.VISIBLE
+
+        if (videoTrailersList.isNotEmpty()) {
+            trailersList = videoTrailersList
+            playTrailer.visibility = View.VISIBLE
+        }
     }
 
     override fun highlightFavoriteIcon() {
