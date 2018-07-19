@@ -61,7 +61,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         }
         val searchText = movieSeriesSearchView.findViewById(android.support.v7.appcompat.R.id.search_src_text) as TextView
         searchText.typeface = ResourcesCompat.getFont(this, R.font.noto_sans_regular)
-        searchText.textSize = 16f
+        searchText.textSize = 14f
         movieSeriesSearchView.setOnQueryTextListener(this)
     }
 
