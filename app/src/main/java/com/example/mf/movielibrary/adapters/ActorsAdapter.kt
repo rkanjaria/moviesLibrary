@@ -34,7 +34,7 @@ class ActorsAdapter(val actorsList: List<Actor?>, actorsAdapterListener: ActorsA
 
         if (position >= itemCount - 1 && !isLoading && isMoreDataAvailable) {
             isLoading = true
-            mActorsAdapterListener?.loadMore()
+            mActorsAdapterListener?.loadMoreActors()
         }
 
         if (getItemViewType(position) == ACTOR_VIEW) {
@@ -68,7 +68,7 @@ class ActorsAdapter(val actorsList: List<Actor?>, actorsAdapterListener: ActorsA
     }
 
     interface ActorsAdapterListener {
-        fun loadMore() {}
+        fun loadMoreActors() {}
         fun onActorClicked(actorModel: Actor?) {}
     }
 

@@ -2,6 +2,7 @@
     <string name="app_name">Movies Library</string>
     <string name="search_movies">Search movies</string>
     <string name="search_tv_shows">Search tv shows</string>
+    <string name="search_famous_people">Search famous people</string>
 
     <string-array name="toolbar_array">
         <item>Movies</item>
@@ -25,6 +26,7 @@
     <string-array name="search_tags">
         <item>Movies</item>
         <item>Tv Shows</item>
+        <item>Actors</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

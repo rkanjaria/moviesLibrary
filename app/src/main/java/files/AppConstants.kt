@@ -19,6 +19,7 @@ val RESULT_CODE = 100
 
 val MOVIE = "movie"
 val TV_SHOWS = "tv"
+val ACTORS = "actors"
 val MOVIE_CREDITS = "movie_credits"
 val TV_CREDITS = "tv_credits"
 

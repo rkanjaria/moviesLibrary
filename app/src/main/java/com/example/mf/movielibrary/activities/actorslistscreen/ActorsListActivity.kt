@@ -67,11 +67,11 @@ class ActorsListActivity : BaseActivity<ActorsListActivityContract.ActorsListVie
         progressBar.visibility = View.VISIBLE
     }
 
-    override fun loadMore() {
-        actorsRecyclerView.post { loadMoreActors() }
+    override fun loadMoreActors() {
+        actorsRecyclerView.post { loadActors() }
     }
 
-    private fun loadMoreActors() {
+    private fun loadActors() {
         page++
         if (mActorsList.size < totalResultsCount) {
             mActorsList.add(null)

@@ -3,6 +3,7 @@ package com.example.mf.movielibrary.activities.searchscreen
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
@@ -10,20 +11,18 @@ import android.view.ContextThemeWrapper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.GenreAdapter
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
-import com.example.mf.movielibrary.classes.KeyboardUtils
 import com.example.mf.movielibrary.models.genremodel.Genre
 import com.example.mf.movielibrary.models.moviemodel.Movie
+import files.ACTORS
 import files.MOVIE
 import files.MOVIE_OR_SERIES
 import files.TV_SHOWS
 import kotlinx.android.synthetic.main.activity_search.*
-import android.graphics.Typeface
-import android.support.v4.content.res.ResourcesCompat
-import android.widget.TextView
 
 class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, SearchActivityPresenter>(),
         SearchActivityContract.SearchBaseView, MovieRecyclerAdapter.OnMovieSeriesAdapterListener,
@@ -174,6 +173,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         when (item) {
             0 -> changeSearchPreference(MOVIE)
             1 -> changeSearchPreference(TV_SHOWS)
+            2 -> changeSearchPreference(TV_SHOWS)
         }
         dialogInterface?.dismiss()
     }
@@ -190,6 +190,13 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
                 movieOrSeries = TV_SHOWS
                 selectedItemPosition = 1
             }
+
+            ACTORS ->{
+                movieSeriesSearchView.queryHint = getString(R.string.search_famous_people)
+                movieOrSeries = TV_SHOWS
+                selectedItemPosition = 2
+            }
+
         }
         mPresenter.getGenreFromDb(preferenceString)
     }
