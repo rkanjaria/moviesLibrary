@@ -13,6 +13,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import com.example.mf.movielibrary.R
+import com.example.mf.movielibrary.adapters.ActorsAdapter
 import com.example.mf.movielibrary.adapters.GenreAdapter
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
@@ -30,7 +31,9 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
     private val mSearchList = mutableListOf<Movie?>()
     private lateinit var gridLayoutManager: GridLayoutManager
+    private lateinit var actorsGridLayoutManager: GridLayoutManager
     private lateinit var movieAdapter: MovieRecyclerAdapter
+    private lateinit var actorsAdapter: ActorsAdapter
     private var queryPage = 1
     private var totalResults = -1
     private var movieOrSeries = MOVIE
@@ -50,7 +53,16 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         changeSearchPreference(movieOrSeries)
 
         gridLayoutManager = GridLayoutManager(this, 3)
+        actorsGridLayoutManager = GridLayoutManager(this, 3)
         searchRecyclerView.layoutManager = gridLayoutManager
+        actorsRecyclerView.layoutManager = actorsGridLayoutManager
+
+        actorsGridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return if (actorsAdapter.getItemViewType(position) == actorsAdapter.LOADER_VIEW)
+                    actorsGridLayoutManager.spanCount else 1
+            }
+        }
 
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
@@ -67,7 +79,6 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     override fun setSearchRecyclerView(moviesList: List<Movie?>?, totalResult: Int) {
 
         totalResults = totalResult
-
         if (moviesList != null && moviesList.isNotEmpty()) {
 
             if (mSearchList.isEmpty()) {
@@ -114,9 +125,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     private fun loadMoreData() {
 
         queryPage++
-
         if (mSearchList.size < totalResults) {
-
             mSearchList.add(null)
             movieAdapter.notifyItemInserted(mSearchList.size - 1)
 
@@ -131,18 +140,26 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     override fun onQueryTextSubmit(query: String?): Boolean {
         movieSeriesSearchView.clearFocus()
         searchQuery = query
-        clearListAndMakeApiCallAgain()
+
+        if (movieOrSeries.equals(ACTORS)) {
+            clearListAndMakeActorsApiCallAgain()
+        } else {
+            clearListAndMakeApiCallAgain()
+        }
         return true
     }
 
     override fun onQueryTextChange(newText: String?) = false
 
+    private fun clearListAndMakeActorsApiCallAgain() {
+
+    }
+
     private fun clearListAndMakeApiCallAgain() {
         isGenre = false
         (genreRecyclerView.adapter as GenreAdapter).removeSeletedGenre()
         queryPage = 1
-        mSearchList.clear()
-        searchRecyclerView.removeAllViews()
+        clearAllSearchTerms()
         mPresenter.callSearchMovieOrSeriesByName(movieOrSeries, searchQuery, queryPage)
     }
 
@@ -173,7 +190,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         when (item) {
             0 -> changeSearchPreference(MOVIE)
             1 -> changeSearchPreference(TV_SHOWS)
-            2 -> changeSearchPreference(TV_SHOWS)
+            2 -> changeSearchPreference(ACTORS)
         }
         dialogInterface?.dismiss()
     }
@@ -181,24 +198,42 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     private fun changeSearchPreference(preferenceString: String) {
         when (preferenceString) {
             MOVIE -> {
-                movieSeriesSearchView.queryHint = getString(R.string.search_movies)
                 movieOrSeries = MOVIE
+                clearAllSearchTerms()
+                movieSeriesSearchView.queryHint = getString(R.string.search_movies)
                 selectedItemPosition = 0
+                mPresenter.getGenreFromDb(preferenceString)
             }
             TV_SHOWS -> {
+                movieOrSeries = TV_SHOWS
+                clearAllSearchTerms()
                 movieSeriesSearchView.queryHint = getString(R.string.search_tv_shows)
-                movieOrSeries = TV_SHOWS
                 selectedItemPosition = 1
+                mPresenter.getGenreFromDb(preferenceString)
             }
-
-            ACTORS ->{
+            ACTORS -> {
+                movieOrSeries = ACTORS
+                clearAllSearchTerms()
                 movieSeriesSearchView.queryHint = getString(R.string.search_famous_people)
-                movieOrSeries = TV_SHOWS
                 selectedItemPosition = 2
             }
-
         }
-        mPresenter.getGenreFromDb(preferenceString)
+    }
+
+    private fun clearAllSearchTerms() {
+        if (movieOrSeries.equals(ACTORS)) {
+            genreRecyclerView.visibility = View.GONE
+            searchRecyclerView.visibility = View.GONE
+            actorsRecyclerView.visibility = View.VISIBLE
+            movieSeriesSearchView.setQuery("", false)
+            movieSeriesSearchView.isIconified = true
+        } else {
+            searchRecyclerView.removeAllViews()
+            mSearchList.clear()
+            genreRecyclerView.visibility = View.VISIBLE
+            searchRecyclerView.visibility = View.VISIBLE
+            actorsRecyclerView.visibility = View.GONE
+        }
     }
 
     override fun onGenreSelected(genreId: Int) {
