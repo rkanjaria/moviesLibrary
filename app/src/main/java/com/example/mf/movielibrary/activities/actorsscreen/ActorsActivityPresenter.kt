@@ -5,6 +5,7 @@ import android.net.Uri
 import com.example.mf.movielibrary.activities.actorsmovieseriesscreen.ActorsMoviesSeriesActivity
 import com.example.mf.movielibrary.activities.imgescreen.ImageActivity
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
+import com.example.mf.movielibrary.activities.searchscreen.SearchActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.actormodel.Actor
@@ -15,7 +16,6 @@ import io.reactivex.schedulers.Schedulers
 
 class ActorsActivityPresenter : BasePresenterImpl<ActorsActivityContract.ActorsView>(),
         ActorsActivityContract.ActorsPresenter {
-
 
     override fun launchActorsMoviesSeriesActivity(actorModel: Actor) {
         val actorMovieSeriesIntent = Intent(mView?.getContext(), ActorsMoviesSeriesActivity::class.java)
@@ -110,3 +110,4 @@ class ActorsActivityPresenter : BasePresenterImpl<ActorsActivityContract.ActorsV
 
     }
 }
+

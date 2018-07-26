@@ -58,7 +58,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/searchRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/genreRecyclerView"
             android:clipToPadding="false"
             android:paddingBottom="@dimen/size_4dp"
@@ -68,6 +68,7 @@
             android:id="@+id/actorsRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/searchRecyclerView"
             android:clipToPadding="false"
             android:paddingBottom="@dimen/size_4dp"
             android:paddingLeft="@dimen/size_8dp"

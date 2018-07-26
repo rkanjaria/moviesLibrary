@@ -3,11 +3,14 @@ package com.example.mf.movielibrary.activities.actorslistscreen
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.ActorsAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.actormodel.Actor
+import files.ACTORS
 import kotlinx.android.synthetic.main.activity_actors_list.*
 
 class ActorsListActivity : BaseActivity<ActorsListActivityContract.ActorsListView, ActorsListActivityPresenter>(),
@@ -82,5 +85,19 @@ class ActorsListActivity : BaseActivity<ActorsListActivityContract.ActorsListVie
 
     override fun onActorClicked(actorModel: Actor?) {
         mPresenter.launchActorsActivity(actorModel)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.home_screen_menu, menu)
+        menu?.findItem(R.id.action_sort)?.isVisible = false // Hiding the sort icon
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> onBackPressed()
+            R.id.action_search -> mPresenter.lauchchSearchActivity(ACTORS)
+        }
+        return true
     }
 }

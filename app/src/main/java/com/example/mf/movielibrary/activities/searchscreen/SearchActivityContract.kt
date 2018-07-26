@@ -3,6 +3,7 @@ package com.example.mf.movielibrary.activities.searchscreen
 import android.widget.LinearLayout
 import com.example.mf.movielibrary.base.BasePresenter
 import com.example.mf.movielibrary.base.BaseView
+import com.example.mf.movielibrary.models.actormodel.Actor
 import com.example.mf.movielibrary.models.genremodel.Genre
 import com.example.mf.movielibrary.models.moviemodel.Movie
 
@@ -17,6 +18,7 @@ class SearchActivityContract {
         fun hideProgressBar()
         fun showSearchTypeDialog()
         fun setGenreRecylerview(genreList: List<Genre>)
+        fun setActorsSearchRecyclerView(actorsList: List<Actor>, totalResult: Int)
     }
 
     interface SearchPresenter : BasePresenter<SearchBaseView> {
@@ -25,5 +27,7 @@ class SearchActivityContract {
         fun requestSearchTypeDialog()
         fun getGenreFromDb(movieOrSeries: String)
         fun callSearchByGenreApi(movieOrSeries: String, page: Int, genreId: Int)
+        fun callSearchPeopleApi(searchQuery: String?, queryPage: Int)
+        fun launchActorsActivity(actorModel: Actor?)
     }
 }

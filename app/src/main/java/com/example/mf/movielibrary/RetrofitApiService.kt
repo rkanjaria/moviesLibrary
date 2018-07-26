@@ -115,4 +115,11 @@ interface RetrofitApiService {
     fun doGetActorsIdsApiCall(@Path("actor_id") actorId: Int,
                               @Query("api_key") apiKey: String = API_KEY): Observable<ActorIdResult>
 
+
+    @GET("search/person")
+    fun doSearchPeopleApiCall(@Query("api_key") apiKey: String = API_KEY,
+                              @Query("query") searchQuery: String,
+                              @Query("page") page: Int,
+                              @Query("include_adult") isAdult: Boolean = true): Observable<ActorsResult>
+
 }

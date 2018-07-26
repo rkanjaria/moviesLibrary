@@ -66,7 +66,6 @@ class MovieRecyclerAdapter(val moviesList: List<Movie?>, onMovieSeriesAdapterLis
     inner open class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private var view: View = itemView
-
         fun bindViews(movieModel: Movie?) {
 
             if(isHorizontal) {

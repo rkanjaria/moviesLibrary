@@ -1,8 +1,11 @@
 package com.example.mf.movielibrary.activities.actorsscreen
 
 import android.os.Bundle
+import android.support.v4.view.GravityCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
@@ -66,7 +69,7 @@ class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsAct
             instaIcon.setOnClickListener { mPresenter.openInstagramIntent(actorIdResult.instagramId) }
         }
 
-        if(actorIdResult?.twitterId != null && actorIdResult.twitterId.isNotEmpty()){
+        if (actorIdResult?.twitterId != null && actorIdResult.twitterId.isNotEmpty()) {
             twitterIcon.visibility = View.VISIBLE
             twitterIcon.setOnClickListener { mPresenter.openTwitterIntent(actorIdResult.twitterId) }
         }
@@ -75,5 +78,4 @@ class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsAct
     override fun onMovieOrSeriesClicked(movieModel: Movie?) {
         mPresenter.launchMovieSeriesActivity(movieModel)
     }
-
 }

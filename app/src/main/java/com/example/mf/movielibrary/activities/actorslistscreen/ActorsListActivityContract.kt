@@ -14,5 +14,6 @@ class ActorsListActivityContract {
     interface ActorsListPresenter : BasePresenter<ActorsListView>{
         fun callGetPopularPeopleApi(page: Int)
         fun launchActorsActivity(actorModel: Actor?)
+        fun lauchchSearchActivity(movieSeriesOrActors: String)
     }
 }
