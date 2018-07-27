@@ -63,11 +63,11 @@ class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListen
     }
 
     fun showProgressBar() {
-        progressBar.visibility = View.VISIBLE
+        progressBar?.visibility = View.VISIBLE
     }
 
     fun hideProgressBar() {
-        progressBar.visibility = View.GONE
+        progressBar?.visibility = View.GONE
     }
 
     fun setRecyclerView(moviesList: List<Movie?>?, totalResults: Int) {

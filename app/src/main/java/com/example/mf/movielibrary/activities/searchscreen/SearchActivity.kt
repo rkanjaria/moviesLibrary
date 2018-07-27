@@ -267,7 +267,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
             ACTORS -> {
                 movieSeriesOrActors = ACTORS
                 clearAllSearchTerms()
-                movieSeriesSearchView.queryHint = getString(R.string.search_famous_people)
+                movieSeriesSearchView.queryHint = getString(R.string.search_celebrities)
                 selectedItemPosition = 2
             }
         }

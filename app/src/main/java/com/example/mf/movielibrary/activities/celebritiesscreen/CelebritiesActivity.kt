@@ -1,4 +1,4 @@
-package com.example.mf.movielibrary.activities.actorslistscreen
+package com.example.mf.movielibrary.activities.celebritiesscreen
 
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
@@ -13,8 +13,8 @@ import com.example.mf.movielibrary.models.actormodel.Actor
 import files.ACTORS
 import kotlinx.android.synthetic.main.activity_actors_list.*
 
-class ActorsListActivity : BaseActivity<ActorsListActivityContract.ActorsListView, ActorsListActivityPresenter>(),
-        ActorsListActivityContract.ActorsListView, ActorsAdapter.ActorsAdapterListener {
+class CelebritiesActivity : BaseActivity<CelebritiesActivityContract.CelebritiesView, CelebritiesActivityPresenter>(),
+        CelebritiesActivityContract.CelebritiesView, ActorsAdapter.ActorsAdapterListener {
 
     private var page = 1
     private var totalResultsCount = -1
@@ -22,12 +22,12 @@ class ActorsListActivity : BaseActivity<ActorsListActivityContract.ActorsListVie
     private lateinit var actorAdapter: ActorsAdapter
     private lateinit var gridLayoutManager: GridLayoutManager
 
-    override var mPresenter = ActorsListActivityPresenter()
+    override var mPresenter = CelebritiesActivityPresenter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actors_list)
-        initToolbar(toolbar as Toolbar, true, "Famous People")
+        initToolbar(toolbar as Toolbar, true, "Celebrities")
         mPresenter.callGetPopularPeopleApi(page)
 
 

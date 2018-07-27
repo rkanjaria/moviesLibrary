@@ -1,7 +1,7 @@
 package com.example.mf.movielibrary.activities.homescreen
 
 import android.content.Intent
-import com.example.mf.movielibrary.activities.actorslistscreen.ActorsListActivity
+import com.example.mf.movielibrary.activities.celebritiesscreen.CelebritiesActivity
 import com.example.mf.movielibrary.activities.collectionlistscreen.CollectionsListActivity
 import com.example.mf.movielibrary.activities.favouritescreen.FavouritesActivity
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
@@ -20,7 +20,7 @@ import io.reactivex.schedulers.Schedulers
 class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>(), HomeActivityContract.HomePresenter {
 
     override fun requestActorsActivity() {
-        val actorsIntent = Intent(mView?.getContext(), ActorsListActivity::class.java)
+        val actorsIntent = Intent(mView?.getContext(), CelebritiesActivity::class.java)
         mView?.getContext()?.startActivity(actorsIntent)
     }
 

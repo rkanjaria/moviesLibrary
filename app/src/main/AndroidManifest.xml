@@ -33,8 +33,9 @@
         <activity android:name=".activities.collectionlistscreen.CollectionsListActivity" />
         <activity android:name=".activities.collectionscreen.CollectionsActivity" />
         <activity android:name=".activities.reviewscreen.ReviewActivity" />
-        <activity android:name=".activities.actorslistscreen.ActorsListActivity" />
-        <activity android:name=".activities.actorsmovieseriesscreen.ActorsMoviesSeriesActivity"></activity>
+        <activity android:name=".activities.celebritiesscreen.CelebritiesActivity" />
+        <activity android:name=".activities.actorsmovieseriesscreen.ActorsMoviesSeriesActivity" />
+        <activity android:name=".activities.castscreen.CastActivity"></activity>
     </application>
 
 </manifest>

@@ -33,7 +33,7 @@
     <item
         android:id="@+id/action_people"
         android:icon="@drawable/ic_face_black"
-        android:title="Famous People" />
+        android:title="Celebrities" />
 
 
 </menu>

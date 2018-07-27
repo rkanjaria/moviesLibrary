@@ -102,7 +102,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
     override fun setCastRecyclerview(castList: List<Cast>) {
         castRecyclerview.setHasFixedSize(true)
         castRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        castRecyclerview.adapter = CastRecyclerAdapter(castList, this)
+        castRecyclerview.adapter = CastRecyclerAdapter(castList, this, true)
         castRecyclerview.visibility = View.VISIBLE
         castTitle.visibility = View.VISIBLE
     }

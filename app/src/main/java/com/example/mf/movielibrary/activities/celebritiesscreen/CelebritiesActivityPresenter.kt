@@ -1,4 +1,4 @@
-package com.example.mf.movielibrary.activities.actorslistscreen
+package com.example.mf.movielibrary.activities.celebritiesscreen
 
 import android.content.Intent
 import com.example.mf.movielibrary.activities.actorsscreen.ActorsActivity
@@ -12,8 +12,8 @@ import files.NAME
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class ActorsListActivityPresenter : BasePresenterImpl<ActorsListActivityContract.ActorsListView>(),
-        ActorsListActivityContract.ActorsListPresenter {
+class CelebritiesActivityPresenter : BasePresenterImpl<CelebritiesActivityContract.CelebritiesView>(),
+        CelebritiesActivityContract.CelebritiesPresenter {
 
     override fun lauchchSearchActivity(movieSeriesOrActors: String) {
         val searchIntent = Intent(mView?.getContext(), SearchActivity::class.java)
