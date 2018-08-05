@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/size_16dp"
         android:layout_marginRight="@dimen/size_8dp"
-        android:layout_marginTop="@dimen/size_30dp"
-        android:src="@drawable/ic_arrow_forward"
+        android:layout_marginTop="@dimen/size_48dp"
+        android:src="@drawable/ic_keyboard_arrow_right"
         app:backgroundTint="@color/darkGrey"
         app:fabSize="mini" />
 

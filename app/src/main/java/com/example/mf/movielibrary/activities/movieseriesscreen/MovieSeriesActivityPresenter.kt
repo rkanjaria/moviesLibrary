@@ -2,6 +2,7 @@ package com.example.mf.movielibrary.activities.movieseriesscreen
 
 import android.content.Intent
 import com.example.mf.movielibrary.activities.actorsscreen.ActorsActivity
+import com.example.mf.movielibrary.activities.castscreen.CastActivity
 import com.example.mf.movielibrary.activities.reviewscreen.ReviewActivity
 import com.example.mf.movielibrary.activities.seasonscreen.SeasonActivity
 import com.example.mf.movielibrary.activities.trailerscreen.TrailerActivity
@@ -26,15 +27,19 @@ import java.util.ArrayList
 class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContract.MovieSeriesView>(),
         MovieSeriesActivityContract.MovieSeriesPresenter {
 
+    override fun launchCastActivity(castList: List<Cast>) {
+        val castIntent = Intent(mView?.getContext(), CastActivity::class.java)
+        castIntent.putParcelableArrayListExtra(PARCELABLE_OBJECT, ArrayList(castList))
+        mView?.getContext()?.startActivity(castIntent)
+    }
+
     override fun launchReviewActivity(reviewList: List<UserReview>) {
         val reviewIntent = Intent(mView?.getContext(), ReviewActivity::class.java)
         reviewIntent.putParcelableArrayListExtra(PARCELABLE_OBJECT, ArrayList(reviewList))
         mView?.getContext()?.startActivity(reviewIntent)
     }
 
-
     override fun addOrRemoveFavourites(movieModel: Movie, movieOrSeries: String) {
-
         if (mView?.getContext()?.database?.doesAlreadyExists(movieModel.id)!!) {
             if (mView?.getContext()?.database?.removeMovie(movieModel.id)!!) {
                 mView?.unhighlightFavoriteIcon()
@@ -85,8 +90,7 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
         }
     }
 
-
-    override fun launchActorActivity(castModel: Cast, movieOrSeries: String?) {
+    override fun launchActorActivity(castModel: Cast) {
         val actorIntent = Intent(mView?.getContext(), ActorsActivity::class.java)
         actorIntent.putExtra(INT_ID, castModel.id)
         actorIntent.putExtra(NAME, castModel.name)
@@ -117,7 +121,6 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
                         mView?.showMessage(error.localizedMessage)
                     })
         }
-
     }
 
     override fun callGetTvDetailsApi(movieOrSeriesId: Int) {

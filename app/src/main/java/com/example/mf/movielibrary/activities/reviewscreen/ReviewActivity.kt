@@ -24,9 +24,7 @@ class ReviewActivity : BaseActivity<ReviewActivityContract.ReviewView, ReviewAct
     }
 
     override fun setReviewRecylerview() {
-
         val reviewList = intent?.getParcelableArrayListExtra<UserReview>(PARCELABLE_OBJECT) as List<UserReview>
-
         reviewRecylerview.setHasFixedSize(true)
         reviewRecylerview.layoutManager = LinearLayoutManager(this)
         reviewRecylerview.adapter = ReviewAdapter(reviewList, false)

@@ -26,7 +26,7 @@ object MovieSeriesActivityContract {
     interface MovieSeriesPresenter : BasePresenter<MovieSeriesView> {
         fun callgetMovieOrSeriesCastApi(movieOrSeries: String?, movieId: Int)
         fun getMovieGenres(genreIds: List<Int>?): String
-        fun launchActorActivity(castModel: Cast, movieOrSeries: String?)
+        fun launchActorActivity(castModel: Cast)
         fun callGetSimilarMovieOrSeriesApi(moviesOrSeries: String?, movieOrSeriesId: Int)
         fun launchMovieSeriesActivity(movieModel: Movie?, movieOrSeries: String?)
         fun callGetTvDetailsApi(movieOrSeriesId: Int)
@@ -36,5 +36,6 @@ object MovieSeriesActivityContract {
         fun addOrRemoveFavourites(movieModel: Movie, movieOrSeries: String)
         fun callGetMoviesOrSeriesReviewsApi(moviesOrSeries: String, movieOrSeriesId: Int)
         fun launchReviewActivity(reviewList: List<UserReview>)
+        fun launchCastActivity(castList: List<Cast>)
     }
 }

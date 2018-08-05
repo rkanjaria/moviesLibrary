@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.cast_recycler_layout.view.*
 import kotlinx.android.synthetic.main.horizontal_footer_layout.view.*
 import org.jetbrains.anko.displayMetrics
 
-class CastRecyclerAdapter(val castList: List<Cast>, val castAdapterListener: OnCastAdapterListener, val isHorizontal : Boolean = false) :
+class CastRecyclerAdapter(val castList: List<Cast>, val castAdapterListener: OnCastAdapterListener, val isHorizontal: Boolean = false) :
         RecyclerView.Adapter<CastRecyclerAdapter.MyViewHolder>() {
 
     private val NORMAL_VIEW = 1
@@ -37,19 +37,18 @@ class CastRecyclerAdapter(val castList: List<Cast>, val castAdapterListener: OnC
     }
 
     override fun getItemViewType(position: Int): Int {
-
-        when (position) {
-            castList.size -> return FOOTER_VIEW
-            8 -> return FOOTER_VIEW
-            else -> return NORMAL_VIEW
+        if (isHorizontal) {
+            if (position == 5) return FOOTER_VIEW else return NORMAL_VIEW
+        } else {
+            return NORMAL_VIEW
         }
     }
 
     override fun getItemCount(): Int {
-        if (castList.size < 8) {
-            return castList.size + 1
+        if (isHorizontal) {
+            if (castList.size < 5) return castList.size else return 6
         } else {
-            return 9
+            return castList.size
         }
     }
 
@@ -61,7 +60,7 @@ class CastRecyclerAdapter(val castList: List<Cast>, val castAdapterListener: OnC
         val view = castView
         fun bindViews(castModel: Cast) {
 
-            if(isHorizontal) {
+            if (isHorizontal) {
                 val widthInDp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100f, view.context.displayMetrics)
                 view.layoutParams.width = widthInDp.toInt()
             }
@@ -76,7 +75,7 @@ class CastRecyclerAdapter(val castList: List<Cast>, val castAdapterListener: OnC
         val fView = footerView
         fun bindFooter() {
             fView.moreButton.setOnClickListener {
-                Toast.makeText(it.context, "more Clicked", Toast.LENGTH_SHORT).show()
+                castAdapterListener.onMoreClicked(castList)
             }
         }
     }
@@ -85,5 +84,6 @@ class CastRecyclerAdapter(val castList: List<Cast>, val castAdapterListener: OnC
 
     interface OnCastAdapterListener {
         fun onCastClicked(castModel: Cast)
+        fun onMoreClicked(castList: List<Cast>){}
     }
 }

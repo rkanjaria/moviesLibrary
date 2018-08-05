@@ -8,6 +8,17 @@
     android:layout_marginEnd="@dimen/size_8dp"
     android:layout_marginTop="@dimen/size_4dp">
 
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </android.support.constraint.ConstraintLayout>
+
     <android.support.v7.widget.CardView
         android:id="@+id/actorsCard"
         android:layout_width="0dp"
@@ -18,15 +29,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/actorsPic"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+        <ImageView
+            android:id="@+id/actorsPic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.v7.widget.CardView>
 
@@ -34,30 +45,30 @@
         android:id="@+id/actorsName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_regular"
         android:layout_marginTop="@dimen/size_8dp"
-        android:maxLines="2"
         android:ellipsize="end"
-        android:textSize="@dimen/text_size_12"
+        android:fontFamily="@font/noto_sans_regular"
         android:gravity="center"
-        android:textStyle="bold"
+        android:maxLines="2"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/actorsCard"
+        android:textSize="@dimen/text_size_12"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/actorsCard"
         app:layout_constraintStart_toStartOf="@+id/actorsCard"
-        app:layout_constraintEnd_toEndOf="@+id/actorsCard" />
+        app:layout_constraintTop_toBottomOf="@+id/actorsCard" />
 
     <TextView
         android:id="@+id/actorsCharacterName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/noto_sans_regular"
         android:layout_marginTop="@dimen/size_4dp"
-        android:maxLines="1"
         android:ellipsize="end"
+        android:fontFamily="@font/noto_sans_regular"
         android:gravity="center"
+        android:maxLines="1"
         android:textSize="@dimen/text_size_12"
-        app:layout_constraintTop_toBottomOf="@+id/actorsName"
+        app:layout_constraintEnd_toEndOf="@+id/actorsCard"
         app:layout_constraintStart_toStartOf="@+id/actorsCard"
-        app:layout_constraintEnd_toEndOf="@+id/actorsCard" />
+        app:layout_constraintTop_toBottomOf="@+id/actorsName" />
 
 </android.support.constraint.ConstraintLayout>
