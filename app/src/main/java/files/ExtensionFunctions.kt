@@ -1,33 +1,20 @@
 package files
 
 import android.animation.ObjectAnimator
-import android.app.Activity
 import android.content.Context
 import android.support.annotation.DrawableRes
 import android.support.annotation.LayoutRes
-import android.support.annotation.Px
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.res.ResourcesCompat
-import android.text.TextUtils
-import android.util.DisplayMetrics
-import android.util.TypedValue
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.classes.BlurTransform
 import com.example.mf.movielibrary.helpers.DatabaseHelper
-import org.jetbrains.anko.collections.forEachByIndex
-import org.jetbrains.anko.displayMetrics
 
 /**
  * Created by RK on 23-12-2017.
@@ -39,7 +26,7 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false):
 
 fun ImageView.loadImage(url: String, placeholder: Int = R.color.darkGrey, centerCrop: Boolean = false) {
 
-    if(centerCrop){
+    if (centerCrop) {
         Glide.with(context)
                 .load(url)
                 .apply(RequestOptions().centerCrop())
@@ -47,7 +34,7 @@ fun ImageView.loadImage(url: String, placeholder: Int = R.color.darkGrey, center
                 .apply(RequestOptions.errorOf(placeholder))
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .into(this)
-    }else {
+    } else {
         Glide.with(context)
                 .load(url)
                 .apply(RequestOptions.placeholderOf(placeholder))
@@ -82,6 +69,13 @@ fun ImageView.loadDrawableImage(@DrawableRes url: Int, placeholder: Int = R.colo
             .apply(RequestOptions().centerCrop())
             .apply(RequestOptions.placeholderOf(placeholder))
             .apply(RequestOptions.errorOf(placeholder))
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(this)
+}
+
+fun ImageView.loadDrawable(@DrawableRes url: Int) {
+    Glide.with(context)
+            .load(url)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
 }

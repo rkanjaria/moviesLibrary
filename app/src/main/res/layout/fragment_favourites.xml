@@ -24,9 +24,9 @@
         android:visibility="gone">
 
         <ImageView
-            android:layout_width="@dimen/size_100dp"
-            android:layout_height="@dimen/size_100dp"
-            android:src="@drawable/lover_grey" />
+            android:id="@+id/noFavavouritesImage"
+            android:layout_width="@dimen/size_230dp"
+            android:layout_height="@dimen/size_230dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_20"
             android:gravity="center"
-            android:layout_marginTop="@dimen/size_16dp"
+            android:layout_marginTop="@dimen/size_32dp"
             android:layout_marginLeft="@dimen/size_16dp"
             android:layout_marginRight="@dimen/size_16dp"
             android:text="Whoops !"/>

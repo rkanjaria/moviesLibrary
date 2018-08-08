@@ -12,10 +12,7 @@ import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.MOVIE_OR_SERIES
-import files.PARCELABLE_OBJECT
-import files.RESULT_CODE
-import files.database
+import files.*
 import kotlinx.android.synthetic.main.fragment_favourites.*
 
 
@@ -42,6 +39,7 @@ class FavouritesFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapter
 
         } else {
             favouritesRecyclerview.visibility = View.GONE
+            noFavavouritesImage.loadDrawable(R.drawable.no_fav)
             noFavouritesLayout.visibility = View.VISIBLE
         }
     }

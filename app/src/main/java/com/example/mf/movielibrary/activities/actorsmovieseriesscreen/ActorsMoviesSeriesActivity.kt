@@ -1,8 +1,6 @@
 package com.example.mf.movielibrary.activities.actorsmovieseriesscreen
 
 import android.os.Bundle
-import android.support.design.widget.AppBarLayout
-import android.support.v4.app.Fragment
 import android.support.v7.widget.Toolbar
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.ActorsMoviesSeriesAdapter
@@ -11,10 +9,11 @@ import com.example.mf.movielibrary.fragments.ActorsMovieFragment
 import com.example.mf.movielibrary.fragments.ActorsTvshowsFragment
 import com.example.mf.movielibrary.interfaces.ActorsMoviesSeriesListener
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.*
+import files.MOVIE_CREDITS
+import files.NAME
 import kotlinx.android.synthetic.main.activity_actors_movies_series.*
 
-class ActorsMoviesSeriesActivity : BaseActivity<ActorsMoviesSeriesActivityContract.ActorsMoviesSeriesView,
+class   ActorsMoviesSeriesActivity : BaseActivity<ActorsMoviesSeriesActivityContract.ActorsMoviesSeriesView,
         ActorsMoviesSeriesActivityPresenter>(), ActorsMoviesSeriesActivityContract.ActorsMoviesSeriesView, ActorsMoviesSeriesListener {
 
     override fun onCallActorsCreditsApi(actorId: Int, moviesOrSeriesCredits: String) {
