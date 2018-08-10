@@ -6,16 +6,9 @@ import android.util.Log
 import com.example.mf.movielibrary.models.genremodel.Genre
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import com.google.gson.Gson
-import com.google.gson.JsonElement
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import com.google.gson.reflect.TypeToken
-import com.google.gson.stream.JsonReader
 import files.*
 import org.jetbrains.anko.db.*
-import org.json.JSONArray
-import org.json.JSONObject
-import org.json.JSONStringer
 
 /**
  * Created by RK on 22-01-2018.
@@ -106,9 +99,9 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
         return genreList!!
     }
 
-    fun isMovieTableEmpty(): Boolean {
+    fun isTableEmpty(tableName : String, tableField: String): Boolean {
         val result = dbInstance?.use {
-            select(GENRE_TABLE, GENRE_NAME)
+            select(tableName, tableField)
                     .exec { parseList(StringParser) }
         }
         return (result == null || result.isEmpty())
@@ -153,7 +146,7 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
         return (movies != null && movies.size > 0)
     }
 
-    fun getAllMoviesOrTvShows(movieOrSeries: String): List<Movie> {
+    fun getAllMoviesOrTvShows(movieOrSeries: String): List<Movie>? {
 
         val moviesOrShowsList = ArrayList<Movie>()
         dbInstance?.use {
@@ -182,6 +175,6 @@ class DatabaseHelper(context: Context) : ManagedSQLiteOpenHelper(context, DATABA
                 })
             }
         }
-        return moviesOrShowsList!!
+        return moviesOrShowsList
     }
 }

@@ -11,8 +11,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.homescreen.HomeActivity" />
-        <activity android:name=".activities.movieseriesscreen.MovieSeriesActivity" />
+        <activity
+            android:name=".activities.homescreen.HomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.movieseriesscreen.MovieSeriesActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".activities.splashscreen.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,22 +26,58 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.actorsscreen.ActorsActivity" />
-        <activity android:name=".activities.imgescreen.ImageActivity" />
-        <activity android:name=".activities.seasonscreen.SeasonActivity" />
-        <activity android:name=".activities.searchscreen.SearchActivity" />
-        <activity android:name=".activities.episodescreen.EpisodeActivity" />
+        <activity
+            android:name=".activities.actorsscreen.ActorsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.imgescreen.ImageActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.seasonscreen.SeasonActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.searchscreen.SearchActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
+        <activity
+            android:name=".activities.episodescreen.EpisodeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".activities.trailerscreen.TrailerActivity"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" />
-        <activity android:name=".activities.favouritescreen.FavouritesActivity" />
-        <activity android:name=".activities.collectionlistscreen.CollectionsListActivity" />
-        <activity android:name=".activities.collectionscreen.CollectionsActivity" />
-        <activity android:name=".activities.reviewscreen.ReviewActivity" />
-        <activity android:name=".activities.celebritiesscreen.CelebritiesActivity" />
-        <activity android:name=".activities.actorsmovieseriesscreen.ActorsMoviesSeriesActivity" />
-        <activity android:name=".activities.castscreen.CastActivity"></activity>
+        <activity
+            android:name=".activities.favouritescreen.FavouritesActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.collectionlistscreen.CollectionsListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.collectionscreen.CollectionsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.reviewscreen.ReviewActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.celebritiesscreen.CelebritiesActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.actorsmovieseriesscreen.ActorsMoviesSeriesActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name=".activities.castscreen.CastActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
     </application>
 
 </manifest>

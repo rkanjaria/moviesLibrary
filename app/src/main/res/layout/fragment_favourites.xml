@@ -14,7 +14,6 @@
         android:paddingLeft="@dimen/size_8dp"
         android:paddingTop="@dimen/size_4dp" />
 
-
     <LinearLayout
         android:id="@+id/noFavouritesLayout"
         android:layout_width="match_parent"

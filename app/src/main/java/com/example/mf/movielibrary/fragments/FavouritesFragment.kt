@@ -32,7 +32,7 @@ class FavouritesFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapter
     fun initFragment() {
         val moviesList = context.database.getAllMoviesOrTvShows(movieOrSeries)
 
-        if (moviesList.isNotEmpty()) {
+        if (moviesList != null && moviesList.isNotEmpty()) {
             favouritesRecyclerview.setHasFixedSize(true)
             favouritesRecyclerview.layoutManager = GridLayoutManager(context, 3)
             favouritesRecyclerview.adapter = MovieRecyclerAdapter(moviesList, this)

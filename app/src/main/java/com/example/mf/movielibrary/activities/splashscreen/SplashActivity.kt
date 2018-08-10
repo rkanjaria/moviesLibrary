@@ -5,9 +5,7 @@ import android.os.Bundle
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.activities.homescreen.HomeActivity
 import com.example.mf.movielibrary.base.BaseActivity
-import files.MOVIE
-import files.TV_SHOWS
-import files.database
+import files.*
 
 class SplashActivity : BaseActivity<SplashActivityContract.SplashView, SplashActivityPresenter>(),
         SplashActivityContract.SplashView {
@@ -19,7 +17,7 @@ class SplashActivity : BaseActivity<SplashActivityContract.SplashView, SplashAct
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        val isTableEmpty = database.isMovieTableEmpty()
+        val isTableEmpty = database.isTableEmpty(GENRE_TABLE, GENRE_NAME)
 
         if (isTableEmpty) {
             mPresenter.callGetGenreListApi(MOVIE, flag)

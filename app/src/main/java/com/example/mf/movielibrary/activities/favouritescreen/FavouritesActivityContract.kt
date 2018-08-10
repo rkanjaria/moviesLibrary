@@ -10,8 +10,10 @@ class FavouritesActivityContract {
 
     interface FavoritesView : BaseView {
         fun setupViewPager()
+        fun setNoFavouritesLayout()
     }
     interface FavoritesPresenter : BasePresenter<FavoritesView> {
         fun requestSetupViewPager()
+        fun requestNoFavouritesLayout()
     }
 }

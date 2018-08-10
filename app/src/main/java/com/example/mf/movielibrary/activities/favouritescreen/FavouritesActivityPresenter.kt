@@ -7,6 +7,10 @@ import com.example.mf.movielibrary.base.BasePresenterImpl
  */
 class FavouritesActivityPresenter : BasePresenterImpl<FavouritesActivityContract.FavoritesView>(),
         FavouritesActivityContract.FavoritesPresenter {
+    override fun requestNoFavouritesLayout() {
+        mView?.setNoFavouritesLayout()
+    }
+
     override fun requestSetupViewPager() {
         mView?.setupViewPager()
     }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.ContextThemeWrapper
 import android.view.Menu
@@ -20,10 +21,7 @@ import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.actormodel.Actor
 import com.example.mf.movielibrary.models.genremodel.Genre
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.ACTORS
-import files.MOVIE
-import files.MOVIE_OR_SERIES
-import files.TV_SHOWS
+import files.*
 import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, SearchActivityPresenter>(),
@@ -118,11 +116,9 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
                 }
                 movieAdapter.refreshAdapter(lastPosition)
             }
-            searchRecyclerView.visibility = View.VISIBLE
-            noSearchLayout.visibility = View.GONE
+            hideNoSearchLayout(searchRecyclerView)
         } else {
-            searchRecyclerView.visibility = View.GONE
-            noSearchLayout.visibility = View.VISIBLE
+            showNoSearchLayout(searchRecyclerView)
         }
     }
 
@@ -303,5 +299,15 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
     override fun hideProgressBar() {
         progressBar.visibility = View.GONE
+    }
+
+    private fun showNoSearchLayout(recyclerViewToHide: RecyclerView){
+        noSearchImage.loadDrawable(R.drawable.no_search)
+        recyclerViewToHide.visibility = View.GONE
+        noSearchLayout.visibility = View.VISIBLE
+    }
+    private fun hideNoSearchLayout(recyclerViewToShow: RecyclerView){
+        recyclerViewToShow.visibility = View.VISIBLE
+        noSearchLayout.visibility = View.GONE
     }
 }

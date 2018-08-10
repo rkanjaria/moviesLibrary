@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorPrimary"
     tools:context="com.example.mf.movielibrary.activities.favouritescreen.FavouritesActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -42,6 +43,46 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/movieSeriesViewpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/noFavouritesLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/noFavavouritesImage"
+            android:layout_width="@dimen/size_230dp"
+            android:layout_height="@dimen/size_230dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans_regular"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_20"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/size_32dp"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:text="Whoops !"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans_regular"
+            android:textSize="@dimen/text_size_16"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/size_8dp"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:text="@string/no_favourites_text"/>
+
+    </LinearLayout>
 
 </LinearLayout>
