@@ -30,9 +30,8 @@
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="no_favourites_text">Looks like You have no favourites added. Please add some.</string>
-    <string name="no_search_text">Nothing found! Try another movie to tv show.</string>
+    <string name="no_favourites_text">Add something to your favourite box.</string>
+    <string name="no_search_text">Nothing found! Try another search.</string>
     <string name="transition_name">shared_transition</string>
 
 </resources>

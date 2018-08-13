@@ -1,6 +1,5 @@
 package com.example.mf.movielibrary.activities.searchscreen
 
-import android.widget.LinearLayout
 import com.example.mf.movielibrary.base.BasePresenter
 import com.example.mf.movielibrary.base.BaseView
 import com.example.mf.movielibrary.models.actormodel.Actor
@@ -18,7 +17,7 @@ class SearchActivityContract {
         fun hideProgressBar()
         fun showSearchTypeDialog()
         fun setGenreRecylerview(genreList: List<Genre>)
-        fun setActorsSearchRecyclerView(actorsList: List<Actor>, totalResult: Int)
+        fun setActorsSearchRecyclerView(actorsList: List<Actor>?, totalResult: Int)
     }
 
     interface SearchPresenter : BasePresenter<SearchBaseView> {

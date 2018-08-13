@@ -86,6 +86,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
     // Click genreRecyclerviewItem
     override fun onGenreSelected(genreId: Int) {
+        hideNoSearchLayout(null)
         movieSeriesSearchView.clearFocus()
         currentGenreId = genreId
         isGenre = true
@@ -148,30 +149,37 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
 
     // Setting ActorsRecyclerView
-    override fun setActorsSearchRecyclerView(actorsList: List<Actor>, totalResult: Int) {
+    override fun setActorsSearchRecyclerView(actorsList: List<Actor>?, totalResult: Int) {
         totalResults = totalResult
 
-        if (mActorsList.isEmpty()) {
-            // for first time when data loads, set the adapter of recyclerview this helps in solving pagination issue since new adapter is set no refreshed
-            mActorsList.addAll(actorsList)
-            actorsAdapter = ActorsAdapter(mActorsList, this)
-            actorsRecyclerView.adapter = actorsAdapter
+        if (actorsList != null && actorsList.isNotEmpty()) {
 
-        } else {
-            // for the second time remove the loader view and add the data and refresh the recyclerview
-            mActorsList.removeAt(mActorsList.size - 1)
-            val lastPosition = mActorsList.size
-            if (actorsList.isNotEmpty()) {
+            if (mActorsList.isEmpty()) {
+                // for first time when data loads, set the adapter of recyclerview this helps in solving pagination issue since new adapter is set no refreshed
                 mActorsList.addAll(actorsList)
+                actorsAdapter = ActorsAdapter(mActorsList, this)
+                actorsRecyclerView.adapter = actorsAdapter
+
+            } else {
+                // for the second time remove the loader view and add the data and refresh the recyclerview
+                mActorsList.removeAt(mActorsList.size - 1)
+                val lastPosition = mActorsList.size
+                if (actorsList.isNotEmpty()) {
+                    mActorsList.addAll(actorsList)
+                }
+                actorsAdapter.refreshAdapter(lastPosition)
             }
-            actorsAdapter.refreshAdapter(lastPosition)
+            hideNoSearchLayout(actorsRecyclerView)
+        } else {
+            showNoSearchLayout(actorsRecyclerView)
         }
     }
 
     // Loading more for ActorsRecyclerView
     override fun loadMoreActors() {
         actorsRecyclerView.post {
-            loadActors() }
+            loadActors()
+        }
     }
 
     private fun loadActors() {
@@ -189,6 +197,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
+        hideNoSearchLayout(null)
         movieSeriesSearchView.clearFocus()
         searchQuery = query
 
@@ -245,6 +254,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
     }
 
     private fun changeSearchPreference(preferenceString: String) {
+        hideNoSearchLayout(null)
         when (preferenceString) {
             MOVIE -> {
                 movieSeriesOrActors = MOVIE
@@ -267,7 +277,6 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
                 selectedItemPosition = 2
             }
         }
-        clearSearchQuery()
     }
 
     private fun clearAllSearchTerms() {
@@ -301,13 +310,15 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         progressBar.visibility = View.GONE
     }
 
-    private fun showNoSearchLayout(recyclerViewToHide: RecyclerView){
+    private fun showNoSearchLayout(recyclerViewToHide: RecyclerView?) {
         noSearchImage.loadDrawable(R.drawable.no_search)
-        recyclerViewToHide.visibility = View.GONE
+        recyclerViewToHide?.visibility = View.GONE
         noSearchLayout.visibility = View.VISIBLE
     }
-    private fun hideNoSearchLayout(recyclerViewToShow: RecyclerView){
-        recyclerViewToShow.visibility = View.VISIBLE
-        noSearchLayout.visibility = View.GONE
+
+    private fun hideNoSearchLayout(recyclerViewToShow: RecyclerView?) {
+        recyclerViewToShow?.visibility = View.VISIBLE
+        if (noSearchLayout.visibility == View.VISIBLE)
+            noSearchLayout.visibility = View.GONE
     }
 }

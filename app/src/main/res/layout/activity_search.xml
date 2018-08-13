@@ -100,13 +100,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:layout_marginRight="@dimen/size_16dp"
-                android:layout_marginTop="@dimen/size_16dp"
+                android:layout_marginTop="@dimen/size_32dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/noto_sans_regular"
                 android:gravity="center"
                 android:text="Aww Snap !"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_20" />
+                android:textSize="@dimen/text_size_18" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -118,7 +118,7 @@
                 android:fontFamily="@font/noto_sans_regular"
                 android:gravity="center"
                 android:text="@string/no_search_text"
-                android:textSize="@dimen/text_size_16" />
+                android:textSize="@dimen/text_size_14" />
 
         </LinearLayout>
 
