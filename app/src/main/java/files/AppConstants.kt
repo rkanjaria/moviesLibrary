@@ -1,7 +1,5 @@
 package files
 
-import android.graphics.Movie
-
 /**
  * Created by RK on 02-01-2018.
  */
@@ -59,3 +57,4 @@ val INT_ID = "cast_id"
 val NAME = "name"
 
 val YOUTUBE_API_KEY = "AIzaSyC5BpEwIkGZDf_9F7X3FEMGS2TEYeA6HzQ"
+val POSITION = "position"

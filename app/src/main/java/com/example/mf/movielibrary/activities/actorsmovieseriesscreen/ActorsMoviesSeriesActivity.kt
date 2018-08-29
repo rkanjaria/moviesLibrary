@@ -5,15 +5,14 @@ import android.support.v7.widget.Toolbar
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.ActorsMoviesSeriesAdapter
 import com.example.mf.movielibrary.base.BaseActivity
-import com.example.mf.movielibrary.fragments.ActorsMovieFragment
-import com.example.mf.movielibrary.fragments.ActorsTvshowsFragment
+import com.example.mf.movielibrary.fragments.ActorsMovieTvShowsFragment
 import com.example.mf.movielibrary.interfaces.ActorsMoviesSeriesListener
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import files.MOVIE_CREDITS
 import files.NAME
 import kotlinx.android.synthetic.main.activity_actors_movies_series.*
 
-class   ActorsMoviesSeriesActivity : BaseActivity<ActorsMoviesSeriesActivityContract.ActorsMoviesSeriesView,
+class ActorsMoviesSeriesActivity : BaseActivity<ActorsMoviesSeriesActivityContract.ActorsMoviesSeriesView,
         ActorsMoviesSeriesActivityPresenter>(), ActorsMoviesSeriesActivityContract.ActorsMoviesSeriesView, ActorsMoviesSeriesListener {
 
     override fun onCallActorsCreditsApi(actorId: Int, moviesOrSeriesCredits: String) {
@@ -31,8 +30,8 @@ class   ActorsMoviesSeriesActivity : BaseActivity<ActorsMoviesSeriesActivityCont
 
     override fun setViewPager() {
         val adapter = ActorsMoviesSeriesAdapter(supportFragmentManager)
-        adapter.addFragment(ActorsMovieFragment(), "Movies")
-        adapter.addFragment(ActorsTvshowsFragment(), "Tv shows")
+        adapter.addFragment("Movies")
+        adapter.addFragment("Tv shows")
         movieSeriesViewpager.adapter = adapter
         tabLayout.setupWithViewPager(movieSeriesViewpager)
     }
@@ -55,7 +54,6 @@ class   ActorsMoviesSeriesActivity : BaseActivity<ActorsMoviesSeriesActivityCont
             getSeriesFragment().showProgressBar()
     }
 
-    fun getMoviesFragment() = movieSeriesViewpager.adapter.instantiateItem(movieSeriesViewpager, 0) as ActorsMovieFragment
-
-    fun getSeriesFragment() = movieSeriesViewpager.adapter.instantiateItem(movieSeriesViewpager, 1) as ActorsTvshowsFragment
+    fun getMoviesFragment() = movieSeriesViewpager.adapter.instantiateItem(movieSeriesViewpager, 0) as ActorsMovieTvShowsFragment
+    fun getSeriesFragment() = movieSeriesViewpager.adapter.instantiateItem(movieSeriesViewpager, 1) as ActorsMovieTvShowsFragment
 }

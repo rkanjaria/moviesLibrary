@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context="com.example.mf.movielibrary.fragments.ActorsMovieFragment">
+    tools:context="com.example.mf.movielibrary.fragments.ActorsMovieTvShowsFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/movieSeriesRecyclerView"
@@ -13,6 +13,7 @@
         android:paddingTop="@dimen/size_4dp"
         android:paddingBottom="@dimen/size_4dp"
         android:paddingLeft="@dimen/size_8dp"
+        android:visibility="gone"
         android:clipToPadding="false" />
 
     <ProgressBar
@@ -21,5 +22,46 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/noMovieSeriesLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/genreRecyclerView"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/noMovieSeriesImage"
+            android:layout_width="@dimen/size_230dp"
+            android:layout_height="@dimen/size_230dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:layout_marginTop="@dimen/size_32dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans_regular"
+            android:gravity="center"
+            android:text="Aww Snap !"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_18" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/size_16dp"
+            android:layout_marginRight="@dimen/size_16dp"
+            android:layout_marginTop="@dimen/size_8dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/noto_sans_regular"
+            android:gravity="center"
+            android:text="@string/no_search_text"
+            android:textSize="@dimen/text_size_14" />
+
+    </LinearLayout>
 
 </RelativeLayout>

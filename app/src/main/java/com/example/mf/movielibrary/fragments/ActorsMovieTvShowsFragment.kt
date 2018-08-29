@@ -17,7 +17,7 @@ import com.example.mf.movielibrary.models.moviemodel.Movie
 import files.*
 import kotlinx.android.synthetic.main.fragment_actors_movie_series.*
 
-class ActorsTvshowsFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListener {
+class ActorsMovieTvShowsFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListener {
 
     private var mListener: ActorsMoviesSeriesListener? = null
     private var actorId = -1
@@ -30,7 +30,11 @@ class ActorsTvshowsFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdap
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         actorId = activity.intent.getIntExtra(INT_ID, -1)
-        mListener?.onCallActorsCreditsApi(actorId, TV_CREDITS)
+
+        if (arguments.getInt(POSITION, -1) == 0)
+            mListener?.onCallActorsCreditsApi(actorId, MOVIE_CREDITS)
+        else
+            mListener?.onCallActorsCreditsApi(actorId, TV_CREDITS)
     }
 
     fun setMovieOrSeriesRecyclerView(moviesList: List<Movie?>?) {
@@ -66,7 +70,8 @@ class ActorsTvshowsFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdap
     override fun onMovieOrSeriesClicked(movieModel: Movie?) {
         val movieSeriesIntent = Intent(context, MovieSeriesActivity::class.java)
         movieSeriesIntent.putExtra(PARCELABLE_OBJECT, movieModel)
-        movieSeriesIntent.putExtra(MOVIE_OR_SERIES, TV_SHOWS)
+        val mediaType = if (arguments.getInt(POSITION, -1) == 0) MOVIE else TV_SHOWS
+        movieSeriesIntent.putExtra(MOVIE_OR_SERIES, mediaType)
         context.startActivity(movieSeriesIntent)
     }
 }
