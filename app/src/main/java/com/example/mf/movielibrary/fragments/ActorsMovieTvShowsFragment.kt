@@ -38,10 +38,15 @@ class ActorsMovieTvShowsFragment : Fragment(), MovieRecyclerAdapter.OnMovieSerie
     }
 
     fun setMovieOrSeriesRecyclerView(moviesList: List<Movie?>?) {
-        if (moviesList != null) {
+        if (moviesList != null && moviesList.isNotEmpty()) {
+            movieSeriesRecyclerView.visibility = View.VISIBLE
             movieSeriesRecyclerView.setHasFixedSize(true)
             movieSeriesRecyclerView.layoutManager = GridLayoutManager(context, 3)
             movieSeriesRecyclerView?.adapter = MovieRecyclerAdapter(moviesList, this)
+        } else {
+            movieSeriesRecyclerView.visibility = View.GONE
+            noMovieSeriesLayout.visibility = View.VISIBLE
+            noMovieSeriesImage.loadDrawable(R.drawable.no_movies_series)
         }
     }
 
