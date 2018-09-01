@@ -45,6 +45,9 @@
     <dimen name="size_250dp">250dp</dimen>
     <dimen name="size_270dp">270dp</dimen>
     <dimen name="size_300dp">300dp</dimen>
+    <dimen name="size_310dp">310dp</dimen>
+    <dimen name="size_320dp">320dp</dimen>
+    <dimen name="size_330dp">330dp</dimen>
 
     <!-- Text Size -->
     <dimen name="text_size_16">16sp</dimen>

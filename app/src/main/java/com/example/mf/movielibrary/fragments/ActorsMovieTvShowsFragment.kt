@@ -45,8 +45,11 @@ class ActorsMovieTvShowsFragment : Fragment(), MovieRecyclerAdapter.OnMovieSerie
             movieSeriesRecyclerView?.adapter = MovieRecyclerAdapter(moviesList, this)
         } else {
             movieSeriesRecyclerView.visibility = View.GONE
+            noMovieSeriesImage.loadDrawable(R.drawable.no_movie_series)
+            val moviesOrTvshows = if (arguments.getInt(POSITION, -1) == 0) "movies" else "tv shows"
+            val name = activity.intent.getStringExtra(NAME)
+            noMovieSeriesSubtitle.text = "No $moviesOrTvshows found for $name"
             noMovieSeriesLayout.visibility = View.VISIBLE
-            noMovieSeriesImage.loadDrawable(R.drawable.no_movies_series)
         }
     }
 
