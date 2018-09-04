@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.support.annotation.StringRes
 import android.support.v7.widget.Toolbar
-import android.widget.ProgressBar
 
 
 /**
@@ -17,6 +16,7 @@ interface BaseView {
     fun showError(@StringRes stringResId: Int)
     fun showMessage(@StringRes stringResId: Int)
     fun showMessage(message: String)
+    fun showNoInternetConnectionSnackBar(message: String)
     fun initToolbar(toolbar : Toolbar, showBackButton : Boolean, title: String)
     fun finishActivity()
     fun lauchchActivity(activityToBeLaunched : Intent)

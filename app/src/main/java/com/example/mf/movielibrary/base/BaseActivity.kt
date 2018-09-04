@@ -3,29 +3,32 @@ package com.example.mf.movielibrary.base
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.Toast
-import com.example.mf.movielibrary.classes.KeyboardUtils
 import android.widget.TextView
-import android.widget.RelativeLayout
+import android.widget.Toast
 import com.example.mf.movielibrary.R
+import com.example.mf.movielibrary.classes.KeyboardUtils
 
 
 /**
  * Created by RK on 28-11-2017.
  */
 abstract class BaseActivity<in V : BaseView, T : BasePresenter<V>>
-    : AppCompatActivity(), BaseView {
+    : AppCompatActivity(), BaseView, View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mPresenter.attachView(this as V)
+
+        if (!mPresenter.isNetworkAvailable()) {
+            showNoInternetConnectionSnackBar("No Internet Connection")
+        }
     }
 
     protected abstract var mPresenter: T
@@ -105,5 +108,15 @@ abstract class BaseActivity<in V : BaseView, T : BasePresenter<V>>
         toastTV.typeface = ResourcesCompat.getFont(this, R.font.noto_sans_regular)
         toastTV.textSize = 14f
         toast.show()
+    }
+
+    override fun showNoInternetConnectionSnackBar(message: String) {
+        val noInternetSnackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
+        noInternetSnackbar.setAction("Try again", this)
+        noInternetSnackbar.show()
+    }
+
+    override fun onClick(view: View?) {
+
     }
 }

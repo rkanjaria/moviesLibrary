@@ -16,8 +16,6 @@ class RetrofitHelper {
     companion object getRetroClient {
 
         fun create(): RetrofitApiService{
-            //5526b6795b244b3f164510b8955df249
-
             val retrofit = Retrofit.Builder()
                     .client(getOkHttpClient())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -36,7 +34,6 @@ class RetrofitHelper {
         }
 
         fun getOkHttpClient() : OkHttpClient = OkHttpClient.Builder()
-                .addInterceptor(getHttpLoggingInterceptor()
-                ).build()
+                .addInterceptor(getHttpLoggingInterceptor()).build()
     }
 }
