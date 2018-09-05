@@ -23,7 +23,6 @@ class EpisodeActivityPresenter : BasePresenterImpl<EpisodeActivityContract.Episo
 
                 }, { error ->
                     error.printStackTrace()
-                    mView?.showMessage(error.localizedMessage)
                 })
 
     }

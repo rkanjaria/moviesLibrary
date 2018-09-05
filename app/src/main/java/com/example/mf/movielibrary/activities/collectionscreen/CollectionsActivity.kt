@@ -9,7 +9,10 @@ import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.collectionmodels.CollectionsResult
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.*
+import files.BACKDROP_PATH
+import files.INT_ID
+import files.NAME
+import files.loadDrawableImage
 import kotlinx.android.synthetic.main.activity_collections.*
 
 class CollectionsActivity : BaseActivity<CollectionsActivityContract.CollectionsView, CollectionsActivityPresenter>(),
@@ -23,6 +26,10 @@ class CollectionsActivity : BaseActivity<CollectionsActivityContract.Collections
 
         initToolbar(toolbar as Toolbar, true, intent.getStringExtra(NAME))
         collectionPosterImage.loadDrawableImage(intent.getIntExtra(BACKDROP_PATH, 0), R.color.darkGrey)
+        callGetCollectionListApi()
+    }
+
+    private fun callGetCollectionListApi() {
         mPresenter.callGetListApi(intent.getIntExtra(INT_ID, 0))
     }
 
@@ -44,6 +51,10 @@ class CollectionsActivity : BaseActivity<CollectionsActivityContract.Collections
 
     override fun onMovieOrSeriesClicked(movieModel: Movie?) {
         mPresenter.launchMoviesOrSeriesActivity(movieModel)
+    }
+
+    override fun onSnackBarButtonClicked() {
+        callGetCollectionListApi()
     }
 
 }

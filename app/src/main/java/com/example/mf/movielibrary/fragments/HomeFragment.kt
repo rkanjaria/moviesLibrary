@@ -40,8 +40,7 @@ class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListen
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-        mListener?.callGetMoviesApi(movieOrSeries, type, page)
-
+        callMoviesOrseriesApi()
         gridLayoutManager = GridLayoutManager(context, 3)
         movieRecyclerView.layoutManager = gridLayoutManager
 
@@ -100,7 +99,7 @@ class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListen
         mMoviesList.clear()
         movieRecyclerView.removeAllViews()
         page = 1
-        mListener?.callGetMoviesApi(movieOrSeries, type, page)
+        callMoviesOrseriesApi()
     }
 
     override fun loadMore() {
@@ -112,7 +111,7 @@ class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListen
         if (mMoviesList.size < totalResultsCount) {
             mMoviesList.add(null)
             movieAdapter.notifyItemInserted(mMoviesList.size - 1)
-            mListener?.callGetMoviesApi(movieOrSeries, type, page)
+            callMoviesOrseriesApi()
         }
     }
 
@@ -157,10 +156,13 @@ class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListen
         mListener?.onClickSearchActivity(movieOrSeries)
     }
 
+    fun callMoviesOrseriesApi() {
+        mListener?.callGetMoviesApi(movieOrSeries, type, page)
+    }
+
     interface HomeFragmentListener {
         fun callGetMoviesApi(movieOrSeries: String, type: String, page: Int)
         fun onMovieOrSeriesClicked(movieModel: Movie?, movieOrSeries: String)
         fun onClickSearchActivity(movieOrSeries: String)
     }
-
 }

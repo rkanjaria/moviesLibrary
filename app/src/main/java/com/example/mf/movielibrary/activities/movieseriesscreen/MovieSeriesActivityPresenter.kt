@@ -7,19 +7,19 @@ import com.example.mf.movielibrary.activities.reviewscreen.ReviewActivity
 import com.example.mf.movielibrary.activities.seasonscreen.SeasonActivity
 import com.example.mf.movielibrary.activities.trailerscreen.TrailerActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
+import com.example.mf.movielibrary.classes.NoInternetConnectionException
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.castmodel.Cast
 import com.example.mf.movielibrary.models.castmodel.CastResult
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import com.example.mf.movielibrary.models.moviemodel.MoviesResult
-import com.example.mf.movielibrary.models.movieseriesdetailsmodel.MovieSeriesDetailsResult
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
 import com.example.mf.movielibrary.models.reviewmodels.UserReview
 import com.example.mf.movielibrary.models.videomodels.VideoTrailers
 import files.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.util.ArrayList
+import java.util.*
 
 /**
  * Created by RK on 04-01-2018.
@@ -73,22 +73,6 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
         mView?.getContext()?.startActivity(movieSeriesIntent)
     }
 
-    override fun callGetSimilarMovieOrSeriesApi(moviesOrSeries: String?, movieOrSeriesId: Int) {
-        if (moviesOrSeries != null) {
-            RetrofitHelper.create().doGetSimilarMoviesOrSeriesApiCall(moviesOrSeries, movieOrSeriesId)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe({ movieResult: MoviesResult? ->
-
-                        if (movieResult?.moviesList != null && movieResult.moviesList.isNotEmpty()) {
-                            mView?.setSimilarMoviesRecyclerview(movieResult.moviesList, movieResult.page)
-                        }
-                    }, { error ->
-                        error.printStackTrace()
-                        mView?.showMessage(error.localizedMessage)
-                    })
-        }
-    }
 
     override fun launchActorActivity(castModel: Cast) {
         val actorIntent = Intent(mView?.getContext(), ActorsActivity::class.java)
@@ -105,74 +89,108 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
         if (genre.isEmpty()) return "" else return genre.toString().substring(0, genre.length - 2)
     }
 
+    override fun callGetSimilarMovieOrSeriesApi(moviesOrSeries: String?, movieOrSeriesId: Int) {
+        try {
+            if (moviesOrSeries != null) {
+                RetrofitHelper.create(mView).doGetSimilarMoviesOrSeriesApiCall(moviesOrSeries, movieOrSeriesId)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe({ movieResult: MoviesResult? ->
+
+                            if (movieResult?.moviesList != null && movieResult.moviesList.isNotEmpty()) {
+                                mView?.setSimilarMoviesRecyclerview(movieResult.moviesList, movieResult.page)
+                            }
+                        }, { error ->
+                            error.printStackTrace()
+                            mView?.showMessage(error.localizedMessage)
+                        })
+            }
+        } catch (e: NoInternetConnectionException) {
+        }
+    }
+
     override fun callgetMovieOrSeriesCastApi(movieOrSeries: String?, movieId: Int) {
 
-        if (movieOrSeries != null) {
-            RetrofitHelper.create().doGetMovieOrSeriesCastApiCall(movieOrSeries, movieId)
+        try {
+            if (movieOrSeries != null) {
+                RetrofitHelper.create(mView).doGetMovieOrSeriesCastApiCall(movieOrSeries, movieId)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe({ castResult: CastResult? ->
+
+                            if (castResult?.castList != null && castResult.castList.isNotEmpty()) {
+                                mView?.setCastRecyclerview(castResult.castList.sortedBy { it.order })
+                            }
+                        }, { error ->
+                            error.printStackTrace()
+                            mView?.showMessage(error.localizedMessage)
+                        })
+            }
+        } catch (e: NoInternetConnectionException) {
+        }
+    }
+
+    override fun callGetTvDetailsApi(movieOrSeriesId: Int) {
+        try {
+            RetrofitHelper.create(mView).doGetTvSeasonsApiCall(movieOrSeriesId)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
-                    .subscribe({ castResult: CastResult? ->
+                    .subscribe({ movieSeriesDetailsResult ->
 
-                        if (castResult?.castList != null && castResult.castList.isNotEmpty()) {
-                            mView?.setCastRecyclerview(castResult.castList.sortedBy { it.order })
+                        if (movieSeriesDetailsResult.seasonsList != null && movieSeriesDetailsResult.seasonsList.isNotEmpty()) {
+                            mView?.setSeasonRecyclerview(movieSeriesDetailsResult.seasonsList
+                                    .filter {
+                                        it.airDate != null && it.episodeCount != 0 && it.posterPath != null && it.seasonNumber != 0
+                                    }.sortedBy { it.seasonNumber })
                         }
                     }, { error ->
                         error.printStackTrace()
                         mView?.showMessage(error.localizedMessage)
                     })
+        } catch (e: NoInternetConnectionException) {
         }
     }
 
-    override fun callGetTvDetailsApi(movieOrSeriesId: Int) {
-        RetrofitHelper.create().doGetTvSeasonsApiCall(movieOrSeriesId)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({ movieSeriesDetailsResult ->
-
-                    if (movieSeriesDetailsResult.seasonsList != null && movieSeriesDetailsResult.seasonsList.isNotEmpty()) {
-                        mView?.setSeasonRecyclerview(movieSeriesDetailsResult.seasonsList
-                                .filter {
-                                    it.airDate != null && it.episodeCount != 0 && it.posterPath != null && it.seasonNumber != 0
-                                }.sortedBy { it.seasonNumber })
-                    }
-                }, { error ->
-                    error.printStackTrace()
-                    mView?.showMessage(error.localizedMessage)
-                })
-    }
-
     override fun callGetMoviesOrSeriesTrailersApi(moviesOrSeries: String, movieOrSeriesId: Int) {
-        RetrofitHelper.create().doGetMovieOrSeriesTrailers(moviesOrSeries, movieOrSeriesId)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({ videoResults ->
+        try {
+            RetrofitHelper.create(mView).doGetMovieOrSeriesTrailers(moviesOrSeries, movieOrSeriesId)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({ videoResults ->
 
-                    if (videoResults.results != null && videoResults.results.isNotEmpty()) {
+                        if (videoResults.results != null && videoResults.results.isNotEmpty()) {
 
-                        mView?.showPlayTrailerLayout(videoResults.results.filter {
-                            it.site.equals("YouTube") && it.type.equals("Trailer")
-                        })
-                    }
+                            mView?.showPlayTrailerLayout(videoResults.results.filter {
+                                it.site.equals("YouTube") && it.type.equals("Trailer")
+                            })
+                        }
 
-                }, { error ->
-                    error.printStackTrace()
-                    mView?.showMessage(error.localizedMessage)
-                })
+                    }, { error ->
+                        error.printStackTrace()
+                        mView?.showMessage(error.localizedMessage)
+                    })
+        } catch (e: NoInternetConnectionException) {
+        }
     }
 
     override fun callGetMoviesOrSeriesReviewsApi(moviesOrSeries: String, movieOrSeriesId: Int) {
-        RetrofitHelper.create().doGetMovieOrSeriesReviews(moviesOrSeries, movieOrSeriesId)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({ reviewResults ->
 
-                    if (reviewResults.reviewList != null && reviewResults.reviewList.isNotEmpty()) {
-                        mView?.setReviewRecyclerview(reviewResults.reviewList)
-                    }
+        try {
+            RetrofitHelper.create(mView).doGetMovieOrSeriesReviews(moviesOrSeries, movieOrSeriesId)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({ reviewResults ->
 
-                }, { error ->
-                    error.printStackTrace()
-                    mView?.showMessage(error.localizedMessage)
-                })
+                        if (reviewResults.reviewList != null && reviewResults.reviewList.isNotEmpty()) {
+                            mView?.setReviewRecyclerview(reviewResults.reviewList)
+                        }
+
+                    }, { error ->
+                        error.printStackTrace()
+                        mView?.showMessage(error.localizedMessage)
+                    })
+        } catch (e: NoInternetConnectionException) {
+        }
+
     }
 }

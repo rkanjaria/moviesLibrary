@@ -4,6 +4,7 @@ import android.content.Intent
 import com.example.mf.movielibrary.activities.actorsscreen.ActorsActivity
 import com.example.mf.movielibrary.activities.searchscreen.SearchActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
+import com.example.mf.movielibrary.classes.NoInternetConnectionException
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.actormodel.Actor
 import files.INT_ID
@@ -30,27 +31,31 @@ class CelebritiesActivityPresenter : BasePresenterImpl<CelebritiesActivityContra
 
     override fun callGetPopularPeopleApi(page: Int) {
 
-        if (page == 1) {
-            mView?.showProgressBar()
+        try {
+            if (page == 1) {
+                mView?.showProgressBar()
+            }
+
+            RetrofitHelper.create(mView)
+                    .doGetPopularPeopleApiCall(page)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({ actorsResult ->
+
+                        if (page == 1) {
+                            mView?.hideProgressBar()
+                        }
+                        if (actorsResult.actorsList != null && actorsResult.actorsList.isNotEmpty()) {
+                            mView?.setActorsRecyclerview(actorsResult.actorsList, actorsResult.totalResults)
+                        }
+
+                    }, { error ->
+                        error.printStackTrace()
+                        mView?.showMessage(error.localizedMessage)
+                    })
+
+        } catch (e: NoInternetConnectionException) {
+            mView?.hideProgressBar()
         }
-
-        RetrofitHelper.create()
-                .doGetPopularPeopleApiCall(page)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({ actorsResult ->
-
-                    if (page == 1) {
-                        mView?.hideProgressBar()
-                    }
-                    if (actorsResult.actorsList != null && actorsResult.actorsList.isNotEmpty()) {
-                        mView?.setActorsRecyclerview(actorsResult.actorsList, actorsResult.totalResults)
-                    }
-
-                }, { error ->
-                    error.printStackTrace()
-                    mView?.showMessage(error.localizedMessage)
-                })
     }
-
 }

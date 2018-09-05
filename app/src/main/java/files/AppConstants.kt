@@ -29,8 +29,6 @@ val ON_AIR = "on_the_air"
 val AIRING_TODAY = "airing_today"
 
 
-
-
 val DATABASE_NAME = "movie.db"
 val GENRE_TABLE = "genre_table"
 val ID = "_id"
@@ -58,3 +56,7 @@ val NAME = "name"
 
 val YOUTUBE_API_KEY = "AIzaSyC5BpEwIkGZDf_9F7X3FEMGS2TEYeA6HzQ"
 val POSITION = "position"
+
+val LONG = "long"
+val SHORT = "short"
+val INDEFINITE = "indefinite"

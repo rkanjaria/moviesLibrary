@@ -16,10 +16,10 @@ interface BaseView {
     fun showError(@StringRes stringResId: Int)
     fun showMessage(@StringRes stringResId: Int)
     fun showMessage(message: String)
-    fun showNoInternetConnectionSnackBar(message: String)
+    fun showSnackBar(message: String, buttonName : String, snackbarShowTime: String)
     fun initToolbar(toolbar : Toolbar, showBackButton : Boolean, title: String)
     fun finishActivity()
     fun lauchchActivity(activityToBeLaunched : Intent)
     fun finishActivityAndStartAnotherActivity(activityToBeLaunched : Intent)
-
+    fun onSnackBarButtonClicked()
 }

@@ -1,23 +1,18 @@
 package com.example.mf.movielibrary.activities.homescreen
 
-import android.app.AlertDialog
-import android.app.FragmentTransaction
-import android.content.DialogInterface
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.Toolbar
-import android.view.ContextThemeWrapper
 import android.view.Menu
 import android.view.MenuItem
 import com.example.mf.movielibrary.R
-import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.fragments.HomeFragment
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.*
+import files.MOVIE
+import files.TV_SHOWS
 import kotlinx.android.synthetic.main.activity_home.*
 
 
@@ -126,5 +121,9 @@ class HomeActivity : BaseActivity<HomeActivityContract.HomeView, HomeActivityPre
 
     override fun hideProgressBar() {
         homeFragment.hideProgressBar()
+    }
+
+    override fun onSnackBarButtonClicked() {
+        homeFragment.callMoviesOrseriesApi()
     }
 }

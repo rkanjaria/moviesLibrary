@@ -3,6 +3,7 @@ package com.example.mf.movielibrary.activities.collectionscreen
 import android.content.Intent
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
+import com.example.mf.movielibrary.classes.NoInternetConnectionException
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import files.MOVIE_OR_SERIES
@@ -15,20 +16,25 @@ import io.reactivex.schedulers.Schedulers
  */
 class CollectionsActivityPresenter : BasePresenterImpl<CollectionsActivityContract.CollectionsView>(),
         CollectionsActivityContract.CollectionsPresenter {
+
     override fun callGetListApi(listId: Int) {
+        try {
+            mView?.showProgressBar()
+            RetrofitHelper.create(mView).doGetListApiCall(listId)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({ collectionsResult ->
 
-        mView?.showProgressBar()
-        RetrofitHelper.create().doGetListApiCall(listId)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({ collectionsResult ->
+                        mView?.hideProgressBar()
+                        mView?.setCollectionsRecyclerview(collectionsResult)
+                    }, { error ->
+                        mView?.hideProgressBar()
+                        mView?.showMessage(error.localizedMessage)
+                    })
+        } catch (e: NoInternetConnectionException) {
+            mView?.hideProgressBar()
+        }
 
-                    mView?.hideProgressBar()
-                    mView?.setCollectionsRecyclerview(collectionsResult)
-                }, { error ->
-                    mView?.hideProgressBar()
-                    mView?.showMessage(error.localizedMessage)
-                })
     }
 
     override fun launchMoviesOrSeriesActivity(movieModel: Movie?) {

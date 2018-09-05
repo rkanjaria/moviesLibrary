@@ -269,7 +269,8 @@
                 android:fontFamily="@font/noto_sans_regular"
                 android:text="Read all reviews"
                 android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_size_16"
+                android:textSize="@dimen/text_size_14"
+                android:padding="@dimen/size_8dp"
                 android:visibility="gone" />
 
         </LinearLayout>

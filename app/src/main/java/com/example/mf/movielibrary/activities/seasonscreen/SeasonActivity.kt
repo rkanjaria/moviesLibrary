@@ -20,21 +20,25 @@ class SeasonActivity : BaseActivity<SeasonActivityContract.SeasonView, SeasonAct
     override var mPresenter = SeasonActivityPresenter()
     private var seriesId = -1
     private var seasonNumber = -1
+    private lateinit var seasonModel: Season
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_season)
 
-        val seasonModel = intent.getParcelableExtra(PARCELABLE_OBJECT) as Season
+        seasonModel = intent.getParcelableExtra(PARCELABLE_OBJECT) as Season
         seriesId = intent.getIntExtra(INT_ID, -1)
         seasonNumber = seasonModel.seasonNumber
 
         initToolbar(toolbar as Toolbar, true, "Season ${seasonNumber}")
+        callGetSesonEpisodesApi()
+    }
+
+    private fun callGetSesonEpisodesApi() {
         mPresenter.callGetSesonDetailsApi(seriesId, seasonModel.seasonNumber)
     }
 
     override fun setEpisodesRecyclerview(seasonResult: SeasonResult?) {
-
         if (seasonResult?.episodeList != null && seasonResult.episodeList.isNotEmpty()) {
             episodesRecyclerview.setHasFixedSize(true)
             episodesRecyclerview.layoutManager = LinearLayoutManager(this)
@@ -55,4 +59,7 @@ class SeasonActivity : BaseActivity<SeasonActivityContract.SeasonView, SeasonAct
         mPresenter.lanchEpisodeActivity(episode, seriesId, seasonNumber)
     }
 
+    override fun onSnackBarButtonClicked() {
+        callGetSesonEpisodesApi()
+    }
 }

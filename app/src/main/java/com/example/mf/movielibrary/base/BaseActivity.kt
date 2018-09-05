@@ -14,6 +14,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.classes.KeyboardUtils
+import files.INDEFINITE
+import files.LONG
+import files.SHORT
 
 
 /**
@@ -25,10 +28,6 @@ abstract class BaseActivity<in V : BaseView, T : BasePresenter<V>>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mPresenter.attachView(this as V)
-
-        if (!mPresenter.isNetworkAvailable()) {
-            showNoInternetConnectionSnackBar("No Internet Connection")
-        }
     }
 
     protected abstract var mPresenter: T
@@ -110,13 +109,25 @@ abstract class BaseActivity<in V : BaseView, T : BasePresenter<V>>
         toast.show()
     }
 
-    override fun showNoInternetConnectionSnackBar(message: String) {
-        val noInternetSnackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
-        noInternetSnackbar.setAction("Try again", this)
+    override fun showSnackBar(message: String, buttonName: String, snackbarShowTime: String) {
+        var time = Snackbar.LENGTH_INDEFINITE
+        when (snackbarShowTime) {
+            SHORT -> time = Snackbar.LENGTH_SHORT
+            LONG -> time = Snackbar.LENGTH_LONG
+            INDEFINITE -> time = Snackbar.LENGTH_INDEFINITE
+        }
+        val noInternetSnackbar = Snackbar.make(findViewById(android.R.id.content), message, time)
+        val snackbarText = noInternetSnackbar.view.findViewById<TextView>(android.support.design.R.id.snackbar_text)
+        snackbarText.typeface = ResourcesCompat.getFont(this, R.font.noto_sans_regular)
+        noInternetSnackbar.setAction(buttonName, this)
         noInternetSnackbar.show()
     }
 
     override fun onClick(view: View?) {
+        mPresenter.requestSnackBarButtonClicked()
+    }
 
+    override fun onSnackBarButtonClicked() {
+        return
     }
 }

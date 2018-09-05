@@ -28,8 +28,8 @@ class CelebritiesActivity : BaseActivity<CelebritiesActivityContract.Celebrities
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_actors_list)
         initToolbar(toolbar as Toolbar, true, "Celebrities")
-        mPresenter.callGetPopularPeopleApi(page)
 
+        callGetPopularPeople()
 
         gridLayoutManager = GridLayoutManager(this, 3)
         actorsRecyclerView.layoutManager = gridLayoutManager
@@ -40,6 +40,10 @@ class CelebritiesActivity : BaseActivity<CelebritiesActivityContract.Celebrities
                     gridLayoutManager.spanCount else 1
             }
         }
+    }
+
+    private fun callGetPopularPeople() {
+        mPresenter.callGetPopularPeopleApi(page)
     }
 
     override fun setActorsRecyclerview(actorsList: List<Actor>, totalResults: Int) {
@@ -59,7 +63,6 @@ class CelebritiesActivity : BaseActivity<CelebritiesActivityContract.Celebrities
             }
             actorAdapter.refreshAdapter(lastPosition)
         }
-
     }
 
     override fun hideProgressBar() {
@@ -99,5 +102,9 @@ class CelebritiesActivity : BaseActivity<CelebritiesActivityContract.Celebrities
             R.id.action_search -> mPresenter.lauchchSearchActivity(ACTORS)
         }
         return true
+    }
+
+    override fun onSnackBarButtonClicked() {
+        callGetPopularPeople()
     }
 }

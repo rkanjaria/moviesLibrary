@@ -56,10 +56,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         movieOverview.text = movieModel.overview
         movieGenre.text = mPresenter.getMovieGenres(movieModel.genreIds)
 
-        mPresenter.callgetMovieOrSeriesCastApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
-        mPresenter.callGetSimilarMovieOrSeriesApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
-        mPresenter.callGetMoviesOrSeriesTrailersApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
-        mPresenter.callGetMoviesOrSeriesReviewsApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
+        callAllRequiredApis()
 
         if (intent.getStringExtra(MOVIE_OR_SERIES) == TV_SHOWS) {
             mPresenter.callGetTvDetailsApi(movieOrSeriesId)
@@ -179,5 +176,16 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         objectAnimator.repeatMode = ObjectAnimator.REVERSE
         objectAnimator.setDuration(200)
         objectAnimator.start()
+    }
+
+    override fun onSnackBarButtonClicked() {
+        callAllRequiredApis()
+    }
+
+    fun callAllRequiredApis(){
+        mPresenter.callgetMovieOrSeriesCastApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
+        mPresenter.callGetSimilarMovieOrSeriesApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
+        mPresenter.callGetMoviesOrSeriesTrailersApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
+        mPresenter.callGetMoviesOrSeriesReviewsApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
     }
 }

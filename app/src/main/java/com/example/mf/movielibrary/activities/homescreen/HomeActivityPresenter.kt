@@ -7,6 +7,7 @@ import com.example.mf.movielibrary.activities.favouritescreen.FavouritesActivity
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
 import com.example.mf.movielibrary.activities.searchscreen.SearchActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
+import com.example.mf.movielibrary.classes.NoInternetConnectionException
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import files.MOVIE_OR_SERIES
@@ -48,20 +49,25 @@ class HomeActivityPresenter : BasePresenterImpl<HomeActivityContract.HomeView>()
             mView?.showProgressBar()
         }
 
-        RetrofitHelper.create().doGetMoviesOrSeriesApiCall(movieOrSeries, requestType, page = page)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe({ movieResult ->
+        try {
 
-                    if (page == 1) {
-                        mView?.hideProgressBar()
-                    }
-                    mView?.setMovieRecyclerView(movieResult?.moviesList, movieResult?.totalResults!!)
-                }, { error ->
-                    error.printStackTrace()
-                    mView?.showMessage(error.localizedMessage)
-                })
+            RetrofitHelper.create(mView).doGetMoviesOrSeriesApiCall(movieOrSeries, requestType, page = page)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({ movieResult ->
 
+                        if (page == 1) {
+                            mView?.hideProgressBar()
+                        }
+                        mView?.setMovieRecyclerView(movieResult?.moviesList, movieResult?.totalResults!!)
+                    }, { error ->
+                        error.printStackTrace()
+                        mView?.showMessage(error.localizedMessage)
+                    })
+
+        }catch (e : NoInternetConnectionException){
+            mView?.hideProgressBar()
+        }
     }
 
 

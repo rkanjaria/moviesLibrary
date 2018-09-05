@@ -1,12 +1,8 @@
 package files
 
 import android.content.Context
-import android.support.v4.content.ContextCompat
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import com.example.mf.movielibrary.R
-import org.jetbrains.anko.displayMetrics
+import android.net.ConnectivityManager
+import com.example.mf.movielibrary.base.BaseView
 
 /**
  * Created by RK on 03-01-2018.
@@ -60,10 +56,10 @@ fun getGender(genderId: Int): String {
     return ""
 }
 
-/*fun calculateNoOfColumns(context: Context, width: Int): Int {
-    val displayMetrices = context.displayMetrics
-    val dpWidth = displayMetrices.widthPixels / displayMetrices.density
-    return (dpWidth / width).toInt()
-}*/
+fun isNetworkAvailable(mView : BaseView?): Boolean {
+    val connectivityManager = mView?.getContext()?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val activeNetworkInfo = connectivityManager.getActiveNetworkInfo()
+    return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting()
+}
 
 
