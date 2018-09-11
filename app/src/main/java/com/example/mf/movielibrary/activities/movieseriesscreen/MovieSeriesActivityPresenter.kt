@@ -40,7 +40,7 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
     }
 
     override fun addOrRemoveFavourites(movieModel: Movie, movieOrSeries: String) {
-        if (mView?.getContext()?.database?.doesAlreadyExists(movieModel.id)!!) {
+        /*if (mView?.getContext()?.database?.doesAlreadyExists(movieModel.id)!!) {
             if (mView?.getContext()?.database?.removeMovie(movieModel.id)!!) {
                 mView?.unhighlightFavoriteIcon()
             }
@@ -50,7 +50,7 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
             } else {
                 mView?.showMessage("Favourite can't be added")
             }
-        }
+        }*/
     }
 
     override fun launchTrailerActivity(videoTrailer: VideoTrailers?) {
@@ -84,7 +84,7 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
     override fun getMovieGenres(genreIds: List<Int>?): String {
         val genre = StringBuilder()
         genreIds?.forEach {
-            genre.append(mView?.getContext()?.database?.getGenreBasedOnGenreId(it) + ", ")
+            genre.append(mView?.getContext()?.database?.genreDao()?.getGenreBasedOnGenreId(it) + ", ")
         }
         if (genre.isEmpty()) return "" else return genre.toString().substring(0, genre.length - 2)
     }

@@ -69,7 +69,7 @@ class SearchActivityPresenter : BasePresenterImpl<SearchActivityContract.SearchB
     }
 
     override fun getGenreFromDb(movieOrSeries: String) {
-        val genreList = mView?.getContext()?.database?.getAllGenres(movieOrSeries)
+        val genreList = mView?.getContext()?.database?.genreDao()?.getAllGenresOfType(movieOrSeries)
         if (genreList != null && genreList.isNotEmpty()) {
             mView?.setGenreRecylerview(genreList)
         }

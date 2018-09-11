@@ -11,6 +11,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        kapt{
+            arguments{
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+            }
+        }
     }
     buildTypes {
         release {
@@ -33,7 +38,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.8.0'
-    implementation 'org.jetbrains.anko:anko-sqlite:0.10.0'
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
     //implementation 'com.jakewharton:butterknife:8.8.1'
     implementation 'com.github.bumptech.glide:glide:4.3.1'
     implementation 'com.android.support:support-v4:26.1.0'

@@ -13,7 +13,7 @@ class SplashActivityPresenter : BasePresenterImpl<SplashActivityContract.SplashV
         SplashActivityContract.SplashPresenter {
 
     override fun clearTable(table: String) {
-        mView?.getContext()?.database?.clearTable(table)
+        mView?.getContext()?.database?.genreDao()?.clearTable()
     }
 
     override fun callGetGenreListApi(movieOrSeries: String, flag: Int) {
@@ -23,8 +23,11 @@ class SplashActivityPresenter : BasePresenterImpl<SplashActivityContract.SplashV
                     .subscribeOn(Schedulers.io())
                     .subscribe({ genreResult ->
                         if (genreResult != null && genreResult.genresList.isNotEmpty()) {
+                            //mView?.getContext()?.database?.genreDao()?.insertAllGenres(genreResult.genresList, movieOrSeries)
+
                             genreResult.genresList.forEach {
-                                mView?.getContext()?.database?.insertGenre(it.genreId.toString(), it.genreName!!, movieOrSeries)
+                                it.showType = movieOrSeries
+                                mView?.getContext()?.database?.genreDao()?.insertAllGenres(genreResult.genresList)
                             }
 
                             if (flag == 1) { // api call for tv is completed finish the activity

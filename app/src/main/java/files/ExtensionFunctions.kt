@@ -1,6 +1,7 @@
 package files
 
 import android.animation.ObjectAnimator
+import android.arch.persistence.room.Room
 import android.content.Context
 import android.support.annotation.DrawableRes
 import android.support.annotation.LayoutRes
@@ -14,7 +15,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.classes.BlurTransform
-import com.example.mf.movielibrary.helpers.DatabaseHelper
+import com.example.mf.movielibrary.database.AppDatabase
 
 /**
  * Created by RK on 23-12-2017.
@@ -80,8 +81,10 @@ fun ImageView.loadDrawable(@DrawableRes url: Int) {
             .into(this)
 }
 
-val Context.database: DatabaseHelper
-    get() = DatabaseHelper.getInstance(applicationContext)
+val Context.database: AppDatabase
+    get() = Room.databaseBuilder(applicationContext, AppDatabase::class.java, DATABASE_NAME)
+            .allowMainThreadQueries()
+            .build()
 
 fun TextView.expandOrCollapseTextView() {
     val collapsedMaxLines = 5

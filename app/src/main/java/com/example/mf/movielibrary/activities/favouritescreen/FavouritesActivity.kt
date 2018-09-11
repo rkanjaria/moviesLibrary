@@ -6,9 +6,6 @@ import android.view.View
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.FavouritesViewPagerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
-import files.FAVOURITE_TABLE
-import files.MOVIE_ID
-import files.database
 import files.loadDrawable
 import kotlinx.android.synthetic.main.activity_favorites.*
 
@@ -23,11 +20,11 @@ class FavouritesActivity : BaseActivity<FavouritesActivityContract.FavoritesView
 
         initToolbar(toolbar as Toolbar, true, "Favourites")
 
-        if(this.database.isTableEmpty(FAVOURITE_TABLE, MOVIE_ID)){
+        /*if(this.database.isTableEmpty(FAVOURITE_TABLE, MOVIE_ID)){
             mPresenter.requestNoFavouritesLayout()
         }else{
             mPresenter.requestSetupViewPager()
-        }
+        }*/
     }
 
     override fun setupViewPager() {

@@ -2,8 +2,8 @@ package com.example.mf.movielibrary.activities.searchscreen
 
 import com.example.mf.movielibrary.base.BasePresenter
 import com.example.mf.movielibrary.base.BaseView
+import com.example.mf.movielibrary.database.entities.Genre
 import com.example.mf.movielibrary.models.actormodel.Actor
-import com.example.mf.movielibrary.models.genremodel.Genre
 import com.example.mf.movielibrary.models.moviemodel.Movie
 
 /**

@@ -18,8 +18,8 @@ import com.example.mf.movielibrary.adapters.ActorsAdapter
 import com.example.mf.movielibrary.adapters.GenreAdapter
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
+import com.example.mf.movielibrary.database.entities.Genre
 import com.example.mf.movielibrary.models.actormodel.Actor
-import com.example.mf.movielibrary.models.genremodel.Genre
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import files.*
 import kotlinx.android.synthetic.main.activity_search.*

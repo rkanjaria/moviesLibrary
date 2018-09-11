@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.models.castmodel.Cast
 import files.inflate
@@ -12,7 +11,6 @@ import files.loadImage
 import files.photoUrl
 import kotlinx.android.synthetic.main.cast_recycler_layout.view.*
 import kotlinx.android.synthetic.main.horizontal_footer_layout.view.*
-import org.jetbrains.anko.displayMetrics
 
 class CastRecyclerAdapter(val castList: List<Cast>, val castAdapterListener: OnCastAdapterListener, val isHorizontal: Boolean = false) :
         RecyclerView.Adapter<CastRecyclerAdapter.MyViewHolder>() {
@@ -61,7 +59,7 @@ class CastRecyclerAdapter(val castList: List<Cast>, val castAdapterListener: OnC
         fun bindViews(castModel: Cast) {
 
             if (isHorizontal) {
-                val widthInDp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100f, view.context.displayMetrics)
+                val widthInDp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100f, view.resources.displayMetrics)
                 view.layoutParams.width = widthInDp.toInt()
             }
             view.actorsPic.loadImage(photoUrl + castModel.profilePath, R.color.darkGrey, false)

@@ -5,7 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.example.mf.movielibrary.R
-import com.example.mf.movielibrary.models.genremodel.Genre
+import com.example.mf.movielibrary.database.entities.Genre
 import files.inflate
 import kotlinx.android.synthetic.main.genre_recyler_layout.view.*
 

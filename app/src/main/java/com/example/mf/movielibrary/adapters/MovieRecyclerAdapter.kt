@@ -1,17 +1,16 @@
 package com.example.mf.movielibrary.adapters
 
-import android.content.Intent
-import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import com.example.mf.movielibrary.R
-import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.*
+import files.getYearFromDate
+import files.inflate
+import files.loadImage
+import files.photoUrl
 import kotlinx.android.synthetic.main.movie_recycler_layout.view.*
-import org.jetbrains.anko.displayMetrics
 
 /**
  * Created by RK on 23-12-2017.
@@ -69,7 +68,7 @@ class MovieRecyclerAdapter(val moviesList: List<Movie?>, onMovieSeriesAdapterLis
         fun bindViews(movieModel: Movie?) {
 
             if(isHorizontal) {
-                val widthInDp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100f, view.context.displayMetrics)
+                val widthInDp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100f, view.resources.displayMetrics)
                 view.layoutParams.width = widthInDp.toInt()
             }
 

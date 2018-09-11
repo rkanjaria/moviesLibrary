@@ -85,10 +85,11 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
             }
         })
 
-        if (database.doesAlreadyExists(movieOrSeriesId)) {
+        //todo
+        /*if (database.doesAlreadyExists(movieOrSeriesId)) {
             favouriteIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite))
             setResult(RESULT_CODE)
-        }
+        }*/
 
         favouriteIcon.setOnClickListener {
             mPresenter.addOrRemoveFavourites(movieModel, intent.getStringExtra(MOVIE_OR_SERIES))
