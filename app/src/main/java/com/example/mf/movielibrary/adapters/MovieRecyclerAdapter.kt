@@ -75,7 +75,7 @@ class MovieRecyclerAdapter(val moviesList: List<Movie?>, onMovieSeriesAdapterLis
             view.moviePoster.loadImage(photoUrl + movieModel?.posterPath)
             view.movieName.text = movieModel?.title
 
-            if (movieModel?.releaseDate != null && !movieModel.releaseDate.isBlank()) {
+            if (movieModel?.releaseDate != null && !movieModel.releaseDate.toString().isBlank()) {
                 view.movieYear.text = getYearFromDate(movieModel.releaseDate)
             }
 

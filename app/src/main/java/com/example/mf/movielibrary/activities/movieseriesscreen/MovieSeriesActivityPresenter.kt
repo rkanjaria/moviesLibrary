@@ -8,6 +8,7 @@ import com.example.mf.movielibrary.activities.seasonscreen.SeasonActivity
 import com.example.mf.movielibrary.activities.trailerscreen.TrailerActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.classes.NoInternetConnectionException
+import com.example.mf.movielibrary.database.entities.FavouriteMovie
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.castmodel.Cast
 import com.example.mf.movielibrary.models.castmodel.CastResult
@@ -16,6 +17,7 @@ import com.example.mf.movielibrary.models.moviemodel.MoviesResult
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
 import com.example.mf.movielibrary.models.reviewmodels.UserReview
 import com.example.mf.movielibrary.models.videomodels.VideoTrailers
+import com.google.gson.Gson
 import files.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -40,17 +42,18 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
     }
 
     override fun addOrRemoveFavourites(movieModel: Movie, movieOrSeries: String) {
-        /*if (mView?.getContext()?.database?.doesAlreadyExists(movieModel.id)!!) {
-            if (mView?.getContext()?.database?.removeMovie(movieModel.id)!!) {
-                mView?.unhighlightFavoriteIcon()
-            }
+        if (mView?.getContext()?.database?.favouriteMovieDao()?.doesAlreadyExists(movieModel.id)!!) {
+            mView?.getContext()?.database?.favouriteMovieDao()?.removeMovie(movieModel.id)!!
+            mView?.unhighlightFavoriteIcon()
         } else {
-            if (mView?.getContext()?.database?.insertMovie(movieModel, movieOrSeries) != -1L) {
-                mView?.highlightFavoriteIcon()
-            } else {
-                mView?.showMessage("Favourite can't be added")
-            }
-        }*/
+            val favouriteMovie = FavouriteMovie(movieModel.id, movieModel.voteAverage,
+                    movieModel.posterPath, movieModel.mediaType, movieModel.originalTitle, movieModel.title,
+                    Gson().toJson(movieModel.genreIds), movieModel.backDropPath, movieModel.overview, movieModel.releaseDate,
+                    showType = movieOrSeries)
+
+            mView?.getContext()?.database?.favouriteMovieDao()?.insertMovie(favouriteMovie)
+            mView?.highlightFavoriteIcon()
+        }
     }
 
     override fun launchTrailerActivity(videoTrailer: VideoTrailers?) {

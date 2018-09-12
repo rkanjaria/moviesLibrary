@@ -95,7 +95,7 @@ class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListen
         mListener?.onMovieOrSeriesClicked(movieModel, movieOrSeries)
     }
 
-    private fun clearListAndMakeApiCallAgain(movieOrSeries: String) {
+    private fun clearListAndMakeApiCallAgain() {
         mMoviesList.clear()
         movieRecyclerView.removeAllViews()
         page = 1
@@ -142,14 +142,14 @@ class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListen
 
         selectedTypePostion = item
         dialogInterface?.dismiss()
-        clearListAndMakeApiCallAgain(movieOrSeries)
+        clearListAndMakeApiCallAgain()
     }
 
     fun callMoviesOrSeriesApi(movieOrSeries: String) {
         this.movieOrSeries = movieOrSeries
         type = POPULAR
         selectedTypePostion = 0
-        clearListAndMakeApiCallAgain(movieOrSeries)
+        clearListAndMakeApiCallAgain()
     }
 
     fun onClickSearch() {

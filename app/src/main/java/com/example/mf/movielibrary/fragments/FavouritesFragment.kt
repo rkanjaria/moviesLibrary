@@ -12,10 +12,9 @@ import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.MOVIE_OR_SERIES
-import files.PARCELABLE_OBJECT
-import files.RESULT_CODE
-import files.loadDrawable
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import files.*
 import kotlinx.android.synthetic.main.fragment_favourites.*
 
 
@@ -33,10 +32,16 @@ class FavouritesFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapter
     }
 
     fun initFragment() {
-        val moviesList = mutableListOf<Movie>()
-                //context.database.getAllMoviesOrTvShows(movieOrSeries)
+        val moviesList = mutableListOf<Movie?>()
+        context.database.favouriteMovieDao().getAllMoviesOrTvShows(movieOrSeries).forEach {
+            val genres: List<Int> = Gson().fromJson(it.genreIds, object : TypeToken<List<Int>>() {}.type)
+            val movie = Movie(id = it.id, voteAverage = it.voteAverage, posterPath = it.posterPath, mediaType = it.mediaType,
+                    originalTitle = it.originalTitle, title = it.title, genreIds = genres, backDropPath = it.backDropPath,
+                    overview = it.overview, releaseDate = it.releaseDate)
+            moviesList.add(movie)
+        }
 
-        if (moviesList != null && moviesList.isNotEmpty()) {
+        if (moviesList.isNotEmpty()) {
             favouritesRecyclerview.setHasFixedSize(true)
             favouritesRecyclerview.layoutManager = GridLayoutManager(context, 3)
             favouritesRecyclerview.adapter = MovieRecyclerAdapter(moviesList, this)

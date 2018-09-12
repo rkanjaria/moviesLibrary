@@ -43,8 +43,8 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
 
         movieOrSeriesId = movieModel.id
 
-        if (movieModel.backDroppath != null) {
-            backdropImage.loadImage(backdropUrl + movieModel.backDroppath, placeholder = R.color.darkGrey)
+        if (movieModel.backDropPath != null) {
+            backdropImage.loadImage(backdropUrl + movieModel.backDropPath, placeholder = R.color.darkGrey)
         }
 
         if (movieModel.posterPath != null) {
@@ -85,11 +85,10 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
             }
         })
 
-        //todo
-        /*if (database.doesAlreadyExists(movieOrSeriesId)) {
+        if (database.favouriteMovieDao().doesAlreadyExists(movieOrSeriesId)) {
             favouriteIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite))
             setResult(RESULT_CODE)
-        }*/
+        }
 
         favouriteIcon.setOnClickListener {
             mPresenter.addOrRemoveFavourites(movieModel, intent.getStringExtra(MOVIE_OR_SERIES))

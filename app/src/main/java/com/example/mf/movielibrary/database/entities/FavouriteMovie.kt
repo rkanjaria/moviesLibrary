@@ -14,8 +14,8 @@ data class FavouriteMovie(
         @ColumnInfo(name = MEDIA_TYPE) val mediaType: String?,
         @ColumnInfo(name = ORIGINAL_TITLE) val originalTitle: String?,
         @ColumnInfo(name = TITLE) val title: String?,
-        @ColumnInfo(name = GENRES) val genreIds: List<Int>?,
-        @ColumnInfo(name = BACKDROP_PATH) val backDroppath: String?,
+        @ColumnInfo(name = GENRES) val genreIds: String?,
+        @ColumnInfo(name = BACKDROP_PATH) val backDropPath: String?,
         @ColumnInfo(name = OVERVIEW) val overview: String?,
         @ColumnInfo(name = RELEASE_DATE) val releaseDate: String?,
         @ColumnInfo(name = SHOW_TYPE) val showType: String?
