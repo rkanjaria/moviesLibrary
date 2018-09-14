@@ -23,12 +23,10 @@ class SplashActivityPresenter : BasePresenterImpl<SplashActivityContract.SplashV
                     .subscribeOn(Schedulers.io())
                     .subscribe({ genreResult ->
                         if (genreResult != null && genreResult.genresList.isNotEmpty()) {
-                            //mView?.getContext()?.database?.genreDao()?.insertAllGenres(genreResult.genresList, movieOrSeries)
-
                             genreResult.genresList.forEach {
                                 it.showType = movieOrSeries
-                                mView?.getContext()?.database?.genreDao()?.insertAllGenres(genreResult.genresList)
                             }
+                            mView?.getContext()?.database?.genreDao()?.insertAllGenres(genreResult.genresList)
 
                             if (flag == 1) { // api call for tv is completed finish the activity
                                 mView?.finishActivityAndStartAnotherActivity(
