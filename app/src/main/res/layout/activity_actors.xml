@@ -140,12 +140,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginBottom="@dimen/size_16dp"
-                android:layout_marginRight="@dimen/size_8dp"
+                android:layout_marginEnd="@dimen/size_8dp"
                 android:layout_marginTop="@dimen/size_16dp"
                 android:fontFamily="@font/noto_sans_regular"
                 android:text="See all"
+                android:textSize="@dimen/text_size_14"
+                android:padding="@dimen/size_8dp"
                 android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_size_16"
                 android:visibility="gone" />
 
         </LinearLayout>

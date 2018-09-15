@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.play_trailer_layout.*
 
 class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeriesView, MovieSeriesActivityPresenter>(),
         MovieSeriesActivityContract.MovieSeriesView, CastRecyclerAdapter.OnCastAdapterListener,
-        MovieRecyclerAdapter.OnMovieSeriesAdapterListener, SeasonRecyclerAdapter.SeasonAdapterListener {
+        MovieRecyclerAdapter.OnMovieSeriesAdapterListener, SeasonRecyclerAdapter.SeasonAdapterListener, View.OnClickListener {
 
 
     private var movieOrSeriesId = 0
@@ -129,16 +129,14 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
     }
 
     override fun setReviewRecyclerview(reviewList: List<UserReview>) {
-        reviewsRecyclerview.setHasFixedSize(true)
-        reviewsRecyclerview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        reviewsRecyclerview.adapter = ReviewAdapter(reviewList, true)
         reviewsRecyclerview.visibility = View.VISIBLE
         reviewsTitle.visibility = View.VISIBLE
+        reviewsRecyclerview.setHasFixedSize(true)
+        reviewsRecyclerview.layoutManager = LinearLayoutManager(this)
+        reviewsRecyclerview.adapter = ReviewAdapter(reviewList, true)
 
-        if (reviewList.size > 1) {
-            readAllReviews.visibility = View.VISIBLE
-            readAllReviews.setOnClickListener { mPresenter.launchReviewActivity(reviewList) }
-        }
+        if (reviewList.size > 1) readAllReviews.visibility = View.VISIBLE else readAllReviews.visibility = View.GONE
+        readAllReviews.setOnClickListener { mPresenter.launchReviewActivity(reviewList) }
     }
 
     override fun onSeasonClicked(season: Season) {

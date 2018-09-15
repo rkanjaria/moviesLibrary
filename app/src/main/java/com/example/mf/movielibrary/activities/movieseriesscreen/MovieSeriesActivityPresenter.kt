@@ -194,6 +194,5 @@ class MovieSeriesActivityPresenter : BasePresenterImpl<MovieSeriesActivityContra
                     })
         } catch (e: NoInternetConnectionException) {
         }
-
     }
 }

@@ -270,11 +270,11 @@
                 android:text="Read all reviews"
                 android:textColor="@color/colorAccent"
                 android:textSize="@dimen/text_size_14"
+                android:layout_marginTop="@dimen/size_16dp"
                 android:padding="@dimen/size_8dp"
                 android:visibility="gone" />
 
         </LinearLayout>
-
 
     </android.support.v4.widget.NestedScrollView>
 
