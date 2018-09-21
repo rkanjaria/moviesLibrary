@@ -2,12 +2,15 @@ package com.example.mf.movielibrary.activities.splashscreen
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.activities.homescreen.HomeActivity
 import com.example.mf.movielibrary.base.BaseActivity
 import files.MOVIE
 import files.TV_SHOWS
 import files.database
+import files.loadDrawable
+import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : BaseActivity<SplashActivityContract.SplashView, SplashActivityPresenter>(),
         SplashActivityContract.SplashView {
@@ -19,14 +22,19 @@ class SplashActivity : BaseActivity<SplashActivityContract.SplashView, SplashAct
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        val isTableEmpty = database.genreDao().isGenreTableEmpty()
+        appIcon.loadDrawable(R.mipmap.ic_launcher)
 
-        if (isTableEmpty <= 0) {
-            mPresenter.callGetGenreListApi(MOVIE, flag)
-        } else {
-            finishActivityAndStartAnotherActivity(
-                    Intent(this, HomeActivity::class.java))
-        }
+        Handler().postDelayed({
+            val isTableEmpty = database.genreDao().isGenreTableEmpty()
+            if (isTableEmpty <= 0) {
+                mPresenter.callGetGenreListApi(MOVIE, flag)
+            } else {
+                finishActivityAndStartAnotherActivity(
+                        Intent(this, HomeActivity::class.java))
+            }
+        }, 1000)
+
+
     }
 
     override fun callGetTvGenreListApi() {

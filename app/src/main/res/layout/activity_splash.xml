@@ -7,4 +7,13 @@
     android:background="@color/colorPrimary"
     tools:context="com.example.mf.movielibrary.activities.splashscreen.SplashActivity">
 
+    <ImageView
+        android:id="@+id/appIcon"
+        android:layout_width="@dimen/size_130dp"
+        android:layout_height="@dimen/size_130dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
