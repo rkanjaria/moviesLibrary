@@ -42,8 +42,10 @@
     <dimen name="size_210dp">210dp</dimen>
     <dimen name="size_220dp">220dp</dimen>
     <dimen name="size_230dp">230dp</dimen>
+    <dimen name="size_240dp">240dp</dimen>
     <dimen name="size_250dp">250dp</dimen>
     <dimen name="size_270dp">270dp</dimen>
+    <dimen name="size_280dp">280dp</dimen>
     <dimen name="size_300dp">300dp</dimen>
     <dimen name="size_310dp">310dp</dimen>
     <dimen name="size_320dp">320dp</dimen>

@@ -33,8 +33,6 @@ class SplashActivity : BaseActivity<SplashActivityContract.SplashView, SplashAct
                         Intent(this, HomeActivity::class.java))
             }
         }, 1000)
-
-
     }
 
     override fun callGetTvGenreListApi() {
