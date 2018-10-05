@@ -12,9 +12,8 @@
         android:layout_height="match_parent"
         android:paddingTop="@dimen/size_4dp"
         android:paddingBottom="@dimen/size_4dp"
-        android:paddingLeft="@dimen/size_8dp"
-        android:clipToPadding="false"
-        android:layout_below="@+id/toolbar" />
+        android:paddingEnd="@dimen/size_8dp"
+        android:clipToPadding="false" />
 
     <ProgressBar
         android:id="@+id/progressBar"

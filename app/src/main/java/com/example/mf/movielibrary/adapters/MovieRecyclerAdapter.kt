@@ -27,9 +27,6 @@ class MovieRecyclerAdapter(val moviesList: List<Movie?>, onMovieSeriesAdapterLis
     private val movieSeriesAdapterListener = onMovieSeriesAdapterListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder? {
-
-        //val movieLayout = if(isRecommendation) R.layout.similar_movie_recycler_layout else R.layout.movie_recycler_layout
-
         when (viewType) {
             MOVIE_VIEW -> return MovieViewHolder(parent.inflate(R.layout.movie_recycler_layout, false))
             LOADER_VIEW -> return LoaderViewHolder(parent.inflate(R.layout.loader_recycler_layout, false))
