@@ -66,6 +66,7 @@
             android:layout_height="match_parent"
             android:animateLayoutChanges="true"
             android:orientation="vertical"
+            android:descendantFocusability="blocksDescendants"
             android:padding="@dimen/size_16dp">
 
             <RelativeLayout
@@ -150,15 +151,6 @@
                     android:maxLines="2" />
 
             </RelativeLayout>
-
-            <!--<tm.charlie.expandabletextview.ExpandableTextView
-                android:id="@+id/movieOverview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_16dp"
-                android:fontFamily="@font/noto_sans_regular"
-                app:etv_collapsedLines="3"
-                app:etv_animationDuration="200" />-->
 
 
             <TextView
