@@ -37,6 +37,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_series)
+        setContentView(R.layout.activity_movie_series)
 
         val movieModel = intent.getParcelableExtra(PARCELABLE_OBJECT) as Movie
         initToolbar(toolbar as Toolbar, true, "")

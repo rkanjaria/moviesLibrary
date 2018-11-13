@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/size_4dp"
+    android:layout_marginTop="@dimen/size_4dp"
     android:layout_marginEnd="@dimen/size_8dp"
-    android:layout_marginTop="@dimen/size_4dp">
+    android:layout_marginBottom="@dimen/size_4dp">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="0dp"
@@ -51,6 +50,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_12"
             android:textStyle="bold"
+            android:layout_marginBottom="@dimen/size_4dp"
             app:layout_constraintEnd_toEndOf="@+id/actorsCard"
             app:layout_constraintStart_toStartOf="@+id/actorsCard"
             app:layout_constraintTop_toBottomOf="@+id/actorsCard" />
@@ -58,17 +58,16 @@
         <TextView
             android:id="@+id/actorsCharacterName"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size_4dp"
+            android:layout_height="0dp"
             android:ellipsize="end"
             android:fontFamily="@font/noto_sans_regular"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:maxLines="1"
             android:textSize="@dimen/text_size_12"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/actorsCard"
             app:layout_constraintStart_toStartOf="@+id/actorsCard"
             app:layout_constraintTop_toBottomOf="@+id/actorsName" />
-
 
     </android.support.constraint.ConstraintLayout>
 
