@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.example.mf.movielibrary.R
-import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
 import com.example.mf.movielibrary.models.seasonmodels.Episode
 import files.*
 import kotlinx.android.synthetic.main.episode_recyler_layout.view.*
@@ -33,7 +32,7 @@ class EpisodeRecyclerAdapter(val episodeList: List<Episode>, episodeAdapterListe
 
             view.episodePosterImage.loadImage(photoUrl + episodeModel.stillPath)
             view.episodeTitle.text = String.format("%02d", episodeModel.episodeNumber) + ". " + episodeModel.episodeName
-            view.episodeRating.text = episodeModel.voteAverage.toString()
+            view.episodeRating.text = formatRating(episodeModel.voteAverage)
             view.episodeDate.text = getDateWithCustomFormat(episodeModel.episodeAirDate)
 
             view.setOnClickListener { episodeListener?.onEpisodeClicked(episodeModel) }

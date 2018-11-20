@@ -1,13 +1,12 @@
 package com.example.mf.movielibrary.activities.movieseriesscreen
 
-import android.animation.ObjectAnimator
-import android.animation.PropertyValuesHolder
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.CastRecyclerAdapter
@@ -15,6 +14,7 @@ import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.adapters.ReviewAdapter
 import com.example.mf.movielibrary.adapters.SeasonRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
+import com.example.mf.movielibrary.classes.BounceInterpolator
 import com.example.mf.movielibrary.models.castmodel.Cast
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
@@ -53,7 +53,7 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         }
         movieTitle.text = movieModel.title
         movieYear.text = getDateWithCustomFormat(movieModel.releaseDate)
-        movieRating.text = if (movieModel.voteAverage != 0f) movieModel.voteAverage.toString() else "No rating"
+        movieRating.text = formatRating(movieModel.voteAverage)
         movieOverview.text = movieModel.overview
         movieGenre.text = mPresenter.getMovieGenres(movieModel.genreIds)
 
@@ -167,14 +167,18 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
     }
 
     fun animateHeart(image: ImageView) {
-        val objectAnimator = ObjectAnimator.ofPropertyValuesHolder(image,
+        /*val objectAnimator = ObjectAnimator.ofPropertyValuesHolder(image,
                 PropertyValuesHolder.ofFloat(View.SCALE_X, 1.3f),
                 PropertyValuesHolder.ofFloat(View.SCALE_Y, 1.3f))
 
         objectAnimator.repeatCount = 1
         objectAnimator.repeatMode = ObjectAnimator.REVERSE
         objectAnimator.setDuration(200)
-        objectAnimator.start()
+        objectAnimator.start()*/
+
+        val scaleAnim = AnimationUtils.loadAnimation(this, R.anim.scale)
+        scaleAnim.interpolator = BounceInterpolator(0.1, 10.0)
+        image.startAnimation(scaleAnim)
     }
 
     override fun onSnackBarButtonClicked() {

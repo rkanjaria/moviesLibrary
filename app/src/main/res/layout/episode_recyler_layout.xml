@@ -51,7 +51,6 @@
                 android:layout_alignTop="@+id/ratingIcon"
                 android:fontFamily="@font/noto_sans_regular"
                 android:textSize="@dimen/text_size_12"
-                android:maxLength="3"
                 android:layout_marginStart="@dimen/size_8dp" />
 
             <TextView

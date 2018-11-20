@@ -9,7 +9,7 @@ import files.*
 data class FavouriteMovie(
         @PrimaryKey
         @ColumnInfo(name = MOVIE_ID) val id: Int,
-        @ColumnInfo(name = VOTE_AVERAGE) val voteAverage: Float,
+        @ColumnInfo(name = VOTE_AVERAGE) val voteAverage: Double,
         @ColumnInfo(name = POSTER_PATH) val posterPath: String?,
         @ColumnInfo(name = MEDIA_TYPE) val mediaType: String?,
         @ColumnInfo(name = ORIGINAL_TITLE) val originalTitle: String?,

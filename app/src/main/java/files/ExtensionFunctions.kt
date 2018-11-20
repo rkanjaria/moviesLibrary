@@ -15,6 +15,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.classes.BlurTransform
 import com.example.mf.movielibrary.database.AppDatabase
+import java.text.DecimalFormat
 
 /**
  * Created by RK on 23-12-2017.
@@ -90,3 +91,5 @@ fun TextView.expandOrCollapseTextView() {
     animation.setDuration(250)
             .start()
 }
+
+fun formatRating(rating: Double): String = if (rating != 0.0) DecimalFormat("#.#").format(rating) else "No rating"

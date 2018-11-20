@@ -18,7 +18,7 @@ data class MoviesResult(
 data class Movie (
         @SerializedName("id") var id : Int,
         @SerializedName("video") var video : Boolean = false,
-        @SerializedName("vote_average") var voteAverage : Float,
+        @SerializedName("vote_average") var voteAverage : Double,
         @SerializedName("poster_path") var posterPath : String ?,
         @SerializedName("media_type") var mediaType : String ?,
         @SerializedName(value = "original_title", alternate = ["original_name"]) var originalTitle : String?,
@@ -32,7 +32,7 @@ data class Movie (
     constructor(parcel: Parcel) : this(
             parcel.readInt(),
             parcel.readByte() != 0.toByte(),
-            parcel.readFloat(),
+            parcel.readDouble(),
             parcel.readString(),
             parcel.readString(),
             parcel.readString(),
@@ -48,7 +48,7 @@ data class Movie (
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeByte(if (video) 1 else 0)
-        parcel.writeFloat(voteAverage)
+        parcel.writeDouble(voteAverage)
         parcel.writeString(posterPath)
         parcel.writeString(mediaType)
         parcel.writeString(originalTitle)

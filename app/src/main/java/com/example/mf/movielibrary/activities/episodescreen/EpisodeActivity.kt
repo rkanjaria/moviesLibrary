@@ -37,7 +37,7 @@ class EpisodeActivity : BaseActivity<EpisodeActivityContract.EpisodeView, Episod
         episodeName.text = episodeModel.episodeName
         episodeOverview.text = episodeModel.episodeOverview
         episodeAirDate.text = getDateWithCustomFormat(episodeModel.episodeAirDate)
-        episodeVoteAverage.text = episodeModel.voteAverage.toString()
+        episodeVoteAverage.text = formatRating(episodeModel.voteAverage)
 
 
         appBarLayout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
@@ -63,7 +63,6 @@ class EpisodeActivity : BaseActivity<EpisodeActivityContract.EpisodeView, Episod
     override fun addImagesToList(imageList: List<String>) {
 
         if (imageList.size > 1) {
-
             this.imageList.addAll(if (imageList.size < 4) imageList else imageList.subList(0, 3))
             imageAdapter.notifyDataSetChanged()
             pageIndicator.visibility = View.VISIBLE

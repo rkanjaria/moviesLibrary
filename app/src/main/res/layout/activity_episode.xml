@@ -101,7 +101,7 @@
                 android:fontFamily="@font/noto_sans_regular"
                 android:textColor="@color/white"
                 android:layout_marginTop="@dimen/size_32dp"
-                android:text="First air date"
+                android:text="Episode air date"
                 android:layout_below="@+id/episodeOverview"
                 android:textStyle="bold" />
 
@@ -120,7 +120,7 @@
                 android:fontFamily="@font/noto_sans_regular"
                 android:textColor="@color/white"
                 android:layout_marginTop="@dimen/size_8dp"
-                android:text="Vote average"
+                android:text="Rating"
                 android:layout_below="@+id/airDateTitle"
                 android:textStyle="bold" />
 
