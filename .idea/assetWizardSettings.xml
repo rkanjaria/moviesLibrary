@@ -34,7 +34,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="134" />
+                                                <entry key="scalingPercent" value="67" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -47,8 +47,10 @@
                                       <entry key="backgroundAssetType" value="COLOR" />
                                       <entry key="backgroundColor" value="383938" />
                                       <entry key="backgroundImage" value="C:\Users\SERVER\Desktop\trans-01.png" />
-                                      <entry key="foregroundImage" value="D:\RK\Illustrator project\adaptive-icon-bg-01.png" />
+                                      <entry key="foregroundImage" value="C:\Users\SERVER\Desktop\Artboard 3xxxhdpi.png" />
                                       <entry key="legacyIconShape" value="CIRCLE" />
+                                      <entry key="previewDensity" value="XXXHIGH" />
+                                      <entry key="showGrid" value="true" />
                                       <entry key="webIconShape" value="CIRCLE" />
                                     </map>
                                   </option>
