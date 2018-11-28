@@ -89,6 +89,8 @@ class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListen
                 movieAdapter.refreshAdapter(lastPosition)
             }
         }
+
+        //runLayoutAnimation(movieRecyclerView, R.anim.grid_layout_animation_from_bottom)
     }
 
     override fun onMovieOrSeriesClicked(movieModel: Movie?) {

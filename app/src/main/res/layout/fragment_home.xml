@@ -6,7 +6,7 @@
     tools:context=".fragments.HomeFragment"
     android:background="@color/colorPrimary">
 
-    <android.support.v7.widget.RecyclerView
+    <com.example.mf.movielibrary.widgets.GridRecyclerView
         android:id="@+id/movieRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

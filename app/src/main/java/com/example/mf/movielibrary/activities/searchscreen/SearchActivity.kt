@@ -82,6 +82,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
         genreRecyclerView.setHasFixedSize(true)
         genreRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         genreRecyclerView.adapter = GenreAdapter(genreList, this)
+        runLayoutAnimation(genreRecyclerView, R.anim.layout_animation_fall_down)
     }
 
     // Click genreRecyclerviewItem

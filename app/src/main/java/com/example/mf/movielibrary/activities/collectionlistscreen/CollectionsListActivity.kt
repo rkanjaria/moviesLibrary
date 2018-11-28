@@ -6,6 +6,7 @@ import android.support.v7.widget.Toolbar
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.CollectionsListAdapter
 import com.example.mf.movielibrary.base.BaseActivity
+import files.runLayoutAnimation
 import kotlinx.android.synthetic.main.activity_collections_list.*
 
 class CollectionsListActivity : BaseActivity<CollectionsListActivityContract.CollectionsListView, CollectionsListActivityPresenter>(),
@@ -42,5 +43,10 @@ class CollectionsListActivity : BaseActivity<CollectionsListActivityContract.Col
         collectionsListRecylerview.layoutManager = LinearLayoutManager(this)
         collectionsListRecylerview.setHasFixedSize(true)
         collectionsListRecylerview.adapter = CollectionsListAdapter(collectionsIds, collectionsName, collectionsImages)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        runLayoutAnimation(collectionsListRecylerview, R.anim.layout_animation_fall_down)
     }
 }

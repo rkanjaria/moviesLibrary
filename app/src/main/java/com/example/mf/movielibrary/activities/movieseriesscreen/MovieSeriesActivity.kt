@@ -28,7 +28,6 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
         MovieSeriesActivityContract.MovieSeriesView, CastRecyclerAdapter.OnCastAdapterListener,
         MovieRecyclerAdapter.OnMovieSeriesAdapterListener, SeasonRecyclerAdapter.SeasonAdapterListener, View.OnClickListener {
 
-
     private var movieOrSeriesId = 0
     private lateinit var trailersList: List<VideoTrailers>
 
@@ -36,7 +35,6 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_series)
         setContentView(R.layout.activity_movie_series)
 
         val movieModel = intent.getParcelableExtra(PARCELABLE_OBJECT) as Movie
