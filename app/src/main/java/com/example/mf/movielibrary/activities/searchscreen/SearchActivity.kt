@@ -4,10 +4,7 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.content.res.ResourcesCompat
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.SearchView
+import android.support.v7.widget.*
 import android.view.ContextThemeWrapper
 import android.view.Menu
 import android.view.MenuItem
@@ -55,6 +52,8 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
         gridLayoutManager = GridLayoutManager(this, 3)
         searchRecyclerView.layoutManager = gridLayoutManager
+        (searchRecyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false // disabling default item animatior of recyclerview
+
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return if (movieAdapter.getItemViewType(position) == movieAdapter.LOADER_VIEW)
@@ -64,6 +63,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
 
         actorsGridLayoutManager = GridLayoutManager(this, 3)
         actorsRecyclerView.layoutManager = actorsGridLayoutManager
+        (actorsRecyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false // disabling default item animatior of recyclerview
         actorsGridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return if (actorsAdapter.getItemViewType(position) == actorsAdapter.LOADER_VIEW)
@@ -108,6 +108,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
                 mSearchList.addAll(moviesList)
                 movieAdapter = MovieRecyclerAdapter(mSearchList, this)
                 searchRecyclerView.adapter = movieAdapter
+                runLayoutAnimation(searchRecyclerView, R.anim.grid_layout_animation_fall_down)
 
             } else {
                 // for the second time remove the loader view and add the data and refresh the recyclerview
@@ -160,6 +161,7 @@ class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, Searc
                 mActorsList.addAll(actorsList)
                 actorsAdapter = ActorsAdapter(mActorsList, this)
                 actorsRecyclerView.adapter = actorsAdapter
+                runLayoutAnimation(actorsRecyclerView, R.anim.grid_layout_animation_fall_down)
 
             } else {
                 // for the second time remove the loader view and add the data and refresh the recyclerview

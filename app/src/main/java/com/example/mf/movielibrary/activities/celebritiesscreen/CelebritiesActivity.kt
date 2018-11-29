@@ -2,6 +2,7 @@ package com.example.mf.movielibrary.activities.celebritiesscreen
 
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.SimpleItemAnimator
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +12,7 @@ import com.example.mf.movielibrary.adapters.ActorsAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.actormodel.Actor
 import files.ACTORS
+import files.runLayoutAnimation
 import kotlinx.android.synthetic.main.activity_actors_list.*
 
 class CelebritiesActivity : BaseActivity<CelebritiesActivityContract.CelebritiesView, CelebritiesActivityPresenter>(),
@@ -33,6 +35,7 @@ class CelebritiesActivity : BaseActivity<CelebritiesActivityContract.Celebrities
 
         gridLayoutManager = GridLayoutManager(this, 3)
         actorsRecyclerView.layoutManager = gridLayoutManager
+        (actorsRecyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
@@ -54,6 +57,7 @@ class CelebritiesActivity : BaseActivity<CelebritiesActivityContract.Celebrities
             mActorsList.addAll(actorsList)
             actorAdapter = ActorsAdapter(mActorsList, this)
             actorsRecyclerView.adapter = actorAdapter
+            runLayoutAnimation(actorsRecyclerView, R.anim.grid_layout_animation_fall_down)
         } else {
             // for the second time remove the loader view and add the data and refresh the recyclerview
             mActorsList.removeAt(mActorsList.size - 1)

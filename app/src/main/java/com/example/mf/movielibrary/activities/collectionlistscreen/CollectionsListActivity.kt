@@ -43,6 +43,7 @@ class CollectionsListActivity : BaseActivity<CollectionsListActivityContract.Col
         collectionsListRecylerview.layoutManager = LinearLayoutManager(this)
         collectionsListRecylerview.setHasFixedSize(true)
         collectionsListRecylerview.adapter = CollectionsListAdapter(collectionsIds, collectionsName, collectionsImages)
+        runLayoutAnimation(collectionsListRecylerview, R.anim.layout_animation_fall_down)
     }
 
     override fun onResume() {

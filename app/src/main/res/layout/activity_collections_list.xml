@@ -17,7 +17,6 @@
         android:paddingLeft="@dimen/size_8dp"
         android:paddingRight="@dimen/size_8dp"
         android:paddingTop="@dimen/size_8dp"
-        android:layoutAnimation="@anim/layout_animation_fall_down"
         android:clipToPadding="false" />
 
 </LinearLayout>

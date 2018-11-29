@@ -64,7 +64,7 @@ class MovieRecyclerAdapter(val moviesList: List<Movie?>, onMovieSeriesAdapterLis
         private var view: View = itemView
         fun bindViews(movieModel: Movie?) {
 
-            if(isHorizontal) {
+            if (isHorizontal) {
                 val widthInDp = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100f, view.resources.displayMetrics)
                 view.layoutParams.width = widthInDp.toInt()
             }
@@ -83,8 +83,8 @@ class MovieRecyclerAdapter(val moviesList: List<Movie?>, onMovieSeriesAdapterLis
     }
 
     interface OnMovieSeriesAdapterListener {
-        fun loadMore(){}
-        fun onMovieOrSeriesClicked(movieModel: Movie?){}
+        fun loadMore() {}
+        fun onMovieOrSeriesClicked(movieModel: Movie?) {}
     }
 
     fun refreshAdapter(lastPosition: Int) {

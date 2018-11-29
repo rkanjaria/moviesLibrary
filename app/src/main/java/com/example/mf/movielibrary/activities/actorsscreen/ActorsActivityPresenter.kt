@@ -5,9 +5,7 @@ import android.net.Uri
 import com.example.mf.movielibrary.activities.actorsmovieseriesscreen.ActorsMoviesSeriesActivity
 import com.example.mf.movielibrary.activities.imgescreen.ImageActivity
 import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
-import com.example.mf.movielibrary.activities.searchscreen.SearchActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
-import com.example.mf.movielibrary.base.BaseView
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.actormodel.Actor
 import com.example.mf.movielibrary.models.moviemodel.Movie

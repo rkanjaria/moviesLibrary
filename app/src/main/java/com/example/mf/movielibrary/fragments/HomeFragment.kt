@@ -7,6 +7,7 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.SimpleItemAnimator
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +44,7 @@ class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListen
         callMoviesOrseriesApi()
         gridLayoutManager = GridLayoutManager(context, 3)
         movieRecyclerView.layoutManager = gridLayoutManager
+        (movieRecyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false // disabling default item animatior of recyclerview
 
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
@@ -79,6 +81,7 @@ class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListen
                 mMoviesList.addAll(moviesList)
                 movieAdapter = MovieRecyclerAdapter(mMoviesList, this)
                 movieRecyclerView.adapter = movieAdapter
+                runLayoutAnimation(movieRecyclerView, R.anim.grid_layout_animation_fall_down)
             } else {
                 // for the second time remove the loader view and add the data and refresh the recyclerview
                 mMoviesList.removeAt(mMoviesList.size - 1)
@@ -89,8 +92,6 @@ class HomeFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListen
                 movieAdapter.refreshAdapter(lastPosition)
             }
         }
-
-        //runLayoutAnimation(movieRecyclerView, R.anim.grid_layout_animation_from_bottom)
     }
 
     override fun onMovieOrSeriesClicked(movieModel: Movie?) {
