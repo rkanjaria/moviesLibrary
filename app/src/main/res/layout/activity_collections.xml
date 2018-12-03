@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true"
     tools:context="com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -21,11 +21,13 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:collapsedTitleTextAppearance="@style/ToolbarTextStyle"
-            app:expandedTitleTextAppearance="@style/ToolbarTextStyle"
             app:contentScrim="@color/colorPrimary"
-            app:expandedTitleMarginStart="@dimen/size_26dp"
             app:expandedTitleMarginBottom="@dimen/size_26dp"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:expandedTitleMarginStart="@dimen/size_26dp"
+            app:expandedTitleTextAppearance="@style/ToolbarTextStyle"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:transitionName="@string/collection_shared_transition_name"
+            tools:ignore="UnusedAttribute">
 
             <ImageView
                 android:id="@+id/collectionPosterImage"
@@ -33,22 +35,24 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax" />
+                app:layout_collapseMode="parallax"
+                android:transitionName="@string/collection_shared_transition" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="bottom"
-                android:background="@drawable/scrim_bottom" />
+                android:background="@drawable/scrim_bottom"
+                android:transitionName="@string/collection_shared_transition_view" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:contentInsetLeft="0dp"
-                app:contentInsetStart="0dp"
-                app:contentInsetRight="@dimen/size_32dp"
                 app:contentInsetEnd="@dimen/size_32dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="@dimen/size_32dp"
+                app:contentInsetStart="0dp"
                 app:contentInsetStartWithNavigation="0dp"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
@@ -70,15 +74,14 @@
             android:layout_marginTop="@dimen/size_40dp"
             android:visibility="gone" />
 
-        <android.support.v7.widget.RecyclerView
+        <com.example.mf.movielibrary.widgets.GridRecyclerView
             android:id="@+id/collectionsRecylerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="@dimen/size_4dp"
-            android:paddingBottom="@dimen/size_4dp"
-            android:paddingLeft="@dimen/size_8dp"
             android:clipToPadding="false"
-            android:layout_below="@+id/toolbar" />
+            android:paddingLeft="@dimen/size_8dp"
+            android:paddingTop="@dimen/size_4dp"
+            android:paddingBottom="@dimen/size_4dp" />
 
     </LinearLayout>
 

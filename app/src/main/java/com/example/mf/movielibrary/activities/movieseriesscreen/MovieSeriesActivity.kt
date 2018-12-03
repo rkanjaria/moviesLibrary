@@ -1,5 +1,6 @@
 package com.example.mf.movielibrary.activities.movieseriesscreen
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v4.content.ContextCompat
@@ -86,12 +87,11 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
 
         if (database.favouriteMovieDao().doesAlreadyExists(movieOrSeriesId)) {
             favouriteIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_favorite))
-            setResult(RESULT_CODE)
         }
 
         favouriteIcon.setOnClickListener {
             mPresenter.addOrRemoveFavourites(movieModel, intent.getStringExtra(MOVIE_OR_SERIES))
-            setResult(RESULT_CODE)
+            setResult(Activity.RESULT_OK)
         }
     }
 

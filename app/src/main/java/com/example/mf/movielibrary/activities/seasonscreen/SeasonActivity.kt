@@ -12,6 +12,7 @@ import com.example.mf.movielibrary.models.seasonmodels.Episode
 import com.example.mf.movielibrary.models.seasonmodels.SeasonResult
 import files.INT_ID
 import files.PARCELABLE_OBJECT
+import files.runLayoutAnimation
 import kotlinx.android.synthetic.main.activity_season.*
 
 class SeasonActivity : BaseActivity<SeasonActivityContract.SeasonView, SeasonActivityPresenter>(),
@@ -44,6 +45,7 @@ class SeasonActivity : BaseActivity<SeasonActivityContract.SeasonView, SeasonAct
             episodesRecyclerview.layoutManager = LinearLayoutManager(this)
             episodesRecyclerview.adapter = EpisodeRecyclerAdapter(seasonResult.episodeList, this)
             episodesRecyclerview.visibility = View.VISIBLE
+            runLayoutAnimation(episodesRecyclerview, R.anim.layout_animation_fall_down)
         }
     }
 

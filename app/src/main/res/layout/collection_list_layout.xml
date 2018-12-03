@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainView"
     android:layout_width="match_parent"
     android:layout_height="@dimen/size_150dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="@dimen/size_8dp"
-    app:cardBackgroundColor="@color/darkGrey">
+    android:transitionName="@string/collection_shared_transition"
+    app:cardBackgroundColor="@color/darkGrey"
+    tools:ignore="UnusedAttribute">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,24 +17,27 @@
         <ImageView
             android:id="@+id/collectionImage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
 
         <View
+            android:id="@+id/collectionView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_50dp"
-            android:background="@drawable/scrim_bottom_light"
-            android:layout_alignParentBottom="true"/>
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/scrim_bottom"
+            android:transitionName="@string/collection_shared_transition_view" />
 
         <TextView
             android:id="@+id/collectionName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_sans_regular"
-            android:textColor="@color/white"
             android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/size_10dp"
-            android:textSize="@dimen/text_size_16" />
-
+            android:fontFamily="@font/noto_sans_regular"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16"
+            android:transitionName="@string/collection_shared_transition_name" />
 
     </RelativeLayout>
 

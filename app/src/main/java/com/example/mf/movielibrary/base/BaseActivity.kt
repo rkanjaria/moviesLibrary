@@ -71,7 +71,8 @@ abstract class BaseActivity<in V : BaseView, T : BasePresenter<V>>
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        //super.onBackPressed()
+        supportFinishAfterTransition()
         KeyboardUtils.hideSoftInputKeyboard(this)
     }
 

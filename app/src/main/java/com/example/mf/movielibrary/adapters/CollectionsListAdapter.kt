@@ -1,24 +1,19 @@
 package com.example.mf.movielibrary.adapters
 
-import android.app.Activity
-import android.content.Intent
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.view.ViewCompat
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.example.mf.movielibrary.R
-import com.example.mf.movielibrary.R.id.imageView
-import com.example.mf.movielibrary.activities.collectionscreen.CollectionsActivity
-import files.*
+import files.inflate
+import files.loadImageForSharedTransition
 import kotlinx.android.synthetic.main.collection_list_layout.view.*
 
 /**
  * Created by RK on 10-05-2018.
  */
-class CollectionsListAdapter(val collectionIdList: List<Int>, val collectionNames: List<String>,
-                             val collectionImages: List<Int>) :
+class CollectionsListAdapter(val collectionIdList: List<Int>,
+                             val collectionNames: List<String>,
+                             val collectionImages: List<Int>, val mListener: CollectionAdapterListsner?) :
         RecyclerView.Adapter<CollectionsListAdapter.CollectionsListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CollectionsListViewHolder {
@@ -37,19 +32,18 @@ class CollectionsListAdapter(val collectionIdList: List<Int>, val collectionName
 
         fun bindItems(collectionId: Int, collectionName: String, collectionImage: Int) {
             view.collectionName.text = collectionName
-            view.collectionImage.loadDrawableImage(collectionImage, R.color.darkGrey)
+            //view.collectionImage.loadDrawableImage(collectionImage, R.color.darkGrey)
+            view.collectionImage.loadImageForSharedTransition(collectionImage, R.color.darkGrey)
 
-            view.setOnClickListener({
-                val collectionsListIntent = Intent(view.context, CollectionsActivity::class.java)
-                collectionsListIntent.putExtra(INT_ID, collectionId)
-                collectionsListIntent.putExtra(NAME, collectionName)
-                collectionsListIntent.putExtra(BACKDROP_PATH, collectionImage)
-                view.context.startActivity(collectionsListIntent)
-
-                /*val options = ActivityOptionsCompat.makeSceneTransitionAnimation(it.context as Activity, view.collectionImage,
-                        ViewCompat.getTransitionName(view.collectionImage))
-                view.context.startActivity(collectionsListIntent, options.toBundle())*/
-            })
+            view.setOnClickListener {
+                mListener?.onClick(collectionId, collectionName, collectionImage,
+                        view.mainView, view.collectionView, view.collectionName)
+            }
         }
+    }
+
+    interface CollectionAdapterListsner {
+        fun onClick(collectionId: Int, collectionName: String, collectionImage: Int,
+                    sharedImage: View, collectionView: View, collectionNameText: View)
     }
 }

@@ -73,6 +73,7 @@ fun ImageView.loadDrawableImage(@DrawableRes url: Int, placeholder: Int = R.colo
             .apply(RequestOptions.errorOf(placeholder))
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
+
 }
 
 fun ImageView.loadDrawable(@DrawableRes url: Int) {
@@ -80,6 +81,18 @@ fun ImageView.loadDrawable(@DrawableRes url: Int) {
             .load(url)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
+}
+
+
+fun ImageView.loadImageForSharedTransition(@DrawableRes url: Int, placeholder: Int = R.color.darkGrey) {
+    Glide.with(this)
+            .load(url)
+            .apply(RequestOptions.placeholderOf(placeholder))
+            .apply(RequestOptions().dontTransform())
+            .apply(RequestOptions.errorOf(placeholder))
+            .apply(RequestOptions().dontAnimate())
+            .into(this)
+
 }
 
 val Context.database: AppDatabase
@@ -97,9 +110,12 @@ fun TextView.expandOrCollapseTextView() {
 
 fun formatRating(rating: Double): String = if (rating != 0.0) DecimalFormat("#.#").format(rating) else "No rating"
 
-fun runLayoutAnimation(recyclerView: RecyclerView, @AnimRes animResFile: Int){
+fun runLayoutAnimation(recyclerView: RecyclerView, @AnimRes animResFile: Int) {
+
+    if (recyclerView.adapter != null) {
         val animationController = AnimationUtils.loadLayoutAnimation(recyclerView.context, animResFile)
-    recyclerView.layoutAnimation = animationController
-    recyclerView.adapter.notifyDataSetChanged()
-    recyclerView.scheduleLayoutAnimation()
+        recyclerView.layoutAnimation = animationController
+        recyclerView.adapter.notifyDataSetChanged()
+        recyclerView.scheduleLayoutAnimation()
+    }
 }

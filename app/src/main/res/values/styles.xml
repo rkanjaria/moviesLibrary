@@ -17,4 +17,10 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="AppTheme.ReEnter">
+        <item name="android:fontFamily">@font/noto_sans_regular</item>
+        <item name="android:textSize">@dimen/text_size_14</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

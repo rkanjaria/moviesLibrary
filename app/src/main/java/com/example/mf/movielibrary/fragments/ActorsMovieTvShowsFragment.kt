@@ -43,6 +43,7 @@ class ActorsMovieTvShowsFragment : Fragment(), MovieRecyclerAdapter.OnMovieSerie
             movieSeriesRecyclerView.setHasFixedSize(true)
             movieSeriesRecyclerView.layoutManager = GridLayoutManager(context, 3)
             movieSeriesRecyclerView?.adapter = MovieRecyclerAdapter(moviesList, this)
+            runLayoutAnimation(movieSeriesRecyclerView, R.anim.grid_layout_animation_fall_down)
         } else {
             movieSeriesRecyclerView.visibility = View.GONE
             noMovieSeriesImage.loadDrawable(R.drawable.no_movie_series)

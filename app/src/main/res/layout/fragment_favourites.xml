@@ -5,7 +5,7 @@
     android:background="@color/colorPrimary"
     tools:context="com.example.mf.movielibrary.fragments.FavouritesFragment">
 
-    <android.support.v7.widget.RecyclerView
+    <com.example.mf.movielibrary.widgets.GridRecyclerView
         android:id="@+id/favouritesRecyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

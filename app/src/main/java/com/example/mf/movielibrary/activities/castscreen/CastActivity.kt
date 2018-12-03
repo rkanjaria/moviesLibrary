@@ -8,6 +8,7 @@ import com.example.mf.movielibrary.adapters.CastRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.castmodel.Cast
 import files.PARCELABLE_OBJECT
+import files.runLayoutAnimation
 import kotlinx.android.synthetic.main.activity_cast.*
 
 class CastActivity : BaseActivity<CastActivityContract.CastView, CastActivityPresenter>(),
@@ -27,6 +28,7 @@ class CastActivity : BaseActivity<CastActivityContract.CastView, CastActivityPre
         castRecyclerview.setHasFixedSize(true)
         castRecyclerview.layoutManager = GridLayoutManager(this, 3)
         castRecyclerview.adapter = CastRecyclerAdapter(castList, this, false)
+        runLayoutAnimation(castRecyclerview, R.anim.grid_layout_animation_fall_down)
     }
 
     override fun onCastClicked(castModel: Cast) {

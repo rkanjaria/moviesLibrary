@@ -1,6 +1,7 @@
 package com.example.mf.movielibrary.fragments
 
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -45,7 +46,7 @@ class FavouritesFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapter
             favouritesRecyclerview.setHasFixedSize(true)
             favouritesRecyclerview.layoutManager = GridLayoutManager(context, 3)
             favouritesRecyclerview.adapter = MovieRecyclerAdapter(moviesList, this)
-
+            runLayoutAnimation(favouritesRecyclerview, R.anim.grid_layout_animation_fall_down)
         } else {
             favouritesRecyclerview.visibility = View.GONE
             noFavavouritesImage.loadDrawable(R.drawable.no_fav)
@@ -66,8 +67,7 @@ class FavouritesFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapter
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == RESULT_CODE) {
+        if (requestCode == RESULT_CODE && resultCode == RESULT_OK) {
             initFragment()
         }
     }
