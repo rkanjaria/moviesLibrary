@@ -3,8 +3,8 @@ package com.example.mf.movielibrary.helpers
 import com.example.mf.movielibrary.RetrofitApiService
 import com.example.mf.movielibrary.base.BaseView
 import com.example.mf.movielibrary.classes.NoInternetConnectionException
-import files.baseUrl
-import files.isNetworkAvailable
+import com.example.mf.movielibrary.files.baseUrl
+import com.example.mf.movielibrary.files.isNetworkAvailable
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

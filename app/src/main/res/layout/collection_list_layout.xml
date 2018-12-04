@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/size_150dp"
     android:layout_marginBottom="@dimen/size_8dp"
-    android:transitionName="@string/collection_shared_transition"
     app:cardBackgroundColor="@color/darkGrey"
     tools:ignore="UnusedAttribute">
 
@@ -25,8 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/scrim_bottom"
-            android:transitionName="@string/collection_shared_transition_view" />
+            android:background="@drawable/scrim_bottom_light" />
 
         <TextView
             android:id="@+id/collectionName"
@@ -36,8 +34,7 @@
             android:layout_margin="@dimen/size_10dp"
             android:fontFamily="@font/noto_sans_regular"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_size_16"
-            android:transitionName="@string/collection_shared_transition_name" />
+            android:textSize="@dimen/text_size_16" />
 
     </RelativeLayout>
 

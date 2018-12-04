@@ -9,7 +9,7 @@ import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.actormodel.Actor
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.*
+import com.example.mf.movielibrary.files.*
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 

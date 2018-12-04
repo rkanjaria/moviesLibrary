@@ -1,15 +1,13 @@
 package com.example.mf.movielibrary.activities.trailerscreen
 
-import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.view.WindowManager
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.models.videomodels.VideoTrailers
 import com.google.android.youtube.player.YouTubeBaseActivity
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
-import files.PARCELABLE_OBJECT
-import files.YOUTUBE_API_KEY
+import com.example.mf.movielibrary.files.PARCELABLE_OBJECT
+import com.example.mf.movielibrary.files.YOUTUBE_API_KEY
 import kotlinx.android.synthetic.main.activity_video_player.*
 
 class TrailerActivity : YouTubeBaseActivity() {

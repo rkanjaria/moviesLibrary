@@ -2,38 +2,27 @@ package com.example.mf.movielibrary.activities.collectionlistscreen
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
-import android.view.View
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.activities.collectionscreen.CollectionsActivity
 import com.example.mf.movielibrary.adapters.CollectionsListAdapter
 import com.example.mf.movielibrary.base.BaseActivity
-import files.BACKDROP_PATH
-import files.INT_ID
-import files.NAME
-import files.runLayoutAnimation
-import android.support.v4.util.Pair
+import com.example.mf.movielibrary.files.BACKDROP_PATH
+import com.example.mf.movielibrary.files.INT_ID
+import com.example.mf.movielibrary.files.NAME
+import com.example.mf.movielibrary.files.runLayoutAnimation
 import kotlinx.android.synthetic.main.activity_collections_list.*
 
 class CollectionsListActivity : BaseActivity<CollectionsListActivityContract.CollectionsListView, CollectionsListActivityPresenter>(),
         CollectionsListActivityContract.CollectionsListView, CollectionsListAdapter.CollectionAdapterListsner {
 
-    override fun onClick(collectionId: Int, collectionName: String, collectionImage: Int, sharedImage: View, collectionView: View, collectionNameText: View) {
+    override fun onClick(collectionId: Int, collectionName: String, collectionImage: Int) {
         val collectionsListIntent = Intent(this, CollectionsActivity::class.java)
         collectionsListIntent.putExtra(INT_ID, collectionId)
         collectionsListIntent.putExtra(NAME, collectionName)
         collectionsListIntent.putExtra(BACKDROP_PATH, collectionImage)
-        //startActivity(collectionsListIntent)
-
-        val pairOne = Pair.create(sharedImage, ViewCompat.getTransitionName(sharedImage))
-        val pairTwo = Pair.create(collectionView, ViewCompat.getTransitionName(collectionView))
-        //val pairThree = Pair.create(collectionNameText, ViewCompat.getTransitionName(collectionNameText))
-
-        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, pairOne, pairTwo)
-        startActivity(collectionsListIntent, options.toBundle())
+        startActivity(collectionsListIntent)
     }
 
     val collectionsIds = listOf(1, 3, 338, 3321, 69937, 15273, 272)

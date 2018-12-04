@@ -1,5 +1,7 @@
 package com.example.mf.movielibrary.activities.movieseriesscreen
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.app.Activity
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
@@ -7,7 +9,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.CastRecyclerAdapter
@@ -15,13 +16,12 @@ import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.adapters.ReviewAdapter
 import com.example.mf.movielibrary.adapters.SeasonRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
-import com.example.mf.movielibrary.classes.BounceInterpolator
+import com.example.mf.movielibrary.files.*
 import com.example.mf.movielibrary.models.castmodel.Cast
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
 import com.example.mf.movielibrary.models.reviewmodels.UserReview
 import com.example.mf.movielibrary.models.videomodels.VideoTrailers
-import files.*
 import kotlinx.android.synthetic.main.activity_movie_series.*
 import kotlinx.android.synthetic.main.play_trailer_layout.*
 
@@ -62,9 +62,9 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
             mPresenter.callGetTvDetailsApi(movieOrSeriesId)
         }
 
-        playTrailer.setOnClickListener({
+        playTrailer.setOnClickListener {
             mPresenter.launchTrailerActivity(trailersList[0])
-        })
+        }
 
         appBarLayout.addOnOffsetChangedListener(object : AppBarLayout.OnOffsetChangedListener {
             var isShow = true
@@ -165,25 +165,25 @@ class MovieSeriesActivity : BaseActivity<MovieSeriesActivityContract.MovieSeries
     }
 
     fun animateHeart(image: ImageView) {
-        /*val objectAnimator = ObjectAnimator.ofPropertyValuesHolder(image,
-                PropertyValuesHolder.ofFloat(View.SCALE_X, 1.3f),
-                PropertyValuesHolder.ofFloat(View.SCALE_Y, 1.3f))
+        val objectAnimator = ObjectAnimator.ofPropertyValuesHolder(image,
+                PropertyValuesHolder.ofFloat(View.SCALE_X, 1.5f),
+                PropertyValuesHolder.ofFloat(View.SCALE_Y, 1.5f))
 
         objectAnimator.repeatCount = 1
         objectAnimator.repeatMode = ObjectAnimator.REVERSE
-        objectAnimator.setDuration(200)
-        objectAnimator.start()*/
+        objectAnimator.setDuration(170)
+        objectAnimator.start()
 
-        val scaleAnim = AnimationUtils.loadAnimation(this, R.anim.scale)
+        /*val scaleAnim = AnimationUtils.loadAnimation(this, R.anim.scale)
         scaleAnim.interpolator = BounceInterpolator(0.1, 10.0)
-        image.startAnimation(scaleAnim)
+        image.startAnimation(scaleAnim)*/
     }
 
     override fun onSnackBarButtonClicked() {
         callAllRequiredApis()
     }
 
-    fun callAllRequiredApis(){
+    fun callAllRequiredApis() {
         mPresenter.callgetMovieOrSeriesCastApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
         mPresenter.callGetSimilarMovieOrSeriesApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)
         mPresenter.callGetMoviesOrSeriesTrailersApi(intent.getStringExtra(MOVIE_OR_SERIES), movieOrSeriesId)

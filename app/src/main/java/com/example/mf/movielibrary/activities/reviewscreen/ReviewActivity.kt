@@ -7,10 +7,8 @@ import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.ReviewAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.reviewmodels.UserReview
-import files.PARCELABLE_OBJECT
+import com.example.mf.movielibrary.files.PARCELABLE_OBJECT
 import kotlinx.android.synthetic.main.activity_review.*
-import java.lang.reflect.Array
-import java.util.*
 
 class ReviewActivity : BaseActivity<ReviewActivityContract.ReviewView, ReviewActivityPresenter>(), ReviewActivityContract.ReviewView {
 

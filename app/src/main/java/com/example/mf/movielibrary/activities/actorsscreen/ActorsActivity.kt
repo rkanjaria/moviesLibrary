@@ -10,7 +10,7 @@ import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.actormodel.Actor
 import com.example.mf.movielibrary.models.actormodel.ActorIdResult
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.*
+import com.example.mf.movielibrary.files.*
 import kotlinx.android.synthetic.main.activity_actors.*
 
 class ActorsActivity : BaseActivity<ActorsActivityContract.ActorsView, ActorsActivityPresenter>(),

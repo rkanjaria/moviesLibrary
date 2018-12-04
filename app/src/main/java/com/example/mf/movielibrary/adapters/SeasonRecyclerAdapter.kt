@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
-import files.getYearFromDate
-import files.inflate
-import files.loadImage
-import files.photoUrl
+import com.example.mf.movielibrary.files.getYearFromDate
+import com.example.mf.movielibrary.files.inflate
+import com.example.mf.movielibrary.files.loadImage
+import com.example.mf.movielibrary.files.photoUrl
 import kotlinx.android.synthetic.main.movie_recycler_layout.view.*
 
 /**

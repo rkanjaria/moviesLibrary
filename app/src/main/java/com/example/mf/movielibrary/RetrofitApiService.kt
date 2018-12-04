@@ -13,7 +13,7 @@ import com.example.mf.movielibrary.models.movieseriesdetailsmodel.MovieSeriesDet
 import com.example.mf.movielibrary.models.reviewmodels.ReviewResult
 import com.example.mf.movielibrary.models.seasonmodels.SeasonResult
 import com.example.mf.movielibrary.models.videomodels.VideoResult
-import files.API_KEY
+import com.example.mf.movielibrary.files.API_KEY
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path

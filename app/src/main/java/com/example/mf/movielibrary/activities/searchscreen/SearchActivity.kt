@@ -18,7 +18,7 @@ import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.database.entities.Genre
 import com.example.mf.movielibrary.models.actormodel.Actor
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.*
+import com.example.mf.movielibrary.files.*
 import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : BaseActivity<SearchActivityContract.SearchBaseView, SearchActivityPresenter>(),

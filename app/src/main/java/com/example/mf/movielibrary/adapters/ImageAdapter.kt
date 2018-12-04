@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.mf.movielibrary.R
-import files.backdropUrl
-import files.loadImage
+import com.example.mf.movielibrary.files.backdropUrl
+import com.example.mf.movielibrary.files.loadImage
 import kotlinx.android.synthetic.main.image_layout.view.*
 
 

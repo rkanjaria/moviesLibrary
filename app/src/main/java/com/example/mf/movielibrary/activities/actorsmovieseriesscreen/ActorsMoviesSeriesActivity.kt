@@ -8,8 +8,8 @@ import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.fragments.ActorsMovieTvShowsFragment
 import com.example.mf.movielibrary.interfaces.ActorsMoviesSeriesListener
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.MOVIE_CREDITS
-import files.NAME
+import com.example.mf.movielibrary.files.MOVIE_CREDITS
+import com.example.mf.movielibrary.files.NAME
 import kotlinx.android.synthetic.main.activity_actors_movies_series.*
 
 class ActorsMoviesSeriesActivity : BaseActivity<ActorsMoviesSeriesActivityContract.ActorsMoviesSeriesView,

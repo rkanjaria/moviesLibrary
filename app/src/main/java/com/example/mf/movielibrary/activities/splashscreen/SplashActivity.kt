@@ -6,10 +6,10 @@ import android.os.Handler
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.activities.homescreen.HomeActivity
 import com.example.mf.movielibrary.base.BaseActivity
-import files.MOVIE
-import files.TV_SHOWS
-import files.database
-import files.loadDrawable
+import com.example.mf.movielibrary.files.MOVIE
+import com.example.mf.movielibrary.files.TV_SHOWS
+import com.example.mf.movielibrary.files.database
+import com.example.mf.movielibrary.files.loadDrawable
 import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : BaseActivity<SplashActivityContract.SplashView, SplashActivityPresenter>(),

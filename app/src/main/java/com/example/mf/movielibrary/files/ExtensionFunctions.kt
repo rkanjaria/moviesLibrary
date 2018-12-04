@@ -1,4 +1,4 @@
-package files
+package com.example.mf.movielibrary.files
 
 import android.animation.ObjectAnimator
 import android.arch.persistence.room.Room
@@ -81,18 +81,6 @@ fun ImageView.loadDrawable(@DrawableRes url: Int) {
             .load(url)
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
-}
-
-
-fun ImageView.loadImageForSharedTransition(@DrawableRes url: Int, placeholder: Int = R.color.darkGrey) {
-    Glide.with(this)
-            .load(url)
-            .apply(RequestOptions.placeholderOf(placeholder))
-            .apply(RequestOptions().dontTransform())
-            .apply(RequestOptions.errorOf(placeholder))
-            .apply(RequestOptions().dontAnimate())
-            .into(this)
-
 }
 
 val Context.database: AppDatabase

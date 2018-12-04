@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.database.entities.Genre
-import files.inflate
+import com.example.mf.movielibrary.files.inflate
 import kotlinx.android.synthetic.main.genre_recyler_layout.view.*
 
 class GenreAdapter(val genreList: List<Genre>, val genreListener: GenreAdapterListener?) : RecyclerView.Adapter<GenreAdapter.GenreViewHolder>() {

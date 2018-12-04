@@ -15,7 +15,7 @@ import android.view.ViewGroup
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.*
+import com.example.mf.movielibrary.files.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**

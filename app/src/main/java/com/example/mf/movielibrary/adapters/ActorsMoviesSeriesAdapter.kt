@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.example.mf.movielibrary.fragments.ActorsMovieTvShowsFragment
-import files.POSITION
+import com.example.mf.movielibrary.files.POSITION
 
 class ActorsMoviesSeriesAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
 

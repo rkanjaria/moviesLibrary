@@ -8,7 +8,7 @@ import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.ImageAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.seasonmodels.Episode
-import files.*
+import com.example.mf.movielibrary.files.*
 import kotlinx.android.synthetic.main.activity_episode.*
 
 class EpisodeActivity : BaseActivity<EpisodeActivityContract.EpisodeView, EpisodeActivityPresenter>(),

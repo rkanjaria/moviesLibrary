@@ -4,8 +4,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.example.mf.movielibrary.R
-import files.inflate
-import files.loadImageForSharedTransition
+import com.example.mf.movielibrary.files.inflate
+import com.example.mf.movielibrary.files.loadDrawableImage
 import kotlinx.android.synthetic.main.collection_list_layout.view.*
 
 /**
@@ -32,18 +32,14 @@ class CollectionsListAdapter(val collectionIdList: List<Int>,
 
         fun bindItems(collectionId: Int, collectionName: String, collectionImage: Int) {
             view.collectionName.text = collectionName
-            //view.collectionImage.loadDrawableImage(collectionImage, R.color.darkGrey)
-            view.collectionImage.loadImageForSharedTransition(collectionImage, R.color.darkGrey)
-
+            view.collectionImage.loadDrawableImage(collectionImage, R.color.darkGrey)
             view.setOnClickListener {
-                mListener?.onClick(collectionId, collectionName, collectionImage,
-                        view.mainView, view.collectionView, view.collectionName)
+                mListener?.onClick(collectionId, collectionName, collectionImage)
             }
         }
     }
 
     interface CollectionAdapterListsner {
-        fun onClick(collectionId: Int, collectionName: String, collectionImage: Int,
-                    sharedImage: View, collectionView: View, collectionNameText: View)
+        fun onClick(collectionId: Int, collectionName: String, collectionImage: Int)
     }
 }

@@ -4,10 +4,10 @@ import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
 import com.example.mf.movielibrary.database.entities.Genre
-import files.GENRE_ID
-import files.GENRE_NAME
-import files.GENRE_TABLE
-import files.SHOW_TYPE
+import com.example.mf.movielibrary.files.GENRE_ID
+import com.example.mf.movielibrary.files.GENRE_NAME
+import com.example.mf.movielibrary.files.GENRE_TABLE
+import com.example.mf.movielibrary.files.SHOW_TYPE
 
 @Dao
 interface GenreDao {

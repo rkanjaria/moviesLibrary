@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.models.actormodel.Actor
-import files.inflate
-import files.loadImage
-import files.photoUrl
+import com.example.mf.movielibrary.files.inflate
+import com.example.mf.movielibrary.files.loadImage
+import com.example.mf.movielibrary.files.photoUrl
 import kotlinx.android.synthetic.main.actor_recycler_layout.view.*
 
 class ActorsAdapter(val actorsList: List<Actor?>, actorsAdapterListener: ActorsAdapterListener?)

@@ -14,7 +14,7 @@ import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActiv
 import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.interfaces.ActorsMoviesSeriesListener
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.*
+import com.example.mf.movielibrary.files.*
 import kotlinx.android.synthetic.main.fragment_actors_movie_series.*
 
 class ActorsMovieTvShowsFragment : Fragment(), MovieRecyclerAdapter.OnMovieSeriesAdapterListener {

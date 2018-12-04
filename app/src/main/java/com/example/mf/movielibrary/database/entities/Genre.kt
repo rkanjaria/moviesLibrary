@@ -4,7 +4,7 @@ import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import files.*
+import com.example.mf.movielibrary.files.*
 
 @Entity(tableName = GENRE_TABLE)
 data class Genre(

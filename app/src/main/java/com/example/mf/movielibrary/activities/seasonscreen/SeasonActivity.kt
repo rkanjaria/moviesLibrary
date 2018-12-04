@@ -10,9 +10,9 @@ import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.movieseriesdetailsmodel.Season
 import com.example.mf.movielibrary.models.seasonmodels.Episode
 import com.example.mf.movielibrary.models.seasonmodels.SeasonResult
-import files.INT_ID
-import files.PARCELABLE_OBJECT
-import files.runLayoutAnimation
+import com.example.mf.movielibrary.files.INT_ID
+import com.example.mf.movielibrary.files.PARCELABLE_OBJECT
+import com.example.mf.movielibrary.files.runLayoutAnimation
 import kotlinx.android.synthetic.main.activity_season.*
 
 class SeasonActivity : BaseActivity<SeasonActivityContract.SeasonView, SeasonActivityPresenter>(),

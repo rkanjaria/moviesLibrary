@@ -6,8 +6,8 @@ import android.view.View
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.FavouritesViewPagerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
-import files.database
-import files.loadDrawable
+import com.example.mf.movielibrary.files.database
+import com.example.mf.movielibrary.files.loadDrawable
 import kotlinx.android.synthetic.main.activity_favorites.*
 
 class FavouritesActivity : BaseActivity<FavouritesActivityContract.FavoritesView, FavouritesActivityPresenter>(),

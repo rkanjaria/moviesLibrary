@@ -25,9 +25,7 @@
             app:expandedTitleMarginBottom="@dimen/size_26dp"
             app:expandedTitleMarginStart="@dimen/size_26dp"
             app:expandedTitleTextAppearance="@style/ToolbarTextStyle"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            android:transitionName="@string/collection_shared_transition_name"
-            tools:ignore="UnusedAttribute">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
                 android:id="@+id/collectionPosterImage"
@@ -35,15 +33,13 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"
-                android:transitionName="@string/collection_shared_transition" />
+                app:layout_collapseMode="parallax" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="bottom"
-                android:background="@drawable/scrim_bottom"
-                android:transitionName="@string/collection_shared_transition_view" />
+                android:background="@drawable/scrim_bottom" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"

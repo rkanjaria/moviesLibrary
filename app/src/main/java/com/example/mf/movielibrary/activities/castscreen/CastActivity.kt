@@ -7,8 +7,8 @@ import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.CastRecyclerAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.castmodel.Cast
-import files.PARCELABLE_OBJECT
-import files.runLayoutAnimation
+import com.example.mf.movielibrary.files.PARCELABLE_OBJECT
+import com.example.mf.movielibrary.files.runLayoutAnimation
 import kotlinx.android.synthetic.main.activity_cast.*
 
 class CastActivity : BaseActivity<CastActivityContract.CastView, CastActivityPresenter>(),

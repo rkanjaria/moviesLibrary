@@ -15,7 +15,7 @@ import com.example.mf.movielibrary.adapters.MovieRecyclerAdapter
 import com.example.mf.movielibrary.models.moviemodel.Movie
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import files.*
+import com.example.mf.movielibrary.files.*
 import kotlinx.android.synthetic.main.fragment_favourites.*
 
 

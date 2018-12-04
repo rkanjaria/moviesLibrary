@@ -2,8 +2,6 @@ package com.example.mf.movielibrary.activities.actorsmovieseriesscreen
 
 import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.helpers.RetrofitHelper
-import files.MOVIE_CREDITS
-import files.MOVIE_OR_SERIES
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 

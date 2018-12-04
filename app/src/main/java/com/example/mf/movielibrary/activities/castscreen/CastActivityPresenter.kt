@@ -4,8 +4,8 @@ import android.content.Intent
 import com.example.mf.movielibrary.activities.actorsscreen.ActorsActivity
 import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.models.castmodel.Cast
-import files.INT_ID
-import files.NAME
+import com.example.mf.movielibrary.files.INT_ID
+import com.example.mf.movielibrary.files.NAME
 
 class CastActivityPresenter : BasePresenterImpl<CastActivityContract.CastView>(), CastActivityContract.CastPresenter {
 

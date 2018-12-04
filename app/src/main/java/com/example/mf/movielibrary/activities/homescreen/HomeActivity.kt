@@ -11,8 +11,8 @@ import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.fragments.HomeFragment
 import com.example.mf.movielibrary.models.moviemodel.Movie
-import files.MOVIE
-import files.TV_SHOWS
+import com.example.mf.movielibrary.files.MOVIE
+import com.example.mf.movielibrary.files.TV_SHOWS
 import kotlinx.android.synthetic.main.activity_home.*
 
 

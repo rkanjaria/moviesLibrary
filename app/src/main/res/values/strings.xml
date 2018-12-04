@@ -33,8 +33,4 @@
     <string name="no_favourites_text">Add something to your favourite box.</string>
     <string name="no_search_text">Nothing found! Try another search.</string>
 
-    <string name="collection_shared_transition">collection_shared_transition</string>
-    <string name="collection_shared_transition_name">collection_shared_transition_name</string>
-    <string name="collection_shared_transition_view">collection_shared_transition_view</string>
-
 </resources>

@@ -14,9 +14,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.classes.KeyboardUtils
-import files.INDEFINITE
-import files.LONG
-import files.SHORT
+import com.example.mf.movielibrary.files.INDEFINITE
+import com.example.mf.movielibrary.files.LONG
+import com.example.mf.movielibrary.files.SHORT
 
 
 /**

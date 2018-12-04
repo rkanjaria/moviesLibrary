@@ -11,8 +11,8 @@ import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.ActorsAdapter
 import com.example.mf.movielibrary.base.BaseActivity
 import com.example.mf.movielibrary.models.actormodel.Actor
-import files.ACTORS
-import files.runLayoutAnimation
+import com.example.mf.movielibrary.files.ACTORS
+import com.example.mf.movielibrary.files.runLayoutAnimation
 import kotlinx.android.synthetic.main.activity_actors_list.*
 
 class CelebritiesActivity : BaseActivity<CelebritiesActivityContract.CelebritiesView, CelebritiesActivityPresenter>(),

@@ -6,7 +6,7 @@ import android.view.View
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.adapters.ImageAdapter
 import com.example.mf.movielibrary.base.BaseActivity
-import files.ID
+import com.example.mf.movielibrary.files.ID
 import kotlinx.android.synthetic.main.activity_image.*
 
 class ImageActivity : BaseActivity<ImageActivityContract.ImageBaseView, ImageActivityPresenter>(), ImageActivityContract.ImageBaseView {

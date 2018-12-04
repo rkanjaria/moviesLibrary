@@ -6,9 +6,9 @@ import com.example.mf.movielibrary.base.BasePresenterImpl
 import com.example.mf.movielibrary.classes.NoInternetConnectionException
 import com.example.mf.movielibrary.helpers.RetrofitHelper
 import com.example.mf.movielibrary.models.seasonmodels.Episode
-import files.ID
-import files.INT_ID
-import files.PARCELABLE_OBJECT
+import com.example.mf.movielibrary.files.ID
+import com.example.mf.movielibrary.files.INT_ID
+import com.example.mf.movielibrary.files.PARCELABLE_OBJECT
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 

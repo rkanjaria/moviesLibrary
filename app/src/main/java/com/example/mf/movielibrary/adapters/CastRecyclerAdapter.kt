@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.mf.movielibrary.R
 import com.example.mf.movielibrary.models.castmodel.Cast
-import files.inflate
-import files.loadImage
-import files.photoUrl
+import com.example.mf.movielibrary.files.inflate
+import com.example.mf.movielibrary.files.loadImage
+import com.example.mf.movielibrary.files.photoUrl
 import kotlinx.android.synthetic.main.cast_recycler_layout.view.*
 import kotlinx.android.synthetic.main.horizontal_footer_layout.view.*
 

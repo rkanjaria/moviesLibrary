@@ -3,7 +3,7 @@ package com.example.mf.movielibrary.database.entities
 import android.arch.persistence.room.ColumnInfo
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey
-import files.*
+import com.example.mf.movielibrary.files.*
 
 @Entity(tableName = FAVOURITE_TABLE)
 data class FavouriteMovie(

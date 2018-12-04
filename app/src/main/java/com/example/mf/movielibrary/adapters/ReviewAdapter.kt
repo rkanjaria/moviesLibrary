@@ -4,11 +4,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.example.mf.movielibrary.R
-import com.example.mf.movielibrary.activities.movieseriesscreen.MovieSeriesActivity
-import com.example.mf.movielibrary.models.movieseriesdetailsmodel.MovieSeriesDetailsResult
 import com.example.mf.movielibrary.models.reviewmodels.UserReview
-import files.inflate
-import files.loadCircularImage
+import com.example.mf.movielibrary.files.inflate
+import com.example.mf.movielibrary.files.loadCircularImage
 import kotlinx.android.synthetic.main.review_recyler_layout.view.*
 
 class ReviewAdapter(val reviewList: List<UserReview>, val isFromMovieSeriesActivity: Boolean) : RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>() {
